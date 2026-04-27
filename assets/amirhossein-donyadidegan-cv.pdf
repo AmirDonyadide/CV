@@ -1,0 +1,83 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [5 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 6 0 R >>
+endobj
+6 0 obj
+<< /Length 4781 >>
+stream
+BT /F2 20 Tf 1 0 0 1 48 792 Tm (Amirhossein Donyadidegan) Tj ET
+BT /F2 11 Tf 1 0 0 1 48 769 Tm (Junior Geoinformatics Engineer | GIS | Python | Remote Sensing | Spatial Data) Tj ET
+BT /F1 9 Tf 1 0 0 1 48 752 Tm (Karlsruhe, Baden-Wurttemberg, Germany | donyadideganamir@gmail.com | +49 176 2477 0243) Tj ET
+BT /F1 9 Tf 1 0 0 1 48 740 Tm (GitHub: github.com/AmirDonyadide | LinkedIn: linkedin.com/in/amirhossein-donyadidegan) Tj ET
+BT /F2 13 Tf 1 0 0 1 48 720 Tm (Profile) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 48 702 Tm (MSc Geoinformatics Engineering graduate with hands-on experience in GIS, remote sensing,) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 48 690 Tm (Python development, geospatial analysis, interactive dashboards, and machine-learning) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 48 678 Tm (workflows for spatial data.) Tj ET
+BT /F2 13 Tf 1 0 0 1 48 659 Tm (Experience) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 48 641 Tm (GIS & Data Analyst, Research Assistant | IIP, Karlsruhe Institute of Technology \(KIT\) | Jul) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 48 629 Tm (2025 - Mar 2026) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 48 615 Tm (- Developed Python-based data pipelines for energy and mobility data processing.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 48 601 Tm (- Performed spatial analyses supporting energy-demand and decarbonization models.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 48 587 Tm (- Built interactive dashboards with map integration for applied research workflows.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 48 573 Tm (Web Developer, Research Assistant | KIT nova | Jul 2025 - Dec 2025) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 48 559 Tm (- Contributed to web applications with focus on functionality and usability.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 48 545 Tm (- Supported VR/AR projects for digital and interactive applications.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 48 531 Tm (- Contributed to geospatial visualizations and digital map solutions.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 48 517 Tm (Intern | Naghsheh Gostaran Fartak Co. | May 2021 - Sep 2021) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 48 503 Tm (- Supported surveying, photogrammetry, and GIS projects in a practical work environment.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 48 489 Tm (- Assisted with data collection, spatial analysis, and technical implementation.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 48 475 Tm (- Applied AutoCAD and GIS tools for creating and processing geospatial data.) Tj ET
+BT /F2 13 Tf 1 0 0 1 48 456 Tm (Education) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 48 438 Tm (MSc Geoinformatics Engineering | Politecnico di Milano, Italy | Sep 2023 - Mar 2026 |) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 48 426 Tm (Completed | Grade: 102 / 110) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 48 412 Tm (Exchange student in geodesy at the University of Bonn and in remote sensing and) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 48 400 Tm (geoinformation at KIT. Thesis: Inferring Map Generalization Operations from User Prompts.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 48 386 Tm (BSc Surveying Engineering | University of Tehran, Iran | Sep 2018 - Jul 2022 | Grade: 16.5 /) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 48 374 Tm (20) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 48 360 Tm (Thesis: Application of GIS and Big Data in Smart Cities.) Tj ET
+BT /F2 13 Tf 1 0 0 1 48 341 Tm (Selected Projects) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 48 323 Tm (Inferring Map Generalization Operations from User Prompts - MSc thesis project using Python,) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 48 311 Tm (Scikit-learn, GeoPandas, and Shapely.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 48 297 Tm (LayerAlterator - Python tool for rule-based raster modification using vector masks,) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 48 285 Tm (Rasterio, GeoPandas, and NumPy.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 48 271 Tm (LandsatToolkit - Reusable Python toolkit for Landsat satellite image processing and) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 48 259 Tm (environmental analysis workflows.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 48 245 Tm (AI-Based Landslide Susceptibility Mapping - GIS and machine-learning workflow using remote) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 48 233 Tm (sensing, terrain, infrastructure data, and WebGIS.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 48 219 Tm (SE4G Geospatial Data Visualization Dashboard - Interactive geospatial dashboard using) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 48 207 Tm (Python, Dash, Plotly, and Flask.) Tj ET
+BT /F2 13 Tf 1 0 0 1 48 188 Tm (Skills) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 48 170 Tm (Programming: Python, SQL, JavaScript, C++) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 48 156 Tm (GIS & Geospatial: QGIS, ArcGIS, GeoPandas, PostGIS, Google Earth Engine) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 48 142 Tm (Data & ML: Scikit-learn, PyTorch, Pandas, NumPy, Machine Learning) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 48 128 Tm (Visualization: Dash, Plotly, Matplotlib) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 48 114 Tm (Web & APIs: Flask, REST APIs, HTML, CSS) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 48 100 Tm (Languages: English fluent, German intermediate, Italian intermediate) Tj ET
+endstream
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000185 00000 n 
+0000000260 00000 n 
+0000000396 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+5229
+%%EOF

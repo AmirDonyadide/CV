@@ -1,26 +1,31 @@
 # testcodex
 
 Personal CV and portfolio website for Amirhossein Donyadidegan. The site is a
-single-page, responsive static website built with plain HTML, CSS, and
-JavaScript for recruiters and hiring managers reviewing junior geoinformatics,
-GIS, remote sensing, data analysis, and Python-development work.
+single-page, responsive static portfolio for junior GIS, geoinformatics, remote
+sensing, Python, spatial data, and geospatial analyst roles.
 
 ## Features
 
-- Multilingual content switcher for English, German, and Italian.
+- Recruiter-focused positioning for junior GIS and geospatial data roles.
+- English, German, and Italian language switcher.
+- Target roles and availability sections for fast recruiter scanning.
+- Five flagship geospatial projects with recruiter-oriented summaries.
+- Project filters for GIS, Python, remote sensing, machine learning, dashboards,
+  and WebGIS.
+- Compact technical skills grouped by hiring-relevant categories.
+- Downloadable CV PDF at `assets/amirhossein-donyadidegan-cv.pdf`.
 - PowerPoint-inspired visual theme using the thesis presentation palette and a
   local Manrope webfont.
-- Institutional logos for study and work sections.
-- Project descriptions with direct GitHub repository links.
-- Responsive, semantic, accessible static HTML suitable for GitHub Pages.
+- Static HTML, CSS, and JavaScript suitable for GitHub Pages.
 
 ## Files
 
-- `index.html` contains the page content and semantic structure.
+- `index.html` contains the page content, semantic structure, SEO metadata, and
+  recruiter-focused portfolio sections.
 - `styles.css` contains the responsive visual design.
-- `script.js` contains mobile navigation, active section highlighting, and
-  language switching.
-- `assets/` contains local imagery, logos, and the local webfont.
+- `script.js` contains mobile navigation, active section highlighting,
+  multilingual switching, and project filtering.
+- `assets/` contains local imagery, logos, the webfont, and the downloadable CV.
 
 ## Run Locally
 
@@ -48,22 +53,10 @@ Settings → Pages → Build and deployment → Source: Deploy from a branch →
 After GitHub Pages finishes building, the site will be available at the Pages
 URL shown in the repository settings.
 
-## Content Notes
-
-- No CV PDF exists in this repository yet, so the download button in the site is
-  intentionally marked as a TODO placeholder.
-- No certifications or awards were present in the provided CV master prompt, so
-  none were invented.
-- The Naghsheh Gostaran Fartak Co. logo is intentionally marked as a TODO
-  placeholder because no verified official logo file was provided.
-- The Politecnico di Milano logo was taken from the supplied thesis
-  presentation. Other institutional logo files are stored locally in
-  `assets/logos/`.
-
 ## Asset Credits
 
-- Theme, typography reference, and Politecnico di Milano photos: supplied
-  thesis presentation.
+- Theme, typography reference, and Politecnico di Milano photos: supplied thesis
+  presentation.
 - Font: Manrope, served locally from `assets/fonts/`.
 - Earth at Night: NASA.
 - Venice, Italy: NASA Earth Observatory.
