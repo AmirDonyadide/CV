@@ -1,8 +1,8 @@
 :root {
   color-scheme: light;
 
-  --font-heading: "Space Grotesk", "Inter", system-ui, sans-serif;
-  --font-body: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-heading: "Manrope", system-ui, sans-serif;
+  --font-body: "Manrope", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
   --space-1: 8px;
   --space-2: 16px;
@@ -27,8 +27,13 @@
   --color-text-soft: #36475d;
   --color-accent: #3f7df1;
   --color-accent-soft: #dce9ff;
-  --color-cta: #f36f45;
-  --color-cta-hover: #d95b34;
+  --color-cta: #0f766e;
+  --color-cta-hover: #0b5f59;
+  --color-cta-text: #ffffff;
+  --color-cta-shadow: rgba(15, 118, 110, 0.24);
+  --color-hero-accent: #b9f4e7;
+  --color-route-end: #9ff3dd;
+  --color-node-glow: rgba(45, 212, 191, 0.58);
   --color-focus: #65a8ff;
   --color-success: #1e9974;
   --color-glow: rgba(63, 125, 241, 0.18);
@@ -70,8 +75,13 @@
   --color-text-soft: #c1d0e1;
   --color-accent: #7fb2ff;
   --color-accent-soft: rgba(127, 178, 255, 0.14);
-  --color-cta: #ff8a61;
-  --color-cta-hover: #ff7446;
+  --color-cta: #5eead4;
+  --color-cta-hover: #99f6e4;
+  --color-cta-text: #06201f;
+  --color-cta-shadow: rgba(94, 234, 212, 0.18);
+  --color-hero-accent: #a7f3d0;
+  --color-route-end: #ccfbf1;
+  --color-node-glow: rgba(94, 234, 212, 0.48);
   --color-focus: #9dd0ff;
   --color-success: #78d8bd;
   --color-glow: rgba(127, 178, 255, 0.22);
@@ -454,7 +464,7 @@ p {
 }
 
 .hero .eyebrow {
-  color: #ffc2ad;
+  color: var(--color-hero-accent);
 }
 
 .hero-subtitle {
@@ -507,14 +517,14 @@ p {
 
 .button-primary {
   background: var(--color-cta);
-  color: #ffffff;
-  box-shadow: 0 16px 32px rgba(243, 111, 69, 0.22);
+  color: var(--color-cta-text);
+  box-shadow: 0 16px 32px var(--color-cta-shadow);
 }
 
 .button-primary:hover,
 .button-primary:focus-visible {
   background: var(--color-cta-hover);
-  color: #ffffff;
+  color: var(--color-cta-text);
 }
 
 .button-secondary,
@@ -626,7 +636,7 @@ p {
   width: 44%;
   height: 38%;
   transform: rotate(18deg);
-  border-color: rgba(255, 138, 97, 0.34);
+  border-color: color-mix(in srgb, var(--color-cta) 52%, transparent);
 }
 
 .geo-route {
@@ -637,7 +647,7 @@ p {
   height: 2px;
   transform: rotate(-16deg);
   transform-origin: left;
-  background: linear-gradient(90deg, transparent, #7fb2ff 12%, #ffb394 88%, transparent);
+  background: linear-gradient(90deg, transparent, #7fb2ff 12%, var(--color-route-end) 88%, transparent);
 }
 
 .geo-node {
@@ -647,7 +657,7 @@ p {
   border: 3px solid rgba(255, 255, 255, 0.84);
   border-radius: 50%;
   background: var(--color-cta);
-  box-shadow: 0 0 26px rgba(255, 138, 97, 0.68);
+  box-shadow: 0 0 26px var(--color-node-glow);
 }
 
 .node-a {
