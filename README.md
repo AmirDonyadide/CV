@@ -1,4 +1,4 @@
-# CV
+# Recruiter Portfolio Website
 
 Personal CV and portfolio website for Amirhossein Donyadidegan. The site is a
 single-page, responsive static portfolio for junior GIS, geoinformatics, remote
@@ -9,7 +9,9 @@ sensing, Python, spatial data, and geospatial analyst roles.
 - Recruiter-focused positioning for junior GIS and geospatial data roles.
 - English, German, and Italian language switcher.
 - Target roles and availability sections for fast recruiter scanning.
+- "What I Bring" section for quick differentiation and trust signals.
 - Five flagship geospatial projects with recruiter-oriented summaries.
+- Evidence-led project thumbnails and problem/method/demonstrates lines.
 - Project filters for GIS, Python, remote sensing, machine learning, dashboards,
   and WebGIS.
 - Compact technical skills grouped by hiring-relevant categories.
@@ -64,3 +66,5 @@ URL shown in the repository settings.
 - Institutional logos: Politecnico di Milano from the supplied deck; University
   of Bonn, Karlsruhe Institute of Technology, and University of Tehran public
   logo files.
+- Project thumbnails: locally composed from available thesis outputs and local
+  geospatial imagery to support recruiter scanning.
