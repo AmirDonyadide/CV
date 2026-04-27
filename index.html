@@ -37,48 +37,57 @@
     </header>
 
     <main id="main">
-      <section class="hero section-shell" id="hero">
-        <!-- TODO: Add a real profile photo only if a photo file is provided; no photo asset exists in this repository. -->
-        <div class="hero-map" aria-hidden="true">
-          <div class="map-grid"></div>
-          <div class="route route-one"></div>
-          <div class="route route-two"></div>
-          <span class="map-node node-a"></span>
-          <span class="map-node node-b"></span>
-          <span class="map-node node-c"></span>
-          <span class="map-label label-a">GIS</span>
-          <span class="map-label label-b">EO</span>
-          <span class="map-label label-c">ML</span>
-        </div>
-        <div class="hero-content">
-          <p class="eyebrow">Junior Geoinformatics Engineer</p>
-          <h1>GIS, remote sensing, Python, and machine learning for geospatial problems.</h1>
-          <p class="hero-summary">
-            I am Amirhossein Donyadidegan, an entry-level geoinformatics graduate based in
-            Karlsruhe with practical experience in geospatial analysis, data pipelines,
-            interactive dashboards, and applied research projects.
-          </p>
-          <div class="hero-actions" aria-label="Primary actions">
-            <a class="button button-primary" href="#projects">View Projects</a>
-            <a class="button button-secondary" href="#contact">Contact Me</a>
-            <!-- TODO: Add a real CV PDF file and update this link, for example assets/amirhossein-donyadidegan-cv.pdf. -->
-            <a class="button button-muted" href="#" aria-disabled="true" data-disabled-link>CV PDF TODO</a>
+      <section class="hero" id="hero" aria-labelledby="hero-title">
+        <!-- TODO: Replace the thematic NASA image with a real profile or work photo if one is provided. -->
+        <div class="hero-overlay">
+          <div class="hero-content">
+            <p class="eyebrow">Junior Geoinformatics Engineer</p>
+            <h1 id="hero-title">GIS, remote sensing, Python, and machine learning for geospatial problems.</h1>
+            <p class="hero-summary">
+              I am Amirhossein Donyadidegan, an entry-level geoinformatics graduate based in
+              Karlsruhe with practical experience in geospatial analysis, data pipelines,
+              interactive dashboards, and applied research projects.
+            </p>
+            <div class="hero-actions" aria-label="Primary actions">
+              <a class="button button-primary" href="#projects">View Projects</a>
+              <a class="button button-secondary" href="#contact">Contact Me</a>
+              <!-- TODO: Add a real CV PDF file and update this control to link to it, for example assets/amirhossein-donyadidegan-cv.pdf. -->
+              <button class="button button-muted" type="button" disabled>CV PDF TODO</button>
+            </div>
           </div>
-          <dl class="hero-meta" aria-label="Profile summary">
-            <div>
-              <dt>Location</dt>
-              <dd>Karlsruhe, Baden-W&uuml;rttemberg, Germany</dd>
-            </div>
-            <div>
-              <dt>Level</dt>
-              <dd>Entry-level / Junior</dd>
-            </div>
-            <div>
-              <dt>Focus</dt>
-              <dd>Geoinformatics, GIS, Data Analysis</dd>
-            </div>
-          </dl>
         </div>
+      </section>
+
+      <section class="intro-band" aria-label="Profile highlights">
+        <div class="intro-inner">
+          <div>
+            <span>Location</span>
+            <strong>Karlsruhe, Baden-W&uuml;rttemberg, Germany</strong>
+          </div>
+          <div>
+            <span>Level</span>
+            <strong>Entry-level / Junior</strong>
+          </div>
+          <div>
+            <span>Focus</span>
+            <strong>Geoinformatics, GIS, Data Analysis</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-shell photo-story" aria-label="Geospatial visual themes">
+        <figure class="photo-tile photo-tile-large">
+          <img src="assets/venice-aster.jpg" alt="Satellite image of Venice and its lagoon" />
+          <figcaption>Remote sensing and environmental analysis</figcaption>
+        </figure>
+        <figure class="photo-tile">
+          <img src="assets/mendenhall-glacier.jpg" alt="Satellite image of the Mendenhall Glacier area" />
+          <figcaption>Earth observation workflows</figcaption>
+        </figure>
+        <figure class="photo-tile">
+          <img src="assets/south-florida.jpg" alt="Satellite image of South Florida wetlands and coastline" />
+          <figcaption>GIS, raster data, and spatial modeling</figcaption>
+        </figure>
       </section>
 
       <section class="section-shell section-grid" id="about">
@@ -244,148 +253,172 @@
         </div>
         <div class="projects-grid">
           <article class="project-card">
-            <div class="project-topline">
-              <span class="project-type">MSc Thesis</span>
-              <a href="https://github.com/AmirDonyadide/nl2map-generalization" target="_blank" rel="noreferrer">GitHub</a>
+            <img src="assets/venice-aster.jpg" alt="Satellite image used as a thematic visual for map generalization work" />
+            <div class="project-card-body">
+              <div class="project-topline">
+                <span class="project-type">MSc Thesis</span>
+                <a href="https://github.com/AmirDonyadide/nl2map-generalization" target="_blank" rel="noreferrer">GitHub</a>
+              </div>
+              <h3>Inferring Map Generalization Operations from User Prompts</h3>
+              <p>
+                Machine-learning workflow connecting natural language with cartographic
+                generalization operations, including data preparation, model training, and evaluation.
+              </p>
+              <ul class="tag-list">
+                <li>Python</li>
+                <li>Scikit-learn</li>
+                <li>GeoPandas</li>
+                <li>Shapely</li>
+              </ul>
             </div>
-            <h3>Inferring Map Generalization Operations from User Prompts</h3>
-            <p>
-              Machine-learning workflow connecting natural language with cartographic
-              generalization operations, including data preparation, model training, and evaluation.
-            </p>
-            <ul class="tag-list">
-              <li>Python</li>
-              <li>Scikit-learn</li>
-              <li>GeoPandas</li>
-              <li>Shapely</li>
-            </ul>
           </article>
 
           <article class="project-card">
-            <div class="project-topline">
-              <span class="project-type">Raster Simulation</span>
-              <a href="https://github.com/AmirDonyadide/LayerAlterator" target="_blank" rel="noreferrer">GitHub</a>
+            <img src="assets/south-florida.jpg" alt="Satellite image used as a thematic visual for raster processing" />
+            <div class="project-card-body">
+              <div class="project-topline">
+                <span class="project-type">Raster Simulation</span>
+                <a href="https://github.com/AmirDonyadide/LayerAlterator" target="_blank" rel="noreferrer">GitHub</a>
+              </div>
+              <h3>LayerAlterator</h3>
+              <p>
+                Python tool for rule-based raster modification using vector masks, percentage-based
+                transformations, CRS consistency, validation, and modular extensibility.
+              </p>
+              <ul class="tag-list">
+                <li>Python</li>
+                <li>Rasterio</li>
+                <li>GeoPandas</li>
+                <li>NumPy</li>
+              </ul>
             </div>
-            <h3>LayerAlterator</h3>
-            <p>
-              Python tool for rule-based raster modification using vector masks, percentage-based
-              transformations, CRS consistency, validation, and modular extensibility.
-            </p>
-            <ul class="tag-list">
-              <li>Python</li>
-              <li>Rasterio</li>
-              <li>GeoPandas</li>
-              <li>NumPy</li>
-            </ul>
           </article>
 
           <article class="project-card">
-            <div class="project-topline">
-              <span class="project-type">Deep Learning</span>
-              <a href="https://github.com/AmirDonyadide/DL4CVRS" target="_blank" rel="noreferrer">GitHub</a>
+            <img src="assets/mendenhall-glacier.jpg" alt="Satellite image used as a thematic visual for computer vision work" />
+            <div class="project-card-body">
+              <div class="project-topline">
+                <span class="project-type">Deep Learning</span>
+                <a href="https://github.com/AmirDonyadide/DL4CVRS" target="_blank" rel="noreferrer">GitHub</a>
+              </div>
+              <h3>DL4CVRS Vehicle Detection Model</h3>
+              <p>
+                CNN and pretrained ResNet18 image-classification models with a complete training and
+                evaluation pipeline, metrics, normalization, and error analysis.
+              </p>
+              <ul class="tag-list">
+                <li>Python</li>
+                <li>PyTorch</li>
+                <li>TensorBoard</li>
+                <li>Scikit-learn</li>
+              </ul>
             </div>
-            <h3>DL4CVRS Vehicle Detection Model</h3>
-            <p>
-              CNN and pretrained ResNet18 image-classification models with a complete training and
-              evaluation pipeline, metrics, normalization, and error analysis.
-            </p>
-            <ul class="tag-list">
-              <li>Python</li>
-              <li>PyTorch</li>
-              <li>TensorBoard</li>
-              <li>Scikit-learn</li>
-            </ul>
           </article>
 
           <article class="project-card">
-            <div class="project-topline">
-              <span class="project-type">WebGIS</span>
-              <a href="https://github.com/AmirDonyadide/GIS-Course-Polimi-2024" target="_blank" rel="noreferrer">GitHub</a>
+            <img src="assets/earth-night.jpg" alt="Earth at night image used as a thematic visual for WebGIS work" />
+            <div class="project-card-body">
+              <div class="project-topline">
+                <span class="project-type">WebGIS</span>
+                <a href="https://github.com/AmirDonyadide/GIS-Course-Polimi-2024" target="_blank" rel="noreferrer">GitHub</a>
+              </div>
+              <h3>AI-Based Landslide Susceptibility Mapping Website</h3>
+              <p>
+                Geospatial machine-learning and GIS workflow for landslide susceptibility analysis,
+                integrating remote sensing, terrain, and infrastructure data in a WebGIS application.
+              </p>
+              <ul class="tag-list">
+                <li>GIS</li>
+                <li>Remote Sensing</li>
+                <li>JavaScript</li>
+                <li>WebGIS</li>
+              </ul>
             </div>
-            <h3>AI-Based Landslide Susceptibility Mapping Website</h3>
-            <p>
-              Geospatial machine-learning and GIS workflow for landslide susceptibility analysis,
-              integrating remote sensing, terrain, and infrastructure data in a WebGIS application.
-            </p>
-            <ul class="tag-list">
-              <li>GIS</li>
-              <li>Remote Sensing</li>
-              <li>JavaScript</li>
-              <li>WebGIS</li>
-            </ul>
           </article>
 
           <article class="project-card">
-            <div class="project-topline">
-              <span class="project-type">Earth Observation</span>
-              <a href="https://github.com/AmirDonyadide/LandsatToolkit" target="_blank" rel="noreferrer">GitHub</a>
+            <img src="assets/mendenhall-glacier.jpg" alt="Satellite image used as a thematic visual for Earth observation tooling" />
+            <div class="project-card-body">
+              <div class="project-topline">
+                <span class="project-type">Earth Observation</span>
+                <a href="https://github.com/AmirDonyadide/LandsatToolkit" target="_blank" rel="noreferrer">GitHub</a>
+              </div>
+              <h3>LandsatToolkit</h3>
+              <p>
+                Python library for processing and analyzing Landsat 7/8/9 satellite data, including
+                metadata extraction, band processing, reprojection, and index calculation.
+              </p>
+              <ul class="tag-list">
+                <li>Python</li>
+                <li>Rasterio</li>
+                <li>NumPy</li>
+              </ul>
             </div>
-            <h3>LandsatToolkit</h3>
-            <p>
-              Python library for processing and analyzing Landsat 7/8/9 satellite data, including
-              metadata extraction, band processing, reprojection, and index calculation.
-            </p>
-            <ul class="tag-list">
-              <li>Python</li>
-              <li>Rasterio</li>
-              <li>NumPy</li>
-            </ul>
           </article>
 
           <article class="project-card">
-            <div class="project-topline">
-              <span class="project-type">Dashboard</span>
-              <a href="https://github.com/AmirDonyadide/SE4G" target="_blank" rel="noreferrer">GitHub</a>
+            <img src="assets/earth-night.jpg" alt="Earth at night image used as a thematic visual for dashboard development" />
+            <div class="project-card-body">
+              <div class="project-topline">
+                <span class="project-type">Dashboard</span>
+                <a href="https://github.com/AmirDonyadide/SE4G" target="_blank" rel="noreferrer">GitHub</a>
+              </div>
+              <h3>SE4G Geospatial Data Visualization Dashboard</h3>
+              <p>
+                Interactive dashboard for geospatial data visualization with maps, charts, API
+                integration, and dynamic user interactions for exploratory analysis.
+              </p>
+              <ul class="tag-list">
+                <li>Python</li>
+                <li>Dash</li>
+                <li>Plotly</li>
+                <li>Flask</li>
+              </ul>
             </div>
-            <h3>SE4G Geospatial Data Visualization Dashboard</h3>
-            <p>
-              Interactive dashboard for geospatial data visualization with maps, charts, API
-              integration, and dynamic user interactions for exploratory analysis.
-            </p>
-            <ul class="tag-list">
-              <li>Python</li>
-              <li>Dash</li>
-              <li>Plotly</li>
-              <li>Flask</li>
-            </ul>
           </article>
 
           <article class="project-card">
-            <div class="project-topline">
-              <span class="project-type">Web Application</span>
-              <a href="https://github.com/moeinp70/HYP_Yoga" target="_blank" rel="noreferrer">GitHub</a>
+            <img src="assets/venice-aster.jpg" alt="Satellite image used as a thematic visual for a responsive web application" />
+            <div class="project-card-body">
+              <div class="project-topline">
+                <span class="project-type">Web Application</span>
+                <a href="https://github.com/moeinp70/HYP_Yoga" target="_blank" rel="noreferrer">GitHub</a>
+              </div>
+              <h3>PoliYoga Responsive Web Application</h3>
+              <p>
+                Responsive web platform for a yoga academy, with frontend, UX, database-related
+                features, profiles, activities, user interactions, and dynamic content.
+              </p>
+              <ul class="tag-list">
+                <li>Nuxt.js</li>
+                <li>Vue</li>
+                <li>TypeScript</li>
+                <li>Supabase</li>
+                <li>SQL</li>
+                <li>Figma</li>
+              </ul>
             </div>
-            <h3>PoliYoga Responsive Web Application</h3>
-            <p>
-              Responsive web platform for a yoga academy, with frontend, UX, database-related
-              features, profiles, activities, user interactions, and dynamic content.
-            </p>
-            <ul class="tag-list">
-              <li>Nuxt.js</li>
-              <li>Vue</li>
-              <li>TypeScript</li>
-              <li>Supabase</li>
-              <li>SQL</li>
-              <li>Figma</li>
-            </ul>
           </article>
 
           <article class="project-card">
-            <div class="project-topline">
-              <span class="project-type">Remote Sensing</span>
-              <a href="https://github.com/AmirDonyadide/EOAdvanced" target="_blank" rel="noreferrer">GitHub</a>
+            <img src="assets/south-florida.jpg" alt="Satellite image used as a thematic visual for water-area analysis" />
+            <div class="project-card-body">
+              <div class="project-topline">
+                <span class="project-type">Remote Sensing</span>
+                <a href="https://github.com/AmirDonyadide/EOAdvanced" target="_blank" rel="noreferrer">GitHub</a>
+              </div>
+              <h3>EOAdvanced Water Area Analysis in Eastern Venice</h3>
+              <p>
+                Satellite-data analysis of water-area changes in Eastern Venice, using NDWI-based
+                indicators, maps, and statistical visualizations for trends from 2021 to 2024.
+              </p>
+              <ul class="tag-list">
+                <li>Python</li>
+                <li>Google Earth Engine</li>
+                <li>JavaScript</li>
+                <li>Geemap</li>
+              </ul>
             </div>
-            <h3>EOAdvanced Water Area Analysis in Eastern Venice</h3>
-            <p>
-              Satellite-data analysis of water-area changes in Eastern Venice, using NDWI-based
-              indicators, maps, and statistical visualizations for trends from 2021 to 2024.
-            </p>
-            <ul class="tag-list">
-              <li>Python</li>
-              <li>Google Earth Engine</li>
-              <li>JavaScript</li>
-              <li>Geemap</li>
-            </ul>
           </article>
         </div>
 
@@ -418,7 +451,7 @@
             <a href="https://github.com/AmirDonyadide" target="_blank" rel="noreferrer">GitHub: AmirDonyadide</a>
             <a href="https://www.linkedin.com/in/amirhossein-donyadidegan/" target="_blank" rel="noreferrer">LinkedIn: amirhossein-donyadidegan</a>
           </address>
-          <div class="language-strip" aria-label="Languages">
+          <div class="language-strip" aria-label="Languages and additional details">
             <span>English: fluent</span>
             <span>German: intermediate</span>
             <span>Italian: intermediate</span>
@@ -430,6 +463,9 @@
 
     <footer class="site-footer">
       <p>&copy; <span id="year">2026</span> Amirhossein Donyadidegan. Built for GitHub Pages.</p>
+      <p class="credit-line">
+        Thematic imagery: NASA, NASA Earth Observatory, and NASA/USGS Landsat.
+      </p>
     </footer>
 
     <script src="script.js"></script>

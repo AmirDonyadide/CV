@@ -1,7 +1,6 @@
 const navToggle = document.querySelector(".nav-toggle");
 const navMenu = document.querySelector(".nav-menu");
 const navLinks = Array.from(document.querySelectorAll(".nav-menu a"));
-const disabledLinks = document.querySelectorAll("[data-disabled-link]");
 const year = document.querySelector("#year");
 
 if (year) {
@@ -21,12 +20,6 @@ navLinks.forEach((link) => {
     navMenu?.classList.remove("is-open");
     document.body.classList.remove("nav-open");
     navToggle?.setAttribute("aria-expanded", "false");
-  });
-});
-
-disabledLinks.forEach((link) => {
-  link.addEventListener("click", (event) => {
-    event.preventDefault();
   });
 });
 

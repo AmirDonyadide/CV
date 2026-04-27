@@ -11,6 +11,7 @@ geoinformatics, GIS, remote sensing, data analysis, and Python-development work.
 - `styles.css` contains the responsive visual design.
 - `script.js` contains the mobile navigation, active section highlighting, and
   small interaction helpers.
+- `assets/` contains local thematic imagery used by the portfolio.
 
 ## Run Locally
 
@@ -44,3 +45,12 @@ URL shown in the repository settings.
   intentionally marked as a TODO placeholder.
 - No certifications or awards were present in the provided CV master prompt, so
   none were invented.
+- The current imagery is thematic NASA, NASA Earth Observatory, and NASA/USGS
+  Landsat imagery. Replace it with personal or project-specific photos when
+  those assets are available.
+
+## Image Credits
+
+- Earth at Night: NASA
+- Venice, Italy: NASA Earth Observatory
+- Mendenhall Glacier and South Florida: NASA/USGS Landsat imagery
