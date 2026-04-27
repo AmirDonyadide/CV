@@ -200,6 +200,41 @@ p {
   margin-bottom: var(--space-2);
 }
 
+main p,
+main li,
+main dd,
+.site-footer p {
+  hyphens: auto;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.button,
+.brand,
+.nav-menu a,
+.language-switch button,
+.theme-toggle,
+.project-filters button,
+.project-topline,
+.project-type,
+.pill-cloud span,
+.language-strip span,
+.geo-console span,
+.intro-inner span,
+.intro-inner strong,
+.visual-topline,
+.hero-metrics dd,
+.timeline-date,
+.date-line,
+.item-meta,
+.proof-grid strong,
+.proof-grid span,
+.footer-nav a,
+.footer-social a {
+  hyphens: manual;
+  text-align: start;
+}
+
 .skip-link {
   position: fixed;
   top: var(--space-2);
