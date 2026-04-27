@@ -1,4 +1,4 @@
-# testcodex
+# CV
 
 Personal CV and portfolio website for Amirhossein Donyadidegan. The site is a
 single-page, responsive static portfolio for junior GIS, geoinformatics, remote
