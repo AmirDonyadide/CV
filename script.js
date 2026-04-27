@@ -4,6 +4,8 @@ const navLinks = Array.from(document.querySelectorAll(".nav-menu a"));
 const langButtons = Array.from(document.querySelectorAll("[data-lang]"));
 const filterButtons = Array.from(document.querySelectorAll("[data-filter]"));
 const projectCards = Array.from(document.querySelectorAll(".project-card[data-categories]"));
+const themeToggle = document.querySelector(".theme-toggle");
+const themeColorMeta = document.querySelector('meta[name="theme-color"]');
 
 const originalText = new Map();
 const originalHtml = new Map();
@@ -46,22 +48,26 @@ const translations = {
     text: {
       skip: "Zum Inhalt springen",
       "nav.toggle": "Navigation umschalten",
+      "nav.about": "Profil",
+      "nav.services": "Leistungen",
       "nav.roles": "Rollen",
       "nav.bring": "Fit",
       "nav.experience": "Erfahrung",
       "nav.skills": "Fähigkeiten",
       "nav.projects": "Projekte",
+      "nav.process": "Prozess",
       "nav.education": "Ausbildung",
       "nav.contact": "Kontakt",
-      "hero.eyebrow": "Junior GIS / Geospatial Kandidat",
-      "hero.title": "Junior Geoinformatik-Ingenieur | GIS | Python | Fernerkundung | Spatial Data",
+      "hero.eyebrow": "Portfolio für Geodaten-Systeme",
+      "hero.title": "Klare geospatiale Workflows von Daten bis Entscheidung gestalten.",
       "hero.subtitle":
-        "Junior Geoinformatik-Ingenieur mit Fokus auf Python-gestützte räumliche Analyse, GIS-Workflows und Earth-Observation-Daten.",
-      "hero.note": "Verbindung von GIS, räumlichen Daten und Python zu praktischen geospatialen Workflows.",
-      "hero.viewProjects": "Flagship-Projekte ansehen",
+        "Ich bin Amirhossein Donyadidegan, Geoinformatik-Ingenieur mit Fokus auf Python-gestützte GIS-Workflows, Fernerkundungsanalysen, Dashboards und räumliche Datenprodukte.",
+      "hero.note": "Strukturierte Portfolio-Nachweise in geospatialem ML, Rasterverarbeitung, WebGIS und forschungsnaher räumlicher Analyse.",
+      "hero.viewProjects": "Projekte ansehen",
       "hero.downloadCv": "CV herunterladen",
       "hero.contact": "Kontakt",
       "hero.snapshotTitle": "Recruiter Snapshot",
+      "hero.available": "Verfügbar",
       "hero.snapshotLevelLabel": "Level",
       "hero.snapshotLevel": "Berufseinsteiger / Junior",
       "hero.snapshotCoreLabel": "Kernprofil",
@@ -112,8 +118,8 @@ const translations = {
       "about.q2": "Fernerkundung und Earth-Observation-Workflows",
       "about.q3": "Interaktive Dashboards und WebGIS-Anwendungen",
       "about.q4": "Machine Learning für räumliche Datenprobleme",
-      "bring.eyebrow": "Was ich mitbringe",
-      "bring.title": "Ein fokussiertes Junior-Profil mit praktischen geospatialen Nachweisen.",
+      "bring.eyebrow": "Leistungen & Stärken",
+      "bring.title": "Angewandte geospatiale Unterstützung mit klaren technischen Nachweisen.",
       "bring.card1Title": "GIS plus Python",
       "bring.card1Text": "Sicher im Wechsel zwischen räumlichen Konzepten, GIS-Werkzeugen und Python-basierter Verarbeitung.",
       "bring.card2Title": "Angewandte Forschungserfahrung",
@@ -192,6 +198,25 @@ const translations = {
       "projects.levellingDemo": "Messdisziplin, Qualitätskontrolle, Dokumentation",
       "projects.roadDemo": "Ingenieur-Design-Tools, Geländeinterpretation, Volumenberechnung",
       "projects.laserDemo": "Punktwolken-Workflow, 3D-Datenerfassung, Vermessungstechnologie",
+      "process.eyebrow": "Prozess",
+      "process.title": "Ein strukturierter Workflow von der räumlichen Fragestellung zum nutzbaren Produkt.",
+      "process.intro":
+        "Ich behandle geospatiale Arbeit wie ein Produktsystem: Entscheidung definieren, Daten validieren, Workflow gestalten und Ergebnisse liefern, die prüfbar und wiederverwendbar sind.",
+      "process.discoveryTitle": "Discovery",
+      "process.discoveryText": "Räumliche Fragestellung, Nutzer, Einschränkungen, verfügbare Daten und Erfolgskriterien klären.",
+      "process.strategyTitle": "Strategie",
+      "process.strategyText": "Analysepfad, Datenmodell, Tools, Validierungschecks und Kommunikationsformat festlegen.",
+      "process.designTitle": "Design",
+      "process.designText": "Karte, Dashboard, Workflow oder Modellergebnis mit Hierarchie und Interpretierbarkeit strukturieren.",
+      "process.developmentTitle": "Entwicklung",
+      "process.developmentText": "Saubere Python-, GIS-, WebGIS- oder Dashboard-Workflows mit wiederverwendbarer und dokumentierter Logik bauen.",
+      "process.deliveryTitle": "Lieferung",
+      "process.deliveryText": "Ergebnisse mit klarer Dokumentation, visuellen Outputs und nächsten Empfehlungen übergeben.",
+      "proof.eyebrow": "Social Proof",
+      "proof.title": "Glaubwürdigkeit durch akademische, forschungsbezogene und projektbasierte Nachweise.",
+      "proof.projects": "Flagship-Projekte im Geodatenbereich",
+      "proof.msc": "Geoinformatik-Ingenieurwesen",
+      "proof.kit": "Angewandte Arbeit als wissenschaftliche Hilfskraft",
       "filters.all": "Alle",
       "filters.gis": "GIS",
       "filters.python": "Python",
@@ -276,22 +301,26 @@ const translations = {
     text: {
       skip: "Vai al contenuto",
       "nav.toggle": "Apri o chiudi navigazione",
+      "nav.about": "Profilo",
+      "nav.services": "Servizi",
       "nav.roles": "Ruoli",
       "nav.bring": "Fit",
       "nav.experience": "Esperienza",
       "nav.skills": "Competenze",
       "nav.projects": "Progetti",
+      "nav.process": "Processo",
       "nav.education": "Formazione",
       "nav.contact": "Contatti",
-      "hero.eyebrow": "Candidato junior GIS / geospaziale",
-      "hero.title": "Ingegnere junior in geoinformatica | GIS | Python | Telerilevamento | Spatial Data",
+      "hero.eyebrow": "Portfolio di sistemi geospaziali",
+      "hero.title": "Progettare workflow geospaziali chiari, dai dati alla decisione.",
       "hero.subtitle":
-        "Ingegnere junior in geoinformatica focalizzato su analisi spaziale con Python, workflow GIS e dati di osservazione della Terra.",
-      "hero.note": "Combinare GIS, dati spaziali e Python in workflow geospaziali pratici.",
-      "hero.viewProjects": "Vedi progetti principali",
+        "Sono Amirhossein Donyadidegan, ingegnere in geoinformatica che costruisce workflow GIS con Python, analisi di telerilevamento, dashboard e prodotti di dati spaziali.",
+      "hero.note": "Evidenze di portfolio strutturate su geospatial ML, elaborazione raster, WebGIS e analisi spaziale orientata alla ricerca.",
+      "hero.viewProjects": "Vedi progetti",
       "hero.downloadCv": "Scarica CV",
       "hero.contact": "Contatti",
       "hero.snapshotTitle": "Sintesi per recruiter",
+      "hero.available": "Disponibile",
       "hero.snapshotLevelLabel": "Livello",
       "hero.snapshotLevel": "Entry-level / Junior",
       "hero.snapshotCoreLabel": "Profilo chiave",
@@ -342,8 +371,8 @@ const translations = {
       "about.q2": "Telerilevamento e workflow di osservazione della Terra",
       "about.q3": "Dashboard interattive e applicazioni WebGIS",
       "about.q4": "Machine learning per problemi di dati spaziali",
-      "bring.eyebrow": "Cosa porto",
-      "bring.title": "Un profilo junior focalizzato con evidenze geospaziali pratiche.",
+      "bring.eyebrow": "Servizi e punti di forza",
+      "bring.title": "Supporto geospaziale applicato con evidenze tecniche chiare.",
       "bring.card1Title": "GIS più Python",
       "bring.card1Text": "A mio agio tra concetti spaziali, strumenti GIS ed elaborazione basata su Python.",
       "bring.card2Title": "Esperienza di ricerca applicata",
@@ -422,6 +451,25 @@ const translations = {
       "projects.levellingDemo": "Disciplina di misura, controllo qualità, documentazione",
       "projects.roadDemo": "Strumenti di progettazione ingegneristica, ragionamento sul terreno, calcolo volumi",
       "projects.laserDemo": "Workflow point-cloud, acquisizione dati 3D, tecnologia di rilevamento",
+      "process.eyebrow": "Processo",
+      "process.title": "Un workflow strutturato dalla domanda spaziale al prodotto utilizzabile.",
+      "process.intro":
+        "Affronto il lavoro geospaziale come un sistema di prodotto: definire la decisione, validare i dati, progettare il workflow e consegnare output ispezionabili e riutilizzabili.",
+      "process.discoveryTitle": "Discovery",
+      "process.discoveryText": "Chiarire domanda spaziale, utenti, vincoli, dataset disponibili e criteri di successo.",
+      "process.strategyTitle": "Strategia",
+      "process.strategyText": "Scegliere percorso di analisi, modello dati, strumenti, controlli di validazione e formato di comunicazione.",
+      "process.designTitle": "Design",
+      "process.designText": "Strutturare mappa, dashboard, workflow o output del modello intorno a gerarchia e interpretabilità.",
+      "process.developmentTitle": "Sviluppo",
+      "process.developmentText": "Costruire workflow Python, GIS, WebGIS o dashboard puliti, riutilizzabili e documentati.",
+      "process.deliveryTitle": "Consegna",
+      "process.deliveryText": "Consegnare risultati con documentazione chiara, output visivi e raccomandazioni successive.",
+      "proof.eyebrow": "Social proof",
+      "proof.title": "Credibilità costruita con evidenze accademiche, di ricerca e di progetto.",
+      "proof.projects": "Progetti geospaziali principali",
+      "proof.msc": "Ingegneria geoinformatica",
+      "proof.kit": "Lavoro applicato come assistente di ricerca",
       "filters.all": "Tutti",
       "filters.gis": "GIS",
       "filters.python": "Python",
@@ -510,6 +558,49 @@ const updateYear = () => {
   }
 };
 
+const getSystemTheme = () =>
+  window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+
+const getStoredTheme = () => {
+  try {
+    return window.localStorage.getItem("portfolio-theme");
+  } catch {
+    return null;
+  }
+};
+
+const setStoredTheme = (theme) => {
+  try {
+    window.localStorage.setItem("portfolio-theme", theme);
+  } catch {
+    // Storage can be unavailable in strict browser modes.
+  }
+};
+
+const updateThemeControl = (theme) => {
+  if (!themeToggle) {
+    return;
+  }
+
+  const isDark = theme === "dark";
+  themeToggle.setAttribute("aria-pressed", String(isDark));
+  themeToggle.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
+
+  if (themeColorMeta) {
+    themeColorMeta.setAttribute("content", isDark ? "#07111f" : "#071a33");
+  }
+};
+
+const applyTheme = (theme, persist = true) => {
+  const selectedTheme = theme === "dark" ? "dark" : "light";
+  document.documentElement.dataset.theme = selectedTheme;
+  updateThemeControl(selectedTheme);
+
+  if (persist) {
+    setStoredTheme(selectedTheme);
+  }
+};
+
 const setStoredLanguage = (language) => {
   try {
     window.localStorage.setItem("portfolio-language", language);
@@ -574,6 +665,7 @@ const applyProjectFilter = (filter) => {
 };
 
 updateYear();
+applyTheme(getStoredTheme() || getSystemTheme(), false);
 
 if (navToggle && navMenu) {
   navToggle.addEventListener("click", () => {
@@ -602,6 +694,22 @@ filterButtons.forEach((button) => {
     applyProjectFilter(button.dataset.filter);
   });
 });
+
+if (themeToggle) {
+  themeToggle.addEventListener("click", () => {
+    const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+    applyTheme(nextTheme);
+  });
+}
+
+if (!getStoredTheme() && window.matchMedia) {
+  const systemThemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+  systemThemeQuery.addEventListener?.("change", (event) => {
+    if (!getStoredTheme()) {
+      applyTheme(event.matches ? "dark" : "light", false);
+    }
+  });
+}
 
 const sections = navLinks
   .map((link) => document.querySelector(link.getAttribute("href")))
@@ -633,6 +741,39 @@ if ("IntersectionObserver" in window) {
   );
 
   sections.forEach((section) => observer.observe(section));
+}
+
+const revealTargets = Array.from(
+  document.querySelectorAll(
+    ".summary-inner, .intro-inner, .section-heading, .logo-card, .available-panel, .bring-card, .timeline-item, .skill-card, .project-card, .additional-projects, .process-step, .proof-grid article, .education-card, .contact-panel"
+  )
+);
+
+const reducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+if ("IntersectionObserver" in window && !reducedMotion) {
+  revealTargets.forEach((target) => target.setAttribute("data-reveal", ""));
+
+  const revealObserver = new IntersectionObserver(
+    (entries, observerInstance) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        entry.target.classList.add("is-visible");
+        observerInstance.unobserve(entry.target);
+      });
+    },
+    {
+      rootMargin: "0px 0px -12% 0px",
+      threshold: 0.12,
+    }
+  );
+
+  revealTargets.forEach((target) => revealObserver.observe(target));
+} else {
+  revealTargets.forEach((target) => target.classList.add("is-visible"));
 }
 
 const preferredLanguage = getStoredLanguage() || document.documentElement.lang || "en";

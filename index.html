@@ -20,7 +20,25 @@
     <meta property="og:type" content="website" />
     <meta property="og:image" content="assets/projects/project-nl2map.png" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#071a33" />
     <title>Amirhossein Donyadidegan | Junior Geoinformatics Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      (() => {
+        try {
+          const storedTheme = window.localStorage.getItem("portfolio-theme");
+          const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+          document.documentElement.dataset.theme = storedTheme || systemTheme;
+        } catch {
+          document.documentElement.dataset.theme = "light";
+        }
+      })();
+    </script>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -39,17 +57,22 @@
           <span class="sr-only" data-i18n="nav.toggle">Toggle navigation</span>
         </button>
         <ul class="nav-menu" id="nav-menu">
-          <li><a href="#roles" data-i18n="nav.roles">Roles</a></li>
-          <li><a href="#bring" data-i18n="nav.bring">Fit</a></li>
+          <li><a href="#about" data-i18n="nav.about">About</a></li>
+          <li><a href="#services" data-i18n="nav.services">Services</a></li>
           <li><a href="#experience" data-i18n="nav.experience">Experience</a></li>
-          <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
           <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
+          <li><a href="#process" data-i18n="nav.process">Process</a></li>
           <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
         </ul>
-        <div class="language-switch" aria-label="Language selection" data-i18n-attr="aria-label:language.aria">
-          <button type="button" data-lang="en" aria-pressed="true">EN</button>
-          <button type="button" data-lang="de" aria-pressed="false">DE</button>
-          <button type="button" data-lang="it" aria-pressed="false">IT</button>
+        <div class="nav-controls">
+          <div class="language-switch" aria-label="Language selection" data-i18n-attr="aria-label:language.aria">
+            <button type="button" data-lang="en" aria-pressed="true">EN</button>
+            <button type="button" data-lang="de" aria-pressed="false">DE</button>
+            <button type="button" data-lang="it" aria-pressed="false">IT</button>
+          </div>
+          <button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+            <span class="theme-toggle-icon" aria-hidden="true"></span>
+          </button>
         </div>
       </nav>
     </header>
@@ -59,18 +82,18 @@
         <div class="hero-overlay">
           <div class="hero-layout">
             <div class="hero-content">
-              <p class="eyebrow" data-i18n="hero.eyebrow">Junior GIS / Geospatial Candidate</p>
+              <p class="eyebrow" data-i18n="hero.eyebrow">Geospatial systems portfolio</p>
               <h1 id="hero-title" data-i18n="hero.title">
-                Junior Geoinformatics Engineer | GIS | Python | Remote Sensing | Spatial Data
+                Designing clear geospatial workflows from data to decision.
               </h1>
               <p class="hero-subtitle" data-i18n="hero.subtitle">
-                Junior geoinformatics engineer focused on Python-driven spatial analysis, GIS workflows, and Earth observation data.
+                I am Amirhossein Donyadidegan, a geoinformatics engineer building Python-driven GIS workflows, remote sensing analysis, dashboards, and spatial data products.
               </p>
               <p class="hero-note" data-i18n="hero.note">
-                Combining GIS, spatial data, and Python into practical geospatial workflows.
+                Structured portfolio evidence across geospatial ML, raster processing, WebGIS, and research-grade spatial analysis.
               </p>
               <div class="hero-actions" aria-label="Primary actions" data-i18n-attr="aria-label:hero.actionsAria">
-                <a class="button button-primary" href="#projects" data-i18n="hero.viewProjects">View Flagship Projects</a>
+                <a class="button button-primary" href="#projects" data-i18n="hero.viewProjects">View Projects</a>
                 <a
                   class="button button-secondary"
                   href="assets/amirhossein-donyadidegan-cv.pdf"
@@ -83,9 +106,26 @@
               </div>
             </div>
 
-            <aside class="hero-card" aria-label="Recruiter snapshot" data-i18n-attr="aria-label:hero.snapshotAria">
-              <h2 data-i18n="hero.snapshotTitle">Recruiter Snapshot</h2>
-              <dl>
+            <aside class="hero-card hero-visual" aria-label="Recruiter snapshot" data-i18n-attr="aria-label:hero.snapshotAria">
+              <div class="visual-topline">
+                <span data-i18n="hero.snapshotTitle">Recruiter Snapshot</span>
+                <span class="status-dot" data-i18n="hero.available">Available</span>
+              </div>
+              <div class="geo-panel" aria-hidden="true">
+                <div class="geo-map">
+                  <span class="geo-route"></span>
+                  <span class="geo-node node-a"></span>
+                  <span class="geo-node node-b"></span>
+                  <span class="geo-node node-c"></span>
+                </div>
+                <div class="geo-console">
+                  <span>Python</span>
+                  <span>GIS</span>
+                  <span>Remote sensing</span>
+                  <span>WebGIS</span>
+                </div>
+              </div>
+              <dl class="hero-metrics">
                 <div>
                   <dt data-i18n="hero.snapshotLevelLabel">Level</dt>
                   <dd data-i18n="hero.snapshotLevel">Entry-level / Junior</dd>
@@ -212,10 +252,10 @@
         </div>
       </section>
 
-      <section class="section-shell section-grid" id="bring">
+      <section class="section-shell section-grid" id="services">
         <div class="section-heading">
-          <p class="eyebrow" data-i18n="bring.eyebrow">What I Bring</p>
-          <h2 data-i18n="bring.title">A focused junior profile with practical geospatial evidence.</h2>
+          <p class="eyebrow" data-i18n="bring.eyebrow">Services & Strengths</p>
+          <h2 data-i18n="bring.title">Applied geospatial support with clear technical evidence.</h2>
         </div>
         <div class="bring-grid section-body">
           <article class="bring-card">
@@ -521,6 +561,66 @@
         </details>
       </section>
 
+      <section class="section-shell process-section" id="process" aria-labelledby="process-title">
+        <div class="section-heading wide-heading">
+          <p class="eyebrow" data-i18n="process.eyebrow">Process</p>
+          <h2 id="process-title" data-i18n="process.title">A structured workflow from spatial question to usable product.</h2>
+          <p class="section-intro" data-i18n="process.intro">
+            I approach geospatial work like a product system: define the decision, validate the data, design the workflow, and ship outputs that can be inspected and reused.
+          </p>
+        </div>
+        <div class="process-steps">
+          <article class="process-step">
+            <span>01</span>
+            <h3 data-i18n="process.discoveryTitle">Discovery</h3>
+            <p data-i18n="process.discoveryText">Clarify the spatial question, users, constraints, available datasets, and success criteria.</p>
+          </article>
+          <article class="process-step">
+            <span>02</span>
+            <h3 data-i18n="process.strategyTitle">Strategy</h3>
+            <p data-i18n="process.strategyText">Choose the analysis path, data model, tools, validation checks, and communication format.</p>
+          </article>
+          <article class="process-step">
+            <span>03</span>
+            <h3 data-i18n="process.designTitle">Design</h3>
+            <p data-i18n="process.designText">Shape the map, dashboard, workflow, or model output around hierarchy and interpretability.</p>
+          </article>
+          <article class="process-step">
+            <span>04</span>
+            <h3 data-i18n="process.developmentTitle">Development</h3>
+            <p data-i18n="process.developmentText">Build clean Python, GIS, WebGIS, or dashboard workflows with reusable and documented logic.</p>
+          </article>
+          <article class="process-step">
+            <span>05</span>
+            <h3 data-i18n="process.deliveryTitle">Delivery</h3>
+            <p data-i18n="process.deliveryText">Package results with clear documentation, visual outputs, and next-step recommendations.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="proof-section" aria-labelledby="proof-title">
+        <div class="section-shell proof-inner">
+          <div>
+            <p class="eyebrow" data-i18n="proof.eyebrow">Social Proof</p>
+            <h2 id="proof-title" data-i18n="proof.title">Credibility built through academic, research, and project evidence.</h2>
+          </div>
+          <div class="proof-grid" aria-label="Credibility indicators">
+            <article>
+              <strong>5+</strong>
+              <span data-i18n="proof.projects">Flagship geospatial projects</span>
+            </article>
+            <article>
+              <strong>MSc</strong>
+              <span data-i18n="proof.msc">Geoinformatics Engineering</span>
+            </article>
+            <article>
+              <strong>KIT</strong>
+              <span data-i18n="proof.kit">Applied research assistant work</span>
+            </article>
+          </div>
+        </div>
+      </section>
+
       <section class="section-shell section-grid" id="education">
         <div class="section-heading">
           <p class="eyebrow" data-i18n="education.eyebrow">Education</p>
@@ -570,7 +670,7 @@
         </div>
       </section>
 
-      <section class="section-shell section-grid" id="contact">
+      <section class="section-shell section-grid final-cta" id="contact">
         <div class="section-heading">
           <p class="eyebrow" data-i18n="contact.eyebrow">Contact</p>
           <h2 data-i18n="contact.title">Open to junior GIS and geospatial data roles in Germany.</h2>
@@ -600,8 +700,25 @@
     </main>
 
     <footer class="site-footer">
-      <p data-i18n-html="footer.copy">&copy; <span id="year">2026</span> Amirhossein Donyadidegan. Built for GitHub Pages.</p>
-      <p class="credit-line" data-i18n="footer.credits">Project visuals: local composites from available thesis outputs and geospatial imagery. Logos: public institutional logo files and the supplied thesis deck.</p>
+      <div class="footer-inner">
+        <a class="brand footer-brand" href="#hero" aria-label="Amirhossein Donyadidegan home">
+          <span class="brand-mark" aria-hidden="true">AD</span>
+          <span class="brand-text">Amirhossein Donyadidegan</span>
+        </a>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <div class="footer-social">
+          <a href="mailto:donyadideganamir@gmail.com">Email</a>
+          <a href="https://github.com/AmirDonyadide" target="_blank" rel="noreferrer">GitHub</a>
+          <a href="https://www.linkedin.com/in/amirhossein-donyadidegan/" target="_blank" rel="noreferrer">LinkedIn</a>
+        </div>
+        <p data-i18n-html="footer.copy">&copy; <span id="year">2026</span> Amirhossein Donyadidegan. Built for GitHub Pages.</p>
+        <p class="credit-line" data-i18n="footer.credits">Project visuals: local composites from available thesis outputs and geospatial imagery. Logos: public institutional logo files and the supplied thesis deck.</p>
+      </div>
     </footer>
 
     <script src="script.js"></script>
