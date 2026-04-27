@@ -613,7 +613,7 @@ const updateThemeControl = (theme) => {
   themeToggle.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
 
   if (themeColorMeta) {
-    themeColorMeta.setAttribute("content", isDark ? "#07111f" : "#071a33");
+    themeColorMeta.setAttribute("content", isDark ? "#07111f" : "#f4f8fb");
   }
 };
 
