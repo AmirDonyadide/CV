@@ -70,7 +70,7 @@
             <button type="button" data-lang="de" aria-pressed="false">DE</button>
             <button type="button" data-lang="it" aria-pressed="false">IT</button>
           </div>
-          <button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+          <button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false" title="Switch theme">
             <span class="theme-toggle-icon" aria-hidden="true"></span>
           </button>
         </div>
@@ -102,7 +102,7 @@
                 >
                   Download CV
                 </a>
-                <a class="button button-ghost" href="#contact" data-i18n="hero.contact">Contact</a>
+                <a class="button button-tertiary" href="#contact" data-i18n="hero.contact">Contact</a>
               </div>
             </div>
 
@@ -128,7 +128,7 @@
               <dl class="hero-metrics">
                 <div>
                   <dt data-i18n="hero.snapshotLevelLabel">Level</dt>
-                  <dd data-i18n="hero.snapshotLevel">Entry-level / Junior</dd>
+                  <dd data-i18n="hero.snapshotLevel">Early Career Geospatial Specialist</dd>
                 </div>
                 <div>
                   <dt data-i18n="hero.snapshotCoreLabel">Core fit</dt>
@@ -160,14 +160,17 @@
       <section class="intro-band" aria-label="Profile highlights" data-i18n-attr="aria-label:intro.aria">
         <div class="intro-inner">
           <div>
+            <span class="intro-icon" aria-hidden="true">LOC</span>
             <span data-i18n="intro.locationLabel">Location</span>
             <strong data-i18n="intro.location">Karlsruhe, Baden-Wurttemberg, Germany</strong>
           </div>
           <div>
+            <span class="intro-icon" aria-hidden="true">MSc</span>
             <span data-i18n="intro.degreeLabel">Education</span>
             <strong data-i18n="intro.degree">MSc Geoinformatics Engineering, completed</strong>
           </div>
           <div>
+            <span class="intro-icon" aria-hidden="true">FIT</span>
             <span data-i18n="intro.positioningLabel">Positioning</span>
             <strong data-i18n="intro.positioning">Junior GIS / Geospatial Data</strong>
           </div>
@@ -191,7 +194,10 @@
           </div>
 
           <div class="available-panel">
-            <h3 data-i18n="available.title">Available For</h3>
+            <div class="available-title-row">
+              <h3 data-i18n="available.title">Available For</h3>
+              <span class="availability-chip">Open</span>
+            </div>
             <ul class="check-list">
               <li data-i18n="available.a1">Junior GIS positions</li>
               <li data-i18n="available.a2">Graduate roles</li>
@@ -211,24 +217,28 @@
         </div>
         <div class="logo-grid">
           <article class="logo-card">
-            <img class="logo-mark" src="assets/logos/polimi.png" alt="Politecnico di Milano logo" data-i18n-attr="alt:logos.polimiAlt" />
+            <img class="logo-mark" src="assets/logos/polimi.png" width="1200" height="600" loading="lazy" alt="Politecnico di Milano logo" data-i18n-attr="alt:logos.polimiAlt" />
             <span data-i18n="logos.polimi">Politecnico di Milano</span>
             <small data-i18n="logos.polimiRole">MSc Geoinformatics Engineering</small>
+            <small class="logo-meta">Italy / degree</small>
           </article>
           <article class="logo-card">
-            <img class="logo-mark" src="assets/logos/bonn.png" alt="University of Bonn logo" data-i18n-attr="alt:logos.bonnAlt" />
+            <img class="logo-mark" src="assets/logos/bonn.png" width="1200" height="600" loading="lazy" alt="University of Bonn logo" data-i18n-attr="alt:logos.bonnAlt" />
             <span data-i18n="logos.bonn">University of Bonn</span>
             <small data-i18n="logos.bonnRole">Erasmus+ exchange, geodesy</small>
+            <small class="logo-meta">Germany / exchange</small>
           </article>
           <article class="logo-card">
-            <img class="logo-mark" src="assets/logos/kit.png" alt="Karlsruhe Institute of Technology logo" data-i18n-attr="alt:logos.kitAlt" />
+            <img class="logo-mark" src="assets/logos/kit.png" width="1200" height="600" loading="lazy" alt="Karlsruhe Institute of Technology logo" data-i18n-attr="alt:logos.kitAlt" />
             <span data-i18n="logos.kit">Karlsruhe Institute of Technology</span>
             <small data-i18n="logos.kitRole">Exchange and research assistant roles</small>
+            <small class="logo-meta">Germany / research</small>
           </article>
           <article class="logo-card">
-            <img class="logo-mark" src="assets/logos/tehran.png" alt="University of Tehran mark" data-i18n-attr="alt:logos.tehranAlt" />
+            <img class="logo-mark" src="assets/logos/tehran.png" width="1200" height="600" loading="lazy" alt="University of Tehran mark" data-i18n-attr="alt:logos.tehranAlt" />
             <span data-i18n="logos.tehran">University of Tehran</span>
             <small data-i18n="logos.tehranRole">BSc Surveying Engineering</small>
+            <small class="logo-meta">Iran / foundation</small>
           </article>
         </div>
       </section>
@@ -244,10 +254,19 @@
             background combines geoinformatics coursework, exchange study in Germany, applied research support, and
             portfolio projects that show how I approach spatial data problems step by step.
           </p>
-          <p data-i18n-html="about.p2">
+          <p class="thesis-callout" data-i18n-html="about.p2">
             My MSc thesis, <cite>Inferring Map Generalization Operations from User Prompts</cite>, is a good example of
             that intersection: cartographic generalization, natural language prompts, feature engineering, and model
             evaluation in one geospatial workflow.
+          </p>
+          <div class="keyword-strip" aria-label="Core strengths" data-i18n-attr="aria-label:about.strengthsAria">
+            <span data-i18n="about.q1">Python-based geospatial data processing</span>
+            <span data-i18n="about.q2">Remote sensing and Earth-observation workflows</span>
+            <span data-i18n="about.q3">Interactive dashboards and WebGIS applications</span>
+            <span data-i18n="about.q4">Machine learning for spatial data problems</span>
+          </div>
+          <p class="human-note" data-i18n="about.human">
+            I like spatial workflows because they make complex real-world questions easier to inspect, explain, and improve.
           </p>
         </div>
       </section>
@@ -258,12 +277,14 @@
           <h2 data-i18n="bring.title">Applied geospatial support with clear technical evidence.</h2>
         </div>
         <div class="bring-grid section-body">
-          <article class="bring-card">
+          <article class="bring-card bring-card-featured">
+            <span class="card-label">Core</span>
             <span class="bring-icon" aria-hidden="true">GIS</span>
             <h3 data-i18n="bring.card1Title">GIS plus Python</h3>
             <p data-i18n="bring.card1Text">Comfortable moving between spatial concepts, GIS tools, and Python-based processing.</p>
           </article>
           <article class="bring-card">
+            <span class="card-label">Research</span>
             <span class="bring-icon" aria-hidden="true">KIT</span>
             <h3 data-i18n="bring.card2Title">Applied research exposure</h3>
             <p data-i18n="bring.card2Text">Experience supporting research workflows at KIT with energy, mobility, dashboard, and map-related work.</p>
@@ -278,7 +299,7 @@
             <h3 data-i18n="bring.card4Title">Geospatial ML intersection</h3>
             <p data-i18n="bring.card4Text">Thesis and projects connect spatial features, text prompts, classification, evaluation, and model workflows.</p>
           </article>
-          <article class="bring-card">
+          <article class="bring-card bring-card-wide">
             <span class="bring-icon" aria-hidden="true">EU</span>
             <h3 data-i18n="bring.card5Title">International academic path</h3>
             <p data-i18n="bring.card5Text">MSc study in Italy with exchange experience in Germany and a surveying engineering foundation.</p>
@@ -292,15 +313,18 @@
           <h2 data-i18n="experience.title">Junior-level applied research, GIS analysis, and web support.</h2>
         </div>
         <div class="timeline section-body">
-          <article class="timeline-item">
-            <div class="timeline-logo"><img src="assets/logos/iip.png" alt="KIT IIP logo" /></div>
+          <article class="timeline-item timeline-item-featured">
+            <div class="timeline-logo"><img src="assets/logos/iip.png" width="1200" height="600" loading="lazy" alt="KIT IIP research institute logo" /></div>
             <div class="timeline-content">
               <div class="item-head">
                 <div>
                   <h3 data-i18n="experience.kitIipRole">GIS &amp; Data Analyst, Research Assistant</h3>
                   <p class="item-meta" data-i18n="experience.kitIipMeta">IIP, Karlsruhe Institute of Technology (KIT)</p>
                 </div>
-                <span class="timeline-date">Jul 2025 - Mar 2026</span>
+                <div class="timeline-meta">
+                  <span class="timeline-status" data-i18n="experience.recent">Most relevant</span>
+                  <span class="timeline-date">Jul 2025 - Mar 2026</span>
+                </div>
               </div>
               <ul>
                 <li data-i18n="experience.kitIipB1">Built Python-based pipelines for energy and mobility datasets used in applied research workflows.</li>
@@ -312,14 +336,16 @@
           </article>
 
           <article class="timeline-item">
-            <div class="timeline-logo"><img src="assets/logos/nova.png" alt="KIT nova logo" /></div>
+            <div class="timeline-logo"><img src="assets/logos/nova.png" width="1200" height="600" loading="lazy" alt="KIT nova logo" /></div>
             <div class="timeline-content">
               <div class="item-head">
                 <div>
                   <h3 data-i18n="experience.kitNovaRole">Web Developer, Research Assistant</h3>
                   <p class="item-meta" data-i18n="experience.kitNovaMeta">KIT nova</p>
                 </div>
-                <span class="timeline-date">Jul 2025 - Dec 2025</span>
+                <div class="timeline-meta">
+                  <span class="timeline-date">Jul 2025 - Dec 2025</span>
+                </div>
               </div>
               <ul>
                 <li data-i18n="experience.kitNovaB1">Supported web application development for digital research and innovation workflows with attention to usability.</li>
@@ -337,7 +363,9 @@
                   <h3 data-i18n="experience.ngfRole">Intern</h3>
                   <p class="item-meta" data-i18n="experience.ngfMeta">Naghsheh Gostaran Fartak Co.</p>
                 </div>
-                <span class="timeline-date">May 2021 - Sep 2021</span>
+                <div class="timeline-meta">
+                  <span class="timeline-date">May 2021 - Sep 2021</span>
+                </div>
               </div>
               <ul>
                 <li data-i18n="experience.ngfB1">Supported surveying, photogrammetry, and GIS tasks in a practical project environment.</li>
@@ -356,25 +384,61 @@
           <h2 data-i18n="skills.title">Compact technical profile for GIS and geospatial data roles.</h2>
         </div>
         <div class="skills-grid section-body" aria-label="Technical skills" data-i18n-attr="aria-label:skills.aria">
-          <article class="skill-card">
+          <article class="skill-card skill-card-core">
+            <span class="skill-level">Primary</span>
             <h3 data-i18n="skills.programmingTitle">Programming</h3>
-            <p>Python, SQL, JavaScript, C++</p>
+            <p>Automation, spatial data processing, scripting, and small web workflows.</p>
+            <div class="skill-tags">
+              <span>Python</span>
+              <span>SQL</span>
+              <span>JavaScript</span>
+              <span>C++</span>
+            </div>
           </article>
-          <article class="skill-card">
+          <article class="skill-card skill-card-core">
+            <span class="skill-level">Primary</span>
             <h3 data-i18n="skills.gisTitle">GIS &amp; Geospatial</h3>
-            <p>QGIS, ArcGIS, GeoPandas, PostGIS, Google Earth Engine</p>
+            <p>Spatial analysis, vector/raster processing, mapping, and geodata preparation.</p>
+            <div class="skill-tags">
+              <span>QGIS</span>
+              <span>GeoPandas</span>
+              <span>PostGIS</span>
+              <span>ArcGIS</span>
+              <span>GEE</span>
+            </div>
           </article>
           <article class="skill-card">
+            <span class="skill-level">Working</span>
             <h3 data-i18n="skills.dataTitle">Data &amp; ML</h3>
-            <p>Scikit-learn, PyTorch, Pandas, NumPy, Machine Learning</p>
+            <p>Feature engineering, model evaluation, tabular processing, and thesis-scale ML experiments.</p>
+            <div class="skill-tags">
+              <span>Pandas</span>
+              <span>NumPy</span>
+              <span>Scikit-learn</span>
+              <span>PyTorch</span>
+            </div>
           </article>
           <article class="skill-card">
+            <span class="skill-level">Working</span>
             <h3 data-i18n="skills.visualTitle">Visualization</h3>
-            <p>Dash, Plotly, Matplotlib, dashboards</p>
+            <p>Dashboards, analytical communication, map-linked views, and visual QA.</p>
+            <div class="skill-tags">
+              <span>Dash</span>
+              <span>Plotly</span>
+              <span>Matplotlib</span>
+              <span>Dashboards</span>
+            </div>
           </article>
           <article class="skill-card">
+            <span class="skill-level">Familiar</span>
             <h3 data-i18n="skills.webTitle">Web &amp; APIs</h3>
-            <p>Flask, REST APIs, HTML, CSS, JavaScript</p>
+            <p>Static sites, lightweight APIs, frontend support, and geospatial interface components.</p>
+            <div class="skill-tags">
+              <span>Flask</span>
+              <span>REST APIs</span>
+              <span>HTML/CSS</span>
+              <span>JavaScript</span>
+            </div>
           </article>
         </div>
       </section>
@@ -388,175 +452,217 @@
           </p>
         </div>
 
-        <div class="project-filters" aria-label="Project filters" data-i18n-attr="aria-label:projects.filtersAria">
-          <button type="button" class="is-active" data-filter="all" aria-pressed="true" data-i18n="filters.all">All</button>
-          <button type="button" data-filter="gis" aria-pressed="false" data-i18n="filters.gis">GIS</button>
-          <button type="button" data-filter="python" aria-pressed="false" data-i18n="filters.python">Python</button>
-          <button type="button" data-filter="remote-sensing" aria-pressed="false" data-i18n="filters.remote">Remote Sensing</button>
-          <button type="button" data-filter="machine-learning" aria-pressed="false" data-i18n="filters.ml">Machine Learning</button>
-          <button type="button" data-filter="dashboard" aria-pressed="false" data-i18n="filters.dashboard">Dashboard</button>
-          <button type="button" data-filter="webgis" aria-pressed="false" data-i18n="filters.webgis">WebGIS</button>
-          <button type="button" data-filter="web-development" aria-pressed="false" data-i18n="filters.webdev">Web Development</button>
-          <button type="button" data-filter="software-design" aria-pressed="false" data-i18n="filters.software">Software Design</button>
-          <button type="button" data-filter="javascript" aria-pressed="false" data-i18n="filters.javascript">JavaScript</button>
-          <button type="button" data-filter="deep-learning" aria-pressed="false" data-i18n="filters.deep">Deep Learning</button>
-          <button type="button" data-filter="ai" aria-pressed="false" data-i18n="filters.ai">AI</button>
-          <button type="button" data-filter="surveying" aria-pressed="false" data-i18n="filters.surveying">Surveying</button>
+        <div class="project-filter-bar">
+          <div class="project-filters" aria-label="Project filters" data-i18n-attr="aria-label:projects.filtersAria">
+            <button type="button" class="is-active" data-filter="all" aria-pressed="true" data-i18n="filters.all">All</button>
+            <button type="button" data-filter="gis" aria-pressed="false" data-i18n="filters.gis">GIS</button>
+            <button type="button" data-filter="python" aria-pressed="false" data-i18n="filters.python">Python</button>
+            <button type="button" data-filter="remote-sensing" aria-pressed="false" data-i18n="filters.remote">Remote Sensing</button>
+            <button type="button" data-filter="machine-learning" aria-pressed="false" data-i18n="filters.ml">Machine Learning</button>
+            <button type="button" data-filter="dashboard" aria-pressed="false" data-i18n="filters.dashboard">Dashboard</button>
+            <button type="button" data-filter="webgis" aria-pressed="false" data-i18n="filters.webgis">WebGIS</button>
+            <button type="button" data-filter="web-development" aria-pressed="false" data-i18n="filters.webdev">Web Development</button>
+            <button type="button" data-filter="software-design" aria-pressed="false" data-i18n="filters.software">Software Design</button>
+            <button type="button" data-filter="javascript" aria-pressed="false" data-i18n="filters.javascript">JavaScript</button>
+            <button type="button" data-filter="deep-learning" aria-pressed="false" data-i18n="filters.deep">Deep Learning</button>
+            <button type="button" data-filter="ai" aria-pressed="false" data-i18n="filters.ai">AI</button>
+            <button type="button" data-filter="surveying" aria-pressed="false" data-i18n="filters.surveying">Surveying</button>
+          </div>
+          <p class="project-count" data-project-count aria-live="polite">Showing 12 projects</p>
         </div>
 
         <div class="projects-grid">
-          <article class="project-card project-card-featured" data-categories="gis python machine-learning ai software-design">
-            <img src="assets/projects/project-nl2map.png" alt="Input and generalized map output from the map generalization thesis project" data-i18n-attr="alt:projectVisuals.generalization" />
+          <article class="project-card project-card-featured project-card-flagship" data-categories="gis python machine-learning ai software-design">
+            <img src="assets/projects/project-nl2map.png" width="1200" height="720" loading="lazy" alt="Input and generalized map output from the map generalization thesis project" data-i18n-attr="alt:projectVisuals.generalization" />
             <div class="project-card-body">
               <div class="project-topline">
-                <span class="project-type" data-i18n="projects.typeThesis">MSc Thesis</span>
-                <a href="https://github.com/AmirDonyadide/nl2map-generalization" target="_blank" rel="noreferrer">GitHub</a>
+                <div class="project-badges">
+                  <span class="project-type" data-i18n="projects.typeThesis">MSc Thesis</span>
+                  <span class="featured-badge" data-i18n="projects.featured">Featured</span>
+                </div>
+                <a class="project-link" href="https://github.com/AmirDonyadide/nl2map-generalization" target="_blank" rel="noopener noreferrer" aria-label="View the NL2Map thesis project on GitHub" data-i18n="projects.github">View GitHub</a>
               </div>
               <h3>Inferring Map Generalization Operations from User Prompts</h3>
               <p data-i18n-html="projects.nl2mapDesc">
                 Built a machine-learning workflow that links user prompts to cartographic generalization operations for
                 more structured map-design decisions.
-                <a href="https://github.com/AmirDonyadide/nl2map-generalization" target="_blank" rel="noreferrer">GitHub repository</a>.
               </p>
-              <ul class="project-proof">
-                <li><strong data-i18n="projects.problemLabel">Problem:</strong> <span data-i18n="projects.nl2mapProblem">Connect human map-editing requests with the operations needed to generalize map features.</span></li>
-                <li><strong data-i18n="projects.methodLabel">Method:</strong> <span data-i18n="projects.nl2mapMethod">Used text embeddings, geometric features, model training, and evaluation in a Python pipeline.</span></li>
-              </ul>
-              <p class="tech-stack"><strong data-i18n="projects.techStack">Tech Stack:</strong> Python, Scikit-learn, GeoPandas, Shapely</p>
-              <p class="demonstrates"><strong data-i18n="projects.demonstratesLabel">Demonstrates:</strong> <span data-i18n="projects.nl2mapDemo">Geospatial ML, feature engineering, cartographic reasoning</span></p>
+              <details class="project-details">
+                <summary data-i18n="projects.details">View details</summary>
+                <ul class="project-proof">
+                  <li><strong data-i18n="projects.problemLabel">Problem:</strong> <span data-i18n="projects.nl2mapProblem">Connect human map-editing requests with the operations needed to generalize map features.</span></li>
+                  <li><strong data-i18n="projects.methodLabel">Method:</strong> <span data-i18n="projects.nl2mapMethod">Used text embeddings, geometric features, model training, and evaluation in a Python pipeline.</span></li>
+                </ul>
+                <p class="tech-stack"><strong data-i18n="projects.techStack">Tech Stack:</strong> Python, Scikit-learn, GeoPandas, Shapely</p>
+                <p class="demonstrates"><strong data-i18n="projects.demonstratesLabel">Demonstrates:</strong> <span data-i18n="projects.nl2mapDemo">Geospatial ML, feature engineering, cartographic reasoning</span></p>
+              </details>
             </div>
           </article>
 
-          <article class="project-card project-card-featured" data-categories="gis python remote-sensing software-design">
-            <img src="assets/projects/project-layeralterator.png" alt="Raster simulation visual with vector mask overlay for LayerAlterator" data-i18n-attr="alt:projectVisuals.raster" />
+          <article class="project-card project-card-featured project-card-flagship" data-categories="gis python remote-sensing software-design">
+            <img src="assets/projects/project-layeralterator.png" width="1200" height="720" loading="lazy" alt="Raster simulation visual with vector mask overlay for LayerAlterator" data-i18n-attr="alt:projectVisuals.raster" />
             <div class="project-card-body">
               <div class="project-topline">
-                <span class="project-type" data-i18n="projects.typeRaster">Raster Simulation</span>
-                <a href="https://github.com/AmirDonyadide/LayerAlterator" target="_blank" rel="noreferrer">GitHub</a>
+                <div class="project-badges">
+                  <span class="project-type" data-i18n="projects.typeRaster">Raster Simulation</span>
+                  <span class="featured-badge" data-i18n="projects.featured">Featured</span>
+                </div>
+                <a class="project-link" href="https://github.com/AmirDonyadide/LayerAlterator" target="_blank" rel="noopener noreferrer" aria-label="View LayerAlterator on GitHub" data-i18n="projects.github">View GitHub</a>
               </div>
               <h3>LayerAlterator</h3>
               <p data-i18n-html="projects.layerDesc">
                 Built a Python tool for controlled raster modification with vector masks, reusable processing logic, and
                 geospatial validation checks.
-                <a href="https://github.com/AmirDonyadide/LayerAlterator" target="_blank" rel="noreferrer">GitHub repository</a>.
               </p>
-              <ul class="project-proof">
-                <li><strong data-i18n="projects.problemLabel">Problem:</strong> <span data-i18n="projects.layerProblem">Modify raster layers in a repeatable way while respecting spatial masks and coordinate systems.</span></li>
-                <li><strong data-i18n="projects.methodLabel">Method:</strong> <span data-i18n="projects.layerMethod">Implemented mask-based raster operations with CRS consistency, validation, and modular Python functions.</span></li>
-              </ul>
-              <p class="tech-stack"><strong data-i18n="projects.techStack">Tech Stack:</strong> Python, Rasterio, GeoPandas, NumPy</p>
-              <p class="demonstrates"><strong data-i18n="projects.demonstratesLabel">Demonstrates:</strong> <span data-i18n="projects.layerDemo">Raster processing, geodata engineering, Python tooling</span></p>
+              <details class="project-details">
+                <summary data-i18n="projects.details">View details</summary>
+                <ul class="project-proof">
+                  <li><strong data-i18n="projects.problemLabel">Problem:</strong> <span data-i18n="projects.layerProblem">Modify raster layers in a repeatable way while respecting spatial masks and coordinate systems.</span></li>
+                  <li><strong data-i18n="projects.methodLabel">Method:</strong> <span data-i18n="projects.layerMethod">Implemented mask-based raster operations with CRS consistency, validation, and modular Python functions.</span></li>
+                </ul>
+                <p class="tech-stack"><strong data-i18n="projects.techStack">Tech Stack:</strong> Python, Rasterio, GeoPandas, NumPy</p>
+                <p class="demonstrates"><strong data-i18n="projects.demonstratesLabel">Demonstrates:</strong> <span data-i18n="projects.layerDemo">Raster processing, geodata engineering, Python tooling</span></p>
+              </details>
             </div>
           </article>
 
-          <article class="project-card" data-categories="python remote-sensing gis software-design">
-            <img src="assets/projects/project-landsattoolkit.png" alt="LandsatToolkit satellite image processing workflow visual" data-i18n-attr="alt:projectVisuals.eo" />
+          <article class="project-card project-card-flagship" data-categories="python remote-sensing gis software-design">
+            <img src="assets/projects/project-landsattoolkit.png" width="1200" height="720" loading="lazy" alt="LandsatToolkit satellite image processing workflow visual" data-i18n-attr="alt:projectVisuals.eo" />
             <div class="project-card-body">
               <div class="project-topline">
-                <span class="project-type" data-i18n="projects.typeEo">Earth Observation</span>
-                <a href="https://github.com/AmirDonyadide/LandsatToolkit" target="_blank" rel="noreferrer">GitHub</a>
+                <div class="project-badges">
+                  <span class="project-type" data-i18n="projects.typeEo">Earth Observation</span>
+                  <span class="featured-badge" data-i18n="projects.featured">Featured</span>
+                </div>
+                <a class="project-link" href="https://github.com/AmirDonyadide/LandsatToolkit" target="_blank" rel="noopener noreferrer" aria-label="View LandsatToolkit on GitHub" data-i18n="projects.github">View GitHub</a>
               </div>
               <h3>LandsatToolkit</h3>
               <p data-i18n-html="projects.landsatDesc">
                 Built a reusable Python toolkit for Landsat satellite image processing, enabling metadata extraction,
                 band operations, reprojection, and environmental analysis workflows.
-                <a href="https://github.com/AmirDonyadide/LandsatToolkit" target="_blank" rel="noreferrer">GitHub repository</a>.
               </p>
-              <ul class="project-proof">
-                <li><strong data-i18n="projects.problemLabel">Problem:</strong> <span data-i18n="projects.landsatProblem">Make common Landsat processing steps easier to reuse across Earth observation analyses.</span></li>
-                <li><strong data-i18n="projects.methodLabel">Method:</strong> <span data-i18n="projects.landsatMethod">Packaged metadata handling, band processing, reprojection, and index-oriented workflows in Python.</span></li>
-              </ul>
-              <p class="tech-stack"><strong data-i18n="projects.techStack">Tech Stack:</strong> Python, Rasterio, NumPy, Remote Sensing</p>
-              <p class="demonstrates"><strong data-i18n="projects.demonstratesLabel">Demonstrates:</strong> <span data-i18n="projects.landsatDemo">Earth observation, reusable Python packages, raster workflows</span></p>
+              <details class="project-details">
+                <summary data-i18n="projects.details">View details</summary>
+                <ul class="project-proof">
+                  <li><strong data-i18n="projects.problemLabel">Problem:</strong> <span data-i18n="projects.landsatProblem">Make common Landsat processing steps easier to reuse across Earth observation analyses.</span></li>
+                  <li><strong data-i18n="projects.methodLabel">Method:</strong> <span data-i18n="projects.landsatMethod">Packaged metadata handling, band processing, reprojection, and index-oriented workflows in Python.</span></li>
+                </ul>
+                <p class="tech-stack"><strong data-i18n="projects.techStack">Tech Stack:</strong> Python, Rasterio, NumPy, Remote Sensing</p>
+                <p class="demonstrates"><strong data-i18n="projects.demonstratesLabel">Demonstrates:</strong> <span data-i18n="projects.landsatDemo">Earth observation, reusable Python packages, raster workflows</span></p>
+              </details>
             </div>
           </article>
 
-          <article class="project-card" data-categories="gis remote-sensing machine-learning ai webgis javascript">
-            <img src="assets/projects/project-landslide.png" alt="Landslide susceptibility mapping visual with terrain and risk classes" data-i18n-attr="alt:projectVisuals.webgis" />
+          <article class="project-card project-card-flagship" data-categories="gis remote-sensing machine-learning ai webgis javascript">
+            <img src="assets/projects/project-landslide.png" width="1200" height="720" loading="lazy" alt="Landslide susceptibility mapping visual with terrain and risk classes" data-i18n-attr="alt:projectVisuals.webgis" />
             <div class="project-card-body">
               <div class="project-topline">
-                <span class="project-type" data-i18n="projects.typeWebgis">WebGIS</span>
-                <a href="https://github.com/AmirDonyadide/GIS-Course-Polimi-2024" target="_blank" rel="noreferrer">GitHub</a>
+                <div class="project-badges">
+                  <span class="project-type" data-i18n="projects.typeWebgis">WebGIS</span>
+                  <span class="featured-badge" data-i18n="projects.featured">Featured</span>
+                </div>
+                <a class="project-link" href="https://github.com/AmirDonyadide/GIS-Course-Polimi-2024" target="_blank" rel="noopener noreferrer" aria-label="View AI-based landslide mapping project on GitHub" data-i18n="projects.github">View GitHub</a>
               </div>
               <h3>AI-Based Landslide Susceptibility Mapping</h3>
               <p data-i18n-html="projects.landslideDesc">
                 Developed a GIS and machine-learning workflow for landslide susceptibility mapping, combining terrain,
                 infrastructure, and remote sensing data.
-                <a href="https://github.com/AmirDonyadide/GIS-Course-Polimi-2024" target="_blank" rel="noreferrer">GitHub repository</a>.
               </p>
-              <ul class="project-proof">
-                <li><strong data-i18n="projects.problemLabel">Problem:</strong> <span data-i18n="projects.landslideProblem">Assess landslide susceptibility using spatial evidence from terrain, infrastructure, and environmental layers.</span></li>
-                <li><strong data-i18n="projects.methodLabel">Method:</strong> <span data-i18n="projects.landslideMethod">Combined GIS layers, remote sensing inputs, machine-learning steps, and WebGIS communication.</span></li>
-              </ul>
-              <p class="tech-stack"><strong data-i18n="projects.techStack">Tech Stack:</strong> GIS, Remote Sensing, JavaScript, WebGIS</p>
-              <p class="demonstrates"><strong data-i18n="projects.demonstratesLabel">Demonstrates:</strong> <span data-i18n="projects.landslideDemo">Spatial modeling, WebGIS communication, environmental analysis</span></p>
+              <details class="project-details">
+                <summary data-i18n="projects.details">View details</summary>
+                <ul class="project-proof">
+                  <li><strong data-i18n="projects.problemLabel">Problem:</strong> <span data-i18n="projects.landslideProblem">Assess landslide susceptibility using spatial evidence from terrain, infrastructure, and environmental layers.</span></li>
+                  <li><strong data-i18n="projects.methodLabel">Method:</strong> <span data-i18n="projects.landslideMethod">Combined GIS layers, remote sensing inputs, machine-learning steps, and WebGIS communication.</span></li>
+                </ul>
+                <p class="tech-stack"><strong data-i18n="projects.techStack">Tech Stack:</strong> GIS, Remote Sensing, JavaScript, WebGIS</p>
+                <p class="demonstrates"><strong data-i18n="projects.demonstratesLabel">Demonstrates:</strong> <span data-i18n="projects.landslideDemo">Spatial modeling, WebGIS communication, environmental analysis</span></p>
+              </details>
             </div>
           </article>
 
           <article class="project-card" data-categories="gis python dashboard web-development software-design">
-            <img src="assets/projects/project-se4g.png" alt="SE4G geospatial dashboard visual with map and chart panels" data-i18n-attr="alt:projectVisuals.dashboard" />
+            <img src="assets/projects/project-se4g.png" width="1200" height="720" loading="lazy" alt="SE4G geospatial dashboard visual with map and chart panels" data-i18n-attr="alt:projectVisuals.dashboard" />
             <div class="project-card-body">
               <div class="project-topline">
-                <span class="project-type" data-i18n="projects.typeDashboard">Dashboard</span>
-                <a href="https://github.com/AmirDonyadide/SE4G" target="_blank" rel="noreferrer">GitHub</a>
+                <div class="project-badges">
+                  <span class="project-type" data-i18n="projects.typeDashboard">Dashboard</span>
+                </div>
+                <a class="project-link" href="https://github.com/AmirDonyadide/SE4G" target="_blank" rel="noopener noreferrer" aria-label="View SE4G dashboard on GitHub" data-i18n="projects.github">View GitHub</a>
               </div>
               <h3>SE4G Geospatial Data Visualization Dashboard</h3>
               <p data-i18n-html="projects.se4gDesc">
                 Built an interactive dashboard for geospatial data exploration, combining maps, charts, API integration,
                 and user-driven analysis in a practical data application.
-                <a href="https://github.com/AmirDonyadide/SE4G" target="_blank" rel="noreferrer">GitHub repository</a>.
               </p>
-              <ul class="project-proof">
-                <li><strong data-i18n="projects.problemLabel">Problem:</strong> <span data-i18n="projects.se4gProblem">Make geospatial datasets easier to inspect through a browser-based analytical interface.</span></li>
-                <li><strong data-i18n="projects.methodLabel">Method:</strong> <span data-i18n="projects.se4gMethod">Combined maps, charts, API integration, and dashboard interactions in a Python web application.</span></li>
-              </ul>
-              <p class="tech-stack"><strong data-i18n="projects.techStack">Tech Stack:</strong> Python, Dash, Plotly, Flask</p>
-              <p class="demonstrates"><strong data-i18n="projects.demonstratesLabel">Demonstrates:</strong> <span data-i18n="projects.se4gDemo">Dashboard development, geospatial visualization, data communication</span></p>
+              <details class="project-details">
+                <summary data-i18n="projects.details">View details</summary>
+                <ul class="project-proof">
+                  <li><strong data-i18n="projects.problemLabel">Problem:</strong> <span data-i18n="projects.se4gProblem">Make geospatial datasets easier to inspect through a browser-based analytical interface.</span></li>
+                  <li><strong data-i18n="projects.methodLabel">Method:</strong> <span data-i18n="projects.se4gMethod">Combined maps, charts, API integration, and dashboard interactions in a Python web application.</span></li>
+                </ul>
+                <p class="tech-stack"><strong data-i18n="projects.techStack">Tech Stack:</strong> Python, Dash, Plotly, Flask</p>
+                <p class="demonstrates"><strong data-i18n="projects.demonstratesLabel">Demonstrates:</strong> <span data-i18n="projects.se4gDemo">Dashboard development, geospatial visualization, data communication</span></p>
+              </details>
             </div>
           </article>
 
           <article class="project-card project-card-compact" data-categories="python machine-learning deep-learning ai">
             <div class="project-card-body">
               <div class="project-topline">
-                <span class="project-type" data-i18n="projects.typeDeepLearning">Deep Learning</span>
-                <a href="https://github.com/AmirDonyadide/DL4CVRS" target="_blank" rel="noreferrer">GitHub</a>
+                <div class="project-badges">
+                  <span class="project-type" data-i18n="projects.typeDeepLearning">Deep Learning</span>
+                </div>
+                <a class="project-link" href="https://github.com/AmirDonyadide/DL4CVRS" target="_blank" rel="noopener noreferrer" aria-label="View DL4CVRS on GitHub" data-i18n="projects.github">View GitHub</a>
               </div>
               <h3>DL4CVRS Vehicle Detection Model</h3>
               <p data-i18n-html="projects.dlDesc">
                 Compared CNN and pretrained ResNet18 image-classification models with training, evaluation, metrics,
-                normalization, and error analysis. <a href="https://github.com/AmirDonyadide/DL4CVRS" target="_blank" rel="noreferrer">GitHub repository</a>.
+                normalization, and error analysis.
               </p>
-              <p class="mini-demonstrates"><strong data-i18n="projects.demonstratesLabel">Demonstrates:</strong> <span data-i18n="projects.dlDemo">Computer vision workflow, model comparison, evaluation basics</span></p>
+              <details class="project-details project-details-compact">
+                <summary data-i18n="projects.details">View details</summary>
+                <p class="mini-demonstrates"><strong data-i18n="projects.demonstratesLabel">Demonstrates:</strong> <span data-i18n="projects.dlDemo">Computer vision workflow, model comparison, evaluation basics</span></p>
+              </details>
             </div>
           </article>
 
           <article class="project-card project-card-compact" data-categories="gis python remote-sensing dashboard">
             <div class="project-card-body">
               <div class="project-topline">
-                <span class="project-type" data-i18n="projects.typeRemoteStudy">Remote Sensing</span>
-                <a href="https://github.com/AmirDonyadide/EOAdvanced" target="_blank" rel="noreferrer">GitHub</a>
+                <div class="project-badges">
+                  <span class="project-type" data-i18n="projects.typeRemoteStudy">Remote Sensing</span>
+                </div>
+                <a class="project-link" href="https://github.com/AmirDonyadide/EOAdvanced" target="_blank" rel="noopener noreferrer" aria-label="View EOAdvanced on GitHub" data-i18n="projects.github">View GitHub</a>
               </div>
               <h3>EOAdvanced Water Area Analysis in Eastern Venice</h3>
               <p data-i18n-html="projects.eoadvancedDesc">
                 Analyzed water-area changes using satellite data, NDWI-based indicators, maps, and statistical
-                visualizations for 2021 to 2024. <a href="https://github.com/AmirDonyadide/EOAdvanced" target="_blank" rel="noreferrer">GitHub repository</a>.
+                visualizations for 2021 to 2024.
               </p>
-              <p class="mini-demonstrates"><strong data-i18n="projects.demonstratesLabel">Demonstrates:</strong> <span data-i18n="projects.eoDemo">Earth observation, NDWI analysis, temporal mapping</span></p>
+              <details class="project-details project-details-compact">
+                <summary data-i18n="projects.details">View details</summary>
+                <p class="mini-demonstrates"><strong data-i18n="projects.demonstratesLabel">Demonstrates:</strong> <span data-i18n="projects.eoDemo">Earth observation, NDWI analysis, temporal mapping</span></p>
+              </details>
             </div>
           </article>
 
           <article class="project-card project-card-compact" data-categories="web-development software-design javascript">
             <div class="project-card-body">
               <div class="project-topline">
-                <span class="project-type" data-i18n="projects.typeWebDevelopment">Web Development</span>
-                <a href="https://github.com/moeinp70/HYP_Yoga" target="_blank" rel="noreferrer">GitHub</a>
+                <div class="project-badges">
+                  <span class="project-type" data-i18n="projects.typeWebDevelopment">Web Development</span>
+                </div>
+                <a class="project-link" href="https://github.com/moeinp70/HYP_Yoga" target="_blank" rel="noopener noreferrer" aria-label="View PoliYoga on GitHub" data-i18n="projects.github">View GitHub</a>
               </div>
               <h3>PoliYoga Responsive Web Application</h3>
               <p data-i18n-html="projects.poliyogaDesc">
                 Contributed to a responsive web platform for a yoga academy with frontend, UX, database-related features,
-                profiles, activities, and dynamic content. <a href="https://github.com/moeinp70/HYP_Yoga" target="_blank" rel="noreferrer">GitHub repository</a>.
+                profiles, activities, and dynamic content.
               </p>
-              <p class="mini-demonstrates"><strong data-i18n="projects.demonstratesLabel">Demonstrates:</strong> <span data-i18n="projects.poliyogaDemo">Web application basics, UX collaboration, database-backed features</span></p>
+              <details class="project-details project-details-compact">
+                <summary data-i18n="projects.details">View details</summary>
+                <p class="mini-demonstrates"><strong data-i18n="projects.demonstratesLabel">Demonstrates:</strong> <span data-i18n="projects.poliyogaDemo">Web application basics, UX collaboration, database-backed features</span></p>
+              </details>
             </div>
           </article>
 
@@ -604,6 +710,7 @@
             </div>
           </article>
         </div>
+        <p class="project-empty" data-project-empty data-i18n="projects.empty" hidden>No projects match this filter yet.</p>
       </section>
 
       <section class="section-shell process-section" id="process" aria-labelledby="process-title">
@@ -648,10 +755,13 @@
           <div>
             <p class="eyebrow" data-i18n="proof.eyebrow">Social Proof</p>
             <h2 id="proof-title" data-i18n="proof.title">Credibility built through academic, research, and project evidence.</h2>
+            <p class="proof-copy" data-i18n="proof.microcopy">
+              The strongest evidence is practical: completed academic work, applied KIT support, and project artifacts recruiters can inspect.
+            </p>
           </div>
           <div class="proof-grid" aria-label="Credibility indicators">
             <article>
-              <strong>5+</strong>
+              <strong class="proof-value" data-count-to="5">5+</strong>
               <span data-i18n="proof.projects">Flagship geospatial projects</span>
             </article>
             <article>
@@ -661,6 +771,10 @@
             <article>
               <strong>KIT</strong>
               <span data-i18n="proof.kit">Applied research assistant work</span>
+            </article>
+            <article>
+              <strong>3</strong>
+              <span data-i18n="proof.institutions">Academic institutions across Italy and Germany</span>
             </article>
           </div>
         </div>
@@ -672,9 +786,16 @@
           <h2 data-i18n="education.title">Geoinformatics, remote sensing, GIS, and surveying foundations.</h2>
         </div>
         <div class="education-list section-body">
+          <div class="education-path" aria-label="Academic journey">
+            <span>Surveying foundation</span>
+            <span aria-hidden="true">&rarr;</span>
+            <span>Geoinformatics specialization</span>
+            <span aria-hidden="true">&rarr;</span>
+            <span>Germany exchange and KIT exposure</span>
+          </div>
           <article class="education-card">
             <div class="card-head">
-              <img class="org-logo" src="assets/logos/polimi.png" alt="Politecnico di Milano logo" data-i18n-attr="alt:logos.polimiAlt" />
+              <img class="org-logo" src="assets/logos/polimi.png" width="1200" height="600" loading="lazy" alt="Politecnico di Milano logo" data-i18n-attr="alt:logos.polimiAlt" />
               <div>
                 <h3 data-i18n="education.mscTitle">MSc Geoinformatics Engineering</h3>
                 <p class="item-meta" data-i18n="education.mscMeta">Politecnico di Milano, Italy</p>
@@ -685,21 +806,25 @@
               Exchange student in geodesy at the University of Bonn and in remote sensing and geoinformation at KIT.
             </p>
             <div class="exchange-logos" aria-label="Exchange institutions" data-i18n-attr="aria-label:education.exchangeAria">
-              <img src="assets/logos/bonn.png" alt="University of Bonn logo" data-i18n-attr="alt:logos.bonnAlt" />
-              <img src="assets/logos/kit.png" alt="KIT logo" data-i18n-attr="alt:logos.kitShortAlt" />
+              <img src="assets/logos/bonn.png" width="1200" height="600" loading="lazy" alt="University of Bonn logo" data-i18n-attr="alt:logos.bonnAlt" />
+              <img src="assets/logos/kit.png" width="1200" height="600" loading="lazy" alt="KIT logo" data-i18n-attr="alt:logos.kitShortAlt" />
             </div>
             <p data-i18n-html="education.mscThesis">
               <strong>Thesis:</strong> <cite>Inferring Map Generalization Operations from User Prompts</cite>
             </p>
-            <p class="course-line" data-i18n-html="education.mscCourses">
-              <strong>Relevant coursework:</strong> Geographic Information Systems, Machine Learning,
-              Databases, Earth Observation, Geospatial Data Analysis, Geospatial Processing
-            </p>
+            <div class="course-tags" aria-label="Relevant MSc coursework">
+              <strong>Relevant coursework</strong>
+              <span>GIS</span>
+              <span>Machine Learning</span>
+              <span>Databases</span>
+              <span>Earth Observation</span>
+              <span>Geospatial Processing</span>
+            </div>
           </article>
 
           <article class="education-card">
             <div class="card-head">
-              <img class="org-logo" src="assets/logos/tehran.png" alt="University of Tehran mark" data-i18n-attr="alt:logos.tehranAlt" />
+              <img class="org-logo" src="assets/logos/tehran.png" width="1200" height="600" loading="lazy" alt="University of Tehran mark" data-i18n-attr="alt:logos.tehranAlt" />
               <div>
                 <h3 data-i18n="education.bscTitle">BSc Surveying Engineering</h3>
                 <p class="item-meta" data-i18n="education.bscMeta">University of Tehran, Iran</p>
@@ -707,10 +832,14 @@
             </div>
             <p class="date-line" data-i18n="education.bscDate">Sep 2018 - Jul 2022 | Grade: 16.5 / 20, approx. 1.9</p>
             <p data-i18n-html="education.bscThesis"><strong>Thesis:</strong> <cite>Application of GIS and Big Data in Smart Cities</cite></p>
-            <p class="course-line" data-i18n-html="education.bscCourses">
-              <strong>Relevant coursework:</strong> Surveying, Photogrammetry, Remote Sensing,
-              Geographic Information Systems, Spatial Analysis, Geodesy
-            </p>
+            <div class="course-tags" aria-label="Relevant BSc coursework">
+              <strong>Relevant coursework</strong>
+              <span>Surveying</span>
+              <span>Photogrammetry</span>
+              <span>Remote Sensing</span>
+              <span>GIS</span>
+              <span>Geodesy</span>
+            </div>
           </article>
         </div>
       </section>
@@ -724,16 +853,34 @@
           <p data-i18n="contact.p">
             Interested in junior GIS, geospatial analysis, or Python-based spatial roles? Feel free to connect or reach out.
           </p>
+          <p class="contact-closing" data-i18n="contact.closing">
+            Interested in geospatial workflows, research support, or collaborative spatial data products.
+          </p>
           <div class="contact-actions">
-            <a class="button button-primary" href="mailto:donyadideganamir@gmail.com" data-i18n="contact.emailButton">Email Me</a>
+            <a class="button button-primary" href="mailto:donyadideganamir@gmail.com" aria-label="Email Amirhossein Donyadidegan" data-i18n="contact.emailButton">Email Me</a>
             <a class="button button-secondary-dark" href="assets/amirhossein-donyadidegan-cv.pdf" download data-i18n="contact.cvButton">Download CV</a>
           </div>
           <address class="contact-list">
-            <a href="mailto:donyadideganamir@gmail.com">donyadideganamir@gmail.com</a>
-            <a href="tel:+4917624770243">+49 176 2477 0243</a>
-            <a href="https://github.com/AmirDonyadide" target="_blank" rel="noreferrer">GitHub: AmirDonyadide</a>
-            <a href="https://www.linkedin.com/in/amirhossein-donyadidegan/" target="_blank" rel="noreferrer">LinkedIn: amirhossein-donyadidegan</a>
+            <a class="contact-link contact-link-primary" href="mailto:donyadideganamir@gmail.com" aria-label="Email Amirhossein Donyadidegan">
+              <span class="contact-icon" aria-hidden="true">@</span>
+              <span><strong>Email</strong><small>donyadideganamir@gmail.com</small></span>
+            </a>
+            <a class="contact-link" href="https://www.linkedin.com/in/amirhossein-donyadidegan/" target="_blank" rel="noopener noreferrer" aria-label="Open Amirhossein Donyadidegan on LinkedIn">
+              <span class="contact-icon" aria-hidden="true">in</span>
+              <span><strong>LinkedIn</strong><small>amirhossein-donyadidegan</small></span>
+            </a>
+            <a class="contact-link" href="https://github.com/AmirDonyadide" target="_blank" rel="noopener noreferrer" aria-label="Open Amirhossein Donyadidegan on GitHub">
+              <span class="contact-icon" aria-hidden="true">GH</span>
+              <span><strong>GitHub</strong><small>AmirDonyadide</small></span>
+            </a>
+            <a class="contact-link" href="tel:+4917624770243" aria-label="Call Amirhossein Donyadidegan">
+              <span class="contact-icon" aria-hidden="true">TEL</span>
+              <span><strong>Phone</strong><small>+49 176 2477 0243</small></span>
+            </a>
           </address>
+          <p class="availability-line" data-i18n="contact.availability">
+            Available for junior GIS, Python, remote sensing, and geospatial analysis opportunities.
+          </p>
           <div class="language-strip" aria-label="Languages and additional details" data-i18n-attr="aria-label:contact.langAria">
             <span data-i18n="contact.langEn">English: fluent</span>
             <span data-i18n="contact.langDe">German: intermediate</span>
@@ -746,20 +893,23 @@
 
     <footer class="site-footer">
       <div class="footer-inner">
-        <a class="brand footer-brand" href="#hero" aria-label="Amirhossein Donyadidegan home">
-          <span class="brand-mark" aria-hidden="true">AD</span>
-          <span class="brand-text">Amirhossein Donyadidegan</span>
-        </a>
+        <div class="footer-brand-group">
+          <a class="brand footer-brand" href="#hero" aria-label="Amirhossein Donyadidegan home">
+            <span class="brand-mark" aria-hidden="true">AD</span>
+            <span class="brand-text">Amirhossein Donyadidegan</span>
+          </a>
+          <p class="footer-tagline" data-i18n="footer.tagline">Geospatial workflows, research, and applied systems thinking.</p>
+        </div>
         <nav class="footer-nav" aria-label="Footer navigation">
-          <a href="#about">About</a>
-          <a href="#services">Services</a>
-          <a href="#projects">Projects</a>
-          <a href="#contact">Contact</a>
+          <a href="#about" aria-label="Go to profile section">About</a>
+          <a href="#services" aria-label="Go to services and strengths section">Services</a>
+          <a href="#projects" aria-label="Go to projects section">Projects</a>
+          <a href="#contact" aria-label="Go to contact section">Contact</a>
         </nav>
         <div class="footer-social">
-          <a href="mailto:donyadideganamir@gmail.com">Email</a>
-          <a href="https://github.com/AmirDonyadide" target="_blank" rel="noreferrer">GitHub</a>
-          <a href="https://www.linkedin.com/in/amirhossein-donyadidegan/" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a href="mailto:donyadideganamir@gmail.com" aria-label="Email Amirhossein Donyadidegan">Email</a>
+          <a href="https://github.com/AmirDonyadide" target="_blank" rel="noopener noreferrer" aria-label="Open GitHub profile">GitHub</a>
+          <a href="https://www.linkedin.com/in/amirhossein-donyadidegan/" target="_blank" rel="noopener noreferrer" aria-label="Open LinkedIn profile">LinkedIn</a>
         </div>
         <p data-i18n-html="footer.copy">&copy; <span id="year">2026</span> Amirhossein Donyadidegan. Built for GitHub Pages.</p>
         <p class="credit-line" data-i18n="footer.credits">Project visuals: local composites from available thesis outputs and geospatial imagery. Logos: public institutional logo files and the supplied thesis deck.</p>

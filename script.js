@@ -4,8 +4,11 @@ const navLinks = Array.from(document.querySelectorAll(".nav-menu a"));
 const langButtons = Array.from(document.querySelectorAll("[data-lang]"));
 const filterButtons = Array.from(document.querySelectorAll("[data-filter]"));
 const projectCards = Array.from(document.querySelectorAll(".project-card[data-categories]"));
+const projectCount = document.querySelector("[data-project-count]");
+const projectEmptyState = document.querySelector("[data-project-empty]");
 const themeToggle = document.querySelector(".theme-toggle");
 const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+const proofValue = document.querySelector(".proof-value[data-count-to]");
 
 const originalText = new Map();
 const originalHtml = new Map();
@@ -69,7 +72,7 @@ const translations = {
       "hero.snapshotTitle": "Recruiter Snapshot",
       "hero.available": "Verfügbar",
       "hero.snapshotLevelLabel": "Level",
-      "hero.snapshotLevel": "Berufseinsteiger / Junior",
+      "hero.snapshotLevel": "Early Career Geospatial Specialist",
       "hero.snapshotCoreLabel": "Kernprofil",
       "hero.snapshotCore": "GIS, Python, Fernerkundung",
       "hero.snapshotEvidenceLabel": "Nachweis",
@@ -118,6 +121,7 @@ const translations = {
       "about.q2": "Fernerkundung und Earth-Observation-Workflows",
       "about.q3": "Interaktive Dashboards und WebGIS-Anwendungen",
       "about.q4": "Machine Learning für räumliche Datenprobleme",
+      "about.human": "Ich mag räumliche Workflows, weil sie komplexe reale Fragen prüfbarer, erklärbarer und verbesserbar machen.",
       "bring.eyebrow": "Leistungen & Stärken",
       "bring.title": "Angewandte geospatiale Unterstützung mit klaren technischen Nachweisen.",
       "bring.card1Title": "GIS plus Python",
@@ -133,6 +137,7 @@ const translations = {
       "experience.eyebrow": "Erfahrung",
       "experience.title": "Junior-Level-Erfahrung in angewandter Forschung, GIS-Analyse und Web-Support.",
       "experience.kitIipRole": "GIS- & Datenanalyst, Hilfswissenschaftler",
+      "experience.recent": "Am relevantesten",
       "experience.kitIipMeta": "IIP, Karlsruher Institut für Technologie (KIT)",
       "experience.kitIipB1": "Aufbau Python-basierter Pipelines für Energie- und Mobilitätsdatensätze in angewandten Forschungsworkflows.",
       "experience.kitIipB2": "Durchführung räumlicher Analysen von Mobilitäts- und Energiedaten zur Unterstützung von Dekarbonisierungsmodellierung und Planungsforschung.",
@@ -169,6 +174,10 @@ const translations = {
       "projects.typeSurveying": "Vermessung",
       "projects.typeEngineeringDesign": "Ingenieurdesign",
       "projects.typePointCloud": "Punktwolke",
+      "projects.featured": "Flagship",
+      "projects.github": "GitHub ansehen",
+      "projects.details": "Details ansehen",
+      "projects.empty": "Für diesen Filter gibt es noch keine passenden Projekte.",
       "projects.problemLabel": "Problem:",
       "projects.methodLabel": "Methode:",
       "projects.techStack": "Tech Stack:",
@@ -220,9 +229,11 @@ const translations = {
       "process.deliveryText": "Ergebnisse mit klarer Dokumentation, visuellen Outputs und nächsten Empfehlungen übergeben.",
       "proof.eyebrow": "Social Proof",
       "proof.title": "Glaubwürdigkeit durch akademische, forschungsbezogene und projektbasierte Nachweise.",
+      "proof.microcopy": "Die stärksten Nachweise sind praktisch: abgeschlossene akademische Arbeit, angewandte KIT-Unterstützung und prüfbare Projektartefakte.",
       "proof.projects": "Flagship-Projekte im Geodatenbereich",
       "proof.msc": "Geoinformatik-Ingenieurwesen",
       "proof.kit": "Angewandte Arbeit als wissenschaftliche Hilfskraft",
+      "proof.institutions": "Akademische Stationen in Italien und Deutschland",
       "filters.all": "Alle",
       "filters.gis": "GIS",
       "filters.python": "Python",
@@ -249,34 +260,37 @@ const translations = {
       "contact.title": "Offen für Junior-Rollen in GIS und geospatialer Datenarbeit in Deutschland.",
       "contact.p":
         "Interessiert an Junior-Rollen in GIS, geospatialer Analyse oder Python-basierter räumlicher Arbeit? Ich freue mich über eine Nachricht oder Vernetzung.",
+      "contact.closing": "Interessiert an geospatialen Workflows, Forschungsunterstützung oder kollaborativen räumlichen Datenprodukten.",
       "contact.emailButton": "E-Mail senden",
       "contact.cvButton": "CV herunterladen",
+      "contact.availability": "Verfügbar für Junior-Rollen in GIS, Python, Fernerkundung und geospatialer Analyse.",
       "contact.langEn": "Englisch: fließend",
       "contact.langDe": "Deutsch: Mittelstufe",
       "contact.langIt": "Italienisch: Mittelstufe",
       "contact.license": "Führerschein: Klasse B",
       "footer.credits":
         "Projektvisualisierungen: lokale Kompositionen aus verfügbaren Thesis-Ausgaben und geospatialen Bildern. Logos: öffentliche institutionelle Logodateien und die bereitgestellte Thesis-Präsentation.",
+      "footer.tagline": "Geospatiale Workflows, Forschung und angewandtes Systemdenken.",
     },
     html: {
       "about.p2":
         "Meine MSc-Arbeit, <cite>Inferring Map Generalization Operations from User Prompts</cite>, ist ein gutes Beispiel für diese Schnittstelle: kartografische Generalisierung, natürlichsprachliche Prompts, Feature Engineering und Modellevaluation in einem geospatialen Workflow.",
       "projects.nl2mapDesc":
-        `Entwicklung eines Machine-Learning-Workflows, der Nutzerprompts mit kartografischen Generalisierungsoperationen für strukturiertere Entscheidungen im Kartendesign verbindet. <a href="https://github.com/AmirDonyadide/nl2map-generalization" target="_blank" rel="noreferrer">GitHub-Repository</a>.`,
+        "Entwicklung eines Machine-Learning-Workflows, der Nutzerprompts mit kartografischen Generalisierungsoperationen für strukturiertere Entscheidungen im Kartendesign verbindet.",
       "projects.layerDesc":
-        `Entwicklung eines Python-Tools zur kontrollierten Rastermodifikation mit Vektormasken, wiederverwendbarer Verarbeitungslogik und geospatialen Validierungsprüfungen. <a href="https://github.com/AmirDonyadide/LayerAlterator" target="_blank" rel="noreferrer">GitHub-Repository</a>.`,
+        "Entwicklung eines Python-Tools zur kontrollierten Rastermodifikation mit Vektormasken, wiederverwendbarer Verarbeitungslogik und geospatialen Validierungsprüfungen.",
       "projects.landsatDesc":
-        `Entwicklung eines wiederverwendbaren Python-Toolkits zur Verarbeitung von Landsat-Satellitendaten, einschließlich Metadatenextraktion, Bandoperationen, Reprojektion und Umweltanalyse-Workflows. <a href="https://github.com/AmirDonyadide/LandsatToolkit" target="_blank" rel="noreferrer">GitHub-Repository</a>.`,
+        "Entwicklung eines wiederverwendbaren Python-Toolkits zur Verarbeitung von Landsat-Satellitendaten, einschließlich Metadatenextraktion, Bandoperationen, Reprojektion und Umweltanalyse-Workflows.",
       "projects.landslideDesc":
-        `Entwicklung eines GIS- und Machine-Learning-Workflows zur Kartierung von Hangrutschungsanfälligkeit mit Terrain-, Infrastruktur- und Fernerkundungsdaten. <a href="https://github.com/AmirDonyadide/GIS-Course-Polimi-2024" target="_blank" rel="noreferrer">GitHub-Repository</a>.`,
+        "Entwicklung eines GIS- und Machine-Learning-Workflows zur Kartierung von Hangrutschungsanfälligkeit mit Terrain-, Infrastruktur- und Fernerkundungsdaten.",
       "projects.se4gDesc":
-        `Entwicklung eines interaktiven Dashboards zur Exploration geospatialer Daten mit Karten, Diagrammen, API-Integration und nutzergesteuerter Analyse in einer praktischen Datenanwendung. <a href="https://github.com/AmirDonyadide/SE4G" target="_blank" rel="noreferrer">GitHub-Repository</a>.`,
+        "Entwicklung eines interaktiven Dashboards zur Exploration geospatialer Daten mit Karten, Diagrammen, API-Integration und nutzergesteuerter Analyse in einer praktischen Datenanwendung.",
       "projects.dlDesc":
-        `Vergleich eines CNN und eines vortrainierten ResNet18-Modells für Bildklassifikation mit Training, Evaluation, Metriken, Normalisierung und Fehleranalyse. <a href="https://github.com/AmirDonyadide/DL4CVRS" target="_blank" rel="noreferrer">GitHub-Repository</a>.`,
+        "Vergleich eines CNN und eines vortrainierten ResNet18-Modells für Bildklassifikation mit Training, Evaluation, Metriken, Normalisierung und Fehleranalyse.",
       "projects.eoadvancedDesc":
-        `Analyse von Veränderungen der Wasserflächen mithilfe von Satellitendaten, NDWI-basierten Indikatoren, Karten und statistischen Visualisierungen für 2021 bis 2024. <a href="https://github.com/AmirDonyadide/EOAdvanced" target="_blank" rel="noreferrer">GitHub-Repository</a>.`,
+        "Analyse von Veränderungen der Wasserflächen mithilfe von Satellitendaten, NDWI-basierten Indikatoren, Karten und statistischen Visualisierungen für 2021 bis 2024.",
       "projects.poliyogaDesc":
-        `Mitarbeit an einer responsiven Webplattform für eine Yoga-Akademie mit Frontend-, UX- und datenbanknahen Funktionen für Profile, Aktivitäten und dynamische Inhalte. <a href="https://github.com/moeinp70/HYP_Yoga" target="_blank" rel="noreferrer">GitHub-Repository</a>.`,
+        "Mitarbeit an einer responsiven Webplattform für eine Yoga-Akademie mit Frontend-, UX- und datenbanknahen Funktionen für Profile, Aktivitäten und dynamische Inhalte.",
       "education.mscThesis": "<strong>Masterarbeit:</strong> <cite>Inferring Map Generalization Operations from User Prompts</cite>",
       "education.mscCourses":
         "<strong>Relevante Kurse:</strong> Geographic Information Systems, Machine Learning, Databases, Earth Observation, Geospatial Data Analysis, Geospatial Processing",
@@ -335,7 +349,7 @@ const translations = {
       "hero.snapshotTitle": "Sintesi per recruiter",
       "hero.available": "Disponibile",
       "hero.snapshotLevelLabel": "Livello",
-      "hero.snapshotLevel": "Entry-level / Junior",
+      "hero.snapshotLevel": "Early Career Geospatial Specialist",
       "hero.snapshotCoreLabel": "Profilo chiave",
       "hero.snapshotCore": "GIS, Python, Telerilevamento",
       "hero.snapshotEvidenceLabel": "Evidenze",
@@ -384,6 +398,7 @@ const translations = {
       "about.q2": "Telerilevamento e workflow di osservazione della Terra",
       "about.q3": "Dashboard interattive e applicazioni WebGIS",
       "about.q4": "Machine learning per problemi di dati spaziali",
+      "about.human": "Mi piacciono i workflow spaziali perché rendono domande reali complesse più verificabili, spiegabili e migliorabili.",
       "bring.eyebrow": "Servizi e punti di forza",
       "bring.title": "Supporto geospaziale applicato con evidenze tecniche chiare.",
       "bring.card1Title": "GIS più Python",
@@ -399,6 +414,7 @@ const translations = {
       "experience.eyebrow": "Esperienza",
       "experience.title": "Esperienza junior in ricerca applicata, analisi GIS e supporto web.",
       "experience.kitIipRole": "Analista GIS e dati, assistente di ricerca",
+      "experience.recent": "Più rilevante",
       "experience.kitIipMeta": "IIP, Karlsruhe Institute of Technology (KIT)",
       "experience.kitIipB1": "Costruzione di pipeline Python per dataset energetici e di mobilità usati in workflow di ricerca applicata.",
       "experience.kitIipB2": "Analisi spaziali su dati di mobilità ed energia a supporto di modellazione della decarbonizzazione e ricerca di pianificazione.",
@@ -435,6 +451,10 @@ const translations = {
       "projects.typeSurveying": "Rilevamento",
       "projects.typeEngineeringDesign": "Design ingegneristico",
       "projects.typePointCloud": "Point cloud",
+      "projects.featured": "In evidenza",
+      "projects.github": "Vedi GitHub",
+      "projects.details": "Vedi dettagli",
+      "projects.empty": "Nessun progetto corrisponde ancora a questo filtro.",
       "projects.problemLabel": "Problema:",
       "projects.methodLabel": "Metodo:",
       "projects.techStack": "Tech Stack:",
@@ -486,9 +506,11 @@ const translations = {
       "process.deliveryText": "Consegnare risultati con documentazione chiara, output visivi e raccomandazioni successive.",
       "proof.eyebrow": "Social proof",
       "proof.title": "Credibilità costruita con evidenze accademiche, di ricerca e di progetto.",
+      "proof.microcopy": "Le evidenze più forti sono pratiche: lavoro accademico completato, supporto applicato al KIT e artefatti di progetto ispezionabili.",
       "proof.projects": "Progetti geospaziali principali",
       "proof.msc": "Ingegneria geoinformatica",
       "proof.kit": "Lavoro applicato come assistente di ricerca",
+      "proof.institutions": "Istituzioni accademiche tra Italia e Germania",
       "filters.all": "Tutti",
       "filters.gis": "GIS",
       "filters.python": "Python",
@@ -515,34 +537,37 @@ const translations = {
       "contact.title": "Disponibile per ruoli junior GIS e geospatial data in Germania.",
       "contact.p":
         "Se cercate profili junior per GIS, analisi geospaziale o workflow spaziali basati su Python, sono disponibile a connettermi o a ricevere un messaggio.",
+      "contact.closing": "Interessato a workflow geospaziali, supporto alla ricerca e prodotti collaborativi di dati spaziali.",
       "contact.emailButton": "Scrivimi",
       "contact.cvButton": "Scarica CV",
+      "contact.availability": "Disponibile per opportunità junior in GIS, Python, telerilevamento e analisi geospaziale.",
       "contact.langEn": "Inglese: fluente",
       "contact.langDe": "Tedesco: intermedio",
       "contact.langIt": "Italiano: intermedio",
       "contact.license": "Patente: categoria B",
       "footer.credits":
         "Visuali di progetto: composizioni locali da output di tesi disponibili e immagini geospaziali. Loghi: file pubblici dei loghi istituzionali e presentazione di tesi fornita.",
+      "footer.tagline": "Workflow geospaziali, ricerca e pensiero sistemico applicato.",
     },
     html: {
       "about.p2":
         "La mia tesi MSc, <cite>Inferring Map Generalization Operations from User Prompts</cite>, è un buon esempio di questa intersezione: generalizzazione cartografica, prompt in linguaggio naturale, feature engineering e valutazione del modello in un workflow geospaziale.",
       "projects.nl2mapDesc":
-        `Sviluppo di un workflow di machine learning che collega prompt utente a operazioni di generalizzazione cartografica per decisioni più strutturate nel design delle mappe. <a href="https://github.com/AmirDonyadide/nl2map-generalization" target="_blank" rel="noreferrer">Repository GitHub</a>.`,
+        "Sviluppo di un workflow di machine learning che collega prompt utente a operazioni di generalizzazione cartografica per decisioni più strutturate nel design delle mappe.",
       "projects.layerDesc":
-        `Sviluppo di uno strumento Python per modifiche raster controllate con maschere vettoriali, logica di elaborazione riutilizzabile e controlli di validazione geospaziale. <a href="https://github.com/AmirDonyadide/LayerAlterator" target="_blank" rel="noreferrer">Repository GitHub</a>.`,
+        "Sviluppo di uno strumento Python per modifiche raster controllate con maschere vettoriali, logica di elaborazione riutilizzabile e controlli di validazione geospaziale.",
       "projects.landsatDesc":
-        `Sviluppo di un toolkit Python riutilizzabile per elaborare immagini satellitari Landsat, con estrazione dei metadati, operazioni sulle bande, riproiezione e workflow di analisi ambientale. <a href="https://github.com/AmirDonyadide/LandsatToolkit" target="_blank" rel="noreferrer">Repository GitHub</a>.`,
+        "Sviluppo di un toolkit Python riutilizzabile per elaborare immagini satellitari Landsat, con estrazione dei metadati, operazioni sulle bande, riproiezione e workflow di analisi ambientale.",
       "projects.landslideDesc":
-        `Sviluppo di un workflow GIS e machine learning per la mappatura della suscettibilità alle frane, combinando dati di terreno, infrastrutture e telerilevamento. <a href="https://github.com/AmirDonyadide/GIS-Course-Polimi-2024" target="_blank" rel="noreferrer">Repository GitHub</a>.`,
+        "Sviluppo di un workflow GIS e machine learning per la mappatura della suscettibilità alle frane, combinando dati di terreno, infrastrutture e telerilevamento.",
       "projects.se4gDesc":
-        `Sviluppo di una dashboard interattiva per esplorare dati geospaziali con mappe, grafici, integrazione API e analisi guidata dall'utente in una pratica applicazione dati. <a href="https://github.com/AmirDonyadide/SE4G" target="_blank" rel="noreferrer">Repository GitHub</a>.`,
+        "Sviluppo di una dashboard interattiva per esplorare dati geospaziali con mappe, grafici, integrazione API e analisi guidata dall'utente in una pratica applicazione dati.",
       "projects.dlDesc":
-        `Confronto tra CNN e ResNet18 preaddestrato per classificazione immagini, con training, valutazione, metriche, normalizzazione e analisi degli errori. <a href="https://github.com/AmirDonyadide/DL4CVRS" target="_blank" rel="noreferrer">Repository GitHub</a>.`,
+        "Confronto tra CNN e ResNet18 preaddestrato per classificazione immagini, con training, valutazione, metriche, normalizzazione e analisi degli errori.",
       "projects.eoadvancedDesc":
-        `Analisi dei cambiamenti delle aree d'acqua usando dati satellitari, indicatori NDWI, mappe e visualizzazioni statistiche per il periodo 2021-2024. <a href="https://github.com/AmirDonyadide/EOAdvanced" target="_blank" rel="noreferrer">Repository GitHub</a>.`,
+        "Analisi dei cambiamenti delle aree d'acqua usando dati satellitari, indicatori NDWI, mappe e visualizzazioni statistiche per il periodo 2021-2024.",
       "projects.poliyogaDesc":
-        `Contributo a una piattaforma web responsive per un'accademia di yoga con funzionalità frontend, UX e database per profili, attività e contenuti dinamici. <a href="https://github.com/moeinp70/HYP_Yoga" target="_blank" rel="noreferrer">Repository GitHub</a>.`,
+        "Contributo a una piattaforma web responsive per un'accademia di yoga con funzionalità frontend, UX e database per profili, attività e contenuti dinamici.",
       "education.mscThesis": "<strong>Tesi:</strong> <cite>Inferring Map Generalization Operations from User Prompts</cite>",
       "education.mscCourses":
         "<strong>Corsi rilevanti:</strong> Geographic Information Systems, Machine Learning, Databases, Earth Observation, Geospatial Data Analysis, Geospatial Processing",
@@ -611,6 +636,7 @@ const updateThemeControl = (theme) => {
   const isDark = theme === "dark";
   themeToggle.setAttribute("aria-pressed", String(isDark));
   themeToggle.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
+  themeToggle.setAttribute("title", isDark ? "Switch to light mode" : "Switch to dark mode");
 
   if (themeColorMeta) {
     themeColorMeta.setAttribute("content", isDark ? "#07111f" : "#f4f8fb");
@@ -640,6 +666,28 @@ const getStoredLanguage = () => {
     return window.localStorage.getItem("portfolio-language");
   } catch {
     return null;
+  }
+};
+
+const projectCountText = {
+  en: (visible, total) => `Showing ${visible} of ${total} projects`,
+  de: (visible, total) => `${visible} von ${total} Projekten sichtbar`,
+  it: (visible, total) => `${visible} di ${total} progetti visibili`,
+};
+
+const getActiveLanguage = () => document.documentElement.lang || "en";
+
+const updateProjectCount = () => {
+  const visibleCount = projectCards.filter((card) => !card.classList.contains("is-hidden")).length;
+  const language = getActiveLanguage();
+  const formatter = projectCountText[language] || projectCountText.en;
+
+  if (projectCount) {
+    projectCount.textContent = formatter(visibleCount, projectCards.length);
+  }
+
+  if (projectEmptyState) {
+    projectEmptyState.hidden = visibleCount !== 0;
   }
 };
 
@@ -673,6 +721,7 @@ const applyLanguage = (language) => {
   });
 
   updateYear();
+  updateProjectCount();
   setStoredLanguage(selectedLanguage);
 };
 
@@ -688,6 +737,8 @@ const applyProjectFilter = (filter) => {
     const shouldShow = filter === "all" || categories.includes(filter);
     card.classList.toggle("is-hidden", !shouldShow);
   });
+
+  updateProjectCount();
 };
 
 updateYear();
@@ -800,6 +851,35 @@ if ("IntersectionObserver" in window && !reducedMotion) {
   revealTargets.forEach((target) => revealObserver.observe(target));
 } else {
   revealTargets.forEach((target) => target.classList.add("is-visible"));
+}
+
+if (proofValue && !reducedMotion && "IntersectionObserver" in window) {
+  const targetValue = Number(proofValue.dataset.countTo || 0);
+  const proofObserver = new IntersectionObserver(
+    (entries, observerInstance) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting || !targetValue) {
+          return;
+        }
+
+        let currentValue = 0;
+        const step = () => {
+          currentValue += 1;
+          proofValue.textContent = `${Math.min(currentValue, targetValue)}+`;
+
+          if (currentValue < targetValue) {
+            window.requestAnimationFrame(step);
+          }
+        };
+
+        step();
+        observerInstance.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.6 }
+  );
+
+  proofObserver.observe(proofValue);
 }
 
 const preferredLanguage = getStoredLanguage() || document.documentElement.lang || "en";
