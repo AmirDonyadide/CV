@@ -381,10 +381,10 @@
 
       <section class="section-shell" id="projects">
         <div class="section-heading wide-heading">
-          <p class="eyebrow" data-i18n="projects.eyebrow">Flagship Projects</p>
-          <h2 data-i18n="projects.title">Project evidence for junior GIS, remote sensing, and Python roles.</h2>
+          <p class="eyebrow" data-i18n="projects.eyebrow">Project Library</p>
+          <h2 data-i18n="projects.title">Projects grouped by geospatial, software, AI, and surveying capabilities.</h2>
           <p class="section-intro" data-i18n="projects.intro">
-            Five selected projects are shown first to keep the portfolio focused and easy to scan.
+            Filter projects by capability area. Several projects intentionally appear in multiple groups.
           </p>
         </div>
 
@@ -395,11 +395,17 @@
           <button type="button" data-filter="remote-sensing" aria-pressed="false" data-i18n="filters.remote">Remote Sensing</button>
           <button type="button" data-filter="machine-learning" aria-pressed="false" data-i18n="filters.ml">Machine Learning</button>
           <button type="button" data-filter="dashboard" aria-pressed="false" data-i18n="filters.dashboard">Dashboard</button>
-          <button type="button" data-filter="webgis" aria-pressed="false">WebGIS</button>
+          <button type="button" data-filter="webgis" aria-pressed="false" data-i18n="filters.webgis">WebGIS</button>
+          <button type="button" data-filter="web-development" aria-pressed="false" data-i18n="filters.webdev">Web Development</button>
+          <button type="button" data-filter="software-design" aria-pressed="false" data-i18n="filters.software">Software Design</button>
+          <button type="button" data-filter="javascript" aria-pressed="false" data-i18n="filters.javascript">JavaScript</button>
+          <button type="button" data-filter="deep-learning" aria-pressed="false" data-i18n="filters.deep">Deep Learning</button>
+          <button type="button" data-filter="ai" aria-pressed="false" data-i18n="filters.ai">AI</button>
+          <button type="button" data-filter="surveying" aria-pressed="false" data-i18n="filters.surveying">Surveying</button>
         </div>
 
         <div class="projects-grid">
-          <article class="project-card project-card-featured" data-categories="gis python machine-learning">
+          <article class="project-card project-card-featured" data-categories="gis python machine-learning ai software-design">
             <img src="assets/projects/project-nl2map.png" alt="Input and generalized map output from the map generalization thesis project" data-i18n-attr="alt:projectVisuals.generalization" />
             <div class="project-card-body">
               <div class="project-topline">
@@ -421,7 +427,7 @@
             </div>
           </article>
 
-          <article class="project-card project-card-featured" data-categories="gis python remote-sensing">
+          <article class="project-card project-card-featured" data-categories="gis python remote-sensing software-design">
             <img src="assets/projects/project-layeralterator.png" alt="Raster simulation visual with vector mask overlay for LayerAlterator" data-i18n-attr="alt:projectVisuals.raster" />
             <div class="project-card-body">
               <div class="project-topline">
@@ -443,7 +449,7 @@
             </div>
           </article>
 
-          <article class="project-card" data-categories="python remote-sensing gis">
+          <article class="project-card" data-categories="python remote-sensing gis software-design">
             <img src="assets/projects/project-landsattoolkit.png" alt="LandsatToolkit satellite image processing workflow visual" data-i18n-attr="alt:projectVisuals.eo" />
             <div class="project-card-body">
               <div class="project-topline">
@@ -465,7 +471,7 @@
             </div>
           </article>
 
-          <article class="project-card" data-categories="gis remote-sensing machine-learning webgis">
+          <article class="project-card" data-categories="gis remote-sensing machine-learning ai webgis javascript">
             <img src="assets/projects/project-landslide.png" alt="Landslide susceptibility mapping visual with terrain and risk classes" data-i18n-attr="alt:projectVisuals.webgis" />
             <div class="project-card-body">
               <div class="project-topline">
@@ -487,7 +493,7 @@
             </div>
           </article>
 
-          <article class="project-card" data-categories="gis python dashboard">
+          <article class="project-card" data-categories="gis python dashboard web-development software-design">
             <img src="assets/projects/project-se4g.png" alt="SE4G geospatial dashboard visual with map and chart panels" data-i18n-attr="alt:projectVisuals.dashboard" />
             <div class="project-card-body">
               <div class="project-topline">
@@ -508,57 +514,96 @@
               <p class="demonstrates"><strong data-i18n="projects.demonstratesLabel">Demonstrates:</strong> <span data-i18n="projects.se4gDemo">Dashboard development, geospatial visualization, data communication</span></p>
             </div>
           </article>
-        </div>
 
-        <details class="additional-projects">
-          <summary data-i18n="projects.additionalSummary">Additional Projects</summary>
-          <div class="additional-grid">
-            <article>
+          <article class="project-card project-card-compact" data-categories="python machine-learning deep-learning ai">
+            <div class="project-card-body">
+              <div class="project-topline">
+                <span class="project-type" data-i18n="projects.typeDeepLearning">Deep Learning</span>
+                <a href="https://github.com/AmirDonyadide/DL4CVRS" target="_blank" rel="noreferrer">GitHub</a>
+              </div>
               <h3>DL4CVRS Vehicle Detection Model</h3>
               <p data-i18n-html="projects.dlDesc">
                 Compared CNN and pretrained ResNet18 image-classification models with training, evaluation, metrics,
                 normalization, and error analysis. <a href="https://github.com/AmirDonyadide/DL4CVRS" target="_blank" rel="noreferrer">GitHub repository</a>.
               </p>
               <p class="mini-demonstrates"><strong data-i18n="projects.demonstratesLabel">Demonstrates:</strong> <span data-i18n="projects.dlDemo">Computer vision workflow, model comparison, evaluation basics</span></p>
-            </article>
-            <article>
+            </div>
+          </article>
+
+          <article class="project-card project-card-compact" data-categories="gis python remote-sensing dashboard">
+            <div class="project-card-body">
+              <div class="project-topline">
+                <span class="project-type" data-i18n="projects.typeRemoteStudy">Remote Sensing</span>
+                <a href="https://github.com/AmirDonyadide/EOAdvanced" target="_blank" rel="noreferrer">GitHub</a>
+              </div>
               <h3>EOAdvanced Water Area Analysis in Eastern Venice</h3>
               <p data-i18n-html="projects.eoadvancedDesc">
                 Analyzed water-area changes using satellite data, NDWI-based indicators, maps, and statistical
                 visualizations for 2021 to 2024. <a href="https://github.com/AmirDonyadide/EOAdvanced" target="_blank" rel="noreferrer">GitHub repository</a>.
               </p>
               <p class="mini-demonstrates"><strong data-i18n="projects.demonstratesLabel">Demonstrates:</strong> <span data-i18n="projects.eoDemo">Earth observation, NDWI analysis, temporal mapping</span></p>
-            </article>
-            <article>
+            </div>
+          </article>
+
+          <article class="project-card project-card-compact" data-categories="web-development software-design javascript">
+            <div class="project-card-body">
+              <div class="project-topline">
+                <span class="project-type" data-i18n="projects.typeWebDevelopment">Web Development</span>
+                <a href="https://github.com/moeinp70/HYP_Yoga" target="_blank" rel="noreferrer">GitHub</a>
+              </div>
               <h3>PoliYoga Responsive Web Application</h3>
               <p data-i18n-html="projects.poliyogaDesc">
                 Contributed to a responsive web platform for a yoga academy with frontend, UX, database-related features,
                 profiles, activities, and dynamic content. <a href="https://github.com/moeinp70/HYP_Yoga" target="_blank" rel="noreferrer">GitHub repository</a>.
               </p>
               <p class="mini-demonstrates"><strong data-i18n="projects.demonstratesLabel">Demonstrates:</strong> <span data-i18n="projects.poliyogaDemo">Web application basics, UX collaboration, database-backed features</span></p>
-            </article>
-            <article>
+            </div>
+          </article>
+
+          <article class="project-card project-card-compact" data-categories="surveying gis">
+            <div class="project-card-body">
+              <div class="project-topline">
+                <span class="project-type" data-i18n="projects.typeSurveying">Surveying</span>
+              </div>
               <h3 data-i18n="projects.surveyingTitle">Engineering Surveying</h3>
               <p data-i18n="projects.additional1">Surveying work at the University of Tehran campus using total station data collection and plan preparation.</p>
               <p class="mini-demonstrates"><strong data-i18n="projects.demonstratesLabel">Demonstrates:</strong> <span data-i18n="projects.surveyingDemo">Surveying fundamentals, field data, plan preparation</span></p>
-            </article>
-            <article>
+            </div>
+          </article>
+
+          <article class="project-card project-card-compact" data-categories="surveying">
+            <div class="project-card-body">
+              <div class="project-topline">
+                <span class="project-type" data-i18n="projects.typeSurveying">Surveying</span>
+              </div>
               <h3 data-i18n="projects.levellingTitle">Levelling Project</h3>
               <p data-i18n="projects.additional2">Measured height differences with classical levelling methods, error control, and technical documentation.</p>
               <p class="mini-demonstrates"><strong data-i18n="projects.demonstratesLabel">Demonstrates:</strong> <span data-i18n="projects.levellingDemo">Measurement discipline, quality control, documentation</span></p>
-            </article>
-            <article>
+            </div>
+          </article>
+
+          <article class="project-card project-card-compact" data-categories="surveying software-design">
+            <div class="project-card-body">
+              <div class="project-topline">
+                <span class="project-type" data-i18n="projects.typeEngineeringDesign">Engineering Design</span>
+              </div>
               <h3 data-i18n="projects.roadTitle">Road Planning with Civil 3D</h3>
               <p data-i18n="projects.additional3">Designed a road connection using AutoCAD Civil 3D, route geometry, longitudinal profiles, and cut-and-fill volumes.</p>
               <p class="mini-demonstrates"><strong data-i18n="projects.demonstratesLabel">Demonstrates:</strong> <span data-i18n="projects.roadDemo">Engineering design tools, terrain reasoning, volume calculation</span></p>
-            </article>
-            <article>
+            </div>
+          </article>
+
+          <article class="project-card project-card-compact" data-categories="surveying gis">
+            <div class="project-card-body">
+              <div class="project-topline">
+                <span class="project-type" data-i18n="projects.typePointCloud">Point Cloud</span>
+              </div>
               <h3 data-i18n="projects.laserTitle">3D Laser Scanning</h3>
               <p data-i18n="projects.additional4">Captured and processed point-cloud data from a building floor to support digital 3D model preparation.</p>
               <p class="mini-demonstrates"><strong data-i18n="projects.demonstratesLabel">Demonstrates:</strong> <span data-i18n="projects.laserDemo">Point-cloud workflow, 3D data capture, surveying technology</span></p>
-            </article>
-          </div>
-        </details>
+            </div>
+          </article>
+        </div>
       </section>
 
       <section class="section-shell process-section" id="process" aria-labelledby="process-title">
