@@ -227,6 +227,10 @@ const translations = {
         "Bester Fit: Teams, die sorgfaeltige Datenarbeit, lesbaren Code, kartenbewusste Analyse und praktische Dashboard- oder Web-Outputs brauchen.",
       "contact.emailButton": "E-Mail senden",
       "contact.cvButton": "CV herunterladen",
+      "contact.emailMicro": "Am besten fuer Chancen",
+      "contact.linkedinMicro": "Berufliches Profil",
+      "contact.githubMicro": "Code und Projekte",
+      "contact.phoneMicro": "Werktags erreichbar",
     },
     attrs: {
       "nav.aria": "Hauptnavigation",
@@ -431,6 +435,10 @@ const translations = {
         "Miglior fit: team che hanno bisogno di gestione dati attenta, codice leggibile, analisi basata su mappe e output dashboard o web pratici.",
       "contact.emailButton": "Scrivimi",
       "contact.cvButton": "Scarica CV",
+      "contact.emailMicro": "Ideale per opportunita",
+      "contact.linkedinMicro": "Profilo professionale",
+      "contact.githubMicro": "Codice e progetti",
+      "contact.phoneMicro": "Disponibile nei giorni feriali",
     },
     attrs: {
       "nav.aria": "Navigazione principale",

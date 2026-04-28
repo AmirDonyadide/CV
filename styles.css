@@ -1097,9 +1097,7 @@ main {
 .process-card:hover,
 .proof-card:hover,
 .education-panel:hover .education-card,
-.timeline-card:hover .timeline-panel,
-.contact-card:hover,
-.contact-card:focus-visible {
+.timeline-card:hover .timeline-panel {
   transform: translateY(-3px);
   border-color: var(--border-strong);
   box-shadow: var(--shadow);
@@ -1530,16 +1528,22 @@ main {
 
 .contact-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-auto-rows: 1fr;
+  grid-auto-rows: minmax(112px, auto);
+  gap: 12px;
 }
 
 .contact-card {
   display: grid;
-  min-height: 168px;
-  align-content: start;
-  gap: 8px;
+  min-height: 118px;
+  grid-template-columns: 38px minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
   color: var(--ink);
-  padding: 22px;
+  padding: 14px;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--teal) 4%, transparent), transparent 55%),
+    var(--surface);
+  box-shadow: 0 8px 18px rgb(7 24 39 / 6%);
   text-decoration: none;
   transition:
     transform 160ms ease,
@@ -1550,13 +1554,13 @@ main {
 
 .contact-icon {
   display: grid;
-  width: 44px;
-  height: 44px;
+  width: 38px;
+  height: 38px;
   place-items: center;
   border-radius: var(--radius);
   border: 1px solid var(--border);
   background: #ffffff;
-  padding: 8px;
+  padding: 7px;
 }
 
 .contact-icon img {
@@ -1565,15 +1569,53 @@ main {
   object-fit: contain;
 }
 
+.contact-copy {
+  display: grid;
+  min-width: 0;
+  gap: 2px;
+}
+
 .contact-card strong,
-.contact-card small {
+.contact-card small,
+.contact-card em {
   display: block;
   overflow-wrap: anywhere;
 }
 
+.contact-card strong {
+  font-size: 0.95rem;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
 .contact-card small {
   color: var(--muted);
+  font-size: 0.8rem;
   font-weight: 700;
+  line-height: 1.25;
+}
+
+.contact-card em {
+  color: color-mix(in srgb, var(--muted) 84%, var(--ink));
+  font-size: 0.74rem;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.contact-card:hover,
+.contact-card:focus-visible {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--teal) 62%, var(--border));
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--teal) 8%, transparent), transparent 58%),
+    var(--surface);
+  box-shadow: 0 14px 28px color-mix(in srgb, var(--teal) 18%, transparent);
+}
+
+.contact-card:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--teal) 70%, var(--blue));
+  outline-offset: 3px;
 }
 
 .site-footer {
@@ -1785,9 +1827,26 @@ main {
   .proof-card,
   .education-card,
   .timeline-panel,
-  .thesis-card,
-  .contact-card {
+  .thesis-card {
     padding: 20px;
+  }
+
+  .contact-grid {
+    grid-auto-rows: auto;
+    gap: 10px;
+  }
+
+  .contact-card {
+    min-height: 92px;
+    grid-template-columns: 36px minmax(0, 1fr);
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .contact-icon {
+    width: 36px;
+    height: 36px;
+    padding: 7px;
   }
 
   .card-top,
