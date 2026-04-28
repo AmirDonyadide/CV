@@ -222,7 +222,7 @@ const translations = {
       "education.bscGrade": "Note: 16,5 / 20, ca. 1,9",
       "education.bscDetails": "Grundlagen in Vermessung, Photogrammetrie, Fernerkundung, GIS, Geodaesie und raeumlicher Analyse.",
       "contact.eyebrow": "Kontakt",
-      "contact.title": "Offen fuer Junior-Rollen in GIS, Software, Web und Datenarbeit.",
+      "contact.title": "Offen fuer Rollen in GIS, Software, Web und Datenarbeit.",
       "contact.note":
         "Bester Fit: Teams, die sorgfaeltige Datenarbeit, lesbaren Code, kartenbewusste Analyse und praktische Dashboard- oder Web-Outputs brauchen.",
       "contact.emailButton": "E-Mail senden",
@@ -426,7 +426,7 @@ const translations = {
       "education.bscGrade": "Voto: 16,5 / 20, circa 1,9",
       "education.bscDetails": "Fondamenti in rilevamento, fotogrammetria, telerilevamento, GIS, geodesia e analisi spaziale.",
       "contact.eyebrow": "Contatti",
-      "contact.title": "Disponibile per ruoli junior in GIS, software, web e dati.",
+      "contact.title": "Disponibile per ruoli in GIS, software, web e dati.",
       "contact.note":
         "Miglior fit: team che hanno bisogno di gestione dati attenta, codice leggibile, analisi basata su mappe e output dashboard o web pratici.",
       "contact.emailButton": "Scrivimi",
