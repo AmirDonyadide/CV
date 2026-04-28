@@ -2,19 +2,13 @@ const navToggle = document.querySelector(".nav-toggle");
 const navMenu = document.querySelector(".nav-menu");
 const navLinks = Array.from(document.querySelectorAll(".nav-menu a"));
 const langButtons = Array.from(document.querySelectorAll("[data-lang]"));
-const filterButtons = Array.from(document.querySelectorAll("[data-filter]"));
-const projectCards = Array.from(document.querySelectorAll(".project-card[data-categories]"));
-const projectCount = document.querySelector("[data-project-count]");
-const projectEmptyState = document.querySelector("[data-project-empty]");
 const themeToggle = document.querySelector(".theme-toggle");
 const themeColorMeta = document.querySelector('meta[name="theme-color"]');
-const proofValue = document.querySelector(".proof-value[data-count-to]");
 
 const originalText = new Map();
-const originalHtml = new Map();
+const originalTitle = document.title;
 const attrElements = Array.from(document.querySelectorAll("[data-i18n-attr]"));
 const attrDefaults = new WeakMap();
-const originalTitle = document.title;
 
 const parseAttrPairs = (value) =>
   value
@@ -33,10 +27,6 @@ document.querySelectorAll("[data-i18n]").forEach((element) => {
   originalText.set(element.dataset.i18n, element.textContent);
 });
 
-document.querySelectorAll("[data-i18n-html]").forEach((element) => {
-  originalHtml.set(element.dataset.i18nHtml, element.innerHTML);
-});
-
 attrElements.forEach((element) => {
   const defaults = {};
   parseAttrPairs(element.dataset.i18nAttr).forEach(({ attr }) => {
@@ -47,574 +37,418 @@ attrElements.forEach((element) => {
 
 const translations = {
   de: {
-    title: "Amirhossein Donyadidegan | Junior Geoinformatik-Ingenieur",
+    title: "Amirhossein Donyadidegan | Geoinformatik, Software, Daten und Web Portfolio",
     text: {
       skip: "Zum Inhalt springen",
       "nav.toggle": "Navigation umschalten",
       "nav.about": "Profil",
-      "nav.services": "Leistungen",
-      "nav.roles": "Rollen",
-      "nav.bring": "Fit",
       "nav.experience": "Erfahrung",
-      "nav.skills": "Fähigkeiten",
       "nav.projects": "Projekte",
-      "nav.process": "Prozess",
       "nav.education": "Ausbildung",
       "nav.contact": "Kontakt",
-      "hero.eyebrow": "Portfolio für Geodaten-Systeme",
-      "hero.title": "Klare geospatiale Workflows von Daten bis Entscheidung gestalten.",
+      "hero.eyebrow": "Portfolio fuer Software, Daten und geospatiale Systeme",
+      "hero.title": "Zuverlaessige Workflows von Daten zu Entscheidungen ueber Karten, Modelle und Webtools bauen.",
       "hero.subtitle":
-        "Ich bin Amirhossein Donyadidegan, Geoinformatik-Ingenieur mit Fokus auf Python-gestützte GIS-Workflows, Fernerkundungsanalysen, Dashboards und räumliche Datenprodukte.",
-      "hero.note": "Strukturierte Portfolio-Nachweise in geospatialem ML, Rasterverarbeitung, WebGIS und forschungsnaher räumlicher Analyse.",
+        "Ich bin Amirhossein Donyadidegan, Geoinformatik-Ingenieur mit geographischem Wissen, Informatik-Grundlagen und Software-Engineering-Praxis.",
+      "hero.note":
+        "Mein Fokus liegt auf Python-gestuetzten Workflows, Fernerkundung und GIS, Dashboards, Datenprodukten sowie strukturierten Portfolio-Nachweisen in Machine Learning, Datenverarbeitung, WebGIS, Webentwicklung und raeumlicher Analyse.",
       "hero.viewProjects": "Projekte ansehen",
       "hero.downloadCv": "CV herunterladen",
       "hero.contact": "Kontakt",
-      "hero.snapshotTitle": "Recruiter Snapshot",
-      "hero.available": "Verfügbar",
-      "hero.snapshotLevelLabel": "Level",
-      "hero.snapshotLevel": "Early Career Geospatial Specialist",
-      "hero.snapshotCoreLabel": "Kernprofil",
-      "hero.snapshotCore": "GIS, Python, Fernerkundung",
-      "hero.snapshotEvidenceLabel": "Nachweis",
-      "hero.snapshotEvidence": "MSc-Arbeit, KIT-Forschung, Geodatenprojekte",
+      "roles.software": "Software Engineer",
+      "roles.data": "Data Scientist",
+      "roles.web": "Web Developer",
+      "roles.gis": "GIS Analyst",
+      "skills.remote": "Fernerkundung",
+      "skills.dataAnalysis": "Datenanalyse",
+      "skills.software": "Softwareentwicklung",
+      "skills.web": "Webentwicklung",
       "summary.eyebrow": "Recruiter Summary",
       "summary.title": "Technische Arbeit, die ich als Junior-Kandidat beitragen kann.",
       "summary.text":
-        "Ich überführe räumliche Datensätze in analysefähige Layer, Modell-Features, Dashboards und dokumentierte Python-Workflows. Meine Arbeit liegt zwischen GIS-Operationen, Raster-/Vektordatenverarbeitung und angewandten Machine-Learning-Experimenten.",
-      "intro.locationLabel": "Standort",
-      "intro.location": "Karlsruhe, Baden-Württemberg, Deutschland",
-      "intro.degreeLabel": "Ausbildung",
-      "intro.degree": "MSc Geoinformatik-Ingenieurwesen, abgeschlossen",
-      "intro.positioningLabel": "Positionierung",
-      "intro.positioning": "Junior GIS / Geospatial Data",
-      "context.eyebrow": "Vertrauenssignale",
-      "context.title": "Abgeschlossener MSc, KIT-Forschungserfahrung und Austauschaufenthalte in Deutschland.",
-      "logos.polimi": "Politecnico di Milano",
-      "logos.polimiRole": "MSc Geoinformatik-Ingenieurwesen",
-      "logos.bonn": "Universität Bonn",
-      "logos.bonnRole": "Erasmus+ Austausch, Geodäsie",
-      "logos.kit": "Karlsruher Institut für Technologie",
-      "logos.kitRole": "Austausch und Hilfswissenschaftler-Rollen",
-      "logos.tehran": "Universität Teheran",
-      "logos.tehranRole": "BSc Vermessungsingenieurwesen",
-      "roles.eyebrow": "Zielrollen",
-      "roles.title": "Recruiter-freundliche Rollen, die zum Profil passen.",
-      "roles.r1": "Junior GIS Analyst",
-      "roles.r2": "Geospatial Data Analyst",
-      "roles.r3": "Geoinformatik-Ingenieur",
-      "roles.r4": "Remote Sensing Analyst",
-      "roles.r5": "Spatial Data Analyst",
-      "roles.r6": "GIS Developer (Python)",
-      "roles.r7": "Junior Python GIS Developer",
-      "available.title": "Verfügbar für",
-      "available.a1": "Junior-GIS-Positionen",
-      "available.a2": "Graduate-Rollen",
-      "available.a3": "Geospatial-Analyst-Rollen",
-      "available.a4": "Hilfswissenschaftler-Positionen",
-      "available.a5": "Positionen in Deutschland",
-      "available.a6": "Hybride oder Remote-Möglichkeiten",
-      "about.eyebrow": "Profil",
-      "about.title": "Ein angewandtes Geoinformatik-Profil, kein generisches Entwicklerportfolio.",
-      "about.p1":
-        "Mich interessiert besonders die Arbeit an der Schnittstelle von Karten, Datenqualität, räumlichem Denken und reproduzierbarem Code. Mein Hintergrund verbindet Geoinformatik-Kurse, Austauschstudium in Deutschland, angewandte Forschungsunterstützung und Portfolio-Projekte, die meine schrittweise Herangehensweise an räumliche Datenprobleme zeigen.",
-      "about.q1": "Python-basierte Verarbeitung geospatialer Daten",
-      "about.q2": "Fernerkundung und Earth-Observation-Workflows",
-      "about.q3": "Interaktive Dashboards und WebGIS-Anwendungen",
-      "about.q4": "Machine Learning für räumliche Datenprobleme",
-      "about.human": "Ich mag räumliche Workflows, weil sie komplexe reale Fragen prüfbarer, erklärbarer und verbesserbar machen.",
-      "bring.eyebrow": "Leistungen & Stärken",
-      "bring.title": "Angewandte geospatiale Unterstützung mit klaren technischen Nachweisen.",
-      "bring.card1Title": "GIS plus Python",
-      "bring.card1Text": "Sicher im Wechsel zwischen räumlichen Konzepten, GIS-Werkzeugen und Python-basierter Verarbeitung.",
-      "bring.card2Title": "Angewandte Forschungserfahrung",
-      "bring.card2Text": "Erfahrung in der Unterstützung von KIT-Forschungsworkflows mit Energie-, Mobilitäts-, Dashboard- und Kartenbezug.",
-      "bring.card3Title": "Earth-Observation-Denkweise",
-      "bring.card3Text": "Projektarbeit mit Satellitendatenverarbeitung, Rasteranalyse, Umweltindikatoren und WebGIS-Ausgaben.",
-      "bring.card4Title": "Geospatial-ML-Schnittstelle",
-      "bring.card4Text": "Thesis und Projekte verbinden räumliche Features, Text-Prompts, Klassifikation, Evaluation und Modellworkflows.",
-      "bring.card5Title": "Internationaler akademischer Weg",
-      "bring.card5Text": "MSc-Studium in Italien, Austausch in Deutschland und Grundlagen im Vermessungsingenieurwesen.",
-      "experience.eyebrow": "Erfahrung",
-      "experience.title": "Junior-Level-Erfahrung in angewandter Forschung, GIS-Analyse und Web-Support.",
-      "experience.kitIipRole": "GIS- & Datenanalyst, Hilfswissenschaftler",
-      "experience.recent": "Am relevantesten",
-      "experience.kitIipMeta": "IIP, Karlsruher Institut für Technologie (KIT)",
-      "experience.kitIipB1": "Aufbau Python-basierter Pipelines für Energie- und Mobilitätsdatensätze in angewandten Forschungsworkflows.",
-      "experience.kitIipB2": "Durchführung räumlicher Analysen von Mobilitäts- und Energiedaten zur Unterstützung von Dekarbonisierungsmodellierung und Planungsforschung.",
-      "experience.kitIipB3": "Erstellung von Dashboard-Ansichten mit Kartenintegration, um Forschungsdaten leichter prüfbar und kommunizierbar zu machen.",
-      "experience.kitNovaRole": "Webentwickler, Hilfswissenschaftler",
-      "experience.kitNovaMeta": "KIT nova",
-      "experience.kitNovaB1": "Unterstützung der Webanwendungsentwicklung für digitale Forschungs- und Innovationsworkflows mit Blick auf Usability.",
-      "experience.kitNovaB2": "Mitarbeit an VR/AR-Projektarbeit durch Vorbereitung interaktiver Komponenten und visueller Ausgaben.",
-      "experience.kitNovaB3": "Beitrag zu kartenbezogenen Interface-Elementen und geospatialen Visualisierungen für digitale Anwendungen.",
-      "experience.ngfRole": "Praktikant",
-      "experience.ngfMeta": "Naghsheh Gostaran Fartak Co.",
-      "experience.ngfB1": "Unterstützung von Vermessungs-, Photogrammetrie- und GIS-Projekten in einem praktischen Arbeitsumfeld.",
-      "experience.ngfB2": "Unterstützung bei Datenerfassung und räumlicher Datenvorbereitung für technische Projektarbeit.",
-      "experience.ngfB3": "Nutzung von AutoCAD und GIS-Tools zur Vorbereitung und Verarbeitung geospatialer Projektdaten.",
-      "experience.toolsLabel": "Tools:",
-      "skills.eyebrow": "Fähigkeiten",
-      "skills.title": "Kompaktes technisches Profil für GIS- und Geodatenrollen.",
+        "Ich verwandle Datensaetze in analysefaehige Layer, Modell-Features, Dashboards und dokumentierte Python-Workflows. Meine Erfahrung verbindet GIS-Analyse, Software-Engineering-Gewohnheiten, Data-Science-Experimente, Web-Interfaces und geospatiale Forschungsunterstuetzung.",
+      "summary.locationLabel": "Standort",
+      "summary.location": "Karlsruhe, Baden-Wuerttemberg, Deutschland",
+      "summary.degreeLabel": "Letzter Abschluss",
+      "summary.degree": "MSc Geoinformatics Engineering",
+      "summary.positioningLabel": "Positionierung",
+      "summary.positioning": "Junior GIS Analyst, Software Developer, Web Developer oder Data Scientist",
+      "target.eyebrow": "Zielrollen",
+      "target.title": "Recruiter-freundliche Rollen, die zum Profil passen.",
+      "target.role1": "Junior Software Engineer",
+      "target.role2": "Junior Data Scientist",
+      "target.role3": "Junior Web Developer",
+      "target.role4": "Junior GIS Analyst",
+      "target.role5": "Python Developer",
+      "target.role6": "Geospatial Data Analyst",
+      "target.role7": "WebGIS Developer",
+      "target.role8": "Remote Sensing Analyst",
+      "availability.title": "Verfuegbar fuer",
+      "availability.item1": "Junior-Level-Positionen",
+      "availability.item2": "Software Engineering, Data Science, Webentwicklung und GIS-Analyse",
+      "availability.item3": "Positionen in Deutschland",
+      "availability.item4": "Hybrid, remote oder vor Ort",
+      "trust.eyebrow": "Trust Signals",
+      "trust.title": "Abgeschlossener MSc, Forschungserfahrung und Erfahrung in Deutschland.",
+      "trust.polimiName": "Politecnico di Milano",
+      "trust.polimiRole": "MSc Geoinformatics Engineering",
+      "trust.polimiCountry": "Italien",
+      "trust.bonnName": "Universitaet Bonn",
+      "trust.bonnRole": "Erasmus+ Austausch fuer die Thesis",
+      "trust.bonnCountry": "Deutschland",
+      "trust.kitName": "Karlsruher Institut fuer Technologie",
+      "trust.kitRole": "Erasmus+ Austausch fuer Kurse + HiWi Forschungsassistenz",
+      "trust.kitCountry": "Deutschland",
+      "trust.tehranName": "Universitaet Teheran",
+      "trust.tehranRole": "BSc Surveying Engineering",
+      "trust.tehranCountry": "Iran",
+      "profile.eyebrow": "Profil",
+      "profile.title": "Ein technisches Profil, in dem geospatiales Denken, Datenarbeit und Software-Umsetzung zusammenkommen.",
+      "profile.text":
+        "Mich interessieren Rollen, in denen Datensaetze, Code, Karten, Modelle und Interfaces zusammenkommen. Dazu gehoeren Python-Automatisierung, Datenvorbereitung, Modell-Features und Evaluation, Web-Dashboards, WebGIS-Anwendungen, Fernerkundungsworkflows und GIS-Analysen, die Teams helfen, komplexe raeumliche oder technische Probleme zu verstehen.",
+      "profile.thesis":
+        "Meine MSc-Thesis, Inferring Map Generalization Operations from User Prompts, ist ein gutes Beispiel fuer diese Schnittstelle.",
+      "profile.thesisTag1": "Kartografische Generalisierung",
+      "profile.thesisTag2": "Natural-Language-Prompts",
+      "profile.thesisTag3": "Multimodales Machine Learning",
+      "profile.thesisTag4": "Vektor-Embeddings",
+      "profile.thesisTag5": "Modellevaluation",
+      "profile.thesisTag6": "MLP",
+      "profile.skill1": "Python-Workflows",
+      "profile.skill2": "Data-Science-Experimente",
+      "profile.skill3": "Web-Dashboards",
+      "profile.skill4": "WebGIS-Interfaces",
+      "profile.skill5": "GIS und raeumliche Analyse",
+      "profile.skill6": "Fernerkundungsverarbeitung",
+      "profile.skill7": "Feature Engineering",
+      "profile.skill8": "Lesbare technische Dokumentation",
+      "skills.eyebrow": "Technische Faehigkeiten",
+      "skills.title": "Ein praktisches Skillset fuer Geoinformatik, GIS, Data Science, Software- und Web-Rollen.",
+      "skills.note":
+        "Aus dem CV in recruiter-freundliche Gruppen uebertragen, mit dem staerksten Fit rund um Python, Geodaten, Machine Learning, Dashboards und Web-Interfaces.",
+      "skills.levelCore": "Kern",
+      "skills.levelApplied": "Angewandt",
+      "skills.levelSupport": "Support",
       "skills.programmingTitle": "Programmierung",
-      "skills.gisTitle": "GIS & Geospatial",
-      "skills.dataTitle": "Data & ML",
-      "skills.visualTitle": "Visualisierung",
-      "skills.webTitle": "Web & APIs",
-      "projects.eyebrow": "Projektbibliothek",
-      "projects.title": "Projekte gruppiert nach Geodaten-, Software-, AI- und Vermessungsfähigkeiten.",
-      "projects.intro": "Projekte nach Fähigkeitsbereich filtern. Mehrere Projekte erscheinen bewusst in mehreren Gruppen.",
-      "projects.typeThesis": "MSc-Arbeit",
-      "projects.typeRaster": "Raster-Simulation",
-      "projects.typeEo": "Earth Observation",
-      "projects.typeWebgis": "WebGIS",
+      "skills.mlTitle": "Machine Learning und Data Science",
+      "skills.geoAiTitle": "Geospatial AI und Remote Sensing ML",
+      "skills.dataEngineeringTitle": "Datenverarbeitung und Engineering",
+      "skills.gisTitle": "GIS und Fernerkundung",
+      "skills.visualTitle": "Visualisierung und Dashboards",
+      "skills.webTitle": "Webentwicklung und APIs",
+      "skills.databasesTitle": "Datenbanken",
+      "skills.devopsTitle": "DevOps und Software Engineering",
+      "skills.toolsTitle": "Cloud, Automatisierung und Design-Tools",
+      "services.eyebrow": "Services und Staerken",
+      "services.title": "Angewandte technische Unterstuetzung fuer Software-, Daten-, Web- und geospatiale Workflows.",
+      "services.pythonTitle": "Python- und Software-Workflows",
+      "services.pythonText": "Lesbare Skripte, wiederverwendbare Verarbeitungsschritte, Git-basierte Projektstruktur und dokumentierte technische Workflows aufbauen.",
+      "services.dataTitle": "Data Science und ML-Support",
+      "services.dataText": "Modell-Features vorbereiten, mit Vektor-Embeddings arbeiten, Evaluationsschleifen durchfuehren und ML-Experimente mit Fachfragen verbinden.",
+      "services.webTitle": "Web, Dashboards und Interfaces",
+      "services.webText": "HTML, CSS, JavaScript, Dashboard-Ansichten und Interface-Elemente unterstuetzen, damit technische Outputs leichter pruefbar werden.",
+      "services.gisTitle": "GIS- und Fernerkundungsanalyse",
+      "services.gisText": "Raeumliche Layer vorbereiten, Mobilitaets- und Energiedaten analysieren, Raster-/Vektordaten verarbeiten und Ergebnisse mit Karten kommunizieren.",
+      "experience.eyebrow": "Erfahrung",
+      "experience.title": "Junior technische Erfahrung in Software, Daten, GIS und Web-Support.",
+      "experience.kitIipRole": "GIS- und Datenanalyst, Hilfswissenschaftler",
+      "experience.kitIipMeta": "IIP, Karlsruher Institut fuer Technologie",
+      "experience.kitIipB1": "Python-basierte Pipelines aufgebaut.",
+      "experience.kitIipB2": "Raeumliche Analysen von Mobilitaets- und Energiedaten durchgefuehrt.",
+      "experience.kitIipB3": "Dashboard-Ansichten erstellt.",
+      "experience.kitNovaRole": "Webentwickler, Hilfswissenschaftler",
+      "experience.kitNovaMeta": "KIT Nova",
+      "experience.kitNovaB1": "Webanwendungsentwicklung unterstuetzt.",
+      "experience.kitNovaB2": "VR/AR-Projektarbeit unterstuetzt.",
+      "experience.kitNovaB3": "Interface-Elemente beigetragen.",
+      "experience.ngfOrg": "Naghsheh Gostaran Fartak Co.",
+      "experience.ngfRole": "Praktikant",
+      "experience.ngfMeta": "Vermessung, GIS und CAD-Projektunterstuetzung",
+      "experience.ngfB1": "Landvermessung unterstuetzt.",
+      "experience.ngfB2": "GIS-Techniker-Aufgaben uebernommen.",
+      "experience.ngfB3": "CAD-Design fuer Kartendatenerfassung in bebauten Umgebungen unterstuetzt.",
+      "experience.toolsLabel": "Tools:",
+      "projects.eyebrow": "Projekte",
+      "projects.title": "Nachweise in ML, Processing, WebGIS, Dashboards und Webentwicklung.",
+      "projects.note":
+        "Jedes Projekt zeigt ein klares Rollensignal fuer Recruiter: Engineering, Analyse, Forschung, Interface-Arbeit oder angewandte Data Science.",
+      "projects.typeThesis": "ML und Geoinformatik",
+      "projects.typeRaster": "Rasterverarbeitung",
+      "projects.typeEo": "Fernerkundungs-Toolkit",
+      "projects.typeWebgis": "WebGIS und Spatial ML",
       "projects.typeDashboard": "Dashboard",
-      "projects.typeDeepLearning": "Deep Learning",
-      "projects.typeRemoteStudy": "Fernerkundung",
-      "projects.typeWebDevelopment": "Webentwicklung",
-      "projects.typeSurveying": "Vermessung",
-      "projects.typeEngineeringDesign": "Ingenieurdesign",
-      "projects.typePointCloud": "Punktwolke",
-      "projects.featured": "Flagship",
+      "projects.typeWeb": "Webentwicklung",
+      "projects.nl2mapDesc": "Machine-Learning-Workflow, der Nutzerprompts mit kartografischen Generalisierungsoperationen verbindet.",
+      "projects.layerDesc": "Python-Tool fuer kontrollierte Rastermodifikation mit Masken, Validierung und wiederverwendbarer Logik.",
+      "projects.landsatDesc": "Wiederverwendbares Python-Toolkit fuer Metadaten, Bandoperationen, Reprojektion und Index-Workflows.",
+      "projects.landslideDesc": "GIS- und Machine-Learning-Workflow mit Terrain-, Infrastruktur- und Fernerkundungsdaten.",
+      "projects.se4gDesc": "Interaktives Dashboard mit Karten, Diagrammen, API-Integration und nutzergesteuerter Datenpruefung.",
+      "projects.poliyogaDesc": "Responsive Webplattform mit Frontend-, UX-, datenbankgestuetzten Funktionen, Profilen und dynamischem Inhalt.",
       "projects.github": "GitHub ansehen",
-      "projects.details": "Details ansehen",
-      "projects.empty": "Für diesen Filter gibt es noch keine passenden Projekte.",
-      "projects.problemLabel": "Problem:",
-      "projects.methodLabel": "Methode:",
-      "projects.techStack": "Tech Stack:",
-      "projects.demonstratesLabel": "Zeigt:",
-      "projects.nl2mapProblem": "Verbindung menschlicher Kartenbearbeitungswünsche mit den Operationen, die zur Generalisierung von Kartenobjekten nötig sind.",
-      "projects.nl2mapMethod": "Nutzung von Text-Embeddings, geometrischen Features, Modelltraining und Evaluation in einer Python-Pipeline.",
-      "projects.nl2mapDemo": "Geospatial ML, Feature Engineering, kartografisches Denken",
-      "projects.layerProblem": "Raster-Layer wiederholbar verändern und dabei räumliche Masken sowie Koordinatensysteme beachten.",
-      "projects.layerMethod": "Implementierung maskenbasierter Rasteroperationen mit CRS-Konsistenz, Validierung und modularen Python-Funktionen.",
-      "projects.layerDemo": "Rasterverarbeitung, Geodata Engineering, Python-Tooling",
-      "projects.landsatProblem": "Häufige Landsat-Verarbeitungsschritte für Earth-Observation-Analysen wiederverwendbar machen.",
-      "projects.landsatMethod": "Paketierung von Metadatenverarbeitung, Bandoperationen, Reprojektion und indexorientierten Workflows in Python.",
-      "projects.landsatDemo": "Earth Observation, wiederverwendbare Python-Pakete, Raster-Workflows",
-      "projects.landslideProblem": "Bewertung von Hangrutschungsanfälligkeit mithilfe räumlicher Evidenz aus Terrain-, Infrastruktur- und Umweltlayern.",
-      "projects.landslideMethod": "Kombination von GIS-Layern, Fernerkundungsdaten, Machine-Learning-Schritten und WebGIS-Kommunikation.",
-      "projects.landslideDemo": "Räumliche Modellierung, WebGIS-Kommunikation, Umweltanalyse",
-      "projects.se4gProblem": "Geospatiale Datensätze über eine browserbasierte Analyseoberfläche leichter prüfbar machen.",
-      "projects.se4gMethod": "Kombination von Karten, Diagrammen, API-Integration und Dashboard-Interaktionen in einer Python-Webanwendung.",
-      "projects.se4gDemo": "Dashboard-Entwicklung, geospatiale Visualisierung, Datenkommunikation",
-      "projects.additionalSummary": "Weitere Projekte",
-      "projects.dlDemo": "Computer-Vision-Workflow, Modellvergleich, Grundlagen der Evaluation",
-      "projects.eoDemo": "Earth Observation, NDWI-Analyse, zeitliche Kartierung",
-      "projects.poliyogaDemo": "Webanwendungsgrundlagen, UX-Kollaboration, datenbankgestützte Funktionen",
-      "projects.surveyingTitle": "Ingenieurvermessung",
-      "projects.levellingTitle": "Nivellement-Projekt",
-      "projects.roadTitle": "Straßenplanung mit Civil 3D",
-      "projects.laserTitle": "3D-Laserscanning",
-      "projects.additional1": "Vermessungsarbeit auf dem Campus der Universität Teheran mit Totalstation-Datenerfassung und Lageplanerstellung.",
-      "projects.additional2": "Messung von Höhenunterschieden mit klassischen Nivellement-Methoden, Fehlerkontrolle und technischer Dokumentation.",
-      "projects.additional3": "Entwurf einer Straßenverbindung mit AutoCAD Civil 3D, Trassengeometrie, Längsprofilen und Cut-and-Fill-Volumen.",
-      "projects.additional4": "Erfassung und Verarbeitung von Punktwolkendaten eines Gebäudegeschosses zur Unterstützung digitaler 3D-Modellierung.",
-      "projects.surveyingDemo": "Vermessungsgrundlagen, Felddaten, Lageplanerstellung",
-      "projects.levellingDemo": "Messdisziplin, Qualitätskontrolle, Dokumentation",
-      "projects.roadDemo": "Ingenieur-Design-Tools, Geländeinterpretation, Volumenberechnung",
-      "projects.laserDemo": "Punktwolken-Workflow, 3D-Datenerfassung, Vermessungstechnologie",
       "process.eyebrow": "Prozess",
-      "process.title": "Ein strukturierter Workflow von der räumlichen Fragestellung zum nutzbaren Produkt.",
-      "process.intro":
-        "Ich behandle geospatiale Arbeit wie ein Produktsystem: Entscheidung definieren, Daten validieren, Workflow gestalten und Ergebnisse liefern, die prüfbar und wiederverwendbar sind.",
-      "process.discoveryTitle": "Discovery",
-      "process.discoveryText": "Räumliche Fragestellung, Nutzer, Einschränkungen, verfügbare Daten und Erfolgskriterien klären.",
-      "process.strategyTitle": "Strategie",
-      "process.strategyText": "Analysepfad, Datenmodell, Tools, Validierungschecks und Kommunikationsformat festlegen.",
-      "process.designTitle": "Design",
-      "process.designText": "Karte, Dashboard, Workflow oder Modellergebnis mit Hierarchie und Interpretierbarkeit strukturieren.",
-      "process.developmentTitle": "Entwicklung",
-      "process.developmentText": "Saubere Python-, GIS-, WebGIS- oder Dashboard-Workflows mit wiederverwendbarer und dokumentierter Logik bauen.",
-      "process.deliveryTitle": "Lieferung",
-      "process.deliveryText": "Ergebnisse mit klarer Dokumentation, visuellen Outputs und nächsten Empfehlungen übergeben.",
+      "process.title": "Ein strukturierter Workflow vom Problemverstaendnis zum nutzbaren technischen Ergebnis.",
+      "process.note": "Derselbe Workflow passt zu GIS-Analyse, Data-Science-Experimenten, Web-Dashboards, Software-Utilities und Forschungsunterstuetzung.",
+      "process.step1Title": "Rahmen",
+      "process.step1Text": "Rolle der Daten, Nutzer, Entscheidung und technische Grenzen klaeren.",
+      "process.step2Title": "Vorbereiten",
+      "process.step2Text": "Daten bereinigen, transformieren, verbinden, dokumentieren und fuer Analyse oder Entwicklung strukturieren.",
+      "process.step3Title": "Bauen",
+      "process.step3Text": "Python-Workflows, ML-Experimente, GIS-Logik, Dashboards oder Web-Interface-Komponenten entwickeln.",
+      "process.step4Title": "Validieren",
+      "process.step4Text": "Outputs mit Metriken, raeumlichem Denken, visueller Pruefung und reproduzierbaren Tests kontrollieren.",
+      "process.step5Title": "Liefern",
+      "process.step5Text": "Ergebnis als dokumentierten Code, Karten, Dashboards, Modelloutputs oder klares Projektergebnis uebergeben.",
       "proof.eyebrow": "Social Proof",
-      "proof.title": "Glaubwürdigkeit durch akademische, forschungsbezogene und projektbasierte Nachweise.",
-      "proof.microcopy": "Die stärksten Nachweise sind praktisch: abgeschlossene akademische Arbeit, angewandte KIT-Unterstützung und prüfbare Projektartefakte.",
-      "proof.projects": "Flagship-Projekte im Geodatenbereich",
-      "proof.msc": "Geoinformatik-Ingenieurwesen",
-      "proof.kit": "Angewandte Arbeit als wissenschaftliche Hilfskraft",
-      "proof.institutions": "Akademische Stationen in Italien und Deutschland",
-      "filters.all": "Alle",
-      "filters.gis": "GIS",
-      "filters.python": "Python",
-      "filters.remote": "Fernerkundung",
-      "filters.ml": "Machine Learning",
-      "filters.dashboard": "Dashboard",
-      "filters.webgis": "WebGIS",
-      "filters.webdev": "Webentwicklung",
-      "filters.software": "Software Design",
-      "filters.javascript": "JavaScript",
-      "filters.deep": "Deep Learning",
-      "filters.ai": "AI",
-      "filters.surveying": "Vermessung",
+      "proof.title": "Nachweise, die Recruiter ueber Ausbildung, Forschung und Projektarbeit pruefen koennen.",
+      "proof.msc": "Abgeschlossener Abschluss in Geoinformatics Engineering",
+      "proof.kit": "Forschungserfahrung als HiWi in Deutschland",
+      "proof.projects": "Portfolio-Projekte in ML, GIS, Dashboards und Web",
+      "proof.germany": "Studien-, Forschungs- und Arbeitskontext in Deutschland",
       "education.eyebrow": "Ausbildung",
-      "education.title": "Grundlagen in Geoinformatik, Fernerkundung, GIS und Vermessung.",
-      "education.mscTitle": "MSc Geoinformatik-Ingenieurwesen",
+      "education.title": "Akademische Grundlagen in Geoinformatik, GIS, Fernerkundung und Vermessung.",
+      "education.note": "Ein Weg von Vermessungsgrundlagen zur Geoinformatik-Spezialisierung, mit Austausch- und Forschungserfahrung in Deutschland.",
+      "education.mscTitle": "MSc Geoinformatics Engineering",
       "education.mscMeta": "Politecnico di Milano, Italien",
-      "education.mscDate": "Sep. 2023 - Mär. 2026 | abgeschlossen | Note: 102 / 110, ca. 1,5",
-      "education.mscExchange": "Austauschstudent in Geodäsie an der Universität Bonn sowie in Fernerkundung und Geoinformation am KIT.",
-      "education.bscTitle": "BSc Vermessungsingenieurwesen",
-      "education.bscMeta": "Universität Teheran, Iran",
-      "education.bscDate": "Sep. 2018 - Jul. 2022 | Note: 16,5 / 20, ca. 1,9",
+      "education.mscStatus": "Abgeschlossen",
+      "education.mscGrade": "Note: 102 / 110, ca. 1,5",
+      "education.mscDetails": "Spezialisierung in Geoinformatik mit GIS, Machine Learning, Datenbanken, Earth Observation, geospatialer Datenanalyse und Geodatenverarbeitung.",
+      "education.bonnTitle": "Universitaet Bonn",
+      "education.bonnText": "Erasmus+ Austausch fuer die Thesis in Geodaesie.",
+      "education.kitTitle": "Karlsruher Institut fuer Technologie",
+      "education.kitText": "Erasmus+ Austausch fuer Kurse in Fernerkundung und Geoinformation.",
+      "education.thesisLabel": "Thesis:",
+      "education.bscTitle": "BSc Surveying Engineering",
+      "education.bscMeta": "Universitaet Teheran, Iran",
+      "education.bscGrade": "Note: 16,5 / 20, ca. 1,9",
+      "education.bscDetails": "Grundlagen in Vermessung, Photogrammetrie, Fernerkundung, GIS, Geodaesie und raeumlicher Analyse.",
       "contact.eyebrow": "Kontakt",
-      "contact.title": "Offen für Junior-Rollen in GIS und geospatialer Datenarbeit in Deutschland.",
-      "contact.p":
-        "Interessiert an Junior-Rollen in GIS, geospatialer Analyse oder Python-basierter räumlicher Arbeit? Ich freue mich über eine Nachricht oder Vernetzung.",
-      "contact.closing": "Interessiert an geospatialen Workflows, Forschungsunterstützung oder kollaborativen räumlichen Datenprodukten.",
+      "contact.title": "Offen fuer Junior-Rollen in GIS, Software, Web und Datenarbeit.",
+      "contact.note":
+        "Bester Fit: Teams, die sorgfaeltige Datenarbeit, lesbaren Code, kartenbewusste Analyse und praktische Dashboard- oder Web-Outputs brauchen.",
       "contact.emailButton": "E-Mail senden",
       "contact.cvButton": "CV herunterladen",
-      "contact.availability": "Verfügbar für Junior-Rollen in GIS, Python, Fernerkundung und geospatialer Analyse.",
-      "contact.langEn": "Englisch: fließend",
-      "contact.langDe": "Deutsch: Mittelstufe",
-      "contact.langIt": "Italienisch: Mittelstufe",
-      "contact.license": "Führerschein: Klasse B",
-      "footer.credits":
-        "Projektvisualisierungen: lokale Kompositionen aus verfügbaren Thesis-Ausgaben und geospatialen Bildern. Logos: öffentliche institutionelle Logodateien und die bereitgestellte Thesis-Präsentation.",
-      "footer.tagline": "Geospatiale Workflows, Forschung und angewandtes Systemdenken.",
-    },
-    html: {
-      "about.p2":
-        "Meine MSc-Arbeit, <cite>Inferring Map Generalization Operations from User Prompts</cite>, ist ein gutes Beispiel für diese Schnittstelle: kartografische Generalisierung, natürlichsprachliche Prompts, Feature Engineering und Modellevaluation in einem geospatialen Workflow.",
-      "projects.nl2mapDesc":
-        "Entwicklung eines Machine-Learning-Workflows, der Nutzerprompts mit kartografischen Generalisierungsoperationen für strukturiertere Entscheidungen im Kartendesign verbindet.",
-      "projects.layerDesc":
-        "Entwicklung eines Python-Tools zur kontrollierten Rastermodifikation mit Vektormasken, wiederverwendbarer Verarbeitungslogik und geospatialen Validierungsprüfungen.",
-      "projects.landsatDesc":
-        "Entwicklung eines wiederverwendbaren Python-Toolkits zur Verarbeitung von Landsat-Satellitendaten, einschließlich Metadatenextraktion, Bandoperationen, Reprojektion und Umweltanalyse-Workflows.",
-      "projects.landslideDesc":
-        "Entwicklung eines GIS- und Machine-Learning-Workflows zur Kartierung von Hangrutschungsanfälligkeit mit Terrain-, Infrastruktur- und Fernerkundungsdaten.",
-      "projects.se4gDesc":
-        "Entwicklung eines interaktiven Dashboards zur Exploration geospatialer Daten mit Karten, Diagrammen, API-Integration und nutzergesteuerter Analyse in einer praktischen Datenanwendung.",
-      "projects.dlDesc":
-        "Vergleich eines CNN und eines vortrainierten ResNet18-Modells für Bildklassifikation mit Training, Evaluation, Metriken, Normalisierung und Fehleranalyse.",
-      "projects.eoadvancedDesc":
-        "Analyse von Veränderungen der Wasserflächen mithilfe von Satellitendaten, NDWI-basierten Indikatoren, Karten und statistischen Visualisierungen für 2021 bis 2024.",
-      "projects.poliyogaDesc":
-        "Mitarbeit an einer responsiven Webplattform für eine Yoga-Akademie mit Frontend-, UX- und datenbanknahen Funktionen für Profile, Aktivitäten und dynamische Inhalte.",
-      "education.mscThesis": "<strong>Masterarbeit:</strong> <cite>Inferring Map Generalization Operations from User Prompts</cite>",
-      "education.mscCourses":
-        "<strong>Relevante Kurse:</strong> Geographic Information Systems, Machine Learning, Databases, Earth Observation, Geospatial Data Analysis, Geospatial Processing",
-      "education.bscThesis": "<strong>Bachelorarbeit:</strong> <cite>Application of GIS and Big Data in Smart Cities</cite>",
-      "education.bscCourses":
-        "<strong>Relevante Kurse:</strong> Surveying, Photogrammetry, Remote Sensing, Geographic Information Systems, Spatial Analysis, Geodesy",
-      "footer.copy": '&copy; <span id="year"></span> Amirhossein Donyadidegan. Erstellt für GitHub Pages.',
     },
     attrs: {
       "nav.aria": "Hauptnavigation",
       "language.aria": "Sprachauswahl",
       "hero.actionsAria": "Hauptaktionen",
-      "hero.snapshotAria": "Recruiter Snapshot",
-      "intro.aria": "Profil-Highlights",
-      "logos.polimiAlt": "Logo des Politecnico di Milano",
-      "logos.bonnAlt": "Logo der Universität Bonn",
-      "logos.kitAlt": "Logo des Karlsruher Instituts für Technologie",
-      "logos.kitShortAlt": "KIT-Logo",
-      "logos.tehranAlt": "Zeichen der Universität Teheran",
-      "roles.targetAria": "Zielrollen",
-      "about.strengthsAria": "Kernstärken",
-      "skills.aria": "Technische Fähigkeiten",
-      "projects.filtersAria": "Projektfilter",
-      "projectVisuals.generalization": "Eingabe- und generalisierte Kartenausgabe aus dem Thesis-Projekt zur Kartengeneralisierung",
-      "projectVisuals.raster": "Raster-Simulationsvisual mit Vektormasken-Overlay für LayerAlterator",
-      "projectVisuals.eo": "LandsatToolkit-Visualisierung eines Satellitenbildverarbeitungs-Workflows",
-      "projectVisuals.webgis": "Visualisierung einer Hangrutschungsanfälligkeitskarte mit Terrain- und Risikoklassen",
-      "projectVisuals.dashboard": "SE4G-Dashboard-Visual mit Karten- und Diagrammpanels",
-      "education.exchangeAria": "Austauschuniversitäten",
-      "contact.langAria": "Sprachen und weitere Details",
+      "hero.visualAria": "Abdeckung der Zielrollen",
+      "hero.skillsAria": "Kernfaehigkeiten",
+      "target.tagsAria": "Zielrollen",
+      "profile.thesisAria": "Thesis-Themen",
+      "profile.skillsAria": "Profil-Faehigkeiten",
+      "skills.aria": "Technische Faehigkeitsgruppen",
     },
   },
   it: {
-    title: "Amirhossein Donyadidegan | Ingegnere junior in geoinformatica",
+    title: "Amirhossein Donyadidegan | Portfolio geoinformatica, software, dati e web",
     text: {
       skip: "Vai al contenuto",
       "nav.toggle": "Apri o chiudi navigazione",
       "nav.about": "Profilo",
-      "nav.services": "Servizi",
-      "nav.roles": "Ruoli",
-      "nav.bring": "Fit",
       "nav.experience": "Esperienza",
-      "nav.skills": "Competenze",
       "nav.projects": "Progetti",
-      "nav.process": "Processo",
       "nav.education": "Formazione",
       "nav.contact": "Contatti",
-      "hero.eyebrow": "Portfolio di sistemi geospaziali",
-      "hero.title": "Progettare workflow geospaziali chiari, dai dati alla decisione.",
+      "hero.eyebrow": "Portfolio di sistemi software, dati e geospaziali",
+      "hero.title": "Costruire workflow affidabili dai dati alle decisioni con mappe, modelli e strumenti web.",
       "hero.subtitle":
-        "Sono Amirhossein Donyadidegan, ingegnere in geoinformatica che costruisce workflow GIS con Python, analisi di telerilevamento, dashboard e prodotti di dati spaziali.",
-      "hero.note": "Evidenze di portfolio strutturate su geospatial ML, elaborazione raster, WebGIS e analisi spaziale orientata alla ricerca.",
+        "Sono Amirhossein Donyadidegan, ingegnere in geoinformatica che combina conoscenza geografica, informatica e pratica di software engineering.",
+      "hero.note":
+        "Il mio lavoro si concentra su workflow Python, telerilevamento e GIS, dashboard, prodotti dati ed evidenze di portfolio su machine learning, data processing, WebGIS, sviluppo web e analisi spaziale.",
       "hero.viewProjects": "Vedi progetti",
       "hero.downloadCv": "Scarica CV",
       "hero.contact": "Contatti",
-      "hero.snapshotTitle": "Sintesi per recruiter",
-      "hero.available": "Disponibile",
-      "hero.snapshotLevelLabel": "Livello",
-      "hero.snapshotLevel": "Early Career Geospatial Specialist",
-      "hero.snapshotCoreLabel": "Profilo chiave",
-      "hero.snapshotCore": "GIS, Python, Telerilevamento",
-      "hero.snapshotEvidenceLabel": "Evidenze",
-      "hero.snapshotEvidence": "Tesi MSc, ricerca al KIT, progetti geospaziali",
+      "roles.software": "Software engineer",
+      "roles.data": "Data scientist",
+      "roles.web": "Web developer",
+      "roles.gis": "GIS analyst",
+      "skills.remote": "Telerilevamento",
+      "skills.dataAnalysis": "Analisi dati",
+      "skills.software": "Sviluppo software",
+      "skills.web": "Sviluppo web",
       "summary.eyebrow": "Sintesi per recruiter",
       "summary.title": "Contributi tecnici che posso portare come candidato junior.",
       "summary.text":
-        "Trasformo dataset spaziali in layer pronti per l'analisi, feature per modelli, dashboard e workflow Python documentati. Il mio lavoro si colloca tra operazioni GIS, elaborazione raster/vettoriale ed esperimenti applicati di machine learning.",
-      "intro.locationLabel": "Sede",
-      "intro.location": "Karlsruhe, Baden-Württemberg, Germania",
-      "intro.degreeLabel": "Formazione",
-      "intro.degree": "MSc in Ingegneria geoinformatica, completato",
-      "intro.positioningLabel": "Posizionamento",
-      "intro.positioning": "Junior GIS / Geospatial Data",
-      "context.eyebrow": "Segnali di fiducia",
-      "context.title": "MSc completato, esperienza di ricerca al KIT e scambi accademici in Germania.",
-      "logos.polimi": "Politecnico di Milano",
-      "logos.polimiRole": "MSc in Ingegneria geoinformatica",
-      "logos.bonn": "Università di Bonn",
-      "logos.bonnRole": "Scambio Erasmus+, geodesia",
-      "logos.kit": "Karlsruhe Institute of Technology",
-      "logos.kitRole": "Scambio e ruoli da assistente di ricerca",
-      "logos.tehran": "Università di Teheran",
-      "logos.tehranRole": "BSc in Ingegneria del rilevamento",
-      "roles.eyebrow": "Ruoli target",
-      "roles.title": "Ruoli chiari e coerenti con il profilo.",
-      "roles.r1": "Junior GIS Analyst",
-      "roles.r2": "Geospatial Data Analyst",
-      "roles.r3": "Ingegnere in geoinformatica",
-      "roles.r4": "Remote Sensing Analyst",
-      "roles.r5": "Spatial Data Analyst",
-      "roles.r6": "GIS Developer (Python)",
-      "roles.r7": "Junior Python GIS Developer",
-      "available.title": "Disponibile per",
-      "available.a1": "Posizioni junior GIS",
-      "available.a2": "Ruoli graduate",
-      "available.a3": "Ruoli da geospatial analyst",
-      "available.a4": "Posizioni da assistente di ricerca",
-      "available.a5": "Opportunità in Germania",
-      "available.a6": "Opportunità ibride o remote",
-      "about.eyebrow": "Profilo",
-      "about.title": "Un profilo applicato in geoinformatica, non un portfolio generico da sviluppatore.",
-      "about.p1":
-        "Mi interessa soprattutto lavorare dove mappe, qualità dei dati, ragionamento spaziale e codice riproducibile si incontrano. Il mio percorso combina corsi di geoinformatica, studio in scambio in Germania, supporto alla ricerca applicata e progetti portfolio che mostrano come affronto passo dopo passo problemi di dati spaziali.",
-      "about.q1": "Elaborazione di dati geospaziali con Python",
-      "about.q2": "Telerilevamento e workflow di osservazione della Terra",
-      "about.q3": "Dashboard interattive e applicazioni WebGIS",
-      "about.q4": "Machine learning per problemi di dati spaziali",
-      "about.human": "Mi piacciono i workflow spaziali perché rendono domande reali complesse più verificabili, spiegabili e migliorabili.",
-      "bring.eyebrow": "Servizi e punti di forza",
-      "bring.title": "Supporto geospaziale applicato con evidenze tecniche chiare.",
-      "bring.card1Title": "GIS più Python",
-      "bring.card1Text": "A mio agio tra concetti spaziali, strumenti GIS ed elaborazione basata su Python.",
-      "bring.card2Title": "Esperienza di ricerca applicata",
-      "bring.card2Text": "Esperienza nel supporto a workflow di ricerca al KIT con dati energia, mobilità, dashboard e mappe.",
-      "bring.card3Title": "Mentalità Earth observation",
-      "bring.card3Text": "Progetti con elaborazione di dati satellitari, analisi raster, indicatori ambientali e output WebGIS.",
-      "bring.card4Title": "Intersezione geospatial ML",
-      "bring.card4Text": "Tesi e progetti collegano feature spaziali, prompt testuali, classificazione, valutazione e workflow di modelli.",
-      "bring.card5Title": "Percorso accademico internazionale",
-      "bring.card5Text": "MSc in Italia con esperienze di scambio in Germania e basi in ingegneria del rilevamento.",
-      "experience.eyebrow": "Esperienza",
-      "experience.title": "Esperienza junior in ricerca applicata, analisi GIS e supporto web.",
-      "experience.kitIipRole": "Analista GIS e dati, assistente di ricerca",
-      "experience.recent": "Più rilevante",
-      "experience.kitIipMeta": "IIP, Karlsruhe Institute of Technology (KIT)",
-      "experience.kitIipB1": "Costruzione di pipeline Python per dataset energetici e di mobilità usati in workflow di ricerca applicata.",
-      "experience.kitIipB2": "Analisi spaziali su dati di mobilità ed energia a supporto di modellazione della decarbonizzazione e ricerca di pianificazione.",
-      "experience.kitIipB3": "Creazione di viste dashboard con integrazione di mappe per rendere i dati di ricerca più ispezionabili e comunicabili.",
-      "experience.kitNovaRole": "Sviluppatore web, assistente di ricerca",
-      "experience.kitNovaMeta": "KIT nova",
-      "experience.kitNovaB1": "Supporto allo sviluppo di applicazioni web per workflow digitali di ricerca e innovazione con attenzione all'usabilità.",
-      "experience.kitNovaB2": "Assistenza a progetti VR/AR preparando componenti interattivi e output visivi.",
-      "experience.kitNovaB3": "Contributo a elementi di interfaccia legati alle mappe e visualizzazioni geospaziali per applicazioni digitali.",
-      "experience.ngfRole": "Tirocinante",
-      "experience.ngfMeta": "Naghsheh Gostaran Fartak Co.",
-      "experience.ngfB1": "Supporto a progetti di rilevamento, fotogrammetria e GIS in un contesto pratico.",
-      "experience.ngfB2": "Assistenza nella raccolta dati e nella preparazione di dati spaziali per attività tecniche di progetto.",
-      "experience.ngfB3": "Uso di AutoCAD e strumenti GIS per preparare ed elaborare dati geospaziali di progetto.",
-      "experience.toolsLabel": "Strumenti:",
-      "skills.eyebrow": "Competenze",
-      "skills.title": "Profilo tecnico compatto per ruoli GIS e dati geospaziali.",
+        "Trasformo dataset in layer pronti per l'analisi, feature per modelli, dashboard e workflow Python documentati. La mia esperienza collega analisi GIS, abitudini di software engineering, esperimenti di data science, interfacce web e supporto alla ricerca geospaziale.",
+      "summary.locationLabel": "Sede",
+      "summary.location": "Karlsruhe, Baden-Wuerttemberg, Germania",
+      "summary.degreeLabel": "Ultimo titolo",
+      "summary.degree": "MSc Geoinformatics Engineering",
+      "summary.positioningLabel": "Posizionamento",
+      "summary.positioning": "Junior GIS Analyst, Software Developer, Web Developer o Data Scientist",
+      "target.eyebrow": "Ruoli target",
+      "target.title": "Ruoli chiari per recruiter e coerenti con il profilo.",
+      "target.role1": "Junior Software Engineer",
+      "target.role2": "Junior Data Scientist",
+      "target.role3": "Junior Web Developer",
+      "target.role4": "Junior GIS Analyst",
+      "target.role5": "Python Developer",
+      "target.role6": "Geospatial Data Analyst",
+      "target.role7": "WebGIS Developer",
+      "target.role8": "Remote Sensing Analyst",
+      "availability.title": "Disponibile per",
+      "availability.item1": "Posizioni junior",
+      "availability.item2": "Software engineering, data science, sviluppo web e analisi GIS",
+      "availability.item3": "Opportunita in Germania",
+      "availability.item4": "Lavoro ibrido, remoto o in presenza",
+      "trust.eyebrow": "Segnali di fiducia",
+      "trust.title": "MSc completato, esposizione alla ricerca ed esperienza in Germania.",
+      "trust.polimiName": "Politecnico di Milano",
+      "trust.polimiRole": "MSc Geoinformatics Engineering",
+      "trust.polimiCountry": "Italia",
+      "trust.bonnName": "Universita di Bonn",
+      "trust.bonnRole": "Scambio Erasmus+ per la tesi",
+      "trust.bonnCountry": "Germania",
+      "trust.kitName": "Karlsruhe Institute of Technology",
+      "trust.kitRole": "Scambio Erasmus+ per corsi + HiWi assistente di ricerca",
+      "trust.kitCountry": "Germania",
+      "trust.tehranName": "Universita di Teheran",
+      "trust.tehranRole": "BSc Surveying Engineering",
+      "trust.tehranCountry": "Iran",
+      "profile.eyebrow": "Profilo",
+      "profile.title": "Un profilo tecnico dove pensiero geospaziale, dati e sviluppo software si incontrano.",
+      "profile.text":
+        "Mi interessano ruoli in cui dataset, codice, mappe, modelli e interfacce lavorano insieme. Questo include automazione Python, preparazione dati, feature ed evaluation di modelli, dashboard web, applicazioni WebGIS, workflow di telerilevamento e analisi GIS per capire problemi spaziali o tecnici complessi.",
+      "profile.thesis":
+        "La mia tesi MSc, Inferring Map Generalization Operations from User Prompts, e un buon esempio di questa intersezione.",
+      "profile.thesisTag1": "Generalizzazione cartografica",
+      "profile.thesisTag2": "Prompt in linguaggio naturale",
+      "profile.thesisTag3": "Machine learning multimodale",
+      "profile.thesisTag4": "Vector embedding",
+      "profile.thesisTag5": "Valutazione del modello",
+      "profile.thesisTag6": "MLP",
+      "profile.skill1": "Workflow Python",
+      "profile.skill2": "Esperimenti data science",
+      "profile.skill3": "Dashboard web",
+      "profile.skill4": "Interfacce WebGIS",
+      "profile.skill5": "GIS e analisi spaziale",
+      "profile.skill6": "Processing telerilevamento",
+      "profile.skill7": "Feature engineering",
+      "profile.skill8": "Documentazione tecnica leggibile",
+      "skills.eyebrow": "Competenze tecniche",
+      "skills.title": "Un set di competenze pratico per ruoli in geoinformatica, GIS, data science, software e web.",
+      "skills.note":
+        "Raggruppato dal CV in cluster leggibili per recruiter, con il fit piu forte su Python, dati geospaziali, machine learning, dashboard e interfacce web.",
+      "skills.levelCore": "Core",
+      "skills.levelApplied": "Applicato",
+      "skills.levelSupport": "Supporto",
       "skills.programmingTitle": "Programmazione",
-      "skills.gisTitle": "GIS e geospaziale",
-      "skills.dataTitle": "Dati e ML",
-      "skills.visualTitle": "Visualizzazione",
-      "skills.webTitle": "Web e API",
-      "projects.eyebrow": "Libreria progetti",
-      "projects.title": "Progetti raggruppati per competenze geospaziali, software, AI e rilevamento.",
-      "projects.intro": "Filtra i progetti per area di competenza. Diversi progetti appaiono intenzionalmente in più gruppi.",
-      "projects.typeThesis": "Tesi MSc",
-      "projects.typeRaster": "Simulazione raster",
-      "projects.typeEo": "Osservazione della Terra",
-      "projects.typeWebgis": "WebGIS",
+      "skills.mlTitle": "Machine learning e data science",
+      "skills.geoAiTitle": "Geospatial AI e remote sensing ML",
+      "skills.dataEngineeringTitle": "Data processing ed engineering",
+      "skills.gisTitle": "GIS e telerilevamento",
+      "skills.visualTitle": "Visualizzazione e dashboard",
+      "skills.webTitle": "Sviluppo web e API",
+      "skills.databasesTitle": "Database",
+      "skills.devopsTitle": "DevOps e software engineering",
+      "skills.toolsTitle": "Cloud, automazione e strumenti di design",
+      "services.eyebrow": "Servizi e punti di forza",
+      "services.title": "Supporto tecnico applicato per workflow software, dati, web e geospaziali.",
+      "services.pythonTitle": "Workflow Python e software",
+      "services.pythonText": "Costruire script leggibili, passaggi riutilizzabili, struttura di progetto con Git e workflow tecnici documentati.",
+      "services.dataTitle": "Supporto data science e ML",
+      "services.dataText": "Preparare feature per modelli, lavorare con vector embedding, eseguire cicli di valutazione e collegare esperimenti ML a domande di dominio.",
+      "services.webTitle": "Web, dashboard e interfacce",
+      "services.webText": "Supportare HTML, CSS, JavaScript, viste dashboard ed elementi di interfaccia per rendere gli output tecnici piu ispezionabili.",
+      "services.gisTitle": "Analisi GIS e telerilevamento",
+      "services.gisText": "Preparare layer spaziali, analizzare dati mobilita ed energia, processare raster/vettori e comunicare risultati con mappe.",
+      "experience.eyebrow": "Esperienza",
+      "experience.title": "Esperienza tecnica junior tra software, dati, GIS e supporto web.",
+      "experience.kitIipRole": "Analista GIS e dati, assistente di ricerca",
+      "experience.kitIipMeta": "IIP, Karlsruhe Institute of Technology",
+      "experience.kitIipB1": "Pipeline Python costruite.",
+      "experience.kitIipB2": "Analisi spaziali su dati mobilita ed energia.",
+      "experience.kitIipB3": "Viste dashboard create.",
+      "experience.kitNovaRole": "Sviluppatore web, assistente di ricerca",
+      "experience.kitNovaMeta": "KIT Nova",
+      "experience.kitNovaB1": "Supporto allo sviluppo di applicazioni web.",
+      "experience.kitNovaB2": "Supporto a lavoro di progetto VR/AR.",
+      "experience.kitNovaB3": "Contributo a elementi di interfaccia.",
+      "experience.ngfOrg": "Naghsheh Gostaran Fartak Co.",
+      "experience.ngfRole": "Tirocinante",
+      "experience.ngfMeta": "Supporto a progetti di rilevamento, GIS e CAD",
+      "experience.ngfB1": "Supporto al rilevamento topografico.",
+      "experience.ngfB2": "Lavoro da tecnico GIS.",
+      "experience.ngfB3": "Disegno CAD per raccolta dati cartografici dell'ambiente costruito.",
+      "experience.toolsLabel": "Strumenti:",
+      "projects.eyebrow": "Progetti",
+      "projects.title": "Evidenze su ML, processing, WebGIS, dashboard e sviluppo web.",
+      "projects.note":
+        "Ogni progetto mostra un segnale utile per recruiter: engineering, analisi, ricerca, lavoro di interfaccia o data science applicata.",
+      "projects.typeThesis": "ML e geoinformatica",
+      "projects.typeRaster": "Elaborazione raster",
+      "projects.typeEo": "Toolkit telerilevamento",
+      "projects.typeWebgis": "WebGIS e spatial ML",
       "projects.typeDashboard": "Dashboard",
-      "projects.typeDeepLearning": "Deep Learning",
-      "projects.typeRemoteStudy": "Telerilevamento",
-      "projects.typeWebDevelopment": "Sviluppo web",
-      "projects.typeSurveying": "Rilevamento",
-      "projects.typeEngineeringDesign": "Design ingegneristico",
-      "projects.typePointCloud": "Point cloud",
-      "projects.featured": "In evidenza",
+      "projects.typeWeb": "Sviluppo web",
+      "projects.nl2mapDesc": "Workflow di machine learning che collega prompt utente a operazioni di generalizzazione cartografica.",
+      "projects.layerDesc": "Tool Python per modifica raster controllata con maschere, validazione e logica riutilizzabile.",
+      "projects.landsatDesc": "Toolkit Python riutilizzabile per metadati, operazioni sulle bande, riproiezione e indici.",
+      "projects.landslideDesc": "Workflow GIS e machine learning con dati di terreno, infrastrutture e telerilevamento.",
+      "projects.se4gDesc": "Dashboard interattiva con mappe, grafici, API e ispezione dati guidata dall'utente.",
+      "projects.poliyogaDesc": "Piattaforma web responsive con frontend, UX, funzioni database, profili e contenuto dinamico.",
       "projects.github": "Vedi GitHub",
-      "projects.details": "Vedi dettagli",
-      "projects.empty": "Nessun progetto corrisponde ancora a questo filtro.",
-      "projects.problemLabel": "Problema:",
-      "projects.methodLabel": "Metodo:",
-      "projects.techStack": "Tech Stack:",
-      "projects.demonstratesLabel": "Dimostra:",
-      "projects.nl2mapProblem": "Collegare richieste umane di modifica cartografica alle operazioni necessarie per generalizzare elementi di mappa.",
-      "projects.nl2mapMethod": "Uso di text embedding, feature geometriche, training del modello e valutazione in una pipeline Python.",
-      "projects.nl2mapDemo": "Geospatial ML, feature engineering, ragionamento cartografico",
-      "projects.layerProblem": "Modificare layer raster in modo ripetibile rispettando maschere spaziali e sistemi di coordinate.",
-      "projects.layerMethod": "Implementazione di operazioni raster basate su maschere con coerenza CRS, validazione e funzioni Python modulari.",
-      "projects.layerDemo": "Elaborazione raster, geodata engineering, tooling Python",
-      "projects.landsatProblem": "Rendere riutilizzabili passaggi comuni di elaborazione Landsat per analisi di osservazione della Terra.",
-      "projects.landsatMethod": "Organizzazione in Python di gestione metadati, operazioni sulle bande, riproiezione e workflow orientati agli indici.",
-      "projects.landsatDemo": "Osservazione della Terra, pacchetti Python riutilizzabili, workflow raster",
-      "projects.landslideProblem": "Valutare la suscettibilità alle frane usando evidenze spaziali da layer di terreno, infrastrutture e ambiente.",
-      "projects.landslideMethod": "Combinazione di layer GIS, input di telerilevamento, passaggi di machine learning e comunicazione WebGIS.",
-      "projects.landslideDemo": "Modellazione spaziale, comunicazione WebGIS, analisi ambientale",
-      "projects.se4gProblem": "Rendere più semplice l'ispezione di dataset geospaziali tramite un'interfaccia analitica nel browser.",
-      "projects.se4gMethod": "Combinazione di mappe, grafici, integrazione API e interazioni dashboard in un'applicazione web Python.",
-      "projects.se4gDemo": "Sviluppo dashboard, visualizzazione geospaziale, comunicazione dei dati",
-      "projects.additionalSummary": "Altri progetti",
-      "projects.dlDemo": "Workflow di computer vision, confronto modelli, basi di valutazione",
-      "projects.eoDemo": "Osservazione della Terra, analisi NDWI, mappatura temporale",
-      "projects.poliyogaDemo": "Basi di applicazioni web, collaborazione UX, funzioni con database",
-      "projects.surveyingTitle": "Rilevamento ingegneristico",
-      "projects.levellingTitle": "Progetto di livellazione",
-      "projects.roadTitle": "Progettazione stradale con Civil 3D",
-      "projects.laserTitle": "Scansione laser 3D",
-      "projects.additional1": "Attività di rilevamento nel campus dell'Università di Teheran con raccolta dati tramite stazione totale e preparazione di planimetrie.",
-      "projects.additional2": "Misurazione di differenze di quota con metodi classici di livellazione, controllo degli errori e documentazione tecnica.",
-      "projects.additional3": "Progettazione di un collegamento stradale con AutoCAD Civil 3D, geometria del tracciato, profili longitudinali e volumi di scavo e riporto.",
-      "projects.additional4": "Acquisizione ed elaborazione di dati point-cloud di un piano di edificio a supporto della preparazione di modelli digitali 3D.",
-      "projects.surveyingDemo": "Fondamenti di rilevamento, dati di campo, preparazione planimetrie",
-      "projects.levellingDemo": "Disciplina di misura, controllo qualità, documentazione",
-      "projects.roadDemo": "Strumenti di progettazione ingegneristica, ragionamento sul terreno, calcolo volumi",
-      "projects.laserDemo": "Workflow point-cloud, acquisizione dati 3D, tecnologia di rilevamento",
       "process.eyebrow": "Processo",
-      "process.title": "Un workflow strutturato dalla domanda spaziale al prodotto utilizzabile.",
-      "process.intro":
-        "Affronto il lavoro geospaziale come un sistema di prodotto: definire la decisione, validare i dati, progettare il workflow e consegnare output ispezionabili e riutilizzabili.",
-      "process.discoveryTitle": "Discovery",
-      "process.discoveryText": "Chiarire domanda spaziale, utenti, vincoli, dataset disponibili e criteri di successo.",
-      "process.strategyTitle": "Strategia",
-      "process.strategyText": "Scegliere percorso di analisi, modello dati, strumenti, controlli di validazione e formato di comunicazione.",
-      "process.designTitle": "Design",
-      "process.designText": "Strutturare mappa, dashboard, workflow o output del modello intorno a gerarchia e interpretabilità.",
-      "process.developmentTitle": "Sviluppo",
-      "process.developmentText": "Costruire workflow Python, GIS, WebGIS o dashboard puliti, riutilizzabili e documentati.",
-      "process.deliveryTitle": "Consegna",
-      "process.deliveryText": "Consegnare risultati con documentazione chiara, output visivi e raccomandazioni successive.",
+      "process.title": "Un workflow strutturato dalla definizione del problema a un output tecnico utilizzabile.",
+      "process.note": "Lo stesso workflow si adatta ad analisi GIS, esperimenti data science, dashboard web, utility software e supporto alla ricerca.",
+      "process.step1Title": "Definire",
+      "process.step1Text": "Chiarire ruolo dei dati, utente, decisione e vincoli tecnici.",
+      "process.step2Title": "Preparare",
+      "process.step2Text": "Pulire, trasformare, collegare, documentare e strutturare dataset per analisi o sviluppo.",
+      "process.step3Title": "Costruire",
+      "process.step3Text": "Sviluppare workflow Python, esperimenti ML, logica GIS, dashboard o componenti web.",
+      "process.step4Title": "Validare",
+      "process.step4Text": "Controllare output con metriche, ragionamento spaziale, ispezione visuale e test riproducibili.",
+      "process.step5Title": "Consegnare",
+      "process.step5Text": "Presentare il risultato come codice documentato, mappe, dashboard, output di modello o evidenza di progetto.",
       "proof.eyebrow": "Social proof",
-      "proof.title": "Credibilità costruita con evidenze accademiche, di ricerca e di progetto.",
-      "proof.microcopy": "Le evidenze più forti sono pratiche: lavoro accademico completato, supporto applicato al KIT e artefatti di progetto ispezionabili.",
-      "proof.projects": "Progetti geospaziali principali",
-      "proof.msc": "Ingegneria geoinformatica",
-      "proof.kit": "Lavoro applicato come assistente di ricerca",
-      "proof.institutions": "Istituzioni accademiche tra Italia e Germania",
-      "filters.all": "Tutti",
-      "filters.gis": "GIS",
-      "filters.python": "Python",
-      "filters.remote": "Telerilevamento",
-      "filters.ml": "Machine Learning",
-      "filters.dashboard": "Dashboard",
-      "filters.webgis": "WebGIS",
-      "filters.webdev": "Sviluppo web",
-      "filters.software": "Software design",
-      "filters.javascript": "JavaScript",
-      "filters.deep": "Deep Learning",
-      "filters.ai": "AI",
-      "filters.surveying": "Rilevamento",
+      "proof.title": "Evidenze verificabili per recruiter tra formazione, ricerca e progetti.",
+      "proof.msc": "MSc completato in Geoinformatics Engineering",
+      "proof.kit": "Esperienza di ricerca come assistente in Germania",
+      "proof.projects": "Progetti portfolio su ML, GIS, dashboard e web",
+      "proof.germany": "Contesto di studio, ricerca e lavoro in Germania",
       "education.eyebrow": "Formazione",
-      "education.title": "Basi in geoinformatica, telerilevamento, GIS e rilevamento.",
-      "education.mscTitle": "MSc in Ingegneria geoinformatica",
+      "education.title": "Fondamenti accademici in geoinformatica, GIS, telerilevamento e rilevamento.",
+      "education.note": "Un percorso dalle basi del rilevamento alla specializzazione in geoinformatica, con scambio ed esperienza di ricerca in Germania.",
+      "education.mscTitle": "MSc Geoinformatics Engineering",
       "education.mscMeta": "Politecnico di Milano, Italia",
-      "education.mscDate": "Set 2023 - Mar 2026 | completato | voto: 102 / 110, circa 1,5",
-      "education.mscExchange": "Studente in scambio in geodesia presso l'Università di Bonn e in telerilevamento e geoinformazione presso il KIT.",
-      "education.bscTitle": "BSc in Ingegneria del rilevamento",
-      "education.bscMeta": "Università di Teheran, Iran",
-      "education.bscDate": "Set 2018 - Lug 2022 | voto: 16,5 / 20, circa 1,9",
+      "education.mscStatus": "Completato",
+      "education.mscGrade": "Voto: 102 / 110, circa 1,5",
+      "education.mscDetails": "Specializzazione in geoinformatica con GIS, machine learning, database, Earth observation, analisi geospaziale e processing geodati.",
+      "education.bonnTitle": "Universita di Bonn",
+      "education.bonnText": "Scambio Erasmus+ per la tesi in geodesia.",
+      "education.kitTitle": "Karlsruhe Institute of Technology",
+      "education.kitText": "Scambio Erasmus+ per corsi in telerilevamento e geoinformazione.",
+      "education.thesisLabel": "Tesi:",
+      "education.bscTitle": "BSc Surveying Engineering",
+      "education.bscMeta": "Universita di Teheran, Iran",
+      "education.bscGrade": "Voto: 16,5 / 20, circa 1,9",
+      "education.bscDetails": "Fondamenti in rilevamento, fotogrammetria, telerilevamento, GIS, geodesia e analisi spaziale.",
       "contact.eyebrow": "Contatti",
-      "contact.title": "Disponibile per ruoli junior GIS e geospatial data in Germania.",
-      "contact.p":
-        "Se cercate profili junior per GIS, analisi geospaziale o workflow spaziali basati su Python, sono disponibile a connettermi o a ricevere un messaggio.",
-      "contact.closing": "Interessato a workflow geospaziali, supporto alla ricerca e prodotti collaborativi di dati spaziali.",
+      "contact.title": "Disponibile per ruoli junior in GIS, software, web e dati.",
+      "contact.note":
+        "Miglior fit: team che hanno bisogno di gestione dati attenta, codice leggibile, analisi basata su mappe e output dashboard o web pratici.",
       "contact.emailButton": "Scrivimi",
       "contact.cvButton": "Scarica CV",
-      "contact.availability": "Disponibile per opportunità junior in GIS, Python, telerilevamento e analisi geospaziale.",
-      "contact.langEn": "Inglese: fluente",
-      "contact.langDe": "Tedesco: intermedio",
-      "contact.langIt": "Italiano: intermedio",
-      "contact.license": "Patente: categoria B",
-      "footer.credits":
-        "Visuali di progetto: composizioni locali da output di tesi disponibili e immagini geospaziali. Loghi: file pubblici dei loghi istituzionali e presentazione di tesi fornita.",
-      "footer.tagline": "Workflow geospaziali, ricerca e pensiero sistemico applicato.",
-    },
-    html: {
-      "about.p2":
-        "La mia tesi MSc, <cite>Inferring Map Generalization Operations from User Prompts</cite>, è un buon esempio di questa intersezione: generalizzazione cartografica, prompt in linguaggio naturale, feature engineering e valutazione del modello in un workflow geospaziale.",
-      "projects.nl2mapDesc":
-        "Sviluppo di un workflow di machine learning che collega prompt utente a operazioni di generalizzazione cartografica per decisioni più strutturate nel design delle mappe.",
-      "projects.layerDesc":
-        "Sviluppo di uno strumento Python per modifiche raster controllate con maschere vettoriali, logica di elaborazione riutilizzabile e controlli di validazione geospaziale.",
-      "projects.landsatDesc":
-        "Sviluppo di un toolkit Python riutilizzabile per elaborare immagini satellitari Landsat, con estrazione dei metadati, operazioni sulle bande, riproiezione e workflow di analisi ambientale.",
-      "projects.landslideDesc":
-        "Sviluppo di un workflow GIS e machine learning per la mappatura della suscettibilità alle frane, combinando dati di terreno, infrastrutture e telerilevamento.",
-      "projects.se4gDesc":
-        "Sviluppo di una dashboard interattiva per esplorare dati geospaziali con mappe, grafici, integrazione API e analisi guidata dall'utente in una pratica applicazione dati.",
-      "projects.dlDesc":
-        "Confronto tra CNN e ResNet18 preaddestrato per classificazione immagini, con training, valutazione, metriche, normalizzazione e analisi degli errori.",
-      "projects.eoadvancedDesc":
-        "Analisi dei cambiamenti delle aree d'acqua usando dati satellitari, indicatori NDWI, mappe e visualizzazioni statistiche per il periodo 2021-2024.",
-      "projects.poliyogaDesc":
-        "Contributo a una piattaforma web responsive per un'accademia di yoga con funzionalità frontend, UX e database per profili, attività e contenuti dinamici.",
-      "education.mscThesis": "<strong>Tesi:</strong> <cite>Inferring Map Generalization Operations from User Prompts</cite>",
-      "education.mscCourses":
-        "<strong>Corsi rilevanti:</strong> Geographic Information Systems, Machine Learning, Databases, Earth Observation, Geospatial Data Analysis, Geospatial Processing",
-      "education.bscThesis": "<strong>Tesi:</strong> <cite>Application of GIS and Big Data in Smart Cities</cite>",
-      "education.bscCourses":
-        "<strong>Corsi rilevanti:</strong> Surveying, Photogrammetry, Remote Sensing, Geographic Information Systems, Spatial Analysis, Geodesy",
-      "footer.copy": '&copy; <span id="year"></span> Amirhossein Donyadidegan. Creato per GitHub Pages.',
     },
     attrs: {
       "nav.aria": "Navigazione principale",
       "language.aria": "Selezione lingua",
       "hero.actionsAria": "Azioni principali",
-      "hero.snapshotAria": "Sintesi per recruiter",
-      "intro.aria": "Punti chiave del profilo",
-      "logos.polimiAlt": "Logo del Politecnico di Milano",
-      "logos.bonnAlt": "Logo dell'Università di Bonn",
-      "logos.kitAlt": "Logo del Karlsruhe Institute of Technology",
-      "logos.kitShortAlt": "Logo KIT",
-      "logos.tehranAlt": "Simbolo dell'Università di Teheran",
-      "roles.targetAria": "Ruoli target",
-      "about.strengthsAria": "Competenze principali",
-      "skills.aria": "Competenze tecniche",
-      "projects.filtersAria": "Filtri progetto",
-      "projectVisuals.generalization": "Output di mappa iniziale e generalizzata dal progetto di tesi sulla generalizzazione cartografica",
-      "projectVisuals.raster": "Visuale di simulazione raster con overlay di maschera vettoriale per LayerAlterator",
-      "projectVisuals.eo": "Visuale del workflow di elaborazione di immagini satellitari LandsatToolkit",
-      "projectVisuals.webgis": "Visuale di mappatura della suscettibilità alle frane con terreno e classi di rischio",
-      "projectVisuals.dashboard": "Visuale dashboard SE4G con pannelli mappa e grafici",
-      "education.exchangeAria": "Istituzioni di scambio",
-      "contact.langAria": "Lingue e altri dettagli",
+      "hero.visualAria": "Copertura dei ruoli target",
+      "hero.skillsAria": "Competenze principali",
+      "target.tagsAria": "Ruoli target",
+      "profile.thesisAria": "Temi della tesi",
+      "profile.skillsAria": "Competenze del profilo",
+      "skills.aria": "Gruppi di competenze tecniche",
     },
   },
 };
 
-const updateYear = () => {
-  const year = document.querySelector("#year");
-  if (year) {
-    year.textContent = new Date().getFullYear();
-  }
-};
-
-const getSystemTheme = () =>
-  window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-
 const getStoredTheme = () => {
   try {
-    return window.localStorage.getItem("portfolio-theme");
+    return window.localStorage.getItem("portfolio-theme-v2");
   } catch {
     return null;
   }
@@ -622,40 +456,7 @@ const getStoredTheme = () => {
 
 const setStoredTheme = (theme) => {
   try {
-    window.localStorage.setItem("portfolio-theme", theme);
-  } catch {
-    // Storage can be unavailable in strict browser modes.
-  }
-};
-
-const updateThemeControl = (theme) => {
-  if (!themeToggle) {
-    return;
-  }
-
-  const isDark = theme === "dark";
-  themeToggle.setAttribute("aria-pressed", String(isDark));
-  themeToggle.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
-  themeToggle.setAttribute("title", isDark ? "Switch to light mode" : "Switch to dark mode");
-
-  if (themeColorMeta) {
-    themeColorMeta.setAttribute("content", isDark ? "#07111f" : "#f4f8fb");
-  }
-};
-
-const applyTheme = (theme, persist = true) => {
-  const selectedTheme = theme === "dark" ? "dark" : "light";
-  document.documentElement.dataset.theme = selectedTheme;
-  updateThemeControl(selectedTheme);
-
-  if (persist) {
-    setStoredTheme(selectedTheme);
-  }
-};
-
-const setStoredLanguage = (language) => {
-  try {
-    window.localStorage.setItem("portfolio-language", language);
+    window.localStorage.setItem("portfolio-theme-v2", theme);
   } catch {
     // Storage can be unavailable in strict browser modes.
   }
@@ -669,25 +470,64 @@ const getStoredLanguage = () => {
   }
 };
 
-const projectCountText = {
-  en: (visible, total) => `Showing ${visible} of ${total} projects`,
-  de: (visible, total) => `${visible} von ${total} Projekten sichtbar`,
-  it: (visible, total) => `${visible} di ${total} progetti visibili`,
+const setStoredLanguage = (language) => {
+  try {
+    window.localStorage.setItem("portfolio-language", language);
+  } catch {
+    // Storage can be unavailable in strict browser modes.
+  }
 };
 
 const getActiveLanguage = () => document.documentElement.lang || "en";
 
-const updateProjectCount = () => {
-  const visibleCount = projectCards.filter((card) => !card.classList.contains("is-hidden")).length;
-  const language = getActiveLanguage();
-  const formatter = projectCountText[language] || projectCountText.en;
+const themeLabels = {
+  en: {
+    light: "Switch to light mode",
+    dark: "Switch to dark mode",
+  },
+  de: {
+    light: "Zum hellen Modus wechseln",
+    dark: "Zum dunklen Modus wechseln",
+  },
+  it: {
+    light: "Passa alla modalita chiara",
+    dark: "Passa alla modalita scura",
+  },
+};
 
-  if (projectCount) {
-    projectCount.textContent = formatter(visibleCount, projectCards.length);
+const updateYear = () => {
+  const year = document.querySelector("#year");
+  if (year) {
+    year.textContent = new Date().getFullYear();
+  }
+};
+
+const updateThemeControl = (theme) => {
+  if (!themeToggle) {
+    return;
   }
 
-  if (projectEmptyState) {
-    projectEmptyState.hidden = visibleCount !== 0;
+  const isDark = theme === "dark";
+  const language = getActiveLanguage();
+  const labels = themeLabels[language] || themeLabels.en;
+  const label = isDark ? labels.light : labels.dark;
+
+  themeToggle.setAttribute("aria-pressed", String(isDark));
+  themeToggle.setAttribute("aria-label", label);
+  themeToggle.setAttribute("title", label);
+
+  if (themeColorMeta) {
+    themeColorMeta.setAttribute("content", isDark ? "#071827" : "#f3f6f8");
+  }
+};
+
+const applyTheme = (theme, persist = true) => {
+  const selectedTheme = theme === "dark" ? "dark" : "light";
+  document.documentElement.dataset.theme = selectedTheme;
+  updateThemeControl(selectedTheme);
+
+  if (persist) {
+    setStoredTheme(selectedTheme);
   }
 };
 
@@ -703,11 +543,6 @@ const applyLanguage = (language) => {
     element.textContent = dictionary.text?.[key] || originalText.get(key) || "";
   });
 
-  document.querySelectorAll("[data-i18n-html]").forEach((element) => {
-    const key = element.dataset.i18nHtml;
-    element.innerHTML = dictionary.html?.[key] || originalHtml.get(key) || "";
-  });
-
   attrElements.forEach((element) => {
     const defaults = attrDefaults.get(element) || {};
     parseAttrPairs(element.dataset.i18nAttr).forEach(({ attr, key }) => {
@@ -720,29 +555,32 @@ const applyLanguage = (language) => {
     button.setAttribute("aria-pressed", String(isSelected));
   });
 
+  updateThemeControl(document.documentElement.dataset.theme || "light");
   updateYear();
-  updateProjectCount();
   setStoredLanguage(selectedLanguage);
 };
 
-const applyProjectFilter = (filter) => {
-  filterButtons.forEach((button) => {
-    const isSelected = button.dataset.filter === filter;
-    button.classList.toggle("is-active", isSelected);
-    button.setAttribute("aria-pressed", String(isSelected));
-  });
-
-  projectCards.forEach((card) => {
-    const categories = card.dataset.categories.split(/\s+/);
-    const shouldShow = filter === "all" || categories.includes(filter);
-    card.classList.toggle("is-hidden", !shouldShow);
-  });
-
-  updateProjectCount();
+const closeMobileNav = () => {
+  navMenu?.classList.remove("is-open");
+  document.body.classList.remove("nav-open");
+  navToggle?.setAttribute("aria-expanded", "false");
 };
 
-updateYear();
-applyTheme(getStoredTheme() || getSystemTheme(), false);
+const reducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+document.querySelectorAll('a[href^="#"]').forEach((link) => {
+  link.addEventListener("click", (event) => {
+    const target = document.querySelector(link.getAttribute("href"));
+    if (!target) {
+      return;
+    }
+
+    event.preventDefault();
+    closeMobileNav();
+    target.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
+    history.pushState(null, "", link.getAttribute("href"));
+  });
+});
 
 if (navToggle && navMenu) {
   navToggle.addEventListener("click", () => {
@@ -752,23 +590,9 @@ if (navToggle && navMenu) {
   });
 }
 
-navLinks.forEach((link) => {
-  link.addEventListener("click", () => {
-    navMenu?.classList.remove("is-open");
-    document.body.classList.remove("nav-open");
-    navToggle?.setAttribute("aria-expanded", "false");
-  });
-});
-
 langButtons.forEach((button) => {
   button.addEventListener("click", () => {
     applyLanguage(button.dataset.lang);
-  });
-});
-
-filterButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    applyProjectFilter(button.dataset.filter);
   });
 });
 
@@ -779,40 +603,33 @@ if (themeToggle) {
   });
 }
 
-if (!getStoredTheme() && window.matchMedia) {
-  const systemThemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
-  systemThemeQuery.addEventListener?.("change", (event) => {
-    if (!getStoredTheme()) {
-      applyTheme(event.matches ? "dark" : "light", false);
-    }
-  });
-}
-
 const sections = navLinks
   .map((link) => document.querySelector(link.getAttribute("href")))
   .filter(Boolean);
+
+const setActiveLink = (sectionId) => {
+  navLinks.forEach((link) => {
+    const isActive = link.getAttribute("href") === `#${sectionId}`;
+    link.classList.toggle("is-active", isActive);
+    if (isActive) {
+      link.setAttribute("aria-current", "page");
+    } else {
+      link.removeAttribute("aria-current");
+    }
+  });
+};
 
 if ("IntersectionObserver" in window) {
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (!entry.isIntersecting) {
-          return;
+        if (entry.isIntersecting) {
+          setActiveLink(entry.target.id);
         }
-
-        navLinks.forEach((link) => {
-          const isActive = link.getAttribute("href") === `#${entry.target.id}`;
-          link.classList.toggle("is-active", isActive);
-          if (isActive) {
-            link.setAttribute("aria-current", "page");
-          } else {
-            link.removeAttribute("aria-current");
-          }
-        });
       });
     },
     {
-      rootMargin: "-40% 0px -55% 0px",
+      rootMargin: "-38% 0px -54% 0px",
       threshold: 0,
     }
   );
@@ -822,11 +639,9 @@ if ("IntersectionObserver" in window) {
 
 const revealTargets = Array.from(
   document.querySelectorAll(
-    ".summary-inner, .intro-inner, .section-heading, .logo-card, .available-panel, .bring-card, .timeline-item, .skill-card, .project-card, .process-step, .proof-grid article, .education-card, .contact-panel"
+    ".hero-content, .hero-visual, .section-heading, .summary-card, .role-tag-grid, .availability-card, .institution-card, .thesis-card, .skill-card, .service-card, .timeline-card, .info-card, .process-card, .proof-card, .education-panel, .contact-card"
   )
 );
-
-const reducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 if ("IntersectionObserver" in window && !reducedMotion) {
   revealTargets.forEach((target) => target.setAttribute("data-reveal", ""));
@@ -843,7 +658,7 @@ if ("IntersectionObserver" in window && !reducedMotion) {
       });
     },
     {
-      rootMargin: "0px 0px -12% 0px",
+      rootMargin: "0px 0px -10% 0px",
       threshold: 0.12,
     }
   );
@@ -853,35 +668,6 @@ if ("IntersectionObserver" in window && !reducedMotion) {
   revealTargets.forEach((target) => target.classList.add("is-visible"));
 }
 
-if (proofValue && !reducedMotion && "IntersectionObserver" in window) {
-  const targetValue = Number(proofValue.dataset.countTo || 0);
-  const proofObserver = new IntersectionObserver(
-    (entries, observerInstance) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting || !targetValue) {
-          return;
-        }
-
-        let currentValue = 0;
-        const step = () => {
-          currentValue += 1;
-          proofValue.textContent = `${Math.min(currentValue, targetValue)}+`;
-
-          if (currentValue < targetValue) {
-            window.requestAnimationFrame(step);
-          }
-        };
-
-        step();
-        observerInstance.unobserve(entry.target);
-      });
-    },
-    { threshold: 0.6 }
-  );
-
-  proofObserver.observe(proofValue);
-}
-
-const preferredLanguage = getStoredLanguage() || document.documentElement.lang || "en";
-applyLanguage(preferredLanguage);
-applyProjectFilter("all");
+updateYear();
+applyTheme(getStoredTheme() || "light", false);
+applyLanguage(getStoredLanguage() || "en");
