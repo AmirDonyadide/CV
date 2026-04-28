@@ -701,7 +701,8 @@ main {
 }
 
 .summary-cards,
-.card-grid {
+.card-grid,
+.contact-grid {
   display: grid;
   gap: 18px;
 }
@@ -1523,60 +1524,22 @@ main {
   padding-bottom: clamp(80px, 10vw, 132px);
 }
 
-.contact-top {
-  margin-bottom: 14px;
-}
-
-.contact-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
-  gap: 18px;
-  align-items: stretch;
-}
-
-.contact-copy-panel,
-.contact-methods {
-  min-height: 330px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: var(--surface);
-  box-shadow: var(--shadow-soft);
-}
-
-.contact-copy-panel {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 24px;
-}
-
-.contact-copy-panel .section-note {
-  max-width: 100%;
-  text-align: justify;
-  text-justify: inter-word;
-}
-
 .contact-actions {
   margin-top: 24px;
 }
 
-.contact-methods {
-  display: grid;
+.contact-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-auto-rows: minmax(82px, auto);
-  gap: 12px;
-  align-content: start;
-  padding: 14px;
+  grid-auto-rows: 1fr;
 }
 
 .contact-card {
   display: grid;
-  min-height: 82px;
-  grid-template-columns: 40px minmax(0, 1fr);
-  align-items: center;
-  gap: 12px;
+  min-height: 168px;
+  align-content: start;
+  gap: 8px;
   color: var(--ink);
-  padding: 14px;
+  padding: 22px;
   text-decoration: none;
   transition:
     transform 160ms ease,
@@ -1585,22 +1548,16 @@ main {
     background-color 160ms ease;
 }
 
-.contact-logo {
+.contact-icon {
   display: grid;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   place-items: center;
   border-radius: var(--radius);
   background: var(--ink);
   color: var(--bg);
-  font-size: 0.76rem;
+  font-size: 0.78rem;
   font-weight: 800;
-  letter-spacing: 0;
-}
-
-.contact-logo-linkedin {
-  background: #0a66c2;
-  color: #ffffff;
 }
 
 .contact-card strong,
@@ -1803,8 +1760,7 @@ main {
   .proof-grid,
   .education-grid,
   .institution-grid,
-  .contact-layout,
-  .contact-methods,
+  .contact-grid,
   .footer-inner {
     grid-template-columns: 1fr;
   }
@@ -1825,7 +1781,7 @@ main {
   .education-card,
   .timeline-panel,
   .thesis-card,
-  .contact-copy-panel {
+  .contact-card {
     padding: 20px;
   }
 
