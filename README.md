@@ -1,23 +1,24 @@
-# Recruiter Portfolio Website
+# Ground / Orbit Portfolio Website
 
 Personal CV and portfolio website for Amirhossein Donyadidegan. The site is a
-single-page, responsive static portfolio for junior GIS, geoinformatics, remote
-sensing, Python, spatial data, and geospatial analyst roles.
+single-page, responsive static portfolio for GIS, geoinformatics, remote
+sensing, Python, spatial data, software, data, and web roles.
 
 ## Features
 
-- Recruiter-focused positioning for junior GIS and geospatial data roles.
+- Recruiter-focused hierarchy with the profile, selected work, experience,
+  capabilities, education, and contact details in one page.
 - English, German, and Italian language switcher.
-- Target roles and availability sections for fast recruiter scanning.
-- "What I Bring" section for quick differentiation and trust signals.
-- Five flagship geospatial projects with recruiter-oriented summaries.
-- Evidence-led project thumbnails and problem/method/demonstrates lines.
-- Project filters for GIS, Python, remote sensing, machine learning, dashboards,
-  and WebGIS.
-- Compact technical skills grouped by hiring-relevant categories.
+- Persistent dark mode with system-preference and saved-state support.
+- "Ground / Orbit" hero using supplied Politecnico and Earth-observation imagery.
+- Six evidence-led projects with real project imagery, summaries, technology
+  signals, and GitHub links.
+- Chronological experience log and four-layer technical capability stack.
+- Politecnico panorama with MSc, exchange, thesis, and BSc evidence.
 - Downloadable CV PDF at `assets/amirhossein-donyadidegan-cv.pdf`.
-- PowerPoint-inspired visual theme using the thesis presentation palette and a
-  local Manrope webfont.
+- Locally served Manrope webfont and optimized WebP display assets.
+- Accessible mobile navigation, visible keyboard focus, reduced-motion support,
+  semantic headings, and 44 px minimum touch targets.
 - Static HTML, CSS, and JavaScript suitable for GitHub Pages.
 
 ## Files
@@ -26,8 +27,9 @@ sensing, Python, spatial data, and geospatial analyst roles.
   recruiter-focused portfolio sections.
 - `styles.css` contains the responsive visual design.
 - `script.js` contains mobile navigation, active section highlighting,
-  multilingual switching, and project filtering.
-- `assets/` contains local imagery, logos, the webfont, and the downloadable CV.
+  multilingual switching, and theme persistence.
+- `assets/` contains the supplied source imagery, optimized display imagery,
+  logos, the webfont, and the downloadable CV.
 
 ## Run Locally
 
@@ -57,8 +59,7 @@ URL shown in the repository settings.
 
 ## Asset Credits
 
-- Theme, typography reference, and Politecnico di Milano photos: supplied thesis
-  presentation.
+- Politecnico di Milano photos: supplied thesis presentation.
 - Font: Manrope, served locally from `assets/fonts/`.
 - Earth at Night: NASA.
 - Venice, Italy: NASA Earth Observatory.
