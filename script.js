@@ -275,6 +275,7 @@ const translations = {
       "target.tagsAria": "Zielrollen",
       "profile.thesisAria": "Thesis-Themen",
       "profile.skillsAria": "Profil-Fähigkeiten",
+      "profile.linksAria": "Berufliche Links",
       "skills.aria": "Technische Fähigkeitsgruppen",
       "projects.techAria": "Technologien",
       "projects.eoContextAria": "Erdbeobachtungskontext",
@@ -297,6 +298,8 @@ const translations = {
         "QGIS-Arbeitsbereich mit geschichteten Geodaten und einer Choroplethenkarte des Medianeinkommens in Houston",
       "alt.se4g":
         "Globale NASA-Karte der Oberflächentemperaturabweichungen in Robinson-Projektion mit warmen und kühlen Regionen in Rot und Blau",
+      "alt.poliyoga":
+        "Visual-Studio-Code-Arbeitsbereich mit Quelldateien, Code-Editor und Terminal als visueller Kontext für die Webanwendungsentwicklung",
       "alt.polimiCampus":
         "Hauptgebäude des Leonardo-Campus des Politecnico di Milano mit Menschen auf dem Platz",
       "alt.contactOrbit":
@@ -540,6 +543,7 @@ const translations = {
       "target.tagsAria": "Ruoli target",
       "profile.thesisAria": "Temi della tesi",
       "profile.skillsAria": "Competenze del profilo",
+      "profile.linksAria": "Link professionali",
       "skills.aria": "Gruppi di competenze tecniche",
       "projects.techAria": "Tecnologie",
       "projects.eoContextAria": "Contesto di osservazione della Terra",
@@ -562,6 +566,8 @@ const translations = {
         "Area di lavoro QGIS con dati geospaziali a strati e una mappa coropletica del reddito mediano a Houston",
       "alt.se4g":
         "Mappa NASA delle anomalie globali della temperatura superficiale in proiezione Robinson, con regioni calde e fredde in rosso e blu",
+      "alt.poliyoga":
+        "Area di lavoro Visual Studio Code con file sorgente, editor e terminale, usata come contesto visivo per lo sviluppo di applicazioni web",
       "alt.polimiCampus":
         "Edificio principale del campus Leonardo del Politecnico di Milano con persone che attraversano la piazza",
       "alt.contactOrbit":
@@ -641,7 +647,7 @@ const updateThemeControl = (theme) => {
   themeToggle.setAttribute("title", label);
 
   if (themeColorMeta) {
-    themeColorMeta.setAttribute("content", isDark ? "#071d2b" : "#f4f6f1");
+    themeColorMeta.setAttribute("content", isDark ? "#030708" : "#e9efeb");
   }
 };
 
@@ -736,7 +742,7 @@ document.addEventListener("keydown", (event) => {
 });
 
 window.addEventListener("resize", () => {
-  if (window.innerWidth > 1020) {
+  if (window.innerWidth > 1160) {
     closeMobileNav();
   }
 });

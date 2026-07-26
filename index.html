@@ -28,7 +28,7 @@
       content="Landsat view of the Pearl River Delta's dense urban fabric"
     />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="theme-color" content="#f4f6f1" />
+    <meta name="theme-color" content="#e9efeb" />
     <link rel="canonical" href="https://amirdonyadide.com/" />
     <link
       rel="icon"
@@ -37,6 +37,13 @@
     <link
       rel="preload"
       href="assets/fonts/manrope-latin-wght-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="assets/fonts/geologica-latin-wght-normal.woff2"
       as="font"
       type="font/woff2"
       crossorigin
@@ -143,12 +150,123 @@
       </nav>
     </header>
 
-    <main id="main" tabindex="-1">
+    <main class="portfolio-main" id="main" tabindex="-1">
+      <div class="portfolio-shell shell">
+        <aside class="profile-rail" aria-labelledby="profile-card-title">
+          <div class="profile-card">
+            <div class="profile-coordinate" aria-hidden="true">
+              <span>SURVEY STATION</span>
+              <span>49.0069° N&nbsp;&nbsp;8.4037° E</span>
+            </div>
+
+            <figure
+              class="hero-atlas"
+              aria-label="Ground and Earth observation visual field"
+              data-i18n-attr="aria-label:hero.visualAria"
+            >
+              <div class="atlas-field">
+                <div class="atlas-image atlas-ground">
+                  <img
+                    src="assets/editorial/hero-ground-1600.webp"
+                    srcset="
+                      assets/editorial/hero-ground-720.webp   720w,
+                      assets/editorial/hero-ground-1600.webp 1600w
+                    "
+                    sizes="(max-width: 720px) calc(100vw - 3rem), (max-width: 1120px) 44vw, 360px"
+                    width="1600"
+                    height="1067"
+                    alt="External staircases and glass facades at Politecnico di Milano's Bovisa campus in autumn"
+                    data-i18n-attr="alt:alt.heroGround"
+                    fetchpriority="high"
+                    decoding="async"
+                  />
+                </div>
+                <div class="atlas-image atlas-orbit">
+                  <img
+                    src="assets/editorial/hero-orbit-1600.webp"
+                    srcset="
+                      assets/editorial/hero-orbit-720.webp   720w,
+                      assets/editorial/hero-orbit-1600.webp 1600w
+                    "
+                    sizes="(max-width: 720px) calc(100vw - 3rem), (max-width: 1120px) 44vw, 360px"
+                    width="1600"
+                    height="2080"
+                    alt="Terra MODIS view of the snow-covered Alps and northern Italy, including Lombardy and the Adriatic Sea"
+                    data-i18n-attr="alt:alt.heroOrbit"
+                    fetchpriority="high"
+                    decoding="async"
+                  />
+                </div>
+                <span class="atlas-label atlas-label-ground" data-i18n="hero.ground">
+                  Ground / Politecnico
+                </span>
+                <span class="atlas-label atlas-label-orbit" data-i18n="hero.orbit">
+                  Orbit / Earth observation
+                </span>
+                <span class="atlas-datum" aria-hidden="true">
+                  <span class="datum-tick datum-tick-a"></span>
+                  <span class="datum-tick datum-tick-b"></span>
+                  <span class="datum-tick datum-tick-c"></span>
+                </span>
+              </div>
+              <figcaption data-i18n="hero.figureCaption">
+                Two scales of one practice: understanding places and engineering the systems used to observe them.
+              </figcaption>
+            </figure>
+
+            <div class="profile-details">
+              <p class="availability-line">
+                <span class="availability-dot" aria-hidden="true"></span>
+                <span data-i18n="availability.title">Available for</span>
+                <strong data-i18n="availability.item1">Junior-level positions</strong>
+              </p>
+              <h2 id="profile-card-title">Amirhossein Donyadidegan</h2>
+              <p class="profile-role" data-i18n="brand.role">Geoinformatics engineer</p>
+              <p class="profile-location" data-i18n="summary.location">
+                Karlsruhe, Baden-Württemberg, Germany
+              </p>
+
+              <nav
+                class="profile-links"
+                aria-label="Professional links"
+                data-i18n-attr="aria-label:profile.linksAria"
+              >
+                <a
+                  href="https://www.linkedin.com/in/amirhossein-donyadidegan/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span>LinkedIn</span><span aria-hidden="true">↗</span>
+                </a>
+                <a href="https://github.com/AmirDonyadide" target="_blank" rel="noopener noreferrer">
+                  <span>GitHub</span><span aria-hidden="true">↗</span>
+                </a>
+                <a href="mailto:donyadideganamir@gmail.com">
+                  <span data-i18n="contact.emailLabel">Email</span><span aria-hidden="true">↗</span>
+                </a>
+              </nav>
+
+              <div class="profile-actions">
+                <a
+                  class="button button-secondary"
+                  href="assets/amirhossein-donyadidegan-cv.pdf"
+                  download
+                  data-i18n="hero.downloadCv"
+                >
+                  Download CV
+                </a>
+                <a class="button button-primary" href="#contact" data-i18n="hero.contact">Contact</a>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <div class="content-column">
       <section class="hero" id="about" aria-labelledby="hero-title">
-        <div class="hero-layout shell">
+        <div class="hero-layout">
           <div class="hero-copy">
             <p class="eyebrow" data-i18n="hero.eyebrow">Software, data and geospatial systems portfolio</p>
-            <p class="hero-name" aria-hidden="true">Amirhossein<br />Donyadidegan</p>
+            <p class="hero-domain" aria-hidden="true">GIS · EARTH OBSERVATION · DATA · SOFTWARE</p>
             <h1 id="hero-title" data-i18n="hero.thesis">I turn spatial data into software people can use.</h1>
             <p class="hero-subtitle" data-i18n="hero.subtitle">
               I am Amirhossein Donyadidegan, a geoinformatics engineer who combines geographic knowledge with
@@ -177,64 +295,9 @@
               <a class="text-action" href="#contact" data-i18n="hero.contact">Contact</a>
             </div>
           </div>
-
-          <figure
-            class="hero-atlas"
-            aria-label="Ground and Earth observation visual field"
-            data-i18n-attr="aria-label:hero.visualAria"
-          >
-            <div class="atlas-field">
-              <div class="atlas-image atlas-ground">
-                <img
-                  src="assets/editorial/hero-ground-1600.webp"
-                  srcset="
-                    assets/editorial/hero-ground-720.webp   720w,
-                    assets/editorial/hero-ground-1600.webp 1600w
-                  "
-                  sizes="(max-width: 720px) calc(100vw - 2.5rem), (max-width: 1020px) calc(100vw - 5rem), 46vw"
-                  width="1600"
-                  height="1067"
-                  alt="External staircases and glass facades at Politecnico di Milano's Bovisa campus in autumn"
-                  data-i18n-attr="alt:alt.heroGround"
-                  fetchpriority="high"
-                  decoding="async"
-                />
-              </div>
-              <div class="atlas-image atlas-orbit">
-                <img
-                  src="assets/editorial/hero-orbit-1600.webp"
-                  srcset="
-                    assets/editorial/hero-orbit-720.webp   720w,
-                    assets/editorial/hero-orbit-1600.webp 1600w
-                  "
-                  sizes="(max-width: 720px) calc(100vw - 2.5rem), (max-width: 1020px) calc(100vw - 5rem), 46vw"
-                  width="1600"
-                  height="2080"
-                  alt="Terra MODIS view of the snow-covered Alps and northern Italy, including Lombardy and the Adriatic Sea"
-                  data-i18n-attr="alt:alt.heroOrbit"
-                  fetchpriority="high"
-                  decoding="async"
-                />
-              </div>
-              <span class="atlas-label atlas-label-ground" data-i18n="hero.ground">
-                Ground / Politecnico
-              </span>
-              <span class="atlas-label atlas-label-orbit" data-i18n="hero.orbit">
-                Orbit / Earth observation
-              </span>
-              <span class="atlas-datum" aria-hidden="true">
-                <span class="datum-tick datum-tick-a"></span>
-                <span class="datum-tick datum-tick-b"></span>
-                <span class="datum-tick datum-tick-c"></span>
-              </span>
-            </div>
-            <figcaption data-i18n="hero.figureCaption">
-              Two scales of one practice: understanding places and engineering the systems used to observe them.
-            </figcaption>
-          </figure>
         </div>
 
-        <div class="hero-brief shell">
+        <div class="hero-brief">
           <dl class="quick-facts">
             <div>
               <dt data-i18n="summary.locationLabel">Location</dt>
@@ -292,7 +355,7 @@
           </p>
         </header>
 
-        <div class="featured-work shell">
+        <div class="project-grid shell">
           <article class="project-feature">
             <figure class="project-media">
               <img
@@ -468,9 +531,7 @@
               </a>
             </div>
           </article>
-        </div>
 
-        <div class="project-index shell">
           <article class="project-index-item">
             <figure>
               <img
@@ -564,11 +625,24 @@
           </article>
 
           <article class="project-index-item project-index-web">
-            <figure class="web-schematic" aria-hidden="true">
-              <span>WEB</span>
-              <span>UX</span>
-              <span>DATA</span>
-              <span class="web-schematic-line"></span>
+            <figure>
+              <img
+                src="assets/editorial/project-poliyoga-1400.webp"
+                srcset="
+                  assets/editorial/project-poliyoga-720.webp   720w,
+                  assets/editorial/project-poliyoga-1400.webp 1400w
+                "
+                sizes="(max-width: 720px) calc(100vw - 3rem), (max-width: 1120px) 50vw, 30vw"
+                width="1400"
+                height="788"
+                loading="lazy"
+                decoding="async"
+                alt="Visual Studio Code workspace with source files, code editor, and terminal, used as visual context for web application development"
+                data-i18n-attr="alt:alt.poliyoga"
+              />
+              <figcaption class="media-context">
+                <span data-i18n="projects.context">Visual context</span><strong>Software · Web application</strong>
+              </figcaption>
             </figure>
             <div>
               <p class="project-type" data-i18n="projects.typeWeb">Web development</p>
@@ -1090,6 +1164,8 @@
           </address>
         </div>
       </section>
+        </div>
+      </div>
     </main>
 
     <footer class="site-footer">
