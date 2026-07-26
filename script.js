@@ -200,9 +200,10 @@ const translations = {
       "projects.typeWebgis": "WebGIS und Spatial ML",
       "projects.typeDashboard": "Dashboard",
       "projects.typeWeb": "Webentwicklung",
-      "projects.figureA": "Abbildung A · Prompt → Operation → generalisierte Karte",
-      "projects.figureB": "Abbildung B · Landsat-Verarbeitung und Erdbeobachtungskontext",
-      "projects.figureC": "Abbildung C · Gelände, Infrastruktur, Exposition und Anfälligkeit",
+      "projects.figureA": "Visueller Kontext · Stadtstruktur im Perlflussdelta · Landsat",
+      "projects.figureB": "Quellbilder · Holuhraun, Beaufortsee und Totes Meer · Landsat",
+      "projects.figureC": "Analysekontext · Bodenbewegung auf Palos Verdes · UAVSAR",
+      "projects.context": "Visueller Kontext",
       "projects.nl2mapDesc": "Machine-Learning-Workflow, der Nutzerprompts mit kartografischen Generalisierungsoperationen verbindet.",
       "projects.layerDesc": "Python-Tool für kontrollierte Rastermodifikation mit Masken, Validierung und wiederverwendbarer Logik.",
       "projects.landsatDesc": "Wiederverwendbares Python-Toolkit für Metadaten, Bandoperationen, Reprojektion und Index-Workflows.",
@@ -262,6 +263,7 @@ const translations = {
       "contact.githubMicro": "Code und Projekte",
       "contact.phoneMicro": "Werktags erreichbar",
       "footer.role": "Geoinformatik · GIS · Daten · Software",
+      "footer.imageCredits": "Bildnachweise und Lizenzen",
     },
     attrs: {
       "nav.aria": "Hauptnavigation",
@@ -277,19 +279,28 @@ const translations = {
       "projects.techAria": "Technologien",
       "projects.eoContextAria": "Erdbeobachtungskontext",
       "education.focusAria": "Studienfokus",
-      "alt.heroGround": "Die zentrale Treppe im Politecnico di Milano",
-      "alt.heroOrbit": "ASTER-Satellitenbild von Venedig und seiner Lagune",
-      "alt.nl2map": "Prompt-Eingabe und generalisierte Gebäudekarten im NL2Map-Workflow",
+      "alt.heroGround":
+        "Außentreppen und Glasfassaden am Bovisa-Campus des Politecnico di Milano im Herbst",
+      "alt.heroOrbit":
+        "Terra-MODIS-Ansicht der schneebedeckten Alpen und Norditaliens mit Lombardei und Adria",
+      "alt.nl2map":
+        "Landsat-Ansicht der dichten Stadtstruktur im Perlflussdelta als Kontext für die Forschung zur Kartengeneralisierung",
       "alt.landsat":
-        "LandsatToolkit-Workflow für Metadaten, Bandstapelung, Reprojektion und Indexanalyse",
-      "alt.mendenhall": "Landsat-8-Aufnahme des Mendenhall-Gletschers",
-      "alt.southFlorida": "Satellitenaufnahme von Südflorida",
+        "Falschfarbenbild des Holuhraun-Lavafelds in Island aus Landsat-8-Kurzwelleninfrarot-, Nahinfrarot- und Grünbändern",
+      "alt.mendenhall":
+        "Falschfarben-Landsat-9-Szene der Beaufortsee-Küste an der Grenze zwischen Alaska und Kanada",
+      "alt.southFlorida":
+        "Falschfarben-Landsat-7-Szene des Toten Meeres, das zehnmillionste Bild im Landsat-Archiv",
       "alt.landslide":
-        "Konzept zur Erdrutschanfälligkeit mit niedrigen, mittleren und hohen Risikobereichen über Geländekonturen",
+        "NASA-Radarkarte der Geschwindigkeit und Bewegungsrichtung eines Erdrutschs auf der Halbinsel Palos Verdes",
       "alt.layerAlterator":
-        "LayerAlterator-Rasterworkflow mit einer Vektormaske über Satellitenbildern von Südflorida",
-      "alt.se4g": "SE4G-Geodaten-Dashboard mit Weltkarte, Balken- und Liniendiagramm",
-      "alt.polimiCampus": "Historische Fassade des Politecnico di Milano",
+        "QGIS-Arbeitsbereich mit geschichteten Geodaten und einer Choroplethenkarte des Medianeinkommens in Houston",
+      "alt.se4g":
+        "Globale NASA-Karte der Oberflächentemperaturabweichungen in Robinson-Projektion mit warmen und kühlen Regionen in Rot und Blau",
+      "alt.polimiCampus":
+        "Hauptgebäude des Leonardo-Campus des Politecnico di Milano mit Menschen auf dem Platz",
+      "alt.contactOrbit":
+        "Globale Karte der nächtlichen Lichter von 2016 aus Beobachtungen des Suomi-NPP-VIIRS-Sensors",
     },
   },
   it: {
@@ -454,9 +465,10 @@ const translations = {
       "projects.typeWebgis": "WebGIS e spatial ML",
       "projects.typeDashboard": "Dashboard",
       "projects.typeWeb": "Sviluppo web",
-      "projects.figureA": "Figura A · Prompt → operazione → mappa generalizzata",
-      "projects.figureB": "Figura B · Elaborazione Landsat e contesto di osservazione della Terra",
-      "projects.figureC": "Figura C · Terreno, infrastrutture, esposizione e suscettibilità",
+      "projects.figureA": "Contesto visivo · Tessuto urbano del delta del Fiume delle Perle · Landsat",
+      "projects.figureB": "Immagini sorgente · Holuhraun, Mare di Beaufort e Mar Morto · Landsat",
+      "projects.figureC": "Contesto di analisi · Movimento del terreno a Palos Verdes · UAVSAR",
+      "projects.context": "Contesto visivo",
       "projects.nl2mapDesc": "Workflow di machine learning che collega prompt utente a operazioni di generalizzazione cartografica.",
       "projects.layerDesc": "Tool Python per modifica raster controllata con maschere, validazione e logica riutilizzabile.",
       "projects.landsatDesc": "Toolkit Python riutilizzabile per metadati, operazioni sulle bande, riproiezione e indici.",
@@ -516,6 +528,7 @@ const translations = {
       "contact.githubMicro": "Codice e progetti",
       "contact.phoneMicro": "Disponibile nei giorni feriali",
       "footer.role": "Geoinformatica · GIS · Dati · Software",
+      "footer.imageCredits": "Crediti immagini e licenze",
     },
     attrs: {
       "nav.aria": "Navigazione principale",
@@ -531,20 +544,28 @@ const translations = {
       "projects.techAria": "Tecnologie",
       "projects.eoContextAria": "Contesto di osservazione della Terra",
       "education.focusAria": "Ambiti di studio",
-      "alt.heroGround": "La scala centrale all'interno del Politecnico di Milano",
-      "alt.heroOrbit": "Immagine satellitare ASTER di Venezia e della sua laguna",
-      "alt.nl2map": "Prompt e mappe di edifici generalizzate che illustrano il flusso NL2Map",
+      "alt.heroGround":
+        "Scale esterne e facciate in vetro del campus Bovisa del Politecnico di Milano in autunno",
+      "alt.heroOrbit":
+        "Vista Terra MODIS delle Alpi innevate e dell'Italia settentrionale, incluse Lombardia e Adriatico",
+      "alt.nl2map":
+        "Vista Landsat del fitto tessuto urbano del delta del Fiume delle Perle, usata come contesto per la ricerca sulla generalizzazione cartografica",
       "alt.landsat":
-        "Flusso LandsatToolkit per metadati, composizione delle bande, riproiezione e analisi degli indici",
-      "alt.mendenhall": "Vista Landsat 8 del ghiacciaio Mendenhall",
-      "alt.southFlorida": "Vista satellitare della Florida meridionale",
+        "Immagine Landsat 8 in falsi colori del campo lavico Holuhraun in Islanda con bande infrarosse a onde corte, vicino infrarosso e verde",
+      "alt.mendenhall":
+        "Scena Landsat 9 in falsi colori della costa del Mare di Beaufort al confine tra Alaska e Canada",
+      "alt.southFlorida":
+        "Scena Landsat 7 in falsi colori del Mar Morto, la decimilionesima immagine dell'archivio Landsat",
       "alt.landslide":
-        "Concetto di suscettibilità alle frane con aree a rischio basso, medio e alto sulle curve di livello",
+        "Mappa radar NASA della velocità e della direzione di movimento della frana nella penisola di Palos Verdes",
       "alt.layerAlterator":
-        "Flusso raster LayerAlterator con una maschera vettoriale su immagini della Florida meridionale",
+        "Area di lavoro QGIS con dati geospaziali a strati e una mappa coropletica del reddito mediano a Houston",
       "alt.se4g":
-        "Dashboard geospaziale SE4G con una mappa mondiale, un grafico a barre e un grafico a linee",
-      "alt.polimiCampus": "La facciata storica del Politecnico di Milano",
+        "Mappa NASA delle anomalie globali della temperatura superficiale in proiezione Robinson, con regioni calde e fredde in rosso e blu",
+      "alt.polimiCampus":
+        "Edificio principale del campus Leonardo del Politecnico di Milano con persone che attraversano la piazza",
+      "alt.contactOrbit":
+        "Mappa globale delle luci notturne del 2016 ricavata dalle osservazioni Suomi NPP VIIRS",
     },
   },
 };

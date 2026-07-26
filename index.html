@@ -21,7 +21,11 @@
     <meta property="og:url" content="https://amirdonyadide.com/" />
     <meta
       property="og:image"
-      content="https://amirdonyadide.com/assets/projects/project-nl2map.png"
+      content="https://amirdonyadide.com/assets/editorial/project-nl2map-1600.webp"
+    />
+    <meta
+      property="og:image:alt"
+      content="Landsat view of the Pearl River Delta's dense urban fabric"
     />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="theme-color" content="#f4f6f1" />
@@ -39,8 +43,8 @@
     />
     <link
       rel="preload"
-      href="assets/optimized/polimi-interior-720.webp"
-      imagesrcset="assets/optimized/polimi-interior-720.webp 720w, assets/optimized/polimi-interior.webp 1600w"
+      href="assets/editorial/hero-ground-720.webp"
+      imagesrcset="assets/editorial/hero-ground-720.webp 720w, assets/editorial/hero-ground-1600.webp 1600w"
       imagesizes="(max-width: 720px) calc(100vw - 2.5rem), (max-width: 1020px) calc(100vw - 5rem), 46vw"
       as="image"
       type="image/webp"
@@ -48,8 +52,8 @@
     />
     <link
       rel="preload"
-      href="assets/optimized/venice-aster-720.webp"
-      imagesrcset="assets/optimized/venice-aster-720.webp 720w, assets/optimized/venice-aster.webp 1370w"
+      href="assets/editorial/hero-orbit-720.webp"
+      imagesrcset="assets/editorial/hero-orbit-720.webp 720w, assets/editorial/hero-orbit-1600.webp 1600w"
       imagesizes="(max-width: 720px) calc(100vw - 2.5rem), (max-width: 1020px) calc(100vw - 5rem), 46vw"
       as="image"
       type="image/webp"
@@ -105,7 +109,12 @@
           </ul>
 
           <div class="nav-controls">
-            <div class="language-switch" aria-label="Language selection" data-i18n-attr="aria-label:language.aria">
+            <div
+              class="language-switch"
+              role="group"
+              aria-label="Language selection"
+              data-i18n-attr="aria-label:language.aria"
+            >
               <button type="button" data-lang="en" aria-pressed="true">EN</button>
               <button type="button" data-lang="de" aria-pressed="false">DE</button>
               <button type="button" data-lang="it" aria-pressed="false">IT</button>
@@ -150,7 +159,12 @@
               structured portfolio evidence across machine learning, data processing, WebGIS, web development, and
               spatial analysis.
             </p>
-            <div class="hero-actions" aria-label="Primary actions" data-i18n-attr="aria-label:hero.actionsAria">
+            <div
+              class="hero-actions"
+              role="group"
+              aria-label="Primary actions"
+              data-i18n-attr="aria-label:hero.actionsAria"
+            >
               <a class="button button-primary" href="#projects" data-i18n="hero.viewProjects">View selected work</a>
               <a
                 class="button button-secondary"
@@ -172,15 +186,15 @@
             <div class="atlas-field">
               <div class="atlas-image atlas-ground">
                 <img
-                  src="assets/optimized/polimi-interior.webp"
+                  src="assets/editorial/hero-ground-1600.webp"
                   srcset="
-                    assets/optimized/polimi-interior-720.webp 720w,
-                    assets/optimized/polimi-interior.webp     1600w
+                    assets/editorial/hero-ground-720.webp   720w,
+                    assets/editorial/hero-ground-1600.webp 1600w
                   "
                   sizes="(max-width: 720px) calc(100vw - 2.5rem), (max-width: 1020px) calc(100vw - 5rem), 46vw"
                   width="1600"
-                  height="1071"
-                  alt="The central staircase inside Politecnico di Milano"
+                  height="1067"
+                  alt="External staircases and glass facades at Politecnico di Milano's Bovisa campus in autumn"
                   data-i18n-attr="alt:alt.heroGround"
                   fetchpriority="high"
                   decoding="async"
@@ -188,15 +202,15 @@
               </div>
               <div class="atlas-image atlas-orbit">
                 <img
-                  src="assets/optimized/venice-aster.webp"
+                  src="assets/editorial/hero-orbit-1600.webp"
                   srcset="
-                    assets/optimized/venice-aster-720.webp 720w,
-                    assets/optimized/venice-aster.webp     1370w
+                    assets/editorial/hero-orbit-720.webp   720w,
+                    assets/editorial/hero-orbit-1600.webp 1600w
                   "
                   sizes="(max-width: 720px) calc(100vw - 2.5rem), (max-width: 1020px) calc(100vw - 5rem), 46vw"
-                  width="1370"
-                  height="1600"
-                  alt="ASTER satellite image of Venice and its lagoon"
+                  width="1600"
+                  height="2080"
+                  alt="Terra MODIS view of the snow-covered Alps and northern Italy, including Lombardy and the Adriatic Sea"
                   data-i18n-attr="alt:alt.heroOrbit"
                   fetchpriority="high"
                   decoding="async"
@@ -282,15 +296,22 @@
           <article class="project-feature">
             <figure class="project-media">
               <img
-                src="assets/optimized/project-nl2map.webp"
-                width="1200"
-                height="720"
+                src="assets/editorial/project-nl2map-1600.webp"
+                srcset="
+                  assets/editorial/project-nl2map-800.webp   800w,
+                  assets/editorial/project-nl2map-1600.webp 1600w
+                "
+                sizes="(max-width: 720px) calc(100vw - 2.5rem), (max-width: 1020px) calc(100vw - 5rem), 62vw"
+                width="1600"
+                height="1067"
                 loading="lazy"
                 decoding="async"
-                alt="Prompt input and generalized building maps illustrating the NL2Map workflow"
+                alt="Landsat view of the Pearl River Delta's dense urban fabric, used as context for map-generalization research"
                 data-i18n-attr="alt:alt.nl2map"
               />
-              <figcaption data-i18n="projects.figureA">Figure A · Prompt → operation → generalized map</figcaption>
+              <figcaption data-i18n="projects.figureA">
+                Visual context · Pearl River Delta urban fabric · Landsat
+              </figcaption>
             </figure>
             <div class="project-copy">
               <p class="project-type" data-i18n="projects.typeThesis">ML and geoinformatics</p>
@@ -320,42 +341,60 @@
 
           <article class="project-feature project-feature-reverse">
             <figure class="project-media landsat-field">
-              <img
-                class="landsat-main"
-                src="assets/optimized/project-landsattoolkit.webp"
-                width="1200"
-                height="720"
-                loading="lazy"
-                decoding="async"
-                alt="LandsatToolkit workflow for metadata, band stacking, reprojection, and index analysis"
-                data-i18n-attr="alt:alt.landsat"
-              />
-              <div
-                class="landsat-scenes"
-                aria-label="Earth observation context"
-                data-i18n-attr="aria-label:projects.eoContextAria"
-              >
+              <div class="landsat-canvas">
                 <img
-                  src="assets/optimized/mendenhall-glacier.webp"
-                  width="1280"
-                  height="1600"
+                  class="landsat-main"
+                  src="assets/editorial/project-landsat-main-1600.webp"
+                  srcset="
+                    assets/editorial/project-landsat-main-800.webp   800w,
+                    assets/editorial/project-landsat-main-1600.webp 1600w
+                  "
+                  sizes="(max-width: 720px) calc(100vw - 2.5rem), (max-width: 1020px) calc(100vw - 5rem), 50vw"
+                  width="1600"
+                  height="1200"
                   loading="lazy"
                   decoding="async"
-                  alt="Landsat 8 view of Mendenhall Glacier"
-                  data-i18n-attr="alt:alt.mendenhall"
+                  alt="False-color Landsat 8 image of Iceland's Holuhraun lava field using shortwave infrared, near-infrared, and green bands"
+                  data-i18n-attr="alt:alt.landsat"
                 />
-                <img
-                  src="assets/optimized/south-florida.webp"
-                  width="774"
-                  height="1600"
-                  loading="lazy"
-                  decoding="async"
-                  alt="Satellite view of South Florida"
-                  data-i18n-attr="alt:alt.southFlorida"
-                />
+                <div
+                  class="landsat-scenes"
+                  role="group"
+                  aria-label="Earth observation context"
+                  data-i18n-attr="aria-label:projects.eoContextAria"
+                >
+                  <img
+                    src="assets/editorial/project-landsat-beaufort-1000.webp"
+                    srcset="
+                      assets/editorial/project-landsat-beaufort-480.webp   480w,
+                      assets/editorial/project-landsat-beaufort-1000.webp 1000w
+                    "
+                    sizes="(max-width: 720px) 50vw, 18vw"
+                    width="1000"
+                    height="1005"
+                    loading="lazy"
+                    decoding="async"
+                    alt="False-color Landsat 9 scene of the Beaufort Sea shoreline at the Alaska-Canada border"
+                    data-i18n-attr="alt:alt.mendenhall"
+                  />
+                  <img
+                    src="assets/editorial/project-landsat-dead-sea-1000.webp"
+                    srcset="
+                      assets/editorial/project-landsat-dead-sea-480.webp   480w,
+                      assets/editorial/project-landsat-dead-sea-1000.webp 1000w
+                    "
+                    sizes="(max-width: 720px) 50vw, 18vw"
+                    width="1000"
+                    height="563"
+                    loading="lazy"
+                    decoding="async"
+                    alt="False-color Landsat 7 scene of the Dead Sea, the ten-millionth image added to the Landsat archive"
+                    data-i18n-attr="alt:alt.southFlorida"
+                  />
+                </div>
               </div>
               <figcaption data-i18n="projects.figureB">
-                Figure B · Landsat processing and Earth observation context
+                Source imagery · Holuhraun, Beaufort Sea, and Dead Sea · Landsat
               </figcaption>
             </figure>
             <div class="project-copy">
@@ -387,16 +426,21 @@
           <article class="project-feature">
             <figure class="project-media">
               <img
-                src="assets/optimized/project-landslide.webp"
-                width="1200"
-                height="720"
+                src="assets/editorial/project-landslide-1440.webp"
+                srcset="
+                  assets/editorial/project-landslide-800.webp   800w,
+                  assets/editorial/project-landslide-1440.webp 1440w
+                "
+                sizes="(max-width: 720px) calc(100vw - 2.5rem), (max-width: 1020px) calc(100vw - 5rem), 62vw"
+                width="1440"
+                height="1090"
                 loading="lazy"
                 decoding="async"
-                alt="Landslide susceptibility concept with low, medium, and high risk areas over terrain contours"
+                alt="NASA radar-derived map of landslide velocity and movement direction on the Palos Verdes Peninsula"
                 data-i18n-attr="alt:alt.landslide"
               />
               <figcaption data-i18n="projects.figureC">
-                Figure C · Terrain, infrastructure, exposure, and susceptibility
+                Analysis context · Palos Verdes ground movement · UAVSAR
               </figcaption>
             </figure>
             <div class="project-copy">
@@ -430,14 +474,22 @@
           <article class="project-index-item">
             <figure>
               <img
-                src="assets/optimized/project-layeralterator.webp"
-                width="1200"
-                height="720"
+                src="assets/editorial/project-layeralterator-1400.webp"
+                srcset="
+                  assets/editorial/project-layeralterator-720.webp   720w,
+                  assets/editorial/project-layeralterator-1400.webp 1400w
+                "
+                sizes="(max-width: 720px) calc(100vw - 2.5rem), (max-width: 1020px) 50vw, 33vw"
+                width="1400"
+                height="786"
                 loading="lazy"
                 decoding="async"
-                alt="LayerAlterator raster workflow with a vector mask over South Florida imagery"
+                alt="QGIS workspace displaying layered geospatial data and a choropleth map of median income in Houston"
                 data-i18n-attr="alt:alt.layerAlterator"
               />
+              <figcaption class="media-context">
+                <span data-i18n="projects.context">Visual context</span><strong>QGIS · Layered geodata</strong>
+              </figcaption>
             </figure>
             <div>
               <p class="project-type" data-i18n="projects.typeRaster">Raster processing</p>
@@ -468,14 +520,22 @@
           <article class="project-index-item">
             <figure>
               <img
-                src="assets/optimized/project-se4g.webp"
-                width="1200"
-                height="720"
+                src="assets/editorial/project-se4g-1600.webp"
+                srcset="
+                  assets/editorial/project-se4g-720.webp   720w,
+                  assets/editorial/project-se4g-1600.webp 1600w
+                "
+                sizes="(max-width: 720px) calc(100vw - 2.5rem), (max-width: 1020px) 50vw, 33vw"
+                width="1600"
+                height="900"
                 loading="lazy"
                 decoding="async"
-                alt="SE4G geospatial dashboard concept with a world map, bar chart, and line chart"
+                alt="NASA global surface-temperature anomaly map in Robinson projection, with warmer and cooler regions encoded in red and blue"
                 data-i18n-attr="alt:alt.se4g"
               />
+              <figcaption class="media-context">
+                <span data-i18n="projects.context">Visual context</span><strong>NASA · Global anomaly data</strong>
+              </figcaption>
             </figure>
             <div>
               <p class="project-type" data-i18n="projects.typeDashboard">Dashboard</p>
@@ -565,7 +625,7 @@
               <p class="item-meta" data-i18n="experience.kitIipMeta">
                 IIP, Karlsruhe Institute of Technology
               </p>
-              <h3 data-i18n="experience.kitIipRole">GIS & Data Analyst, Research Assistant</h3>
+              <h3 data-i18n="experience.kitIipRole">GIS &amp; Data Analyst, Research Assistant</h3>
               <ul>
                 <li data-i18n="experience.kitIipB1">
                   Developed Python-based data pipelines for energy and mobility data processing.
@@ -646,7 +706,12 @@
           </p>
         </header>
 
-        <div class="capability-stack shell" aria-label="Technical skill groups" data-i18n-attr="aria-label:skills.aria">
+        <div
+          class="capability-stack shell"
+          role="group"
+          aria-label="Technical skill groups"
+          data-i18n-attr="aria-label:skills.aria"
+        >
           <article class="capability-layer">
             <header>
               <p class="capability-code">SPATIAL / EO</p>
@@ -659,7 +724,7 @@
             <div class="capability-groups">
               <section>
                 <p class="skill-level" data-i18n="skills.levelCore">Core</p>
-                <h4 data-i18n="skills.gisTitle">GIS & Remote Sensing</h4>
+                <h4 data-i18n="skills.gisTitle">GIS &amp; Remote Sensing</h4>
                 <ul class="skill-list">
                   <li>QGIS</li><li>ArcGIS</li><li>Google Earth Engine</li><li>Raster processing</li>
                   <li>Vector processing</li><li>CRS transformations</li><li>Spatial joins</li><li>GeoJSON</li>
@@ -668,7 +733,7 @@
               </section>
               <section>
                 <p class="skill-level" data-i18n="skills.levelApplied">Applied</p>
-                <h4 data-i18n="skills.geoAiTitle">Geospatial AI & Remote Sensing ML</h4>
+                <h4 data-i18n="skills.geoAiTitle">Geospatial AI &amp; Remote Sensing ML</h4>
                 <ul class="skill-list">
                   <li>Geospatial ML</li><li>Remote sensing ML</li><li>Earth observation analytics</li>
                   <li>Spatial modeling</li><li>Satellite data analysis</li><li>Spatial pattern recognition</li>
@@ -698,7 +763,7 @@
               </section>
               <section>
                 <p class="skill-level" data-i18n="skills.levelCore">Core</p>
-                <h4 data-i18n="skills.dataEngineeringTitle">Data Processing & Engineering</h4>
+                <h4 data-i18n="skills.dataEngineeringTitle">Data Processing &amp; Engineering</h4>
                 <ul class="skill-list">
                   <li>Data pipelines</li><li>ETL workflows</li><li>Data cleaning</li><li>Pandas</li>
                   <li>NumPy</li><li>GeoPandas</li><li>xarray</li><li>Jupyter</li>
@@ -719,7 +784,7 @@
             <div class="capability-groups">
               <section>
                 <p class="skill-level" data-i18n="skills.levelCore">Core</p>
-                <h4 data-i18n="skills.mlTitle">Machine Learning & Data Science</h4>
+                <h4 data-i18n="skills.mlTitle">Machine Learning &amp; Data Science</h4>
                 <ul class="skill-list">
                   <li>Classification</li><li>Regression</li><li>Clustering</li><li>Feature engineering</li>
                   <li>Model validation</li><li>Cross-validation</li><li>Vector embeddings</li><li>MLP</li>
@@ -728,7 +793,7 @@
               </section>
               <section>
                 <p class="skill-level" data-i18n="skills.levelApplied">Applied</p>
-                <h4 data-i18n="skills.visualTitle">Visualization & Dashboards</h4>
+                <h4 data-i18n="skills.visualTitle">Visualization &amp; Dashboards</h4>
                 <ul class="skill-list">
                   <li>Plotly</li><li>Dash</li><li>Matplotlib</li><li>Interactive dashboards</li>
                   <li>Cartographic visualization</li><li>Map-linked views</li>
@@ -749,7 +814,7 @@
             <div class="capability-groups capability-groups-wide">
               <section>
                 <p class="skill-level" data-i18n="skills.levelApplied">Applied</p>
-                <h4 data-i18n="skills.webTitle">Web Development & APIs</h4>
+                <h4 data-i18n="skills.webTitle">Web Development &amp; APIs</h4>
                 <ul class="skill-list">
                   <li>HTML</li><li>CSS</li><li>JavaScript</li><li>Nuxt.js</li><li>Vue</li>
                   <li>TypeScript</li><li>Flask</li><li>REST APIs</li><li>JSON</li>
@@ -764,7 +829,7 @@
               </section>
               <section>
                 <p class="skill-level" data-i18n="skills.levelSupport">Support</p>
-                <h4 data-i18n="skills.devopsTitle">DevOps & Software Engineering</h4>
+                <h4 data-i18n="skills.devopsTitle">DevOps &amp; Software Engineering</h4>
                 <ul class="skill-list">
                   <li>Git</li><li>GitHub</li><li>GitLab</li><li>Linux/Bash</li><li>Docker</li>
                   <li>GitHub Actions</li><li>pytest</li><li>Debugging</li><li>Code documentation</li>
@@ -772,7 +837,7 @@
               </section>
               <section>
                 <p class="skill-level" data-i18n="skills.levelSupport">Support</p>
-                <h4 data-i18n="skills.toolsTitle">Cloud, Automation & Design Tools</h4>
+                <h4 data-i18n="skills.toolsTitle">Cloud, Automation &amp; Design Tools</h4>
                 <ul class="skill-list">
                   <li>Google Cloud</li><li>Google Sheets API</li><li>Google Drive API</li><li>Scripting</li>
                   <li>AutoCAD</li><li>Civil 3D</li><li>Figma</li>
@@ -819,12 +884,17 @@
       <section class="page-section education-section" id="education" aria-labelledby="education-title">
         <figure class="education-panorama">
           <img
-            src="assets/optimized/polimi-campus.webp"
-            width="1800"
-            height="1183"
+            src="assets/editorial/education-polimi-1920.webp"
+            srcset="
+              assets/editorial/education-polimi-960.webp   960w,
+              assets/editorial/education-polimi-1920.webp 1920w
+            "
+            sizes="100vw"
+            width="1920"
+            height="1440"
             loading="lazy"
             decoding="async"
-            alt="The historic facade of Politecnico di Milano"
+            alt="Main Leonardo campus building of Politecnico di Milano, with people crossing the square"
             data-i18n-attr="alt:alt.polimiCampus"
           />
           <figcaption>
@@ -954,13 +1024,18 @@
       <section class="contact-section" id="contact" aria-labelledby="contact-title">
         <img
           class="contact-orbit"
-          src="assets/optimized/earth-night.webp"
-          width="1600"
-          height="1200"
+          src="assets/editorial/contact-black-marble-1920.webp"
+          srcset="
+            assets/editorial/contact-black-marble-960.webp   960w,
+            assets/editorial/contact-black-marble-1920.webp 1920w
+          "
+          sizes="100vw"
+          width="1920"
+          height="960"
           loading="lazy"
           decoding="async"
-          alt=""
-          aria-hidden="true"
+          alt="Global 2016 map of nighttime lights derived from Suomi NPP VIIRS observations"
+          data-i18n-attr="alt:alt.contactOrbit"
         />
         <div class="contact-inner shell">
           <div class="contact-copy">
@@ -1005,11 +1080,11 @@
             <a href="https://github.com/AmirDonyadide" target="_blank" rel="noopener noreferrer">
               <span>GitHub</span>
               <strong>AmirDonyadide</strong>
-              <small data-i18n="contact.githubMicro">Code & projects</small>
+              <small data-i18n="contact.githubMicro">Code &amp; projects</small>
             </a>
             <a href="tel:+4917624770243">
               <span data-i18n="contact.phoneLabel">Phone</span>
-              <strong>+49 176 2477 0243</strong>
+              <strong>+49&nbsp;176&nbsp;2477&nbsp;0243</strong>
               <small data-i18n="contact.phoneMicro">Available weekdays</small>
             </a>
           </address>
@@ -1028,7 +1103,10 @@
           <span class="brand-name">Amirhossein Donyadidegan</span>
           <span class="brand-role" data-i18n="footer.role">Geoinformatics · GIS · Data · Software</span>
         </a>
-        <p>&copy; <span id="year">2026</span> Amirhossein Donyadidegan</p>
+        <div class="footer-meta">
+          <p>&copy; <span id="year">2026</span> Amirhossein Donyadidegan</p>
+          <a href="image-credits.html" data-i18n="footer.imageCredits">Image credits &amp; licenses</a>
+        </div>
       </div>
     </footer>
 
