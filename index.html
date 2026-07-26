@@ -28,7 +28,7 @@
       content="Landsat view of the Pearl River Delta's dense urban fabric"
     />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="theme-color" content="#e9efeb" />
+    <meta name="theme-color" content="#edf2ef" />
     <link rel="canonical" href="https://amirdonyadide.com/" />
     <link
       rel="icon"
@@ -52,19 +52,21 @@
       rel="preload"
       href="assets/editorial/hero-ground-720.webp"
       imagesrcset="assets/editorial/hero-ground-720.webp 720w, assets/editorial/hero-ground-1600.webp 1600w"
-      imagesizes="(max-width: 720px) calc(100vw - 2.5rem), (max-width: 1020px) calc(100vw - 5rem), 46vw"
+      imagesizes="(max-width: 720px) calc(100vw - 2rem), (max-width: 1160px) 44vw, 360px"
       as="image"
       type="image/webp"
       fetchpriority="high"
+      media="(min-width: 721px)"
     />
     <link
       rel="preload"
       href="assets/editorial/hero-orbit-720.webp"
       imagesrcset="assets/editorial/hero-orbit-720.webp 720w, assets/editorial/hero-orbit-1600.webp 1600w"
-      imagesizes="(max-width: 720px) calc(100vw - 2.5rem), (max-width: 1020px) calc(100vw - 5rem), 46vw"
+      imagesizes="(max-width: 720px) calc(100vw - 2rem), (max-width: 1160px) 44vw, 360px"
       as="image"
       type="image/webp"
       fetchpriority="high"
+      media="(min-width: 721px)"
     />
     <title>Amirhossein Donyadidegan | Geoinformatics, GIS, Data &amp; Software</title>
     <script>
@@ -87,12 +89,7 @@
 
     <header class="site-header">
       <nav class="nav shell" aria-label="Primary navigation" data-i18n-attr="aria-label:nav.aria">
-        <a
-          class="brand"
-          href="#about"
-          aria-label="Amirhossein Donyadidegan home"
-          data-i18n-attr="aria-label:brand.homeAria"
-        >
+        <a class="brand" href="#about">
           <span class="brand-name">Amirhossein Donyadidegan</span>
           <span class="brand-role" data-i18n="brand.role">Geoinformatics engineer</span>
         </a>
@@ -177,7 +174,7 @@
                     height="1067"
                     alt="External staircases and glass facades at Politecnico di Milano's Bovisa campus in autumn"
                     data-i18n-attr="alt:alt.heroGround"
-                    fetchpriority="high"
+                    loading="lazy"
                     decoding="async"
                   />
                 </div>
@@ -193,7 +190,7 @@
                     height="2080"
                     alt="Terra MODIS view of the snow-covered Alps and northern Italy, including Lombardy and the Adriatic Sea"
                     data-i18n-attr="alt:alt.heroOrbit"
-                    fetchpriority="high"
+                    loading="lazy"
                     decoding="async"
                   />
                 </div>
@@ -634,14 +631,14 @@
                 "
                 sizes="(max-width: 720px) calc(100vw - 3rem), (max-width: 1120px) 50vw, 30vw"
                 width="1400"
-                height="788"
+                height="934"
                 loading="lazy"
                 decoding="async"
-                alt="Visual Studio Code workspace with source files, code editor, and terminal, used as visual context for web application development"
+                alt="Person practicing yoga beside a lake at sunset, used as domain context for the PoliYoga web application"
                 data-i18n-attr="alt:alt.poliyoga"
               />
               <figcaption class="media-context">
-                <span data-i18n="projects.context">Visual context</span><strong>Software · Web application</strong>
+                <span data-i18n="projects.domainContext">Domain context</span><strong>Yoga · Responsive platform</strong>
               </figcaption>
             </figure>
             <div>
@@ -1170,12 +1167,7 @@
 
     <footer class="site-footer">
       <div class="footer-inner shell">
-        <a
-          class="brand footer-brand"
-          href="#about"
-          aria-label="Amirhossein Donyadidegan home"
-          data-i18n-attr="aria-label:brand.homeAria"
-        >
+        <a class="brand footer-brand" href="#about">
           <span class="brand-name">Amirhossein Donyadidegan</span>
           <span class="brand-role" data-i18n="footer.role">Geoinformatics · GIS · Data · Software</span>
         </a>

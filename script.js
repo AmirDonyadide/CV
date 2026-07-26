@@ -204,6 +204,7 @@ const translations = {
       "projects.figureB": "Quellbilder · Holuhraun, Beaufortsee und Totes Meer · Landsat",
       "projects.figureC": "Analysekontext · Bodenbewegung auf Palos Verdes · UAVSAR",
       "projects.context": "Visueller Kontext",
+      "projects.domainContext": "Domänenkontext",
       "projects.nl2mapDesc": "Machine-Learning-Workflow, der Nutzerprompts mit kartografischen Generalisierungsoperationen verbindet.",
       "projects.layerDesc": "Python-Tool für kontrollierte Rastermodifikation mit Masken, Validierung und wiederverwendbarer Logik.",
       "projects.landsatDesc": "Wiederverwendbares Python-Toolkit für Metadaten, Bandoperationen, Reprojektion und Index-Workflows.",
@@ -299,7 +300,7 @@ const translations = {
       "alt.se4g":
         "Globale NASA-Karte der Oberflächentemperaturabweichungen in Robinson-Projektion mit warmen und kühlen Regionen in Rot und Blau",
       "alt.poliyoga":
-        "Visual-Studio-Code-Arbeitsbereich mit Quelldateien, Code-Editor und Terminal als visueller Kontext für die Webanwendungsentwicklung",
+        "Person bei einer Yoga-Übung an einem See bei Sonnenuntergang als Domänenkontext für die PoliYoga-Webanwendung",
       "alt.polimiCampus":
         "Hauptgebäude des Leonardo-Campus des Politecnico di Milano mit Menschen auf dem Platz",
       "alt.contactOrbit":
@@ -472,6 +473,7 @@ const translations = {
       "projects.figureB": "Immagini sorgente · Holuhraun, Mare di Beaufort e Mar Morto · Landsat",
       "projects.figureC": "Contesto di analisi · Movimento del terreno a Palos Verdes · UAVSAR",
       "projects.context": "Contesto visivo",
+      "projects.domainContext": "Contesto di dominio",
       "projects.nl2mapDesc": "Workflow di machine learning che collega prompt utente a operazioni di generalizzazione cartografica.",
       "projects.layerDesc": "Tool Python per modifica raster controllata con maschere, validazione e logica riutilizzabile.",
       "projects.landsatDesc": "Toolkit Python riutilizzabile per metadati, operazioni sulle bande, riproiezione e indici.",
@@ -567,7 +569,7 @@ const translations = {
       "alt.se4g":
         "Mappa NASA delle anomalie globali della temperatura superficiale in proiezione Robinson, con regioni calde e fredde in rosso e blu",
       "alt.poliyoga":
-        "Area di lavoro Visual Studio Code con file sorgente, editor e terminale, usata come contesto visivo per lo sviluppo di applicazioni web",
+        "Persona che pratica yoga accanto a un lago al tramonto, usata come contesto di dominio per l'applicazione web PoliYoga",
       "alt.polimiCampus":
         "Edificio principale del campus Leonardo del Politecnico di Milano con persone che attraversano la piazza",
       "alt.contactOrbit":
@@ -647,7 +649,7 @@ const updateThemeControl = (theme) => {
   themeToggle.setAttribute("title", label);
 
   if (themeColorMeta) {
-    themeColorMeta.setAttribute("content", isDark ? "#030708" : "#e9efeb");
+    themeColorMeta.setAttribute("content", isDark ? "#071011" : "#edf2ef");
   }
 };
 
@@ -698,11 +700,26 @@ const setPageInert = (isInert) => {
   });
 };
 
-const closeMobileNav = () => {
+const getNavFocusable = () => {
+  if (!navDrawer || !navToggle) {
+    return [];
+  }
+
+  return [
+    navToggle,
+    ...navDrawer.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'),
+  ].filter((element) => element.getClientRects().length > 0);
+};
+
+const closeMobileNav = (restoreFocus = false) => {
   navDrawer?.classList.remove("is-open");
   document.body.classList.remove("nav-open");
   navToggle?.setAttribute("aria-expanded", "false");
   setPageInert(false);
+
+  if (restoreFocus) {
+    navToggle?.focus();
+  }
 };
 
 const reducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -723,21 +740,48 @@ document.querySelectorAll('a[href^="#"]:not(.skip-link)').forEach((link) => {
 
 if (navToggle && navDrawer) {
   navToggle.addEventListener("click", () => {
-    const isOpen = navDrawer.classList.toggle("is-open");
-    document.body.classList.toggle("nav-open", isOpen);
-    navToggle.setAttribute("aria-expanded", String(isOpen));
-    setPageInert(isOpen);
+    const willOpen = !navDrawer.classList.contains("is-open");
 
-    if (isOpen) {
-      window.requestAnimationFrame(() => navLinks[0]?.focus());
+    if (!willOpen) {
+      closeMobileNav();
+      return;
     }
+
+    navDrawer.classList.add("is-open");
+    document.body.classList.add("nav-open");
+    navToggle.setAttribute("aria-expanded", "true");
+    setPageInert(true);
+    window.requestAnimationFrame(() => navLinks[0]?.focus());
   });
 }
 
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && navToggle?.getAttribute("aria-expanded") === "true") {
-    closeMobileNav();
-    navToggle.focus();
+  const navIsOpen = navToggle?.getAttribute("aria-expanded") === "true";
+  if (!navIsOpen) {
+    return;
+  }
+
+  if (event.key === "Escape") {
+    closeMobileNav(true);
+    return;
+  }
+
+  if (event.key === "Tab") {
+    const focusable = getNavFocusable();
+    if (!focusable.length) {
+      return;
+    }
+
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
   }
 });
 

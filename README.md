@@ -69,3 +69,4 @@ URL shown in the repository settings.
   logo files.
 - Project thumbnails: locally composed from available thesis outputs and local
   geospatial imagery to support recruiter scanning.
+- PoliYoga domain photograph: Salambayoga via Wikimedia Commons, CC0 1.0.
