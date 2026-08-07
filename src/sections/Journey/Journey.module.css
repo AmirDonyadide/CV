@@ -1,0 +1,411 @@
+.section {
+  position: relative;
+  overflow: clip;
+  min-height: 100svh;
+  background:
+    radial-gradient(circle at 44% 42%, rgba(69, 191, 230, 0.035), transparent 27%),
+    radial-gradient(circle at 79% 66%, rgba(36, 49, 56, 0.2), transparent 29%),
+    var(--graphite);
+}
+
+.section::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(122, 139, 149, 0.032) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(122, 139, 149, 0.032) 1px, transparent 1px);
+  background-size: 5rem 5rem;
+  mask-image: linear-gradient(to bottom, black, black 82%, transparent);
+  content: "";
+}
+
+.sectionHeader {
+  position: relative;
+  z-index: 2;
+  padding: clamp(5rem, 9vh, 6rem) clamp(2rem, 4.7vw, 4.75rem) 1rem;
+}
+
+.entry time,
+.thesis > span {
+  font-family: ui-monospace, "SFMono-Regular", "Cascadia Mono", monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sectionHeader h2 {
+  margin: 0;
+  font-family: "Geologica", "Helvetica Neue", sans-serif;
+  font-size: clamp(3.5rem, 4.3vw, 4.5rem);
+  font-weight: 410;
+  line-height: 0.9;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+}
+
+.supporting {
+  max-width: 45rem;
+  margin: 1.6rem 0 0;
+  color: #a7aeb2;
+  font-size: clamp(1.1rem, 1.45vw, 1.5rem);
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+}
+
+.routeStage {
+  position: relative;
+  z-index: 1;
+  height: clamp(38rem, 43vw, 42rem);
+  min-height: 0;
+  margin: 0 clamp(2rem, 4.7vw, 4.75rem);
+}
+
+.routeGraphic {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.routeGuide,
+.routeProgress,
+.geographicArc,
+.originDrop,
+.exchangeTick,
+.routeContinuation path {
+  fill: none;
+  vector-effect: non-scaling-stroke;
+}
+
+.routeGuide {
+  stroke: #2c373d;
+  stroke-width: 1.15;
+}
+
+.routeProgress {
+  stroke: url(#journey-route-gradient);
+  stroke-width: 1.35;
+}
+
+.routeProgress[data-journey-segment="branch"] {
+  stroke: #8e999e;
+}
+
+.geographicArc {
+  stroke: #354047;
+  stroke-width: 1;
+  stroke-dasharray: 8 10;
+  opacity: 0.72;
+}
+
+.originDrop,
+.exchangeTick {
+  stroke: #647076;
+  stroke-width: 1;
+}
+
+.nodeHalo {
+  fill: var(--graphite);
+  stroke: #7a858b;
+  stroke-width: 1.1;
+  vector-effect: non-scaling-stroke;
+}
+
+.nodeCore {
+  fill: #c2c9cc;
+}
+
+.routeNode[data-primary="true"] .nodeHalo {
+  stroke: var(--accent);
+}
+
+.routeNode[data-primary="true"] .nodeCore {
+  fill: var(--accent);
+}
+
+.routeContinuation path {
+  stroke: #3f4a50;
+  stroke-width: 1;
+}
+
+.routeContinuation circle {
+  fill: var(--graphite);
+  stroke: #59646a;
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.entry {
+  position: absolute;
+  z-index: 2;
+}
+
+.entry[data-location="tehran"] {
+  top: 25%;
+  left: 4.4%;
+  width: 30%;
+}
+
+.entry[data-location="milan"] {
+  top: 25%;
+  left: 44.4%;
+  width: 32%;
+}
+
+.entry[data-location="karlsruhe"] {
+  top: 35%;
+  left: 82%;
+  width: 17%;
+}
+
+.entry[data-location="bonn"] {
+  top: 75.5%;
+  left: 82%;
+  width: 17%;
+}
+
+.city {
+  margin: 0 0 1.2rem;
+  color: var(--accent);
+  font-family: "Geologica", "Helvetica Neue", sans-serif;
+  font-size: clamp(1.5rem, 2vw, 2.25rem);
+  font-weight: 450;
+  letter-spacing: 0.035em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.entry time {
+  display: block;
+  margin: 0 0 1.2rem;
+  color: #899297;
+  font-size: clamp(0.67rem, 0.78vw, 0.8rem);
+}
+
+.degreeEntry h3,
+.exchangeEntry h3 {
+  margin: 0;
+  font-family: "Geologica", "Helvetica Neue", sans-serif;
+  font-weight: 410;
+}
+
+.degreeEntry h3 {
+  max-width: 20ch;
+  font-size: clamp(1.35rem, 1.72vw, 1.8rem);
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+}
+
+.institution {
+  margin: 0.8rem 0 0;
+  color: #aeb5b9;
+  font-size: clamp(0.92rem, 1.05vw, 1.08rem);
+}
+
+.degreeFacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 1.1rem;
+  margin: 1.15rem 0 0;
+  color: var(--accent);
+  font-family: ui-monospace, "SFMono-Regular", "Cascadia Mono", monospace;
+  font-size: 0.76rem;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+}
+
+.degreeFacts span + span {
+  position: relative;
+  padding-left: 1.1rem;
+}
+
+.degreeFacts span + span::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 0.25rem;
+  height: 0.25rem;
+  border-radius: 50%;
+  background: #5d6970;
+  content: "";
+}
+
+.description {
+  max-width: 34rem;
+  margin: 1.2rem 0 0;
+  color: #8f999e;
+  font-size: clamp(0.82rem, 0.94vw, 0.96rem);
+  line-height: 1.55;
+}
+
+.thesis {
+  display: grid;
+  gap: 0.5rem;
+  max-width: 26rem;
+  margin: 1.45rem 0 0;
+}
+
+.thesis > span {
+  color: #788289;
+  font-size: 0.65rem;
+}
+
+.thesis strong {
+  color: #d6dbdd;
+  font-size: clamp(0.9rem, 1.05vw, 1.08rem);
+  font-weight: 450;
+  line-height: 1.4;
+}
+
+.entry[data-location="milan"] .thesis {
+  max-width: 22rem;
+}
+
+.exchangeEntry .city {
+  margin-bottom: 0.85rem;
+  font-size: clamp(1.2rem, 1.55vw, 1.65rem);
+}
+
+.exchangeEntry h3 {
+  color: #d5dadd;
+  font-size: clamp(0.94rem, 1.08vw, 1.1rem);
+  line-height: 1.35;
+}
+
+.exchangeEntry .description {
+  margin-top: 0.7rem;
+}
+
+@media (max-width: 1199px) {
+  .entry[data-location="tehran"] {
+    width: 33%;
+  }
+
+  .entry[data-location="milan"] {
+    left: 43%;
+    width: 34%;
+  }
+
+  .entry[data-location="karlsruhe"],
+  .entry[data-location="bonn"] {
+    left: 80%;
+    width: 19%;
+  }
+
+  .description {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 899px) {
+  .section {
+    min-height: auto;
+  }
+
+  .sectionHeader {
+    padding: 7rem 1rem 5.5rem;
+  }
+
+  .sectionHeader h2 {
+    font-size: clamp(3.2rem, 15vw, 5.6rem);
+    letter-spacing: 0.025em;
+  }
+
+  .routeStage {
+    height: auto;
+    min-height: auto;
+    margin: 0 1rem;
+    padding: 0 0 2rem 1.85rem;
+  }
+
+  .routeStage::before {
+    position: absolute;
+    top: 0.7rem;
+    bottom: 4rem;
+    left: 0.3rem;
+    width: 1px;
+    background: linear-gradient(var(--accent), #69747a 56%, #2f393f);
+    content: "";
+  }
+
+  .routeGraphic {
+    display: none;
+  }
+
+  .entry,
+  .entry[data-location="tehran"],
+  .entry[data-location="milan"],
+  .entry[data-location="karlsruhe"],
+  .entry[data-location="bonn"] {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: auto;
+    padding: 0 0 6rem;
+  }
+
+  .entry::before {
+    position: absolute;
+    top: 0.2rem;
+    left: -1.88rem;
+    width: 0.7rem;
+    height: 0.7rem;
+    border: 1px solid #6a767c;
+    border-radius: 50%;
+    background: var(--graphite);
+    content: "";
+  }
+
+  .degreeEntry::before {
+    border-color: var(--accent);
+    background: var(--accent);
+    box-shadow: 0 0 0 0.35rem rgba(69, 191, 230, 0.08);
+  }
+
+  .city {
+    margin-bottom: 0.9rem;
+    font-size: clamp(1.5rem, 8vw, 2.25rem);
+  }
+
+  .entry time {
+    margin-bottom: 1rem;
+  }
+
+  .degreeEntry h3 {
+    font-size: clamp(1.7rem, 8vw, 2.6rem);
+  }
+
+  .institution {
+    font-size: 1rem;
+  }
+
+  .description,
+  .thesis strong {
+    font-size: 0.91rem;
+  }
+
+  .exchangeEntry {
+    padding-left: 0.25rem !important;
+  }
+
+  .exchangeEntry .city {
+    font-size: 1.45rem;
+  }
+
+  .exchangeEntry h3 {
+    font-size: 1.05rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .entry,
+  .routeProgress,
+  .routeNode {
+    opacity: 1 !important;
+  }
+
+  .entry {
+    transform: none !important;
+  }
+}

@@ -1,0 +1,342 @@
+.section {
+  position: relative;
+  min-height: 138svh;
+  border-top: 1px solid var(--hairline);
+  background:
+    radial-gradient(circle at 51% 42%, rgba(27, 34, 39, 0.22), transparent 40%),
+    var(--graphite);
+}
+
+.stickyFrame {
+  position: sticky;
+  top: 0;
+  display: grid;
+  min-height: 100svh;
+  align-items: start;
+  overflow: clip;
+}
+
+.inner {
+  width: 100%;
+  padding: clamp(7.5rem, 12.5vh, 8.25rem) clamp(2rem, 4.7vw, 4.75rem) clamp(3.5rem, 6vh, 5.5rem);
+}
+
+.header {
+  max-width: 60rem;
+}
+
+.header h2 {
+  margin: 0;
+  font-family: "Geologica", "Helvetica Neue", sans-serif;
+  font-size: clamp(3.6rem, 4.3vw, 4.8rem);
+  font-weight: 420;
+  line-height: 0.94;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.header p {
+  margin: clamp(1rem, 2vh, 1.5rem) 0 0;
+  color: #a7aeb2;
+  font-size: clamp(1.1rem, 1.45vw, 1.55rem);
+  letter-spacing: -0.02em;
+}
+
+.pipeline {
+  margin-top: clamp(2.7rem, 5vh, 4.7rem);
+  margin-right: -1.5rem;
+  margin-left: -1.5rem;
+}
+
+.desktopVisual {
+  width: 100%;
+  max-height: 32rem;
+}
+
+.desktopVisual svg,
+.mobileVisual svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.desktopVisual path,
+.desktopVisual rect,
+.desktopVisual circle,
+.mobileVisual path,
+.mobileVisual rect,
+.mobileVisual circle {
+  fill: none;
+  stroke: #899299;
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.spatialLayerTop,
+.spatialLayerBottom {
+  opacity: 0.68;
+}
+
+.spatialLayerTop path:not(:first-child) {
+  stroke: #535c62;
+  stroke-width: 0.7;
+}
+
+.cellFill {
+  fill: rgba(221, 225, 227, 0.48) !important;
+  stroke: none !important;
+}
+
+.accentPath,
+.accentNode {
+  stroke: var(--accent) !important;
+}
+
+.accentNode {
+  fill: var(--graphite) !important;
+  stroke-width: 1.8 !important;
+}
+
+.accentFill {
+  fill: var(--accent) !important;
+  stroke: var(--accent) !important;
+}
+
+.accentSelection {
+  fill: rgba(69, 191, 230, 0.2) !important;
+  stroke: var(--accent) !important;
+}
+
+.connector {
+  color: var(--accent);
+}
+
+.connector path,
+.systemArrow {
+  stroke: var(--accent) !important;
+}
+
+.dataFrame,
+.systemOuter {
+  stroke: #b5bcc0 !important;
+  stroke-width: 1.2 !important;
+}
+
+.streams path:nth-child(odd) {
+  stroke: #667078;
+}
+
+.modelOrbit {
+  stroke: #4f5960 !important;
+  stroke-dasharray: 4 5;
+}
+
+.capabilityRail {
+  position: relative;
+  display: grid;
+  grid-template-columns: 24% 44% 32%;
+  gap: 1rem;
+  margin: 0.65rem 0 0;
+  padding: 2rem 0 0;
+  list-style: none;
+}
+
+.capabilityRail::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 1px;
+  background: #4a5359;
+  content: "";
+}
+
+.capabilityRail li {
+  position: relative;
+  text-align: center;
+}
+
+.railDot {
+  position: absolute;
+  top: -2.35rem;
+  left: 50%;
+  width: 0.62rem;
+  height: 0.62rem;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--graphite);
+  transform: translateX(-50%);
+}
+
+.capabilityRail h3 {
+  margin: 0;
+  color: var(--accent);
+  font-family: ui-monospace, "SFMono-Regular", "Cascadia Mono", monospace;
+  font-size: clamp(0.9rem, 1.25vw, 1.25rem);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.capabilityRail p {
+  margin: 0.8rem 0 0;
+  color: #9ba3a8;
+  font-size: clamp(0.92rem, 1.05vw, 1.08rem);
+}
+
+.mobileVisual {
+  display: none;
+}
+
+.projectsBoundary {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  background: var(--hairline);
+}
+
+@media (max-width: 1199px) {
+  .section {
+    min-height: 125svh;
+  }
+
+  .inner {
+    padding-right: 2rem;
+    padding-left: 2rem;
+  }
+
+  .pipeline {
+    margin-top: 2.5rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .section {
+    min-height: auto;
+  }
+
+  .stickyFrame {
+    position: relative;
+    min-height: auto;
+    overflow: hidden;
+  }
+
+  .inner {
+    padding: 6rem 1rem 7rem;
+  }
+
+  .header h2 {
+    max-width: 9ch;
+    font-size: clamp(2.65rem, 13vw, 3.4rem);
+    line-height: 0.96;
+    letter-spacing: 0.07em;
+  }
+
+  .header p {
+    max-width: 31rem;
+    margin-top: 1.15rem;
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  .pipeline {
+    margin-top: 3.8rem;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .desktopVisual {
+    display: none;
+  }
+
+  .mobileVisual {
+    display: grid;
+    gap: 0;
+  }
+
+  .mobileStage {
+    max-width: 23rem;
+    margin: 0 auto;
+  }
+
+  .mobileConnector {
+    display: grid;
+    height: 3.5rem;
+    place-items: center;
+  }
+
+  .mobileConnector span {
+    position: relative;
+    width: 1px;
+    height: 2.8rem;
+    background: var(--accent);
+  }
+
+  .mobileConnector span::after {
+    position: absolute;
+    bottom: -1px;
+    left: 50%;
+    width: 0.45rem;
+    height: 0.45rem;
+    border-right: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    content: "";
+    transform: translateX(-50%) rotate(45deg);
+  }
+
+  .capabilityRail {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin-top: 3rem;
+    padding: 0 0 0 1.5rem;
+  }
+
+  .capabilityRail::before {
+    top: 0.4rem;
+    right: auto;
+    bottom: 0.4rem;
+    left: 0.18rem;
+    width: 1px;
+    height: auto;
+  }
+
+  .capabilityRail li {
+    min-height: 8rem;
+    text-align: left;
+  }
+
+  .capabilityRail li:last-child {
+    min-height: 0;
+  }
+
+  .railDot {
+    top: 0.35rem;
+    left: -1.31rem;
+    width: 0.52rem;
+    height: 0.52rem;
+    transform: none;
+  }
+
+  .capabilityRail h3 {
+    font-size: 0.9rem;
+  }
+
+  .capabilityRail p {
+    margin-top: 0.55rem;
+    font-size: 0.92rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section {
+    min-height: auto;
+  }
+
+  .stickyFrame {
+    position: relative;
+  }
+}

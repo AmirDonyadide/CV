@@ -43,3 +43,8 @@ __pycache__/
 # Coverage
 coverage/
 .nyc_output/
+
+# Browser and visual QA artifacts
+output/
+playwright-report/
+test-results/

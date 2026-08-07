@@ -1,0 +1,133 @@
+import type { JourneyCopyByLocale } from "./journey.types";
+
+export const journeyCopy: JourneyCopyByLocale = {
+  en: {
+    heading: "Journey",
+    supporting: "Surveying foundations to geoinformatics specialization.",
+    routeLabel: "Academic route from Tehran to Milan, with exchange study in Karlsruhe and Bonn",
+    thesisLabel: "Thesis",
+    degrees: [
+      {
+        id: "tehran",
+        city: "Tehran",
+        date: "September 2018 – July 2022",
+        title: "BSc Surveying Engineering",
+        institution: "University of Tehran, Iran",
+        grade: "Grade 16.5 / 20",
+        thesis: "Application of GIS and Big Data in Smart Cities",
+      },
+      {
+        id: "milan",
+        city: "Milan",
+        date: "September 2023 – March 2026",
+        title: "MSc Geoinformatics Engineering",
+        institution: "Politecnico di Milano, Italy",
+        grade: "Grade 102 / 110",
+        status: "Completed",
+        thesis: "Inferring Map Generalization Operations from User Prompts",
+      },
+    ],
+    exchanges: [
+      {
+        id: "karlsruhe",
+        city: "Karlsruhe",
+        date: "April 2025 – September 2025",
+        institution: "Karlsruhe Institute of Technology",
+        description: "Erasmus+ exchange for remote sensing and geoinformation courses.",
+      },
+      {
+        id: "bonn",
+        city: "Bonn",
+        date: "October 2025 – March 2026",
+        institution: "University of Bonn",
+        description: "Erasmus+ exchange for the thesis in geodesy.",
+      },
+    ],
+  },
+  de: {
+    heading: "Weg",
+    supporting: "Von Vermessungsgrundlagen zur Geoinformatik-Spezialisierung.",
+    routeLabel: "Akademischer Weg von Teheran nach Mailand mit Austauschstudium in Karlsruhe und Bonn",
+    thesisLabel: "Thesis",
+    degrees: [
+      {
+        id: "tehran",
+        city: "Teheran",
+        date: "September 2018 – Juli 2022",
+        title: "BSc Surveying Engineering",
+        institution: "Universität Teheran, Iran",
+        grade: "Note 16,5 / 20",
+        thesis: "Application of GIS and Big Data in Smart Cities",
+      },
+      {
+        id: "milan",
+        city: "Mailand",
+        date: "September 2023 – März 2026",
+        title: "MSc Geoinformatics Engineering",
+        institution: "Politecnico di Milano, Italien",
+        grade: "Note 102 / 110",
+        status: "Abgeschlossen",
+        thesis: "Inferring Map Generalization Operations from User Prompts",
+      },
+    ],
+    exchanges: [
+      {
+        id: "karlsruhe",
+        city: "Karlsruhe",
+        date: "April 2025 – September 2025",
+        institution: "Karlsruher Institut für Technologie",
+        description: "Erasmus+ Austausch für Kurse in Fernerkundung und Geoinformation.",
+      },
+      {
+        id: "bonn",
+        city: "Bonn",
+        date: "Oktober 2025 – März 2026",
+        institution: "Universität Bonn",
+        description: "Erasmus+ Austausch für die Thesis in Geodäsie.",
+      },
+    ],
+  },
+  it: {
+    heading: "Percorso",
+    supporting: "Dalle basi del rilevamento alla specializzazione in geoinformatica.",
+    routeLabel: "Percorso accademico da Teheran a Milano con scambi a Karlsruhe e Bonn",
+    thesisLabel: "Tesi",
+    degrees: [
+      {
+        id: "tehran",
+        city: "Teheran",
+        date: "Settembre 2018 – Luglio 2022",
+        title: "BSc Surveying Engineering",
+        institution: "Università di Teheran, Iran",
+        grade: "Voto 16,5 / 20",
+        thesis: "Application of GIS and Big Data in Smart Cities",
+      },
+      {
+        id: "milan",
+        city: "Milano",
+        date: "Settembre 2023 – Marzo 2026",
+        title: "MSc Geoinformatics Engineering",
+        institution: "Politecnico di Milano, Italia",
+        grade: "Voto 102 / 110",
+        status: "Completato",
+        thesis: "Inferring Map Generalization Operations from User Prompts",
+      },
+    ],
+    exchanges: [
+      {
+        id: "karlsruhe",
+        city: "Karlsruhe",
+        date: "Aprile 2025 – Settembre 2025",
+        institution: "Karlsruhe Institute of Technology",
+        description: "Scambio Erasmus+ per corsi di telerilevamento e geoinformazione.",
+      },
+      {
+        id: "bonn",
+        city: "Bonn",
+        date: "Ottobre 2025 – Marzo 2026",
+        institution: "Università di Bonn",
+        description: "Scambio Erasmus+ per la tesi in geodesia.",
+      },
+    ],
+  },
+};

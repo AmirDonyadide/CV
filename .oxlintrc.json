@@ -1,0 +1,33 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["eslint", "typescript", "oxc", "unicorn", "react", "import", "jsx-a11y"],
+  "env": {
+    "browser": true,
+    "es2022": true
+  },
+  "categories": {
+    "correctness": "error",
+    "suspicious": "error",
+    "perf": "error"
+  },
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "react/rules-of-hooks": "error",
+    "react/exhaustive-deps": "error",
+    "jsx-a11y/prefer-tag-over-role": "off",
+    "unicorn/no-array-reverse": "off",
+    "oxc/no-map-spread": "off",
+    "no-console": "error",
+    "no-debugger": "error"
+  },
+  "overrides": [
+    {
+      "files": ["vite.config.ts"],
+      "env": {
+        "browser": false,
+        "node": true,
+        "es2022": true
+      }
+    }
+  ]
+}
