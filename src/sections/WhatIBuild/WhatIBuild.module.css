@@ -54,7 +54,7 @@
 }
 
 .desktopVisual svg,
-.mobileVisual svg {
+.responsiveArtwork svg {
   display: block;
   width: 100%;
   height: auto;
@@ -64,9 +64,9 @@
 .desktopVisual path,
 .desktopVisual rect,
 .desktopVisual circle,
-.mobileVisual path,
-.mobileVisual rect,
-.mobileVisual circle {
+.responsiveArtwork path,
+.responsiveArtwork rect,
+.responsiveArtwork circle {
   fill: none;
   stroke: #899299;
   stroke-width: 1;
@@ -172,7 +172,8 @@
   transform: translateX(-50%);
 }
 
-.capabilityRail h3 {
+.capabilityRail h3,
+.responsiveCapability h3 {
   margin: 0;
   color: var(--accent);
   font-family: ui-monospace, "SFMono-Regular", "Cascadia Mono", monospace;
@@ -182,13 +183,14 @@
   text-transform: uppercase;
 }
 
-.capabilityRail p {
+.capabilityRail p,
+.responsiveCapability p {
   margin: 0.8rem 0 0;
   color: #9ba3a8;
   font-size: clamp(0.92rem, 1.05vw, 1.08rem);
 }
 
-.mobileVisual {
+.responsiveStages {
   display: none;
 }
 
@@ -216,7 +218,22 @@
   }
 }
 
-@media (max-width: 767px) {
+@media (min-width: 1100px) and (max-height: 720px) {
+  .inner {
+    padding-top: clamp(1.75rem, 4vh, 2.25rem);
+    padding-bottom: 1.5rem;
+  }
+
+  .header p {
+    margin-top: 0.75rem;
+  }
+
+  .pipeline {
+    margin-top: 1.25rem;
+  }
+}
+
+@media (max-width: 1099px) {
   .section {
     min-height: auto;
   }
@@ -228,7 +245,93 @@
   }
 
   .inner {
-    padding: 6rem 1rem 7rem;
+    padding: clamp(4.75rem, 8vw, 6rem) clamp(1.5rem, 4vw, 2.5rem) clamp(5.5rem, 9vw, 7rem);
+  }
+
+  .pipeline {
+    margin: clamp(2.75rem, 5vw, 3.5rem) 0 0;
+  }
+
+  .desktopVisual,
+  .desktopRail {
+    display: none;
+  }
+
+  .responsiveStages {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .responsiveStage {
+    display: grid;
+    justify-items: center;
+    min-width: 0;
+  }
+
+  .responsiveArtwork {
+    width: clamp(20rem, 52vw, 31rem);
+    max-width: 100%;
+  }
+
+  .responsiveCapability {
+    position: relative;
+    width: min(100%, 28rem);
+    margin-top: clamp(0.9rem, 2vw, 1.25rem);
+    padding-left: 1.35rem;
+    text-align: left;
+  }
+
+  .responsiveDot {
+    position: absolute;
+    top: 0.34rem;
+    left: 0;
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 4px var(--graphite);
+  }
+
+  .responsiveCapability h3 {
+    font-size: clamp(0.92rem, 1.9vw, 1.05rem);
+  }
+
+  .responsiveCapability p {
+    margin-top: 0.5rem;
+    font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+  }
+
+  .responsiveConnector {
+    display: grid;
+    height: clamp(4.5rem, 9vw, 5.5rem);
+    place-items: center;
+  }
+
+  .responsiveConnector span {
+    position: relative;
+    width: 1px;
+    height: clamp(3.25rem, 6.5vw, 4.1rem);
+    background: var(--accent);
+  }
+
+  .responsiveConnector span::after {
+    position: absolute;
+    bottom: -1px;
+    left: 50%;
+    width: 0.45rem;
+    height: 0.45rem;
+    border-right: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    content: "";
+    transform: translateX(-50%) rotate(45deg);
+  }
+}
+
+@media (max-width: 699px) {
+  .inner {
+    padding: 5rem 1rem 6rem;
   }
 
   .header h2 {
@@ -246,91 +349,34 @@
   }
 
   .pipeline {
-    margin-top: 3.8rem;
-    margin-right: 0;
-    margin-left: 0;
-  }
-
-  .desktopVisual {
-    display: none;
-  }
-
-  .mobileVisual {
-    display: grid;
-    gap: 0;
-  }
-
-  .mobileStage {
-    max-width: 23rem;
-    margin: 0 auto;
-  }
-
-  .mobileConnector {
-    display: grid;
-    height: 3.5rem;
-    place-items: center;
-  }
-
-  .mobileConnector span {
-    position: relative;
-    width: 1px;
-    height: 2.8rem;
-    background: var(--accent);
-  }
-
-  .mobileConnector span::after {
-    position: absolute;
-    bottom: -1px;
-    left: 50%;
-    width: 0.45rem;
-    height: 0.45rem;
-    border-right: 1px solid var(--accent);
-    border-bottom: 1px solid var(--accent);
-    content: "";
-    transform: translateX(-50%) rotate(45deg);
-  }
-
-  .capabilityRail {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0;
     margin-top: 3rem;
-    padding: 0 0 0 1.5rem;
   }
 
-  .capabilityRail::before {
-    top: 0.4rem;
-    right: auto;
-    bottom: 0.4rem;
-    left: 0.18rem;
-    width: 1px;
-    height: auto;
+  .responsiveArtwork {
+    width: min(100%, 22rem);
   }
 
-  .capabilityRail li {
-    min-height: 8rem;
-    text-align: left;
+  .responsiveCapability {
+    width: min(calc(100% - 2rem), 20rem);
+    margin-top: 0.8rem;
+    padding-left: 1.25rem;
   }
 
-  .capabilityRail li:last-child {
-    min-height: 0;
-  }
-
-  .railDot {
-    top: 0.35rem;
-    left: -1.31rem;
-    width: 0.52rem;
-    height: 0.52rem;
-    transform: none;
-  }
-
-  .capabilityRail h3 {
+  .responsiveCapability h3 {
     font-size: 0.9rem;
   }
 
-  .capabilityRail p {
-    margin-top: 0.55rem;
+  .responsiveCapability p {
+    margin-top: 0.45rem;
     font-size: 0.92rem;
+  }
+
+  .responsiveConnector {
+    height: 4rem;
+  }
+
+  .responsiveConnector span {
+    height: 3rem;
   }
 }
 

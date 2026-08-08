@@ -35,14 +35,34 @@ export function useWhatIBuildTimeline({ sectionRef }: UseWhatIBuildTimelineOptio
       const systemArrow = select("[data-system-arrow]");
       const system = select("[data-build-system]");
       const systemControls = select("[data-system-control]");
-      const railItems = select("[data-build-rail-item]");
-      const railDots = select("[data-build-rail-dot]");
-      const mobileStages = select("[data-mobile-stage]");
+      const desktopRailItems = select("[data-build-desktop-rail-item]");
+      const desktopRailDots = select("[data-build-desktop-rail-dot]");
+      const responsiveStages = select("[data-build-responsive-stage]");
+      const responsiveVisuals = select("[data-build-responsive-visual]");
+      const responsiveCapabilities = select("[data-build-responsive-capability]");
 
       const showStatic = () => {
         section.dataset.motionMode = "static";
         gsap.set(
-          [header, spatialLayers, connector, data, dataRows, streams, model, modelEdges, modelNodes, systemArrow, system, systemControls, railItems, railDots, mobileStages].flat(),
+          [
+            header,
+            spatialLayers,
+            connector,
+            data,
+            dataRows,
+            streams,
+            model,
+            modelEdges,
+            modelNodes,
+            systemArrow,
+            system,
+            systemControls,
+            desktopRailItems,
+            desktopRailDots,
+            responsiveStages,
+            responsiveVisuals,
+            responsiveCapabilities,
+          ].flat(),
           { clearProps: "all" },
         );
       };
@@ -50,8 +70,9 @@ export function useWhatIBuildTimeline({ sectionRef }: UseWhatIBuildTimelineOptio
       media.add(
         {
           reduced: "(prefers-reduced-motion: reduce)",
-          desktop: "(min-width: 768px) and (prefers-reduced-motion: no-preference)",
-          mobile: "(max-width: 767px) and (prefers-reduced-motion: no-preference)",
+          desktop: "(min-width: 1100px) and (prefers-reduced-motion: no-preference)",
+          tablet: "(min-width: 700px) and (max-width: 1099px) and (prefers-reduced-motion: no-preference)",
+          mobile: "(max-width: 699px) and (prefers-reduced-motion: no-preference)",
         },
         (mediaContext) => {
           const conditions = mediaContext.conditions;
@@ -60,27 +81,31 @@ export function useWhatIBuildTimeline({ sectionRef }: UseWhatIBuildTimelineOptio
             return;
           }
 
-          if (conditions.mobile) {
-            section.dataset.motionMode = "mobile";
+          if (conditions.mobile || conditions.tablet) {
+            section.dataset.motionMode = conditions.tablet ? "tablet" : "mobile";
             gsap.set(header, { opacity: 0.55, y: 22 });
-            gsap.set(mobileStages, { opacity: 0.28, y: 26 });
-            gsap.set(railItems, { opacity: 0.42 });
+            gsap.set(responsiveStages, { y: 24 });
+            gsap.set(responsiveVisuals, { opacity: 0.22 });
+            gsap.set(responsiveCapabilities, { opacity: 0.52 });
 
-            const mobileTimeline = gsap.timeline({ defaults: { ease: "none" } });
-            mobileTimeline
+            const responsiveTimeline = gsap.timeline({ defaults: { ease: "none" } });
+            responsiveTimeline
               .to(header, { opacity: 1, y: 0, duration: 0.16 }, 0)
-              .to(mobileStages[0], { opacity: 1, y: 0, duration: 0.2 }, 0.08)
-              .to(railItems[0], { opacity: 1, duration: 0.16 }, 0.1)
-              .to(mobileStages[1], { opacity: 1, y: 0, duration: 0.22 }, 0.36)
-              .to(railItems[1], { opacity: 1, duration: 0.16 }, 0.4)
-              .to(mobileStages[2], { opacity: 1, y: 0, duration: 0.22 }, 0.68)
-              .to(railItems[2], { opacity: 1, duration: 0.16 }, 0.72);
+              .to(responsiveStages[0], { y: 0, duration: 0.18 }, 0.08)
+              .to(responsiveVisuals[0], { opacity: 1, duration: 0.2 }, 0.08)
+              .to(responsiveCapabilities[0], { opacity: 1, duration: 0.16 }, 0.1)
+              .to(responsiveStages[1], { y: 0, duration: 0.2 }, 0.36)
+              .to(responsiveVisuals[1], { opacity: 1, duration: 0.22 }, 0.36)
+              .to(responsiveCapabilities[1], { opacity: 1, duration: 0.16 }, 0.39)
+              .to(responsiveStages[2], { y: 0, duration: 0.2 }, 0.66)
+              .to(responsiveVisuals[2], { opacity: 1, duration: 0.22 }, 0.66)
+              .to(responsiveCapabilities[2], { opacity: 1, duration: 0.16 }, 0.69);
 
             const trigger = ScrollTrigger.create({
               trigger: section,
               start: "top 82%",
               end: "bottom bottom",
-              animation: mobileTimeline,
+              animation: responsiveTimeline,
               scrub: 0.35,
               refreshPriority: -1,
               invalidateOnRefresh: true,
@@ -90,7 +115,7 @@ export function useWhatIBuildTimeline({ sectionRef }: UseWhatIBuildTimelineOptio
             return () => {
               if (sectionTrigger === trigger) sectionTrigger = null;
               trigger.kill();
-              mobileTimeline.kill();
+              responsiveTimeline.kill();
             };
           }
 
@@ -109,19 +134,19 @@ export function useWhatIBuildTimeline({ sectionRef }: UseWhatIBuildTimelineOptio
           gsap.set(systemArrow, { opacity: 0.12 });
           gsap.set(system, { opacity: 0.12, x: 34 });
           gsap.set(systemControls, { opacity: 0.15 });
-          gsap.set(railItems, { opacity: 0.38 });
-          gsap.set(railDots, { scale: 0.65, transformOrigin: "center center" });
+          gsap.set(desktopRailItems, { opacity: 0.52 });
+          gsap.set(desktopRailDots, { scale: 0.68, transformOrigin: "center center" });
 
           const timeline = gsap.timeline({ defaults: { ease: "none" } });
           timeline
             .to(header, { opacity: 1, y: 0, duration: 0.15 }, 0)
             .to(spatialLayers, { opacity: 1, y: 0, duration: 0.2, stagger: 0.025 }, 0.04)
-            .to(railItems[0], { opacity: 1, duration: 0.12 }, 0.06)
-            .to(railDots[0], { scale: 1, duration: 0.12 }, 0.08)
+            .to(desktopRailItems[0], { opacity: 1, duration: 0.12 }, 0.06)
+            .to(desktopRailDots[0], { scale: 1, duration: 0.12 }, 0.08)
             .to(connector, { opacity: 1, duration: 0.12 }, 0.22)
             .to(data, { opacity: 1, x: 0, duration: 0.2 }, 0.25)
-            .to(railItems[1], { opacity: 1, duration: 0.14 }, 0.27)
-            .to(railDots[1], { scale: 1, duration: 0.14 }, 0.29)
+            .to(desktopRailItems[1], { opacity: 1, duration: 0.14 }, 0.27)
+            .to(desktopRailDots[1], { scale: 1, duration: 0.14 }, 0.29)
             .to(dataRows, { opacity: 1, x: 0, duration: 0.16, stagger: 0.018 }, 0.3)
             .to(streams, { strokeDashoffset: 0, duration: 0.22, stagger: 0.012 }, 0.38)
             .to(model, { opacity: 1, duration: 0.2 }, 0.44)
@@ -130,8 +155,8 @@ export function useWhatIBuildTimeline({ sectionRef }: UseWhatIBuildTimelineOptio
             .to(systemArrow, { opacity: 1, duration: 0.12 }, 0.67)
             .to(system, { opacity: 1, x: 0, duration: 0.21 }, 0.7)
             .to(systemControls, { opacity: 1, duration: 0.13, stagger: 0.01 }, 0.73)
-            .to(railItems[2], { opacity: 1, duration: 0.12 }, 0.75)
-            .to(railDots[2], { scale: 1, duration: 0.12 }, 0.77);
+            .to(desktopRailItems[2], { opacity: 1, duration: 0.12 }, 0.75)
+            .to(desktopRailDots[2], { scale: 1, duration: 0.12 }, 0.77);
 
           const trigger = ScrollTrigger.create({
             trigger: section,

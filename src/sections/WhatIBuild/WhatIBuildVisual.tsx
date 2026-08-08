@@ -92,11 +92,96 @@ function DesktopDefinitions() {
   );
 }
 
+type ResponsiveStageIndex = 0 | 1 | 2;
+
+function SpatialStageVisual() {
+  return (
+    <svg viewBox="0 0 320 190" role="presentation" focusable="false">
+      <defs>
+        <clipPath id="build-responsive-vector-clip" clipPathUnits="userSpaceOnUse">
+          <path d="M4 91l110-42 102 38-111 45z" />
+        </clipPath>
+      </defs>
+      <g transform="translate(50 10)">
+        <path d="M4 46l110-42 102 38-111 45z" />
+        <path d="M4 91l110-42 102 38-111 45z" />
+        <path d="M4 136l110-42 102 38-111 45z" />
+        <g data-mobile-spatial-content clipPath="url(#build-responsive-vector-clip)">
+          <path className={styles.accentPath} d="M25 117l27-21 29 8 30-27 34 13 43-21" />
+          {[25, 52, 81, 111, 145, 188].map((cx, index) => (
+            <circle
+              className={index === 3 ? styles.accentNode : undefined}
+              key={cx}
+              cx={cx}
+              cy={[117, 96, 104, 77, 90, 69][index]}
+              r="4"
+            />
+          ))}
+        </g>
+      </g>
+    </svg>
+  );
+}
+
+function IntelligenceStageVisual() {
+  return (
+    <svg viewBox="0 0 320 210" role="presentation" focusable="false">
+      <g transform="translate(32 0)">
+        <rect x="12" y="28" width="120" height="154" />
+        {[0, 1, 2, 3].map((row) => (
+          <g key={row}>
+            <rect x="26" y={44 + row * 34} width="22" height="20" />
+            <path d={`M60 ${54 + row * 34}h55`} />
+            <path className={styles.accentPath} d={`M84 ${61 + row * 34}h20`} />
+          </g>
+        ))}
+        {[0, 1, 2, 3].map((row) => (
+          <path
+            className={row === 1 ? styles.accentPath : undefined}
+            key={row}
+            d={`M132 ${54 + row * 34}C166 ${54 + row * 34} 166 106 198 106`}
+          />
+        ))}
+        <path d="M202 52l39 22v50l-39 25-38-25V75z" />
+        <path d="M202 52v97M164 75l77 49M241 74l-77 50" />
+        <circle className={styles.accentNode} cx="202" cy="106" r="8" />
+      </g>
+    </svg>
+  );
+}
+
+function SystemsStageVisual() {
+  return (
+    <svg viewBox="0 0 320 220" role="presentation" focusable="false">
+      <rect className={styles.systemOuter} x="26" y="16" width="268" height="188" rx="5" />
+      <path d="M26 43h268M67 43v161M258 43v161" />
+      <circle cx="39" cy="30" r="2.5" />
+      <circle cx="49" cy="30" r="2.5" />
+      <circle cx="59" cy="30" r="2.5" />
+      <path d="M82 169c30-67 57-37 76-89 18-48 58-38 91 12" />
+      <path d="M85 64c39 34 69 47 93 46 24-1 47 17 69 53" />
+      <path className={styles.accentSelection} d="M168 87l40-16 30 31-18 45-43 7-25-36z" />
+      {[0, 1, 2, 3].map((row) => (
+        <g key={row}>
+          <rect className={row === 1 ? styles.accentPath : undefined} x="39" y={62 + row * 31} width="7" height="7" />
+          <path d={`M51 ${66 + row * 31}h10`} />
+          <rect x="269" y={62 + row * 31} width="7" height="7" />
+        </g>
+      ))}
+    </svg>
+  );
+}
+
+export function WhatIBuildResponsiveVisual({ stage }: { stage: ResponsiveStageIndex }) {
+  if (stage === 0) return <SpatialStageVisual />;
+  if (stage === 1) return <IntelligenceStageVisual />;
+  return <SystemsStageVisual />;
+}
+
 export function WhatIBuildVisual() {
   return (
-    <>
-      <div className={styles.desktopVisual} data-build-visual aria-hidden="true">
-        <svg viewBox="0 0 1600 500" role="presentation" focusable="false">
+    <div className={styles.desktopVisual} data-build-visual aria-hidden="true">
+      <svg viewBox="0 0 1600 500" role="presentation" focusable="false">
           <DesktopDefinitions />
 
           <g data-build-spatial transform="translate(30 0)">
@@ -198,52 +283,7 @@ export function WhatIBuildVisual() {
               ))}
             </g>
           </g>
-        </svg>
-      </div>
-
-      <div className={styles.mobileVisual} data-build-mobile aria-hidden="true">
-        <div className={styles.mobileStage} data-mobile-stage>
-          <svg viewBox="0 0 320 190" role="presentation">
-            <defs>
-              <clipPath id="build-mobile-vector-clip" clipPathUnits="userSpaceOnUse">
-                <path d="M4 91l110-42 102 38-111 45z" />
-              </clipPath>
-            </defs>
-            <g transform="translate(18 10)">
-              <path d="M4 46l110-42 102 38-111 45z" />
-              <path d="M4 91l110-42 102 38-111 45z" />
-              <path d="M4 136l110-42 102 38-111 45z" />
-              <g data-mobile-spatial-content clipPath="url(#build-mobile-vector-clip)">
-                <path className={styles.accentPath} d="M25 117l27-21 29 8 30-27 34 13 43-21" />
-                {[25,52,81,111,145,188].map((cx,index)=><circle className={index===3?styles.accentNode:undefined} key={cx} cx={cx} cy={[117,96,104,77,90,69][index]} r="4" />)}
-              </g>
-            </g>
-          </svg>
-        </div>
-        <div className={styles.mobileConnector}><span /></div>
-        <div className={styles.mobileStage} data-mobile-stage>
-          <svg viewBox="0 0 320 210" role="presentation">
-            <rect x="12" y="28" width="120" height="154" />
-            {[0,1,2,3].map((row)=><g key={row}><rect x="26" y={44+row*34} width="22" height="20"/><path d={`M60 ${54+row*34}h55`}/><path className={styles.accentPath} d={`M84 ${61+row*34}h20`}/></g>)}
-            {[0,1,2,3].map((row)=><path className={row===1?styles.accentPath:undefined} key={row} d={`M132 ${54+row*34}C166 ${54+row*34} 166 106 198 106`}/>)}
-            <path d="M202 52l39 22 0 50-39 25-38-25V75z"/>
-            <path d="M202 52v97M164 75l77 49M241 74l-77 50"/>
-            <circle className={styles.accentNode} cx="202" cy="106" r="8"/>
-          </svg>
-        </div>
-        <div className={styles.mobileConnector}><span /></div>
-        <div className={styles.mobileStage} data-mobile-stage>
-          <svg viewBox="0 0 320 220" role="presentation">
-            <rect className={styles.systemOuter} x="26" y="16" width="268" height="188" rx="5"/>
-            <path d="M26 43h268M67 43v161M258 43v161"/>
-            <circle cx="39" cy="30" r="2.5"/><circle cx="49" cy="30" r="2.5"/><circle cx="59" cy="30" r="2.5"/>
-            <path d="M82 169c30-67 57-37 76-89 18-48 58-38 91 12"/>
-            <path d="M85 64c39 34 69 47 93 46 24-1 47 17 69 53"/>
-            <path className={styles.accentSelection} d="M168 87l40-16 30 31-18 45-43 7-25-36z"/>
-            {[0,1,2,3].map((row)=><g key={row}><rect className={row===1?styles.accentPath:undefined} x="39" y={62+row*31} width="7" height="7"/><path d={`M51 ${66+row*31}h10`}/><rect x="269" y={62+row*31} width="7" height="7"/></g>)}
-          </svg>
-        </div>
-      </div>
-    </>
+      </svg>
+    </div>
   );
 }

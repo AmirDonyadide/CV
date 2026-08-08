@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import type { Locale } from "../Hero/hero.types";
-import { WhatIBuildVisual } from "./WhatIBuildVisual";
+import { WhatIBuildResponsiveVisual, WhatIBuildVisual } from "./WhatIBuildVisual";
 import { whatIBuildCopy } from "./whatIBuild.copy";
 import { useWhatIBuildTimeline } from "./useWhatIBuildTimeline";
 import styles from "./WhatIBuild.module.css";
@@ -25,12 +25,32 @@ export function WhatIBuild({ locale }: WhatIBuildProps) {
 
           <div className={styles.pipeline}>
             <WhatIBuildVisual />
-            <ol className={styles.capabilityRail}>
+            <ol className={`${styles.capabilityRail} ${styles.desktopRail}`}>
               {copy.stages.map((stage) => (
-                <li key={stage.name} data-build-rail-item>
-                  <span className={styles.railDot} data-build-rail-dot aria-hidden="true" />
+                <li key={stage.name} data-build-desktop-rail-item>
+                  <span className={styles.railDot} data-build-desktop-rail-dot aria-hidden="true" />
                   <h3>{stage.name}</h3>
                   <p>{stage.detail}</p>
+                </li>
+              ))}
+            </ol>
+
+            <ol className={styles.responsiveStages}>
+              {copy.stages.map((stage, index) => (
+                <li className={styles.responsiveStage} data-build-responsive-stage key={stage.name}>
+                  <div className={styles.responsiveArtwork} data-build-responsive-visual aria-hidden="true">
+                    <WhatIBuildResponsiveVisual stage={index as 0 | 1 | 2} />
+                  </div>
+                  <div className={styles.responsiveCapability} data-build-responsive-capability>
+                    <span className={styles.responsiveDot} aria-hidden="true" />
+                    <h3>{stage.name}</h3>
+                    <p>{stage.detail}</p>
+                  </div>
+                  {index < copy.stages.length - 1 ? (
+                    <div className={styles.responsiveConnector} aria-hidden="true">
+                      <span />
+                    </div>
+                  ) : null}
                 </li>
               ))}
             </ol>
