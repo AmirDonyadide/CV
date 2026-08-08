@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import type { ScrollTrigger as ScrollTriggerInstance } from "gsap/ScrollTrigger";
 import { deferUntilNearViewport } from "../../motion/deferUntilNearViewport";
 import { loadGsap } from "../../motion/loadGsap";
 
@@ -13,11 +14,13 @@ export function useWhatIBuildTimeline({ sectionRef }: UseWhatIBuildTimelineOptio
 
     let active = true;
     let disposeAnimation = () => {};
+    let disposeLayoutSync = () => {};
     const activate = async () => {
       const { gsap, ScrollTrigger } = await loadGsap();
       if (!active) return;
 
       const media = gsap.matchMedia();
+      let sectionTrigger: ScrollTriggerInstance | null = null;
       const context = gsap.context(() => {
       const select = gsap.utils.selector(section);
       const header = select("[data-build-header]");
@@ -79,10 +82,13 @@ export function useWhatIBuildTimeline({ sectionRef }: UseWhatIBuildTimelineOptio
               end: "bottom bottom",
               animation: mobileTimeline,
               scrub: 0.35,
+              refreshPriority: -1,
               invalidateOnRefresh: true,
             });
+            sectionTrigger = trigger;
 
             return () => {
+              if (sectionTrigger === trigger) sectionTrigger = null;
               trigger.kill();
               mobileTimeline.kill();
             };
@@ -114,13 +120,13 @@ export function useWhatIBuildTimeline({ sectionRef }: UseWhatIBuildTimelineOptio
             .to(railDots[0], { scale: 1, duration: 0.12 }, 0.08)
             .to(connector, { opacity: 1, duration: 0.12 }, 0.22)
             .to(data, { opacity: 1, x: 0, duration: 0.2 }, 0.25)
-            .to(dataRows, { opacity: 1, x: 0, duration: 0.16, stagger: 0.018 }, 0.28)
+            .to(railItems[1], { opacity: 1, duration: 0.14 }, 0.27)
+            .to(railDots[1], { scale: 1, duration: 0.14 }, 0.29)
+            .to(dataRows, { opacity: 1, x: 0, duration: 0.16, stagger: 0.018 }, 0.3)
             .to(streams, { strokeDashoffset: 0, duration: 0.22, stagger: 0.012 }, 0.38)
-            .to(railItems[1], { opacity: 1, duration: 0.12 }, 0.4)
-            .to(railDots[1], { scale: 1, duration: 0.12 }, 0.42)
-            .to(model, { opacity: 1, duration: 0.18 }, 0.48)
-            .to(modelEdges, { strokeDashoffset: 0, duration: 0.2, stagger: 0.008 }, 0.5)
-            .to(modelNodes, { scale: 1, duration: 0.16, stagger: 0.016 }, 0.5)
+            .to(model, { opacity: 1, duration: 0.2 }, 0.44)
+            .to(modelEdges, { strokeDashoffset: 0, duration: 0.21, stagger: 0.008 }, 0.46)
+            .to(modelNodes, { scale: 1, duration: 0.17, stagger: 0.016 }, 0.47)
             .to(systemArrow, { opacity: 1, duration: 0.12 }, 0.67)
             .to(system, { opacity: 1, x: 0, duration: 0.21 }, 0.7)
             .to(systemControls, { opacity: 1, duration: 0.13, stagger: 0.01 }, 0.73)
@@ -133,10 +139,13 @@ export function useWhatIBuildTimeline({ sectionRef }: UseWhatIBuildTimelineOptio
             end: "bottom bottom",
             animation: timeline,
             scrub: 0.45,
+            refreshPriority: -1,
             invalidateOnRefresh: true,
           });
+          sectionTrigger = trigger;
 
           return () => {
+            if (sectionTrigger === trigger) sectionTrigger = null;
             trigger.kill();
             timeline.kill();
           };
@@ -145,8 +154,45 @@ export function useWhatIBuildTimeline({ sectionRef }: UseWhatIBuildTimelineOptio
       }, section);
 
       document.fonts.ready.then(() => {
-        if (active) ScrollTrigger.refresh();
+        if (!active || !sectionTrigger) return;
+        sectionTrigger.refresh();
+        sectionTrigger.update();
       });
+
+      const hero = document.getElementById("hero");
+      if (hero) {
+        let firstFrame = 0;
+        let secondFrame = 0;
+        const observer = new MutationObserver(() => {
+          if (hero.dataset.motionMode === "pending") return;
+          observer.disconnect();
+          firstFrame = window.requestAnimationFrame(() => {
+            secondFrame = window.requestAnimationFrame(() => {
+              if (!active || !sectionTrigger) return;
+              sectionTrigger.refresh();
+              sectionTrigger.update();
+            });
+          });
+        });
+
+        if (hero.dataset.motionMode === "pending") {
+          observer.observe(hero, { attributes: true, attributeFilter: ["data-motion-mode"] });
+        } else {
+          firstFrame = window.requestAnimationFrame(() => {
+            secondFrame = window.requestAnimationFrame(() => {
+              if (!active || !sectionTrigger) return;
+              sectionTrigger.refresh();
+              sectionTrigger.update();
+            });
+          });
+        }
+
+        disposeLayoutSync = () => {
+          observer.disconnect();
+          window.cancelAnimationFrame(firstFrame);
+          window.cancelAnimationFrame(secondFrame);
+        };
+      }
 
       disposeAnimation = () => {
         media.revert();
@@ -161,6 +207,7 @@ export function useWhatIBuildTimeline({ sectionRef }: UseWhatIBuildTimelineOptio
     return () => {
       active = false;
       cancelActivation();
+      disposeLayoutSync();
       disposeAnimation();
     };
   }, [sectionRef]);

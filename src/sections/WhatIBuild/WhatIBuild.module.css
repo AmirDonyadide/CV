@@ -78,7 +78,7 @@
   opacity: 0.68;
 }
 
-.spatialLayerTop path:not(:first-child) {
+.spatialLayerTop [data-spatial-content] path {
   stroke: #535c62;
   stroke-width: 0.7;
 }
@@ -127,6 +127,14 @@
   stroke: #667078;
 }
 
+.streams {
+  opacity: 0.76;
+}
+
+.streams .accentPath {
+  stroke: rgba(69, 191, 230, 0.76) !important;
+}
+
 .modelOrbit {
   stroke: #4f5960 !important;
   stroke-dasharray: 4 5;
@@ -135,7 +143,7 @@
 .capabilityRail {
   position: relative;
   display: grid;
-  grid-template-columns: 24% 44% 32%;
+  grid-template-columns: 30% 40% 30%;
   gap: 1rem;
   margin: 0.65rem 0 0;
   padding: 2rem 0 0;

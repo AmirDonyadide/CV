@@ -1,5 +1,56 @@
 import styles from "./WhatIBuild.module.css";
 
+type Plane = readonly [
+  readonly [number, number],
+  readonly [number, number],
+  readonly [number, number],
+  readonly [number, number],
+];
+
+const topPlane: Plane = [[42, 104], [188, 22], [364, 79], [213, 166]];
+const bottomPlane: Plane = [[46, 336], [199, 253], [368, 313], [214, 404]];
+
+const pointOnPlane = (plane: Plane, u: number, v: number) => {
+  const [[ax, ay], [bx, by], [cx, cy], [dx, dy]] = plane;
+  return [
+    (1 - u) * (1 - v) * ax + u * (1 - v) * bx + u * v * cx + (1 - u) * v * dx,
+    (1 - u) * (1 - v) * ay + u * (1 - v) * by + u * v * cy + (1 - u) * v * dy,
+  ] as const;
+};
+
+const linePath = (start: readonly [number, number], end: readonly [number, number]) =>
+  `M${start[0].toFixed(1)} ${start[1].toFixed(1)}L${end[0].toFixed(1)} ${end[1].toFixed(1)}`;
+
+const cellPath = (column: number, row: number) => {
+  const corners = [
+    pointOnPlane(topPlane, column / 6, row / 5),
+    pointOnPlane(topPlane, (column + 1) / 6, row / 5),
+    pointOnPlane(topPlane, (column + 1) / 6, (row + 1) / 5),
+    pointOnPlane(topPlane, column / 6, (row + 1) / 5),
+  ];
+  return `${corners.map(([x, y], index) => `${index === 0 ? "M" : "L"}${x.toFixed(1)} ${y.toFixed(1)}`).join("")}z`;
+};
+
+const topGridLines = [
+  ...Array.from({ length: 5 }, (_, index) => {
+    const u = (index + 1) / 6;
+    return linePath(pointOnPlane(topPlane, u, 0), pointOnPlane(topPlane, u, 1));
+  }),
+  ...Array.from({ length: 4 }, (_, index) => {
+    const v = (index + 1) / 5;
+    return linePath(pointOnPlane(topPlane, 0, v), pointOnPlane(topPlane, 1, v));
+  }),
+];
+
+const observationCoordinates = [
+  [0.12, 0.2], [0.28, 0.16], [0.46, 0.18], [0.65, 0.15], [0.82, 0.2],
+  [0.18, 0.4], [0.38, 0.36], [0.57, 0.42], [0.76, 0.38], [0.88, 0.46],
+  [0.1, 0.62], [0.3, 0.58], [0.5, 0.64], [0.7, 0.6], [0.84, 0.68],
+  [0.2, 0.8], [0.42, 0.78], [0.62, 0.82], [0.78, 0.8],
+] as const;
+
+const observationPoints = observationCoordinates.map(([u, v]) => pointOnPlane(bottomPlane, u, v));
+
 const modelNodes = [
   [922, 190], [1006, 152], [1040, 252], [952, 286], [1080, 330], [970, 386], [1114, 220], [1124, 404],
 ];
@@ -8,12 +59,21 @@ const modelEdges = [
   [0, 1], [0, 2], [0, 3], [1, 2], [1, 6], [2, 3], [2, 4], [2, 6], [3, 4], [3, 5], [4, 5], [4, 7], [5, 7], [6, 7],
 ];
 
-function ArrowMarker() {
+function DesktopDefinitions() {
   return (
     <defs>
       <marker id="build-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
         <path d="M0 0L10 5 0 10z" fill="currentColor" stroke="none" />
       </marker>
+      <clipPath id="build-spatial-top-clip" clipPathUnits="userSpaceOnUse">
+        <path d="M42 104l146-82 176 57-151 87z" />
+      </clipPath>
+      <clipPath id="build-spatial-middle-clip" clipPathUnits="userSpaceOnUse">
+        <path d="M44 218l151-83 172 62-154 87z" />
+      </clipPath>
+      <clipPath id="build-spatial-bottom-clip" clipPathUnits="userSpaceOnUse">
+        <path d="M46 336l153-83 169 60-154 91z" />
+      </clipPath>
     </defs>
   );
 }
@@ -23,74 +83,83 @@ export function WhatIBuildVisual() {
     <>
       <div className={styles.desktopVisual} data-build-visual aria-hidden="true">
         <svg viewBox="0 0 1600 430" role="presentation" focusable="false">
-          <ArrowMarker />
+          <DesktopDefinitions />
 
-          <g data-build-spatial transform="translate(-45 0)">
+          <g data-build-spatial transform="translate(30 0)">
             <g data-spatial-layer className={styles.spatialLayerTop}>
-              <path d="M42 104l146-82 176 57-151 87z" />
-              {Array.from({ length: 7 }, (_, index) => <path key={`top-v-${index}`} d={`M${70 + index * 37} ${88 - index * 9}l145 48`} />)}
-              {Array.from({ length: 5 }, (_, index) => <path key={`top-h-${index}`} d={`M${72 + index * 30} ${88 + index * 15}l144-81`} />)}
-              <rect className={styles.cellFill} x="182" y="68" width="24" height="17" transform="rotate(18 194 77)" />
-              <rect x="238" y="96" width="28" height="18" transform="rotate(18 252 105)" />
+              <path data-layer-boundary d="M42 104l146-82 176 57-151 87z" />
+              <g data-spatial-content="top" clipPath="url(#build-spatial-top-clip)">
+                {topGridLines.map((path) => <path key={path} d={path} />)}
+                <path className={styles.cellFill} d={cellPath(2, 1)} />
+                <path d={cellPath(4, 3)} />
+              </g>
             </g>
 
             <g data-spatial-layer>
-              <path d="M44 218l151-83 172 62-154 87z" />
-              <path d="M70 238c32-49 75-56 119-28 40 25 80 17 133-25" />
-              <path d="M72 205c45-2 84-13 115-34 39-26 82-12 133 30" />
-              <path className={styles.accentPath} d="M92 235l31-31 36 8 26-28 41 12 42-19 47 17" />
-              {[92, 123, 159, 185, 226, 268, 315].map((cx, index) => <circle className={index === 4 ? styles.accentNode : undefined} key={cx} cx={cx} cy={[235, 204, 212, 184, 196, 177, 194][index]} r="4" />)}
+              <path data-layer-boundary d="M44 218l151-83 172 62-154 87z" />
+              <g data-spatial-content="middle" clipPath="url(#build-spatial-middle-clip)">
+                <path d="M70 238c32-49 75-56 119-28 40 25 80 17 133-25" />
+                <path d="M72 205c45-2 84-13 115-34 39-26 82-12 133 30" />
+                <path className={styles.accentPath} d="M92 235l31-31 36 8 26-28 41 12 42-19 47 17" />
+                {[92, 123, 159, 185, 226, 268, 315].map((cx, index) => <circle className={index === 4 ? styles.accentNode : undefined} key={cx} cx={cx} cy={[235, 204, 212, 184, 196, 177, 194][index]} r="4" />)}
+              </g>
             </g>
 
             <g data-spatial-layer className={styles.spatialLayerBottom}>
-              <path d="M46 336l153-83 169 60-154 91z" />
-              <path d="M70 350c44-58 96-69 151-35 43 27 80 19 121-9" />
-              <path d="M82 370c37-36 75-51 112-45 49 8 87-5 126-38" />
-              {Array.from({ length: 22 }, (_, index) => (
-                <circle key={`spatial-point-${80 + (index * 47) % 240}-${290 + (index * 29) % 88}`} cx={80 + (index * 47) % 240} cy={290 + (index * 29) % 88} r={index % 4 === 0 ? 2.5 : 1.5} />
-              ))}
+              <path data-layer-boundary d="M46 336l153-83 169 60-154 91z" />
+              <g data-spatial-content="bottom" clipPath="url(#build-spatial-bottom-clip)">
+                <path d="M70 350c44-58 96-69 151-35 43 27 80 19 121-9" />
+                <path d="M82 370c37-36 75-51 112-45 49 8 87-5 126-38" />
+                {observationPoints.map(([cx, cy], index) => (
+                  <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r={index % 4 === 0 ? 2.5 : 1.5} />
+                ))}
+              </g>
             </g>
           </g>
 
           <g className={styles.connector} data-flow-connector>
-            <path d="M372 246h86" markerEnd="url(#build-arrow)" />
-            <circle className={styles.accentFill} cx="433" cy="246" r="5" />
+            <path d="M408 246h132" markerEnd="url(#build-arrow)" />
+            <circle className={styles.accentFill} cx="494" cy="246" r="5" />
           </g>
 
-          <g transform="translate(-14 -12) scale(1 .88)">
-            <g data-build-data>
-              <rect className={styles.dataFrame} x="470" y="92" width="254" height="308" />
-              {Array.from({ length: 6 }, (_, index) => (
-                <g data-data-row key={`data-row-${108 + index * 48}`}>
-                  <rect x="486" y={108 + index * 48} width="42" height="36" />
-                  <path d={`M542 ${126 + index * 48}h68M626 ${126 + index * 48}h70`} />
-                  <path className={styles.accentPath} d={`M648 ${126 + index * 48}h20`} />
-                </g>
+          <g className={styles.intelligenceComposite} data-build-intelligence transform="translate(72 0)">
+            <g transform="translate(85 8) scale(.84 .84)">
+              <g data-build-data>
+                <rect className={styles.dataFrame} x="470" y="92" width="254" height="308" />
+                {Array.from({ length: 6 }, (_, index) => (
+                  <g data-data-row key={`data-row-${108 + index * 48}`}>
+                    <rect x="486" y={108 + index * 48} width="42" height="36" />
+                    <path d={`M542 ${126 + index * 48}h68M626 ${126 + index * 48}h70`} />
+                    <path className={styles.accentPath} d={`M648 ${126 + index * 48}h20`} />
+                  </g>
+                ))}
+                <path d="M528 92v308M616 92v308" />
+              </g>
+            </g>
+
+            <g className={styles.streams} data-build-streams>
+              {[114, 154, 194, 234, 274, 314].map((y, index) => (
+                <path data-stream key={y} className={index === 2 || index === 3 ? styles.accentPath : undefined} d={`M696 ${y}C730 ${y} 746 246 778 246`} />
               ))}
-              <path d="M528 92v308M616 92v308" />
+            </g>
+
+            <g transform="translate(-140 0) translate(1000 270) scale(.86) translate(-1000 -270)">
+              <g data-build-model>
+                <path className={styles.modelOrbit} d="M884 246c0-117 198-117 198 0s-198 117-198 0z" />
+                <path className={styles.modelOrbit} d="M946 126c114 0 114 250 0 250s-114-250 0-250z" />
+                {modelEdges.map(([from, to]) => {
+                  const [x1, y1] = modelNodes[from];
+                  const [x2, y2] = modelNodes[to];
+                  return <path data-model-edge key={`${from}-${to}`} d={`M${x1} ${y1}L${x2} ${y2}`} />;
+                })}
+                {modelNodes.map(([cx, cy], index) => (
+                  <circle data-model-node className={index === 2 || index === 3 ? styles.accentNode : undefined} key={`${cx}-${cy}`} cx={cx} cy={cy} r={index === 2 || index === 3 ? 9 : 8} />
+                ))}
+              </g>
             </g>
           </g>
 
-          <g className={styles.streams} data-build-streams>
-            {[126, 176, 226, 276, 326, 376].map((y, index) => (
-              <path data-stream key={y} className={index === 2 || index === 3 ? styles.accentPath : undefined} d={`M710 ${y * 0.88 - 12}C790 ${y * 0.88 - 12} 802 246 876 246`} />
-            ))}
-          </g>
-
-          <g data-build-model>
-            <path className={styles.modelOrbit} d="M884 246c0-117 198-117 198 0s-198 117-198 0z" />
-            <path className={styles.modelOrbit} d="M946 126c114 0 114 250 0 250s-114-250 0-250z" />
-            {modelEdges.map(([from, to]) => {
-              const [x1, y1] = modelNodes[from];
-              const [x2, y2] = modelNodes[to];
-              return <path data-model-edge key={`${from}-${to}`} d={`M${x1} ${y1}L${x2} ${y2}`} />;
-            })}
-            {modelNodes.map(([cx, cy], index) => (
-              <circle data-model-node className={index === 2 || index === 3 ? styles.accentNode : undefined} key={`${cx}-${cy}`} cx={cx} cy={cy} r={index === 2 || index === 3 ? 9 : 8} />
-            ))}
-          </g>
-
-          <path className={`${styles.connector} ${styles.systemArrow}`} data-system-arrow d="M1138 246h32" markerEnd="url(#build-arrow)" />
+          <path className={`${styles.connector} ${styles.systemArrow}`} data-system-arrow d="M1048 246h92" markerEnd="url(#build-arrow)" />
 
           <g transform="translate(-379 -40) scale(1.245 1)">
             <g data-build-system>
@@ -123,12 +192,19 @@ export function WhatIBuildVisual() {
       <div className={styles.mobileVisual} data-build-mobile aria-hidden="true">
         <div className={styles.mobileStage} data-mobile-stage>
           <svg viewBox="0 0 320 190" role="presentation">
+            <defs>
+              <clipPath id="build-mobile-vector-clip" clipPathUnits="userSpaceOnUse">
+                <path d="M4 91l110-42 102 38-111 45z" />
+              </clipPath>
+            </defs>
             <g transform="translate(18 10)">
               <path d="M4 46l110-42 102 38-111 45z" />
               <path d="M4 91l110-42 102 38-111 45z" />
               <path d="M4 136l110-42 102 38-111 45z" />
-              <path className={styles.accentPath} d="M25 117l27-21 29 8 30-27 34 13 43-21" />
-              {[25,52,81,111,145,188].map((cx,index)=><circle className={index===3?styles.accentNode:undefined} key={cx} cx={cx} cy={[117,96,104,77,90,69][index]} r="4" />)}
+              <g data-mobile-spatial-content clipPath="url(#build-mobile-vector-clip)">
+                <path className={styles.accentPath} d="M25 117l27-21 29 8 30-27 34 13 43-21" />
+                {[25,52,81,111,145,188].map((cx,index)=><circle className={index===3?styles.accentNode:undefined} key={cx} cx={cx} cy={[117,96,104,77,90,69][index]} r="4" />)}
+              </g>
             </g>
           </svg>
         </div>
