@@ -16,12 +16,8 @@ interface HeroStoryProps {
 export function HeroStory({ locale, onLocaleChange }: HeroStoryProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const viewportRef = useRef<HTMLDivElement>(null);
-  const skipIntro = useHeroTimeline({ sectionRef, viewportRef });
+  const { navigateTo, skipIntro } = useHeroTimeline({ sectionRef, viewportRef });
   const copy = heroCopy[locale];
-
-  const navigateToBoundary = (target: "projects" | "experience" | "journey" | "technical-stack" | "contact") => {
-    skipIntro(target);
-  };
 
   return (
     <>
@@ -48,10 +44,10 @@ export function HeroStory({ locale, onLocaleChange }: HeroStoryProps) {
             locale={locale}
             onLocaleChange={onLocaleChange}
             onSkipIntro={() => skipIntro()}
-            onBoundaryNavigate={navigateToBoundary}
+            onNavigate={navigateTo}
           />
           <HeroStage />
-          <HeroIdentity copy={copy} onExploreWork={() => navigateToBoundary("projects")} />
+          <HeroIdentity copy={copy} onExploreWork={() => navigateTo("projects")} />
           <HeroMetadata labels={copy.metadataStates} />
         </div>
       </section>

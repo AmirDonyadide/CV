@@ -1,5 +1,13 @@
 export type Locale = "en" | "de" | "it";
 
+export type HeroNavigationTarget =
+  | "hero"
+  | "projects"
+  | "experience"
+  | "journey"
+  | "technical-stack"
+  | "contact";
+
 export interface HeroCopy {
   homeLabel: string;
   languageLabel: string;

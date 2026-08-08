@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef } from "react";
 import type { ScrollTrigger as ScrollTriggerInstance } from "gsap/ScrollTrigger";
-import { loadGsap } from "../../motion/loadGsap";
+import { loadGsap, loadScrollGsap } from "../../motion/loadGsap";
+import type { HeroNavigationTarget } from "./hero.types";
 
 interface UseHeroTimelineOptions {
   sectionRef: React.RefObject<HTMLElement | null>;
@@ -11,6 +12,10 @@ interface NavigatorWithConnection extends Navigator {
   connection?: {
     saveData?: boolean;
   };
+}
+
+interface KillableTween {
+  kill: () => void;
 }
 
 const layerSelectors = {
@@ -58,6 +63,8 @@ const scaleTransform = ([x, y]: readonly [number, number], scale: number) =>
 
 export function useHeroTimeline({ sectionRef, viewportRef }: UseHeroTimelineOptions) {
   const triggerRef = useRef<ScrollTriggerInstance | null>(null);
+  const navigationTweenRef = useRef<KillableTween | null>(null);
+  const navigationRequestRef = useRef(0);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -332,7 +339,27 @@ export function useHeroTimeline({ sectionRef, viewportRef }: UseHeroTimelineOpti
     };
   }, [sectionRef, viewportRef]);
 
-  return useCallback((hash = "hero-title") => {
+  useEffect(() => () => {
+    navigationRequestRef.current += 1;
+    navigationTweenRef.current?.kill();
+    navigationTweenRef.current = null;
+  }, []);
+
+  const focusDestination = useCallback((hash: string) => {
+    const target = document.getElementById(hash);
+    const destinationHeading = target?.matches("h1, h2")
+      ? target
+      : target?.querySelector<HTMLElement>("h1, h2") ?? target;
+    const focusTarget = destinationHeading ?? document.getElementById("hero-title");
+    if (!focusTarget) return;
+    if (!focusTarget.hasAttribute("tabindex")) focusTarget.tabIndex = -1;
+    focusTarget.focus({ preventScroll: true });
+  }, []);
+
+  const skipIntro = useCallback((hash = "hero-title") => {
+    navigationRequestRef.current += 1;
+    navigationTweenRef.current?.kill();
+    navigationTweenRef.current = null;
     const trigger = triggerRef.current;
     const isIdentityRequest = hash === "hero-title";
     if (!trigger && sectionRef.current) {
@@ -350,14 +377,69 @@ export function useHeroTimeline({ sectionRef, viewportRef }: UseHeroTimelineOpti
       });
     }
     window.history.replaceState(null, "", `#${hash}`);
-    const focusDestination = () => {
-      const target = document.getElementById(hash);
-      const destinationHeading = target?.matches("h1, h2")
-        ? target
-        : target?.querySelector<HTMLElement>("h1, h2") ?? target;
-      (destinationHeading ?? document.getElementById("hero-title"))?.focus({ preventScroll: true });
-    };
-    window.requestAnimationFrame(focusDestination);
-    window.setTimeout(focusDestination, 50);
-  }, [sectionRef]);
+    window.requestAnimationFrame(() => focusDestination(hash));
+    window.setTimeout(() => focusDestination(hash), 50);
+  }, [focusDestination, sectionRef]);
+
+  const navigateTo = useCallback((hash: HeroNavigationTarget) => {
+    const section = sectionRef.current;
+    const trigger = triggerRef.current;
+    const target = document.getElementById(hash);
+    if (!target) return;
+
+    if (!trigger && section) {
+      section.dataset.motionMode = "static";
+    }
+
+    navigationRequestRef.current += 1;
+    const requestId = navigationRequestRef.current;
+    navigationTweenRef.current?.kill();
+    navigationTweenRef.current = null;
+
+    const targetTop = hash === "hero"
+      ? trigger?.start ?? section?.offsetTop ?? 0
+      : target.getBoundingClientRect().top + window.scrollY;
+    const distance = Math.abs(targetTop - window.scrollY);
+    const saveData = Boolean((navigator as NavigatorWithConnection).connection?.saveData);
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    window.history.replaceState(null, "", `#${hash}`);
+
+    if (reduceMotion || saveData || distance < 2) {
+      window.scrollTo({ top: targetTop, behavior: "auto" });
+      window.requestAnimationFrame(() => focusDestination(hash));
+      return;
+    }
+
+    const duration = Math.min(1.45, Math.max(0.72, 0.72 + distance / 7500));
+
+    void loadScrollGsap()
+      .then(({ gsap }) => {
+        if (requestId !== navigationRequestRef.current) return;
+
+        navigationTweenRef.current = gsap.to(window, {
+          scrollTo: { y: targetTop, autoKill: true },
+          duration,
+          ease: "power2.inOut",
+          overwrite: "auto",
+          onComplete: () => {
+            if (requestId !== navigationRequestRef.current) return;
+            navigationTweenRef.current = null;
+            focusDestination(hash);
+          },
+          onInterrupt: () => {
+            if (requestId === navigationRequestRef.current) {
+              navigationTweenRef.current = null;
+            }
+          },
+        });
+      })
+      .catch(() => {
+        if (requestId !== navigationRequestRef.current) return;
+        window.scrollTo({ top: targetTop, behavior: "smooth" });
+        window.setTimeout(() => focusDestination(hash), duration * 1000 + 100);
+      });
+  }, [focusDestination, sectionRef]);
+
+  return { navigateTo, skipIntro };
 }

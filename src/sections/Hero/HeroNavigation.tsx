@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { localizedHref } from "../../i18n/routing";
-import type { HeroCopy, Locale } from "./hero.types";
+import type { HeroCopy, HeroNavigationTarget, Locale } from "./hero.types";
 import styles from "./Hero.module.css";
 
 interface HeroNavigationProps {
@@ -8,7 +8,7 @@ interface HeroNavigationProps {
   locale: Locale;
   onLocaleChange: (locale: Locale) => void;
   onSkipIntro: () => void;
-  onBoundaryNavigate: (target: "projects" | "experience" | "journey" | "technical-stack" | "contact") => void;
+  onNavigate: (target: HeroNavigationTarget) => void;
 }
 
 const locales: Locale[] = ["en", "de", "it"];
@@ -18,7 +18,7 @@ export function HeroNavigation({
   locale,
   onLocaleChange,
   onSkipIntro,
-  onBoundaryNavigate,
+  onNavigate,
 }: HeroNavigationProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
@@ -36,15 +36,23 @@ export function HeroNavigation({
     return () => window.removeEventListener("keydown", closeOnEscape);
   }, [menuOpen]);
 
-  const navigate = (target: "projects" | "experience" | "journey" | "technical-stack" | "contact") => {
+  const navigate = (target: HeroNavigationTarget) => {
     setMenuOpen(false);
-    onBoundaryNavigate(target);
+    onNavigate(target);
   };
 
   return (
     <header className={styles.header}>
       <nav className={styles.navigation} aria-label={copy.navLabel}>
-        <a className={styles.brand} href="#hero" aria-label={copy.homeLabel}>
+        <a
+          className={styles.brand}
+          href="#hero"
+          aria-label={copy.homeLabel}
+          onClick={(event) => {
+            event.preventDefault();
+            navigate("hero");
+          }}
+        >
           AMIR
         </a>
 
