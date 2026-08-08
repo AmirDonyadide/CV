@@ -18,7 +18,7 @@
 
 .inner {
   width: 100%;
-  padding: clamp(7.5rem, 12.5vh, 8.25rem) clamp(2rem, 4.7vw, 4.75rem) clamp(3.5rem, 6vh, 5.5rem);
+  padding: clamp(6.25rem, 10vh, 7.25rem) clamp(2rem, 4.7vw, 4.75rem) clamp(3.5rem, 6vh, 5.5rem);
 }
 
 .header {
@@ -43,7 +43,7 @@
 }
 
 .pipeline {
-  margin-top: clamp(2.7rem, 5vh, 4.7rem);
+  margin-top: clamp(2rem, 3vh, 3rem);
   margin-right: -1.5rem;
   margin-left: -1.5rem;
 }
@@ -133,11 +133,6 @@
 
 .streams .accentPath {
   stroke: rgba(69, 191, 230, 0.76) !important;
-}
-
-.modelOrbit {
-  stroke: #4f5960 !important;
-  stroke-dasharray: 4 5;
 }
 
 .capabilityRail {

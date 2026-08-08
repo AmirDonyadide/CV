@@ -104,7 +104,7 @@ export function useWhatIBuildTimeline({ sectionRef }: UseWhatIBuildTimelineOptio
           gsap.set(dataRows, { opacity: 0.15, x: -12 });
           gsap.set(streams, { strokeDasharray: 260, strokeDashoffset: 260 });
           gsap.set(model, { opacity: 0.12 });
-          gsap.set(modelEdges, { strokeDasharray: 180, strokeDashoffset: 180 });
+          gsap.set(modelEdges, { opacity: 0 });
           gsap.set(modelNodes, { scale: 0.45, transformOrigin: "center center" });
           gsap.set(systemArrow, { opacity: 0.12 });
           gsap.set(system, { opacity: 0.12, x: 34 });
@@ -125,8 +125,8 @@ export function useWhatIBuildTimeline({ sectionRef }: UseWhatIBuildTimelineOptio
             .to(dataRows, { opacity: 1, x: 0, duration: 0.16, stagger: 0.018 }, 0.3)
             .to(streams, { strokeDashoffset: 0, duration: 0.22, stagger: 0.012 }, 0.38)
             .to(model, { opacity: 1, duration: 0.2 }, 0.44)
-            .to(modelEdges, { strokeDashoffset: 0, duration: 0.21, stagger: 0.008 }, 0.46)
-            .to(modelNodes, { scale: 1, duration: 0.17, stagger: 0.016 }, 0.47)
+            .to(modelNodes, { scale: 1, duration: 0.17, stagger: 0.016 }, 0.46)
+            .to(modelEdges, { opacity: 1, duration: 0.18, stagger: 0.012 }, 0.48)
             .to(systemArrow, { opacity: 1, duration: 0.12 }, 0.67)
             .to(system, { opacity: 1, x: 0, duration: 0.21 }, 0.7)
             .to(systemControls, { opacity: 1, duration: 0.13, stagger: 0.01 }, 0.73)
