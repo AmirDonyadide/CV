@@ -115,7 +115,7 @@ function Nl2MapVisual({
           <ResponsiveEvidenceImage
             src={nl2mapAssets.input.fallback}
             webpSrcSet={nl2mapAssets.input.webp}
-            sizes="(max-width: 899px) 42vw, 20vw"
+            sizes="(max-width: 1099px) 42vw, 20vw"
             deferUntilNear
             alt="Original building map used in NL2MAP thesis study pair 1069"
             width="1000"
@@ -133,7 +133,7 @@ function Nl2MapVisual({
           <ResponsiveEvidenceImage
             src={nl2mapAssets.generalized.fallback}
             webpSrcSet={nl2mapAssets.generalized.webp}
-            sizes="(max-width: 899px) 42vw, 20vw"
+            sizes="(max-width: 1099px) 42vw, 20vw"
             deferUntilNear
             alt="Generalized building map used in NL2MAP thesis study pair 1069"
             width="1000"
@@ -193,7 +193,7 @@ function Se4gVisual({
         <ResponsiveEvidenceImage
           src={se4gDashboardAsset.fallback}
           webpSrcSet={se4gDashboardAsset.webp}
-          sizes="(max-width: 899px) 94vw, 52vw"
+          sizes="(max-width: 1099px) 94vw, 52vw"
           deferUntilNear
           alt="Documented SE4G dashboard interface showing maps, filters, and data visualizations"
           width="1235"
@@ -243,7 +243,7 @@ function LandslideVisual({
           <ResponsiveEvidenceImage
             src={landslideAssets.terrain.fallback}
             webpSrcSet={landslideAssets.terrain.webp}
-            sizes="(max-width: 899px) 38vw, 16vw"
+            sizes="(max-width: 1099px) 38vw, 16vw"
             deferUntilNear
             alt="Digital terrain model input from the landslide susceptibility project"
             width="1000"
@@ -274,7 +274,7 @@ function LandslideVisual({
           <ResponsiveEvidenceImage
             src={landslideAssets.susceptibility.fallback}
             webpSrcSet={landslideAssets.susceptibility.webp}
-            sizes="(max-width: 899px) 38vw, 16vw"
+            sizes="(max-width: 1099px) 38vw, 16vw"
             deferUntilNear
             alt="Landslide susceptibility raster produced by the project"
             width="1000"

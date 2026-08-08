@@ -20,124 +20,162 @@ export function useSelectedWorkTimeline({ sectionRef }: UseSelectedWorkTimelineO
 
       const media = gsap.matchMedia();
       const context = gsap.context(() => {
-      const select = gsap.utils.selector(section);
-      const scenes = select<HTMLElement>("[data-project-scene]");
-      const stories = select<HTMLElement>("[data-project-story]");
-      const indexItems = select<HTMLElement>("[data-project-index]");
-      const mobileVisuals = select<HTMLElement>("[data-project-mobile-visual]");
+        const select = gsap.utils.selector(section);
+        const scenes = select<HTMLElement>("[data-project-scene]");
+        const stories = select<HTMLElement>("[data-project-story]");
+        const indexItems = select<HTMLElement>("[data-project-index]");
+        const mobileVisuals = select<HTMLElement>("[data-project-mobile-visual]");
 
-      const showStatic = () => {
-        section.dataset.motionMode = "static";
-        gsap.set([scenes, stories, indexItems, mobileVisuals].flat(), { clearProps: "all" });
-      };
+        const showStatic = () => {
+          section.dataset.motionMode = "static";
+          section.dataset.activeProject = "all";
+          gsap.set([scenes, stories, indexItems, mobileVisuals].flat(), { clearProps: "all" });
+          scenes.forEach((scene) => scene.removeAttribute("aria-hidden"));
+        };
 
-      media.add(
-        {
-          reduced: "(prefers-reduced-motion: reduce)",
-          desktop: "(min-width: 900px) and (prefers-reduced-motion: no-preference)",
-          mobile: "(max-width: 899px) and (prefers-reduced-motion: no-preference)",
-        },
-        (mediaContext) => {
-          const conditions = mediaContext.conditions;
-          if (!conditions || conditions.reduced) {
-            showStatic();
-            return;
-          }
+        media.add(
+          {
+            reduced: "(prefers-reduced-motion: reduce)",
+            desktop: "(min-width: 1100px) and (prefers-reduced-motion: no-preference)",
+            stacked: "(max-width: 1099px) and (prefers-reduced-motion: no-preference)",
+          },
+          (mediaContext) => {
+            const conditions = mediaContext.conditions;
+            if (!conditions || conditions.reduced) {
+              showStatic();
+              return;
+            }
 
-          if (conditions.mobile) {
-            section.dataset.motionMode = "mobile";
-            const triggers: ScrollTriggerInstance[] = [];
+            if (conditions.stacked) {
+              section.dataset.motionMode = window.innerWidth < 700 ? "mobile" : "tablet";
+              section.dataset.activeProject = "all";
+              const triggers: ScrollTriggerInstance[] = [];
 
-            stories.forEach((story, index) => {
-              const visual = mobileVisuals[index];
-              gsap.set([story, visual], { opacity: 0.45, y: 24 });
-              const timeline = gsap.timeline({ defaults: { ease: "none" } })
-                .to(story, { opacity: 1, y: 0, duration: 1 }, 0)
-                .to(visual, { opacity: 1, y: 0, duration: 1 }, 0);
+              stories.forEach((story, index) => {
+                const visual = mobileVisuals[index];
+                gsap.set([story, visual], { opacity: 0.45, y: 24 });
+                const timeline = gsap.timeline({ defaults: { ease: "none" } })
+                  .to(story, { opacity: 1, y: 0, duration: 1 }, 0)
+                  .to(visual, { opacity: 1, y: 0, duration: 1 }, 0);
 
-              triggers.push(ScrollTrigger.create({
-                trigger: story,
-                start: "top 88%",
-                end: "top 62%",
-                animation: timeline,
-                scrub: 0.3,
-                invalidateOnRefresh: true,
-              }));
+                triggers.push(ScrollTrigger.create({
+                  trigger: story,
+                  start: "top 88%",
+                  end: "top 62%",
+                  animation: timeline,
+                  scrub: 0.3,
+                  invalidateOnRefresh: true,
+                }));
+              });
+
+              return () => triggers.forEach((trigger) => trigger.kill());
+            }
+
+            section.dataset.motionMode = "desktop";
+            let activeIndex = 0;
+            let storyStarts: number[] = [];
+            let previewTimeline: ReturnType<typeof gsap.timeline> | null = null;
+
+            const updateStoryStarts = () => {
+              storyStarts = stories.map((story) => story.getBoundingClientRect().top + window.scrollY);
+            };
+
+            const resolveActiveIndex = () => {
+              const anchor = window.scrollY + window.innerHeight * 0.52;
+              for (let index = storyStarts.length - 1; index >= 0; index -= 1) {
+                if (anchor >= storyStarts[index]) return index;
+              }
+              return 0;
+            };
+
+            const setAccessibleScene = (nextIndex: number) => {
+              scenes.forEach((scene, index) => {
+                scene.setAttribute("aria-hidden", index === nextIndex ? "false" : "true");
+              });
+            };
+
+            const setProjectState = (nextIndex: number, immediate = false) => {
+              const targetIndex = Math.max(0, Math.min(scenes.length - 1, nextIndex));
+              if (!immediate && targetIndex === activeIndex) return;
+
+              previewTimeline?.kill();
+              gsap.killTweensOf([scenes, indexItems].flat());
+
+              const opacity = (scene: HTMLElement) => Number.parseFloat(gsap.getProperty(scene, "opacity") as string) || 0;
+              const outgoingIndex = scenes.reduce(
+                (dominant, scene, index) => opacity(scene) > opacity(scenes[dominant]) ? index : dominant,
+                activeIndex,
+              );
+              const outgoing = scenes[outgoingIndex];
+              const incoming = scenes[targetIndex];
+              const direction = targetIndex >= outgoingIndex ? 1 : -1;
+
+              activeIndex = targetIndex;
+              section.dataset.activeProject = incoming.dataset.projectScene ?? String(targetIndex);
+              setAccessibleScene(targetIndex);
+
+              if (immediate || outgoing === incoming) {
+                gsap.set(scenes, {
+                  autoAlpha: (index) => index === targetIndex ? 1 : 0,
+                  y: 0,
+                  zIndex: (index) => index === targetIndex ? 2 : 0,
+                });
+                gsap.set(indexItems, { opacity: (index) => index === targetIndex ? 1 : 0.34 });
+                return;
+              }
+
+              scenes.forEach((scene, index) => {
+                if (index !== outgoingIndex && index !== targetIndex) {
+                  gsap.set(scene, { autoAlpha: 0, y: 0, zIndex: 0 });
+                }
+              });
+
+              gsap.set(outgoing, { autoAlpha: Math.max(opacity(outgoing), 0.72), zIndex: 1 });
+              gsap.set(incoming, {
+                autoAlpha: Math.max(opacity(incoming), 0.16),
+                y: direction * 18,
+                zIndex: 2,
+              });
+
+              previewTimeline = gsap.timeline({ defaults: { overwrite: "auto" } })
+                .to(outgoing, { autoAlpha: 0.68, y: direction * -5, duration: 0.06, ease: "power1.out" }, 0)
+                .to(incoming, { autoAlpha: 1, y: 0, duration: 0.14, ease: "power2.out" }, 0.04)
+                .to(outgoing, { autoAlpha: 0, y: direction * -16, duration: 0.1, ease: "power1.in" }, 0.06)
+                .to(indexItems, {
+                  opacity: (index) => index === targetIndex ? 1 : 0.34,
+                  duration: 0.1,
+                  ease: "power1.out",
+                }, 0.04)
+                .set(outgoing, { zIndex: 0 }, 0.18);
+            };
+
+            gsap.set(scenes, { autoAlpha: 0, y: 0, zIndex: 0 });
+            gsap.set(indexItems, { opacity: 0.34 });
+            updateStoryStarts();
+            setProjectState(resolveActiveIndex(), true);
+
+            const trigger = ScrollTrigger.create({
+              trigger: section,
+              start: "top bottom",
+              end: "bottom top",
+              invalidateOnRefresh: true,
+              onUpdate: () => setProjectState(resolveActiveIndex()),
+              onEnter: () => setProjectState(resolveActiveIndex()),
+              onEnterBack: () => setProjectState(resolveActiveIndex()),
+              onLeave: () => setProjectState(scenes.length - 1, true),
+              onLeaveBack: () => setProjectState(0, true),
+              onRefresh: () => {
+                updateStoryStarts();
+                setProjectState(resolveActiveIndex(), true);
+              },
             });
 
-            return () => triggers.forEach((trigger) => trigger.kill());
-          }
-
-          section.dataset.motionMode = "desktop";
-          const triggers: ScrollTriggerInstance[] = [];
-
-          scenes.forEach((scene, index) => {
-            const story = stories[index];
-            const indexItem = indexItems[index];
-            const steps = scene.querySelectorAll<HTMLElement>("[data-project-step]");
-            const lines = scene.querySelectorAll<SVGElement>("[data-project-line] path");
-            const nodes = scene.querySelectorAll<SVGElement>("[data-project-node] circle");
-            const evidence = scene.querySelectorAll<HTMLElement>("[data-project-evidence]");
-
-            gsap.set(scene, { autoAlpha: index === 0 ? 1 : 0, y: index === 0 ? 0 : 34 });
-            gsap.set(indexItem, { opacity: index === 0 ? 1 : 0.34 });
-            gsap.set(steps, { opacity: index === 0 ? 1 : 0.32, y: index === 0 ? 0 : 16 });
-            if (evidence.length > 0) {
-              gsap.set(evidence, { opacity: index === 0 ? 1 : 0.45, y: index === 0 ? 0 : 18 });
-            }
-            if (lines.length > 0) {
-              gsap.set(lines, { strokeDasharray: 240, strokeDashoffset: index === 0 ? 0 : 240 });
-            }
-            if (nodes.length > 0) {
-              gsap.set(nodes, { scale: index === 0 ? 1 : 0.35, transformOrigin: "center center" });
-            }
-
-            if (index > 0) {
-              const enterTimeline = gsap.timeline({ defaults: { ease: "none" } })
-                .to(scene, { autoAlpha: 1, y: 0, duration: 0.38 }, 0)
-                .to(indexItem, { opacity: 1, duration: 0.28 }, 0)
-                .to(steps, { opacity: 1, y: 0, duration: 0.34, stagger: 0.035 }, 0.08);
-
-              if (lines.length > 0) {
-                enterTimeline.to(lines, { strokeDashoffset: 0, duration: 0.4, stagger: 0.018 }, 0.1);
-              }
-              if (nodes.length > 0) {
-                enterTimeline.to(nodes, { scale: 1, duration: 0.28, stagger: 0.02 }, 0.16);
-              }
-
-              if (evidence.length > 0) {
-                enterTimeline.to(evidence, { opacity: 1, y: 0, duration: 0.36 }, 0.18);
-              }
-
-              triggers.push(ScrollTrigger.create({
-                trigger: story,
-                start: "top 84%",
-                end: "top 51%",
-                animation: enterTimeline,
-                scrub: 0.45,
-                invalidateOnRefresh: true,
-              }));
-            }
-
-            if (index < scenes.length - 1) {
-              const exitTimeline = gsap.timeline({ defaults: { ease: "none" } })
-                .to(scene, { autoAlpha: 0, y: -34, duration: 1 }, 0)
-                .to(indexItem, { opacity: 0.34, duration: 0.7 }, 0);
-
-              triggers.push(ScrollTrigger.create({
-                trigger: story,
-                start: "bottom 51%",
-                end: "bottom 18%",
-                animation: exitTimeline,
-                scrub: 0.45,
-                invalidateOnRefresh: true,
-              }));
-            }
-          });
-
-          return () => triggers.forEach((trigger) => trigger.kill());
-        },
-      );
+            return () => {
+              previewTimeline?.kill();
+              trigger.kill();
+            };
+          },
+        );
       }, section);
 
       document.fonts.ready.then(() => {
