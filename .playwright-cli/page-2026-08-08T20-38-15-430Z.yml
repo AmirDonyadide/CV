@@ -1,0 +1,43 @@
+- main [ref=f6e3]:
+  - link "Skip to identity" [ref=f6e4] [cursor=pointer]:
+    - /url: "#hero-title"
+  - region [ref=f6e5]:
+    - generic [ref=f6e7]:
+      - navigation "Primary navigation" [ref=f6e9]:
+        - link "Amirhossein Donyadidegan — home" [ref=f6e10] [cursor=pointer]:
+          - /url: "#hero"
+          - text: AMIR
+        - generic [ref=f6e11]:
+          - link "Work" [ref=f6e12] [cursor=pointer]:
+            - /url: "#projects"
+          - link "Experience" [ref=f6e13] [cursor=pointer]:
+            - /url: "#experience"
+          - link "Education" [ref=f6e14] [cursor=pointer]:
+            - /url: "#journey"
+          - link "Skills" [ref=f6e15] [cursor=pointer]:
+            - /url: "#technical-stack"
+          - link "Contact" [ref=f6e16] [cursor=pointer]:
+            - /url: "#contact"
+        - generic [ref=f6e17]:
+          - group "Language" [ref=f6e18]:
+            - button "EN" [pressed] [ref=f6e19] [cursor=pointer]
+            - button "DE" [ref=f6e20] [cursor=pointer]
+            - button "IT" [ref=f6e21] [cursor=pointer]
+          - button "Skip intro" [ref=f6e22] [cursor=pointer]
+          - link "Quick CV" [ref=f6e23] [cursor=pointer]:
+            - /url: /cv
+      - generic [ref=f6e31]:
+        - heading "Amir Donyadide" [level=1] [ref=f6e32]:
+          - generic [ref=f6e33]: Amir
+          - generic [ref=f6e34]: Donyadide
+        - paragraph [ref=f6e35]: Geospatial Data & Software Engineer
+        - paragraph [ref=f6e36]: From coordinates to decisions.
+        - generic [ref=f6e37]:
+          - link "Explore work" [ref=f6e38] [cursor=pointer]:
+            - /url: "#projects"
+          - link "Download CV" [ref=f6e42] [cursor=pointer]:
+            - /url: /assets/amirhossein-donyadidegan-cv.pdf
+      - paragraph [ref=f6e47]:
+        - generic [ref=f6e48]: STATE 01
+        - strong [ref=f6e49]: COORDINATE
+  - status "Loading page" [ref=f6e50]

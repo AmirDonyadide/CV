@@ -1,7 +1,9 @@
-let runtimePromise: Promise<{
-  gsap: typeof import("gsap").default;
-  ScrollTrigger: typeof import("gsap/ScrollTrigger").ScrollTrigger;
-}> | null = null;
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
+export { gsap, ScrollTrigger };
 
 let scrollRuntimePromise: Promise<{
   gsap: typeof import("gsap").default;
@@ -10,17 +12,7 @@ let scrollRuntimePromise: Promise<{
 }> | null = null;
 
 export function loadGsap() {
-  runtimePromise ??= Promise.all([
-    import("gsap"),
-    import("gsap/ScrollTrigger"),
-  ]).then(([gsapModule, scrollTriggerModule]) => {
-    const gsap = gsapModule.default;
-    const { ScrollTrigger } = scrollTriggerModule;
-    gsap.registerPlugin(ScrollTrigger);
-    return { gsap, ScrollTrigger };
-  });
-
-  return runtimePromise;
+  return Promise.resolve({ gsap, ScrollTrigger });
 }
 
 export function loadScrollGsap() {

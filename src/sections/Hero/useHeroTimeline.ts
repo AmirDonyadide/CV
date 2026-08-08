@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef } from "react";
 import type { ScrollTrigger as ScrollTriggerInstance } from "gsap/ScrollTrigger";
-import { loadGsap, loadScrollGsap } from "../../motion/loadGsap";
+import { gsap, loadScrollGsap, ScrollTrigger } from "../../motion/loadGsap";
 import type { HeroNavigationTarget } from "./hero.types";
 
 interface UseHeroTimelineOptions {
@@ -27,9 +27,10 @@ const layerSelectors = {
   model: "[data-layer='model']",
   system: "[data-layer='system']",
   arrows: "[data-layer='arrows']",
+  mobileArrows: "[data-layer='mobile-arrows']",
 } as const;
 
-type VisualStateKey = Exclude<keyof typeof layerSelectors, "arrows">;
+type VisualStateKey = Exclude<keyof typeof layerSelectors, "arrows" | "mobileArrows">;
 
 interface StateLayout {
   key: VisualStateKey;
@@ -54,9 +55,29 @@ const stateLayouts: readonly StateLayout[] = [
   { key: "system", origin: [1356, 381], activeX: -376, activeScale: 1.03, historyX: -376, historyScale: 1.03, historyOpacity: 1, overviewX: 180, overviewScale: 0.82, overviewOpacity: 0.92 },
 ];
 
+interface OverviewLayout {
+  x: number;
+  y: number;
+  scale: number;
+  opacity: number;
+}
+
+const mobileOverviewLayouts: Record<VisualStateKey, OverviewLayout> = {
+  coordinate: { x: 402, y: -112, scale: 0.62, opacity: 0.58 },
+  points: { x: 309, y: -112, scale: 0.52, opacity: 0.56 },
+  grid: { x: 238, y: -112, scale: 0.55, opacity: 0.62 },
+  layers: { x: 274, y: -121, scale: 0.5, opacity: 0.66 },
+  data: { x: -335, y: 65, scale: 0.62, opacity: 0.68 },
+  model: { x: -203, y: 77, scale: 0.6, opacity: 0.74 },
+  system: { x: -360, y: 59, scale: 0.58, opacity: 0.96 },
+};
+
 const STATE_HOLD = 0.26;
 const HANDOFF_DURATION = 0.78;
 const INCOMING_OFFSET = 64;
+const MOBILE_HISTORY_CENTER = 620;
+const MOBILE_EXIT_CENTER = 260;
+const MOBILE_OVERVIEW_STAGE_SCALE = 0.88;
 
 const scaleTransform = ([x, y]: readonly [number, number], scale: number) =>
   `translate(${x} ${y}) scale(${scale}) translate(${-x} ${-y})`;
@@ -66,7 +87,7 @@ export function useHeroTimeline({ sectionRef, viewportRef }: UseHeroTimelineOpti
   const navigationTweenRef = useRef<KillableTween | null>(null);
   const navigationRequestRef = useRef(0);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const section = sectionRef.current;
     const viewport = viewportRef.current;
     if (!section || !viewport) return;
@@ -75,11 +96,33 @@ export function useHeroTimeline({ sectionRef, viewportRef }: UseHeroTimelineOpti
     let disposeAnimation = () => {};
     const saveData = Boolean((navigator as NavigatorWithConnection).connection?.saveData);
 
-    const activate = async () => {
-      const { gsap, ScrollTrigger } = await loadGsap();
-      if (!active || section.dataset.motionMode === "static") return;
+    const completeCoordinateIntro = () => {
+      section.dataset.coordinateIntro = "complete";
+    };
+    const handleScrollIntent = () => {
+      completeCoordinateIntro();
+    };
+    const handleScrollKey = (event: KeyboardEvent) => {
+      if (["ArrowDown", "ArrowUp", "PageDown", "PageUp", "Home", "End", " "].includes(event.key)) {
+        completeCoordinateIntro();
+      }
+    };
+
+    window.addEventListener("wheel", handleScrollIntent, { passive: true });
+    window.addEventListener("touchstart", handleScrollIntent, { passive: true });
+    window.addEventListener("keydown", handleScrollKey);
+
+    const activate = () => {
+      if (!active) return;
 
       const matchMedia = gsap.matchMedia();
+      let preservedResponsiveProgress: number | null = null;
+      let responsiveRestoreFrame: number | undefined;
+      const captureResponsiveProgress = () => {
+        const trigger = triggerRef.current;
+        if (trigger) preservedResponsiveProgress = trigger.progress;
+      };
+      window.addEventListener("resize", captureResponsiveProgress, { capture: true });
       const context = gsap.context(() => {
         const select = gsap.utils.selector(section);
         const stageShell = select("[data-stage-shell]");
@@ -100,6 +143,7 @@ export function useHeroTimeline({ sectionRef, viewportRef }: UseHeroTimelineOpti
           model: select(layerSelectors.model),
           system: select(layerSelectors.system),
           arrows: select(layerSelectors.arrows),
+          mobileArrows: select(layerSelectors.mobileArrows),
         };
         const artwork: Record<VisualStateKey, Element[]> = {
           coordinate: select("[data-state-artwork='coordinate']"),
@@ -115,9 +159,34 @@ export function useHeroTimeline({ sectionRef, viewportRef }: UseHeroTimelineOpti
         const internalArtwork = [points, gridLines, vectorPaths, rasterCells, dataRows, modelEdges, modelNodes].flat();
 
         const showStaticFinal = () => {
+          const isMobileViewport = window.matchMedia("(max-width: 767px)").matches;
+          const isTabletViewport = window.matchMedia("(min-width: 768px) and (max-width: 1199px)").matches;
           section.dataset.motionMode = "static";
-          gsap.set([...visualLayers, ...artworkLayers, ...layers.arrows, ...internalArtwork, ...stageShell], { clearProps: "all" });
-          gsap.set(artworkLayers, { attr: { transform: "" } });
+          completeCoordinateIntro();
+          gsap.set(
+            [...visualLayers, ...artworkLayers, ...layers.arrows, ...layers.mobileArrows, ...internalArtwork, ...stageShell],
+            { clearProps: "all" },
+          );
+          stateLayouts.forEach((state) => {
+            const overview = isMobileViewport
+              ? mobileOverviewLayouts[state.key]
+              : {
+                  x: state.overviewX,
+                  y: 0,
+                  scale: state.overviewScale,
+                  opacity: state.overviewOpacity,
+                };
+            gsap.set(layers[state.key], { x: overview.x, y: overview.y, autoAlpha: overview.opacity });
+            gsap.set(artwork[state.key], {
+              attr: { transform: scaleTransform(state.origin, overview.scale) },
+            });
+          });
+          gsap.set(stageShell, {
+            scale: isMobileViewport ? MOBILE_OVERVIEW_STAGE_SCALE : isTabletViewport ? 0.92 : 1,
+            transformOrigin: "center center",
+          });
+          gsap.set(layers.arrows, { autoAlpha: isMobileViewport ? 0 : 0.44 });
+          gsap.set(layers.mobileArrows, { autoAlpha: isMobileViewport ? 0.5 : 0 });
           gsap.set(labels, { autoAlpha: 0, scale: 0.8, clearProps: "transformOrigin" });
           gsap.set(labels.at(-1) ?? [], { autoAlpha: 1, scale: 1 });
         };
@@ -144,21 +213,24 @@ export function useHeroTimeline({ sectionRef, viewportRef }: UseHeroTimelineOpti
             const isMobile = Boolean(conditions.mobile);
             const distanceFactor = isDesktop ? 3.6 : isCompactDesktop ? 1.8 : isTablet ? 2.35 : 1.25;
             const systemActiveX = isMobile ? -556 : stateLayouts.at(-1)?.activeX ?? -376;
-            const overviewStageScale = isMobile ? 0.46 : isTablet ? 0.92 : 1;
+            const activeScaleMultiplier = isMobile ? 1.42 : isTablet ? 1.45 : 1;
+            const overviewStageScale = isMobile ? MOBILE_OVERVIEW_STAGE_SCALE : isTablet ? 0.92 : 1;
             section.dataset.motionMode = isDesktop || isCompactDesktop ? "desktop" : isTablet ? "tablet" : "mobile";
 
-            gsap.set(visualLayers, { autoAlpha: 0, x: 0 });
+            gsap.set(visualLayers, { autoAlpha: 0, x: 0, y: 0 });
             stateLayouts.forEach((state, index) => {
               const activeX = state.key === "system" ? systemActiveX : state.activeX;
+              const activeScale = state.activeScale * activeScaleMultiplier;
               gsap.set(layers[state.key], {
                 x: index === 0 ? activeX : activeX + INCOMING_OFFSET,
               });
               gsap.set(artwork[state.key], {
-                attr: { transform: scaleTransform(state.origin, index === 0 ? state.activeScale : state.activeScale * 0.8) },
+                attr: { transform: scaleTransform(state.origin, index === 0 ? activeScale : activeScale * 0.8) },
               });
             });
             gsap.set(layers.coordinate, { autoAlpha: 1 });
             gsap.set(layers.arrows, { autoAlpha: 0 });
+            gsap.set(layers.mobileArrows, { autoAlpha: 0 });
             gsap.set(stageShell, { x: 0, y: 0, xPercent: 0, yPercent: 0, scale: 1, transformOrigin: "center center" });
             gsap.set(points, { autoAlpha: 0, scale: 0.2, transformOrigin: "center center" });
             gsap.set(gridLines, { strokeDasharray: 220, strokeDashoffset: 220 });
@@ -204,6 +276,13 @@ export function useHeroTimeline({ sectionRef, viewportRef }: UseHeroTimelineOpti
             stateLayouts.slice(0, -1).forEach((outgoingState, index) => {
               const incomingState = stateLayouts[index + 1];
               const incomingX = incomingState.key === "system" ? systemActiveX : incomingState.activeX;
+              const incomingScale = incomingState.activeScale * activeScaleMultiplier;
+              const historyX = isMobile
+                ? MOBILE_HISTORY_CENTER - outgoingState.origin[0]
+                : outgoingState.historyX;
+              const historyOpacity = isMobile
+                ? Math.min(outgoingState.historyOpacity, 0.36)
+                : outgoingState.historyOpacity;
               const incomingStart = cursor + 0.32;
 
               timeline.addLabel(`handoff-${String(index + 1).padStart(2, "0")}-${String(index + 2).padStart(2, "0")}`, cursor);
@@ -211,8 +290,8 @@ export function useHeroTimeline({ sectionRef, viewportRef }: UseHeroTimelineOpti
                 .to(
                   layers[outgoingState.key],
                   {
-                    x: outgoingState.historyX,
-                    autoAlpha: outgoingState.historyOpacity,
+                    x: historyX,
+                    autoAlpha: historyOpacity,
                     duration: 0.52,
                   },
                   cursor,
@@ -234,7 +313,7 @@ export function useHeroTimeline({ sectionRef, viewportRef }: UseHeroTimelineOpti
                 )
                 .to(
                   artwork[incomingState.key],
-                  { attr: { transform: scaleTransform(incomingState.origin, incomingState.activeScale) }, duration: 0.46 },
+                  { attr: { transform: scaleTransform(incomingState.origin, incomingScale) }, duration: 0.46 },
                   incomingStart,
                 )
                 .to(labels[index + 1], { autoAlpha: 1, scale: 1, duration: 0.38 }, incomingStart + 0.04);
@@ -242,7 +321,16 @@ export function useHeroTimeline({ sectionRef, viewportRef }: UseHeroTimelineOpti
               revealArtwork(incomingState.key, incomingStart + 0.02);
 
               if (isMobile && index > 0) {
-                timeline.to(layers[stateLayouts[index - 1].key], { autoAlpha: 0.12, duration: 0.28 }, cursor);
+                const olderState = stateLayouts[index - 1];
+                timeline.to(
+                  layers[olderState.key],
+                  {
+                    x: MOBILE_EXIT_CENTER - olderState.origin[0],
+                    autoAlpha: 0,
+                    duration: 0.28,
+                  },
+                  cursor,
+                );
               }
 
               timeline.addLabel(`state-${String(index + 2).padStart(2, "0")}`, cursor + HANDOFF_DURATION);
@@ -252,30 +340,39 @@ export function useHeroTimeline({ sectionRef, viewportRef }: UseHeroTimelineOpti
             const overviewStart = cursor + 0.08;
             timeline.addLabel("overview", overviewStart);
             stateLayouts.forEach((state) => {
+              const overview = isMobile
+                ? mobileOverviewLayouts[state.key]
+                : {
+                    x: state.overviewX,
+                    y: 0,
+                    scale: state.overviewScale,
+                    opacity: state.overviewOpacity,
+                  };
               timeline.to(
                 layers[state.key],
                 {
-                  x: state.overviewX,
-                  y: 0,
-                  autoAlpha: state.overviewOpacity,
+                  x: overview.x,
+                  y: overview.y,
+                  autoAlpha: overview.opacity,
                   duration: 0.72,
                 },
                 overviewStart,
               );
               timeline.to(
                 artwork[state.key],
-                { attr: { transform: scaleTransform(state.origin, state.overviewScale) }, duration: 0.72 },
+                { attr: { transform: scaleTransform(state.origin, overview.scale) }, duration: 0.72 },
                 overviewStart,
               );
             });
             timeline
               .to(labels[6], { autoAlpha: 0, scale: 0.7, duration: 0.28 }, overviewStart)
               .to(labels[7], { autoAlpha: 1, scale: 1, duration: 0.4 }, overviewStart + 0.32)
-              .to(layers.arrows, { autoAlpha: 0.44, duration: 0.36 }, overviewStart + 0.34)
+              .to(layers.arrows, { autoAlpha: isMobile ? 0 : 0.44, duration: 0.36 }, overviewStart + 0.34)
+              .to(layers.mobileArrows, { autoAlpha: isMobile ? 0.5 : 0, duration: 0.36 }, overviewStart + 0.34)
               .to(stageShell, { scale: overviewStageScale, duration: 0.72 }, overviewStart)
               .to({}, { duration: 0.14 }, overviewStart + 0.72);
 
-            triggerRef.current = ScrollTrigger.create({
+            const trigger = ScrollTrigger.create({
               trigger: section,
               start: "top top",
               end: () => `+=${Math.round(window.innerHeight * distanceFactor)}`,
@@ -285,10 +382,35 @@ export function useHeroTimeline({ sectionRef, viewportRef }: UseHeroTimelineOpti
               scrub: isDesktop ? 0.65 : isCompactDesktop ? 0.5 : 0.4,
               anticipatePin: 1,
               invalidateOnRefresh: true,
+              onUpdate: (self) => {
+                if (self.progress > 0.001) completeCoordinateIntro();
+              },
             });
+            triggerRef.current = trigger;
+            if (preservedResponsiveProgress !== null) {
+              trigger.refresh();
+              const restoredScroll = trigger.start
+                + preservedResponsiveProgress * (trigger.end - trigger.start);
+              preservedResponsiveProgress = null;
+              if (Number.isFinite(restoredScroll)) {
+                if (responsiveRestoreFrame !== undefined) {
+                  window.cancelAnimationFrame(responsiveRestoreFrame);
+                }
+                responsiveRestoreFrame = window.requestAnimationFrame(() => {
+                  if (triggerRef.current !== trigger) return;
+                  ScrollTrigger.getScrollFunc(window)(restoredScroll);
+                  ScrollTrigger.update();
+                });
+              }
+            }
+            ScrollTrigger.update();
+            if (trigger.progress > 0.001) completeCoordinateIntro();
 
             return () => {
-              triggerRef.current = null;
+              if (triggerRef.current === trigger) {
+                preservedResponsiveProgress ??= trigger.progress;
+                triggerRef.current = null;
+              }
               timeline.kill();
             };
           },
@@ -301,40 +423,26 @@ export function useHeroTimeline({ sectionRef, viewportRef }: UseHeroTimelineOpti
 
       disposeAnimation = () => {
         triggerRef.current = null;
+        if (responsiveRestoreFrame !== undefined) window.cancelAnimationFrame(responsiveRestoreFrame);
+        window.removeEventListener("resize", captureResponsiveProgress, { capture: true });
         matchMedia.revert();
         context.revert();
       };
     };
 
-    let motionStarted = false;
-    let delayedActivation: number | undefined;
-    const startMotion = () => {
-      if (motionStarted) return;
-      motionStarted = true;
-      if (delayedActivation !== undefined) window.clearTimeout(delayedActivation);
-      interactionEvents.forEach((eventName) => {
-        window.removeEventListener(eventName, startMotion);
-      });
-      void activate();
-    };
-    const interactionEvents = ["wheel", "touchstart", "keydown"] as const;
     const staticExperienceRequested = window.matchMedia("(prefers-reduced-motion: reduce), (max-height: 559px)").matches || saveData;
 
     if (staticExperienceRequested) {
       section.dataset.motionMode = "static";
-    } else {
-      delayedActivation = window.setTimeout(startMotion, 2200);
-      interactionEvents.forEach((eventName) => {
-        window.addEventListener(eventName, startMotion, { passive: true, once: true });
-      });
+      completeCoordinateIntro();
     }
+    activate();
 
     return () => {
       active = false;
-      if (delayedActivation !== undefined) window.clearTimeout(delayedActivation);
-      interactionEvents.forEach((eventName) => {
-        window.removeEventListener(eventName, startMotion);
-      });
+      window.removeEventListener("wheel", handleScrollIntent);
+      window.removeEventListener("touchstart", handleScrollIntent);
+      window.removeEventListener("keydown", handleScrollKey);
       disposeAnimation();
     };
   }, [sectionRef, viewportRef]);
@@ -414,10 +522,10 @@ export function useHeroTimeline({ sectionRef, viewportRef }: UseHeroTimelineOpti
     const duration = Math.min(1.45, Math.max(0.72, 0.72 + distance / 7500));
 
     void loadScrollGsap()
-      .then(({ gsap }) => {
+      .then(({ gsap: scrollGsap }) => {
         if (requestId !== navigationRequestRef.current) return;
 
-        navigationTweenRef.current = gsap.to(window, {
+        navigationTweenRef.current = scrollGsap.to(window, {
           scrollTo: { y: targetTop, autoKill: true },
           duration,
           ease: "power2.inOut",

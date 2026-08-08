@@ -43,6 +43,15 @@ export function HeroStage() {
           <path d="M1300 372h60" />
         </g>
 
+        <g className={`${styles.sequenceArrows} ${styles.mobileSequenceArrows}`} data-layer="mobile-arrows">
+          <path d="M575 260h70" />
+          <path d="M755 260h60" />
+          <path d="M915 260h70" />
+          <path d="M1090 260h30v90H620v35" />
+          <path d="M690 440h65" />
+          <path d="M870 440h30" />
+        </g>
+
         <g className={styles.layerCoordinate} data-layer="coordinate">
           <g data-state-artwork="coordinate">
             <g data-coordinate-mark>

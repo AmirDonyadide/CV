@@ -1,0 +1,28 @@
+- main [ref=f8e3]:
+  - link "Skip to identity" [ref=f8e4] [cursor=pointer]:
+    - /url: "#hero-title"
+  - region [ref=f8e5]:
+    - generic [ref=f8e7]:
+      - navigation "Primary navigation" [ref=f8e9]:
+        - link "Amirhossein Donyadidegan — home" [ref=f8e10] [cursor=pointer]:
+          - /url: "#hero"
+          - text: AMIR
+        - generic [ref=f8e11]:
+          - link "Quick CV" [ref=f8e12] [cursor=pointer]:
+            - /url: /cv
+          - button "Open navigation" [ref=f8e13] [cursor=pointer]
+      - generic [ref=f8e23]:
+        - heading "Amir Donyadide" [level=1] [ref=f8e24]:
+          - generic [ref=f8e25]: Amir
+          - generic [ref=f8e26]: Donyadide
+        - paragraph [ref=f8e27]: Geospatial Data & Software Engineer
+        - paragraph [ref=f8e28]: From coordinates to decisions.
+        - generic [ref=f8e29]:
+          - link "Explore work" [ref=f8e30] [cursor=pointer]:
+            - /url: "#projects"
+          - link "Download CV" [ref=f8e34] [cursor=pointer]:
+            - /url: /assets/amirhossein-donyadidegan-cv.pdf
+      - paragraph [ref=f8e39]:
+        - generic [ref=f8e40]: STATE 01
+        - strong [ref=f8e41]: COORDINATE
+  - status "Loading page" [ref=f8e42]

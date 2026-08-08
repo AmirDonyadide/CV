@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import { heroCopy } from "./hero.copy";
 import type { Locale } from "./hero.types";
 import { HeroIdentity } from "./HeroIdentity";
@@ -19,6 +19,10 @@ export function HeroStory({ locale, onLocaleChange }: HeroStoryProps) {
   const { navigateTo, skipIntro } = useHeroTimeline({ sectionRef, viewportRef });
   const copy = heroCopy[locale];
 
+  useLayoutEffect(() => {
+    document.getElementById("hero-prepaint")?.remove();
+  }, []);
+
   return (
     <>
       <a
@@ -36,6 +40,7 @@ export function HeroStory({ locale, onLocaleChange }: HeroStoryProps) {
         ref={sectionRef}
         className={styles.hero}
         data-motion-mode="pending"
+        data-coordinate-intro="pending"
         aria-labelledby="hero-title"
       >
         <div ref={viewportRef} className={styles.viewport}>

@@ -3,6 +3,7 @@ import { localeFromPath, localizedPath, routePathFromLocalized } from "./i18n/ro
 import { loadGsap } from "./motion/loadGsap";
 import { applySeo } from "./seo/applySeo";
 import { projectSlugFromRoute } from "./seo/seo.data";
+import { HeroStory } from "./sections/Hero/HeroStory";
 import type { Locale } from "./sections/Hero/hero.types";
 
 const HomePage = lazy(() => import("./HomePage"));
@@ -107,8 +108,11 @@ export default function App() {
   }
 
   return (
-    <Suspense fallback={fallback}>
-      <HomePage locale={locale} onLocaleChange={changeLocale} />
-    </Suspense>
+    <main>
+      <HeroStory locale={locale} onLocaleChange={changeLocale} />
+      <Suspense fallback={fallback}>
+        <HomePage locale={locale} />
+      </Suspense>
+    </main>
   );
 }

@@ -3,6 +3,45 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preload" href="/assets/fonts/geologica-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <script>
+      if (/^\/(?:de|it)?\/?$/.test(window.location.pathname)) {
+        document.documentElement.classList.add("hero-prepaint-enabled");
+      }
+    </script>
+    <style>
+      @font-face{font-family:Geologica;src:url('/assets/fonts/geologica-latin-wght-normal.woff2') format('woff2');font-weight:100 900;font-display:swap}
+      @font-face{font-family:Manrope;src:url('/assets/fonts/manrope-latin-wght-normal.woff2') format('woff2');font-weight:200 800;font-display:swap}
+      html,body{margin:0;background:#0b0d0f;color:#f2f4f3}
+      #hero-prepaint{display:none}
+      .hero-prepaint-enabled #hero-prepaint{position:fixed;inset:0;z-index:1000;display:block;overflow:hidden;background:#0b0d0f;color:#f2f4f3;font-family:Manrope,"Helvetica Neue",Arial,sans-serif;pointer-events:none}
+      .hero-prepaint-header{position:absolute;inset:0 0 auto;padding:clamp(1.35rem,2.7vw,2.9rem) clamp(1.35rem,3.2vw,3.35rem)}
+      .hero-prepaint-nav{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:clamp(2rem,4vw,5rem);min-height:2.2rem;font:clamp(.72rem,.82vw,.9rem)/1 ui-monospace,"SFMono-Regular","Cascadia Mono",monospace;letter-spacing:.055em;text-transform:uppercase}
+      .hero-prepaint-brand{color:#45bfe6;font-weight:650;letter-spacing:.14em}
+      .hero-prepaint-links,.hero-prepaint-tools{display:flex;align-items:center}
+      .hero-prepaint-links{gap:clamp(1.7rem,3.2vw,4.25rem);color:#c5cacc}
+      .hero-prepaint-tools{gap:clamp(1rem,1.8vw,2rem)}
+      .hero-prepaint-languages{color:#727b82;font-size:.66rem}
+      .hero-prepaint-languages .hero-prepaint-active-language{color:#45bfe6}
+      .hero-prepaint-quick{padding-bottom:.55rem;border-bottom:1px solid #45bfe6;white-space:nowrap}
+      .hero-prepaint-menu{display:none;width:2.75rem;height:2.75rem;border:1px solid #293137;place-items:center}
+      .hero-prepaint-menu::before,.hero-prepaint-menu::after{position:absolute;width:1.25rem;height:1px;background:#f2f4f3;content:"";transform:translateY(-4px)}
+      .hero-prepaint-menu::after{transform:translateY(4px)}
+      .hero-prepaint-identity{position:absolute;bottom:clamp(3rem,7.4vh,4.75rem);left:clamp(1.5rem,3.4vw,3.5rem);width:min(48rem,65vw)}
+      .hero-prepaint-identity h1{max-width:11ch;margin:0;font:420 clamp(3.7rem,5.15vw,6.25rem)/.86 Geologica,"Helvetica Neue",sans-serif;letter-spacing:.035em;text-transform:uppercase}
+      .hero-prepaint-identity h1 span{display:block}
+      .hero-prepaint-role{margin:clamp(1rem,2.2vh,1.5rem) 0 0;color:#abb2b6;font-size:clamp(1.05rem,1.42vw,1.65rem);font-weight:600;letter-spacing:-.025em}
+      .hero-prepaint-tagline{margin:clamp(1rem,3.4vh,2.15rem) 0 0;color:#8d969d;font:clamp(.88rem,.95vw,1.12rem)/1.4 ui-monospace,"SFMono-Regular","Cascadia Mono",monospace}
+      .hero-prepaint-actions{display:flex;gap:1rem;margin-top:clamp(1.8rem,5.8vh,3.65rem)}
+      .hero-prepaint-action{display:flex;align-items:center;justify-content:space-between;box-sizing:border-box;min-width:15.5rem;min-height:3.25rem;padding:.75rem 1.4rem;border:1px solid #737d83;color:#c4c9cc;font:.78rem/1 ui-monospace,"SFMono-Regular","Cascadia Mono",monospace}
+      .hero-prepaint-action:first-child{border-color:#45bfe6;color:#45bfe6}
+      .hero-prepaint-meta{position:absolute;right:clamp(1.5rem,3.4vw,3.5rem);bottom:clamp(2.25rem,5vh,4.1rem);display:grid;grid-template-columns:5.7rem 1fr;gap:.8rem;width:min(15rem,24vw);color:#929ba0;font:clamp(.68rem,.72vw,.8rem)/1.4 ui-monospace,"SFMono-Regular","Cascadia Mono",monospace;letter-spacing:.055em;text-transform:uppercase}
+      .hero-prepaint-meta strong{color:#45bfe6;font-weight:500;white-space:nowrap}
+      @media(max-width:1049px){.hero-prepaint-nav{grid-template-columns:1fr auto}.hero-prepaint-links,.hero-prepaint-languages,.hero-prepaint-skip{display:none}.hero-prepaint-menu{position:relative;display:grid}.hero-prepaint-meta{top:5.9rem;right:1.5rem;bottom:auto;width:13rem}}
+      @media(max-width:767px){.hero-prepaint-header{padding:1.15rem 1rem}.hero-prepaint-tools{gap:1rem}.hero-prepaint-quick{font-size:.65rem}.hero-prepaint-identity{right:1rem;bottom:1.25rem;left:1rem;width:auto}.hero-prepaint-identity h1{max-width:none;font-size:clamp(2.55rem,11.6vw,4.4rem);line-height:.9;letter-spacing:.01em}.hero-prepaint-role{font-size:clamp(.95rem,4vw,1.15rem)}.hero-prepaint-tagline{margin-top:.75rem;font-size:.75rem}.hero-prepaint-actions{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-top:1.3rem}.hero-prepaint-action{min-width:0;min-height:3.2rem;padding:.65rem .85rem;font-size:.68rem}.hero-prepaint-meta{top:5.9rem;right:1rem;width:min(14rem,calc(100vw - 2rem));grid-template-columns:4.75rem 1fr;gap:.5rem;font-size:.68rem}}
+      @media(max-width:359px){.hero-prepaint-actions{grid-template-columns:1fr;gap:.6rem}.hero-prepaint-action{width:100%;white-space:nowrap}}
+    </style>
     <meta name="author" content="Amirhossein Donyadidegan" />
     <meta name="robots" content="index,follow" />
     <meta
@@ -51,6 +90,48 @@
     <title>Amirhossein Donyadidegan | Geospatial Data &amp; Software Engineer</title>
   </head>
   <body>
+    <div id="hero-prepaint" aria-hidden="true">
+      <div class="hero-prepaint-header">
+        <div class="hero-prepaint-nav">
+          <span class="hero-prepaint-brand">AMIR</span>
+          <div class="hero-prepaint-links"><span data-prepaint-key="work">WORK</span><span data-prepaint-key="experience">EXPERIENCE</span><span data-prepaint-key="education">EDUCATION</span><span data-prepaint-key="skills">SKILLS</span><span data-prepaint-key="contact">CONTACT</span></div>
+          <div class="hero-prepaint-tools">
+            <span class="hero-prepaint-languages"><span class="hero-prepaint-active-language" data-prepaint-language="en">EN</span>&nbsp;&nbsp; <span data-prepaint-language="de">DE</span>&nbsp;&nbsp; <span data-prepaint-language="it">IT</span></span>
+            <span class="hero-prepaint-skip" data-prepaint-key="skip">SKIP INTRO</span>
+            <span class="hero-prepaint-quick" data-prepaint-key="quickCv">QUICK CV</span>
+            <span class="hero-prepaint-menu"></span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-prepaint-identity">
+        <h1><span>AMIR</span><span>DONYADIDE</span></h1>
+        <p class="hero-prepaint-role" data-prepaint-key="role">Geospatial Data &amp; Software Engineer</p>
+        <p class="hero-prepaint-tagline" data-prepaint-key="tagline">From coordinates to decisions.</p>
+        <div class="hero-prepaint-actions">
+          <span class="hero-prepaint-action"><span data-prepaint-key="explore">Explore work</span> <b>→</b></span>
+          <span class="hero-prepaint-action"><span data-prepaint-key="download">Download CV</span> <b>↓</b></span>
+        </div>
+      </div>
+      <div class="hero-prepaint-meta"><span data-prepaint-key="state">STATE 01</span><strong data-prepaint-key="coordinate">COORDINATE</strong></div>
+    </div>
+    <script>
+      {
+        const locale = window.location.pathname.startsWith("/de") ? "de" : window.location.pathname.startsWith("/it") ? "it" : "en";
+        const localizedPrepaint = {
+          de: { work: "PROJEKTE", experience: "ERFAHRUNG", education: "AUSBILDUNG", skills: "KENNTNISSE", contact: "KONTAKT", skip: "INTRO ÜBERSPRINGEN", quickCv: "KURZPROFIL", role: "Ingenieur für Geodaten und Software", tagline: "Von Koordinaten zu Entscheidungen.", explore: "Projekte ansehen", download: "Lebenslauf herunterladen", state: "STATUS 01", coordinate: "KOORDINATE" },
+          it: { work: "PROGETTI", experience: "ESPERIENZA", education: "FORMAZIONE", skills: "COMPETENZE", contact: "CONTATTI", skip: "SALTA INTRODUZIONE", quickCv: "CV RAPIDO", role: "Ingegnere di dati geospaziali e software", tagline: "Dalle coordinate alle decisioni.", explore: "Vedi i progetti", download: "Scarica il CV", state: "STATO 01", coordinate: "COORDINATA" }
+        };
+        const copy = localizedPrepaint[locale];
+        if (copy) {
+          for (const [key, value] of Object.entries(copy)) {
+            document.querySelectorAll(`[data-prepaint-key="${key}"]`).forEach((element) => { element.textContent = value; });
+          }
+          document.querySelectorAll("[data-prepaint-language]").forEach((element) => {
+            element.classList.toggle("hero-prepaint-active-language", element.getAttribute("data-prepaint-language") === locale);
+          });
+        }
+      }
+    </script>
     <div id="root"></div>
     <noscript>
       <main style="min-height:100vh;padding:10vh 6vw;background:#0b0d0f;color:#f2f4f3;font-family:Arial,sans-serif">
