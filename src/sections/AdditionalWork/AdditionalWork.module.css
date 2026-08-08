@@ -111,6 +111,11 @@
   transform: scaleX(1);
 }
 
+.projectItem[data-expanded="true"]::before {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
 .projectRow {
   display: grid;
   grid-template-columns: 3.2rem minmax(14rem, 1.15fr) minmax(14rem, 0.9fr) auto;
@@ -162,7 +167,7 @@
 .rowMeta ul {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.35rem 0.8rem;
+  gap: 0.35rem 0.55rem;
   margin: 0.75rem 0 0;
   padding: 0;
   color: #737d83;
@@ -170,8 +175,14 @@
   list-style: none;
 }
 
-.rowMeta li + li::before {
-  margin-right: 0.8rem;
+.rowMeta li {
+  display: inline-flex;
+  align-items: baseline;
+  white-space: nowrap;
+}
+
+.rowMeta li:not(:last-child)::after {
+  margin-left: 0.55rem;
   color: #3f4a50;
   content: "·";
 }
@@ -204,6 +215,9 @@
 .projectItem[data-active="true"] .number,
 .projectItem[data-active="true"] .rowMeta > span,
 .projectItem[data-active="true"] .rowAction,
+.projectItem[data-expanded="true"] .number,
+.projectItem[data-expanded="true"] .rowMeta > span,
+.projectItem[data-expanded="true"] .rowAction,
 .projectItem:hover .rowAction {
   color: var(--accent);
 }
@@ -213,10 +227,16 @@
 }
 
 .previewRail {
-  align-self: start;
+  align-self: stretch;
   min-width: 0;
   border-left: 1px solid var(--hairline);
-  padding: clamp(2.2rem, 3.4vw, 3.6rem) 0 0 clamp(2.2rem, 3.2vw, 3.5rem);
+  padding-left: clamp(2.2rem, 3.2vw, 3.5rem);
+}
+
+.previewSticky {
+  position: sticky;
+  top: clamp(4.5rem, 9vh, 6.5rem);
+  padding: clamp(2.2rem, 3.4vw, 3.6rem) 0 2.5rem;
 }
 
 .previewHeader {
@@ -281,10 +301,6 @@
   stroke: #5b666c;
   stroke-width: 1;
   vector-effect: non-scaling-stroke;
-}
-
-.connector {
-  marker-end: url(#additional-arrow);
 }
 
 .visual marker path {
@@ -381,7 +397,11 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-@media (max-width: 1180px) {
+.inlineWorkflow {
+  display: none;
+}
+
+@media (max-width: 1240px) {
   .content {
     grid-template-columns: minmax(0, 1.35fr) minmax(21rem, 0.65fr);
   }
@@ -389,13 +409,9 @@
   .projectRow {
     grid-template-columns: 2.5rem minmax(12rem, 1fr) minmax(11rem, 0.75fr) auto;
   }
-
-  .rowAction > span {
-    display: none;
-  }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1099px) {
   .sectionHeader {
     grid-template-columns: 1fr;
   }
@@ -409,13 +425,11 @@
   }
 
   .previewRail {
-    grid-row: 1;
-    border-left: 0;
-    padding: 2rem 0 1rem;
+    display: none;
   }
 
   .projectRow {
-    grid-template-columns: 2.4rem minmax(0, 1fr) auto;
+    grid-template-columns: 2.4rem minmax(0, 1fr) max-content;
     min-height: 0;
   }
 
@@ -425,8 +439,46 @@
   }
 
   .rowAction {
+    display: inline-flex;
     grid-column: 3;
     grid-row: 1;
+    min-width: 0;
+    min-height: 2.75rem;
+    align-items: center;
+    gap: 0.65rem;
+    justify-self: end;
+    padding: 0.1rem 0;
+  }
+
+  .rowAction svg {
+    flex: none;
+  }
+
+  .rowAction[aria-expanded="true"] svg {
+    transform: rotate(90deg);
+  }
+
+  .projectItem:hover .rowAction[aria-expanded="true"] svg {
+    transform: rotate(90deg) translateX(0.2rem);
+  }
+
+  .inlineWorkflow {
+    display: block;
+    padding: 0 0 2.25rem calc(2.4rem + clamp(1rem, 2vw, 2.2rem));
+  }
+
+  .inlineWorkflow[hidden] {
+    display: none;
+  }
+
+  .inlineWorkflow .visual {
+    margin: 0;
+    border-top: 1px solid #222a2f;
+    padding-top: 1.35rem;
+  }
+
+  .inlineWorkflow .visual > svg {
+    max-height: 15rem;
   }
 }
 
@@ -451,27 +503,31 @@
     margin: 0 1.25rem;
   }
 
-  .previewRail {
-    padding-top: 1.6rem;
-  }
-
-  .previewHeader {
-    min-height: 6.5rem;
-  }
-
-  .visual {
-    margin-top: 0.5rem;
-  }
-
-  .previewSteps {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem 0;
-  }
-
   .projectRow {
-    grid-template-columns: 2.15rem minmax(0, 1fr) auto;
+    grid-template-columns: 2.15rem minmax(0, 1fr);
     gap: 0.8rem;
     padding: 1.5rem 0;
+  }
+
+  .rowTitle,
+  .rowMeta,
+  .rowAction {
+    grid-column: 2;
+  }
+
+  .rowTitle {
+    grid-row: 1;
+  }
+
+  .rowMeta {
+    grid-row: 2;
+  }
+
+  .rowAction {
+    grid-row: 3;
+    justify-self: start;
+    min-height: 2.75rem;
+    margin-top: 0.15rem;
   }
 
   .rowTitle h3 {
@@ -483,12 +539,25 @@
   }
 
   .rowMeta ul {
-    gap: 0.3rem 0.55rem;
+    gap: 0.3rem 0.4rem;
     font-size: 0.69rem;
   }
 
-  .rowMeta li + li::before {
-    margin-right: 0.55rem;
+  .rowMeta li:not(:last-child)::after {
+    margin-left: 0.4rem;
+  }
+
+  .inlineWorkflow {
+    padding: 0 0 2rem 2.95rem;
+  }
+
+  .inlineWorkflow .visual > svg {
+    max-height: none;
+  }
+
+  .inlineWorkflow .previewSteps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem 0;
   }
 }
 
