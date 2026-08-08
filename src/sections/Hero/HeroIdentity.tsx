@@ -11,8 +11,8 @@ export function HeroIdentity({ copy, onExploreWork }: HeroIdentityProps) {
   return (
     <div className={styles.identity} data-hero-identity>
       <h1 id="hero-title" tabIndex={-1}>
-        <span>Amirhossein</span>
-        <span>Donyadidegan</span>
+        <span>Amir</span>
+        <span>Donyadide</span>
       </h1>
       <p className={styles.role}>{copy.role}</p>
       <p className={styles.tagline}>{copy.tagline}</p>

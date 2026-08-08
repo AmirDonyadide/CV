@@ -24,6 +24,38 @@ const layerSelectors = {
   arrows: "[data-layer='arrows']",
 } as const;
 
+type VisualStateKey = Exclude<keyof typeof layerSelectors, "arrows">;
+
+interface StateLayout {
+  key: VisualStateKey;
+  origin: readonly [number, number];
+  activeX: number;
+  activeScale: number;
+  historyX: number;
+  historyScale: number;
+  historyOpacity: number;
+  overviewX: number;
+  overviewScale: number;
+  overviewOpacity: number;
+}
+
+const stateLayouts: readonly StateLayout[] = [
+  { key: "coordinate", origin: [128, 372], activeX: 672, activeScale: 1.18, historyX: 12, historyScale: 0.72, historyOpacity: 0.38, overviewX: -10, overviewScale: 0.72, overviewOpacity: 0.52 },
+  { key: "points", origin: [391, 372], activeX: 409, activeScale: 1, historyX: -116, historyScale: 0.58, historyOpacity: 0.4, overviewX: -10, overviewScale: 0.58, overviewOpacity: 0.48 },
+  { key: "grid", origin: [632, 372], activeX: 168, activeScale: 1, historyX: -227, historyScale: 0.66, historyOpacity: 0.42, overviewX: -15, overviewScale: 0.66, overviewOpacity: 0.56 },
+  { key: "layers", origin: [766, 381], activeX: 34, activeScale: 1, historyX: -246, historyScale: 0.62, historyOpacity: 0.44, overviewX: 25, overviewScale: 0.62, overviewOpacity: 0.58 },
+  { key: "data", origin: [955, 375], activeX: -155, activeScale: 1, historyX: -335, historyScale: 0.66, historyOpacity: 0.48, overviewX: 75, overviewScale: 0.66, overviewOpacity: 0.6 },
+  { key: "model", origin: [1023, 363], activeX: -223, activeScale: 1, historyX: -293, historyScale: 0.64, historyOpacity: 0.52, overviewX: 205, overviewScale: 0.64, overviewOpacity: 0.65 },
+  { key: "system", origin: [1356, 381], activeX: -376, activeScale: 1.03, historyX: -376, historyScale: 1.03, historyOpacity: 1, overviewX: 180, overviewScale: 0.82, overviewOpacity: 0.92 },
+];
+
+const STATE_HOLD = 0.26;
+const HANDOFF_DURATION = 0.78;
+const INCOMING_OFFSET = 64;
+
+const scaleTransform = ([x, y]: readonly [number, number], scale: number) =>
+  `translate(${x} ${y}) scale(${scale}) translate(${-x} ${-y})`;
+
 export function useHeroTimeline({ sectionRef, viewportRef }: UseHeroTimelineOptions) {
   const triggerRef = useRef<ScrollTriggerInstance | null>(null);
 
@@ -35,141 +67,225 @@ export function useHeroTimeline({ sectionRef, viewportRef }: UseHeroTimelineOpti
     let active = true;
     let disposeAnimation = () => {};
     const saveData = Boolean((navigator as NavigatorWithConnection).connection?.saveData);
+
     const activate = async () => {
       const { gsap, ScrollTrigger } = await loadGsap();
       if (!active || section.dataset.motionMode === "static") return;
 
       const matchMedia = gsap.matchMedia();
       const context = gsap.context(() => {
-      const select = gsap.utils.selector(section);
-      const identity = select("[data-hero-identity]");
-      const actions = select("[data-hero-actions] > *");
-      const stageShell = select("[data-stage-shell]");
-      const labels = select("[data-state-label]");
-      const points = select("[data-point]");
-      const gridLines = select("[data-grid-line]");
-      const vectorPaths = select("[data-vector-path]");
-      const rasterCells = select("[data-raster-cell]");
-      const dataRows = select("[data-data-row]");
-      const modelEdges = select("[data-model-edge]");
-      const modelNodes = select("[data-model-node]");
-      const layers: Record<keyof typeof layerSelectors, Element[]> = {
-        coordinate: select(layerSelectors.coordinate),
-        points: select(layerSelectors.points),
-        grid: select(layerSelectors.grid),
-        layers: select(layerSelectors.layers),
-        data: select(layerSelectors.data),
-        model: select(layerSelectors.model),
-        system: select(layerSelectors.system),
-        arrows: select(layerSelectors.arrows),
-      };
+        const select = gsap.utils.selector(section);
+        const stageShell = select("[data-stage-shell]");
+        const labels = select("[data-state-label]");
+        const points = select("[data-point]");
+        const gridLines = select("[data-grid-line]");
+        const vectorPaths = select("[data-vector-path]");
+        const rasterCells = select("[data-raster-cell]");
+        const dataRows = select("[data-data-row]");
+        const modelEdges = select("[data-model-edge]");
+        const modelNodes = select("[data-model-node]");
+        const layers: Record<keyof typeof layerSelectors, Element[]> = {
+          coordinate: select(layerSelectors.coordinate),
+          points: select(layerSelectors.points),
+          grid: select(layerSelectors.grid),
+          layers: select(layerSelectors.layers),
+          data: select(layerSelectors.data),
+          model: select(layerSelectors.model),
+          system: select(layerSelectors.system),
+          arrows: select(layerSelectors.arrows),
+        };
+        const artwork: Record<VisualStateKey, Element[]> = {
+          coordinate: select("[data-state-artwork='coordinate']"),
+          points: select("[data-state-artwork='points']"),
+          grid: select("[data-state-artwork='grid']"),
+          layers: select("[data-state-artwork='layers']"),
+          data: select("[data-state-artwork='data']"),
+          model: select("[data-state-artwork='model']"),
+          system: select("[data-state-artwork='system']"),
+        };
+        const visualLayers = stateLayouts.flatMap(({ key }) => layers[key]);
+        const artworkLayers = stateLayouts.flatMap(({ key }) => artwork[key]);
+        const internalArtwork = [points, gridLines, vectorPaths, rasterCells, dataRows, modelEdges, modelNodes].flat();
 
-      const showStaticFinal = () => {
-        section.dataset.motionMode = "static";
-        gsap.set(Object.values(layers).flat(), { clearProps: "all" });
-        gsap.set([identity, actions, stageShell].flat(), { clearProps: "all" });
-        gsap.set(labels, { autoAlpha: 0 });
-        gsap.set(labels.at(-1) ?? [], { autoAlpha: 1 });
-      };
+        const showStaticFinal = () => {
+          section.dataset.motionMode = "static";
+          gsap.set([...visualLayers, ...artworkLayers, ...layers.arrows, ...internalArtwork, ...stageShell], { clearProps: "all" });
+          gsap.set(artworkLayers, { attr: { transform: "" } });
+          gsap.set(labels, { autoAlpha: 0, scale: 0.8, clearProps: "transformOrigin" });
+          gsap.set(labels.at(-1) ?? [], { autoAlpha: 1, scale: 1 });
+        };
 
-      matchMedia.add(
-        {
-          reduced: "(prefers-reduced-motion: reduce)",
-          short: "(max-height: 559px)",
-          desktop: "(min-width: 1200px) and (min-height: 650px) and (prefers-reduced-motion: no-preference)",
-          tablet: "(min-width: 768px) and (max-width: 1199px) and (min-height: 560px) and (prefers-reduced-motion: no-preference)",
-          mobile: "(max-width: 767px) and (min-height: 560px) and (prefers-reduced-motion: no-preference)",
-        },
-        (mediaContext) => {
-          const conditions = mediaContext.conditions;
-          if (!conditions || conditions.reduced || conditions.short || saveData) {
-            showStaticFinal();
-            return;
-          }
+        matchMedia.add(
+          {
+            reduced: "(prefers-reduced-motion: reduce)",
+            short: "(max-height: 559px)",
+            desktop: "(min-width: 1200px) and (min-height: 650px) and (prefers-reduced-motion: no-preference)",
+            compactDesktop: "(min-width: 1200px) and (min-height: 560px) and (max-height: 649px) and (prefers-reduced-motion: no-preference)",
+            tablet: "(min-width: 768px) and (max-width: 1199px) and (min-height: 560px) and (prefers-reduced-motion: no-preference)",
+            mobile: "(max-width: 767px) and (min-height: 560px) and (prefers-reduced-motion: no-preference)",
+          },
+          (mediaContext) => {
+            const conditions = mediaContext.conditions;
+            if (!conditions || conditions.reduced || conditions.short || saveData) {
+              showStaticFinal();
+              return;
+            }
 
-          const isDesktop = Boolean(conditions.desktop);
-          const isTablet = Boolean(conditions.tablet);
-          const distanceFactor = isDesktop ? 3.4 : isTablet ? 2.2 : 0.9;
-          section.dataset.motionMode = isDesktop ? "desktop" : isTablet ? "tablet" : "mobile";
+            const isDesktop = Boolean(conditions.desktop);
+            const isCompactDesktop = Boolean(conditions.compactDesktop);
+            const isTablet = Boolean(conditions.tablet);
+            const isMobile = Boolean(conditions.mobile);
+            const distanceFactor = isDesktop ? 3.6 : isCompactDesktop ? 1.8 : isTablet ? 2.35 : 1.25;
+            const systemActiveX = isMobile ? -556 : stateLayouts.at(-1)?.activeX ?? -376;
+            const overviewStageScale = isMobile ? 0.46 : isTablet ? 0.92 : 1;
+            section.dataset.motionMode = isDesktop || isCompactDesktop ? "desktop" : isTablet ? "tablet" : "mobile";
 
-          gsap.set(Object.values(layers).flat(), { autoAlpha: 0, transformOrigin: "center center" });
-          gsap.set(layers.coordinate, { autoAlpha: 1, x: isDesktop ? 590 : 470, scale: 1.18 });
-          gsap.set(layers.points, { x: isDesktop ? 420 : 330, scale: 0.72 });
-          gsap.set(layers.grid, { x: isDesktop ? 215 : 120, scale: 0.78 });
-          gsap.set(layers.layers, { x: 35, scale: 0.82 });
-          gsap.set(layers.data, { x: -145, scale: 0.88 });
-          gsap.set(layers.model, { x: -330, scale: 0.92 });
-          gsap.set(layers.system, { x: -500, scale: 0.62 });
-          gsap.set(points, { autoAlpha: 0, scale: 0.2, transformOrigin: "center center" });
-          gsap.set(gridLines, { strokeDasharray: 220, strokeDashoffset: 220 });
-          gsap.set(vectorPaths, { strokeDasharray: 420, strokeDashoffset: 420 });
-          gsap.set(rasterCells, { autoAlpha: 0, scale: 0.35, transformOrigin: "center center" });
-          gsap.set(dataRows, { autoAlpha: 0, x: -16 });
-          gsap.set(modelEdges, { strokeDasharray: 160, strokeDashoffset: 160 });
-          gsap.set(modelNodes, { autoAlpha: 0, scale: 0.2, transformOrigin: "center center" });
-          gsap.set(labels, { autoAlpha: 0 });
-          gsap.set(labels[0], { autoAlpha: 1 });
+            gsap.set(visualLayers, { autoAlpha: 0, x: 0 });
+            stateLayouts.forEach((state, index) => {
+              const activeX = state.key === "system" ? systemActiveX : state.activeX;
+              gsap.set(layers[state.key], {
+                x: index === 0 ? activeX : activeX + INCOMING_OFFSET,
+              });
+              gsap.set(artwork[state.key], {
+                attr: { transform: scaleTransform(state.origin, index === 0 ? state.activeScale : state.activeScale * 0.8) },
+              });
+            });
+            gsap.set(layers.coordinate, { autoAlpha: 1 });
+            gsap.set(layers.arrows, { autoAlpha: 0 });
+            gsap.set(stageShell, { x: 0, y: 0, xPercent: 0, yPercent: 0, scale: 1, transformOrigin: "center center" });
+            gsap.set(points, { autoAlpha: 0, scale: 0.2, transformOrigin: "center center" });
+            gsap.set(gridLines, { strokeDasharray: 220, strokeDashoffset: 220 });
+            gsap.set(vectorPaths, { strokeDasharray: 420, strokeDashoffset: 420 });
+            gsap.set(rasterCells, { autoAlpha: 0, scale: 0.35, transformOrigin: "center center" });
+            gsap.set(dataRows, { autoAlpha: 0, x: -16 });
+            gsap.set(modelEdges, { strokeDasharray: 160, strokeDashoffset: 160 });
+            gsap.set(modelNodes, { autoAlpha: 0, scale: 0.2, transformOrigin: "center center" });
+            gsap.set(labels, { autoAlpha: 0, scale: 0.8, transformOrigin: "right center" });
+            gsap.set(labels[0], { autoAlpha: 1, scale: 1 });
 
-          const timeline = gsap.timeline({ defaults: { ease: "none" } });
+            const timeline = gsap.timeline({ defaults: { ease: "none" } });
 
-          timeline
-            .to(points, { autoAlpha: 0.82, scale: 1, duration: 0.11, stagger: { each: 0.0015, from: "center" } }, 0.04)
-            .to(layers.points, { autoAlpha: 1, scale: 1, duration: 0.12 }, 0.05)
-            .to(layers.coordinate, { autoAlpha: 0.72, scale: 1, duration: 0.08 }, 0.15)
-            .to(layers.grid, { autoAlpha: 1, scale: 1, duration: 0.12 }, 0.19)
-            .to(gridLines, { strokeDashoffset: 0, duration: 0.12, stagger: 0.002 }, 0.19)
-            .to(layers.points, { autoAlpha: 0.68, duration: 0.07 }, 0.27)
-            .to(layers.layers, { autoAlpha: 1, scale: 1, duration: 0.12 }, 0.31)
-            .to(vectorPaths, { strokeDashoffset: 0, duration: 0.12, stagger: 0.015 }, 0.31)
-            .to(rasterCells, { autoAlpha: 0.68, scale: 1, duration: 0.11, stagger: 0.004 }, 0.34)
-            .to(layers.grid, { autoAlpha: 0.42, duration: 0.08 }, 0.41)
-            .to(layers.data, { autoAlpha: 1, scale: 1, duration: 0.12 }, 0.44)
-            .to(dataRows, { autoAlpha: 1, x: 0, duration: 0.09, stagger: 0.012 }, 0.45)
-            .to(layers.layers, { autoAlpha: 0.58, duration: 0.08 }, 0.5)
-            .to(layers.model, { autoAlpha: 1, scale: 1, duration: 0.12 }, 0.54)
-            .to(modelNodes, { autoAlpha: 1, scale: 1, duration: 0.08, stagger: 0.008 }, 0.54)
-            .to(modelEdges, { strokeDashoffset: 0, duration: 0.11, stagger: 0.004 }, 0.57)
-            .to(layers.data, { autoAlpha: 0.62, duration: 0.08 }, 0.62)
-            .to(layers.system, { autoAlpha: 1, scale: 1, duration: 0.14 }, 0.66)
-            .to(layers.model, { autoAlpha: 0.58, duration: 0.08 }, 0.72)
-            .to(stageShell, { xPercent: isDesktop ? -5 : 0, yPercent: -4, scale: isDesktop ? 0.94 : 0.88, duration: 0.12 }, 0.75)
-            .to(layers.system, { autoAlpha: 1, x: isDesktop ? -180 : -260, scale: 1.08, duration: 0.1 }, 0.76)
-            .to(Object.values(layers).flat(), { x: 0, y: 0, scale: 1, duration: 0.1 }, 0.86)
-            .to(layers.coordinate, { autoAlpha: 0.24, duration: 0.08 }, 0.86)
-            .to(layers.points, { autoAlpha: 0.24, duration: 0.08 }, 0.86)
-            .to(layers.grid, { autoAlpha: 0.3, duration: 0.08 }, 0.86)
-            .to(layers.layers, { autoAlpha: 0.3, duration: 0.08 }, 0.86)
-            .to(layers.data, { autoAlpha: 0.2, duration: 0.08 }, 0.86)
-            .to(layers.model, { autoAlpha: 0.28, duration: 0.08 }, 0.86)
-            .to(layers.system, { autoAlpha: 0.56, duration: 0.08 }, 0.86)
-            .to(layers.arrows, { autoAlpha: 0.44, duration: 0.08 }, 0.86)
-            .to(stageShell, { xPercent: 0, yPercent: 0, y: isDesktop ? -32 : 0, scale: 1, duration: 0.1 }, 0.86)
-            .to({}, { duration: 0.04 });
+            const revealArtwork = (key: VisualStateKey, at: number) => {
+              switch (key) {
+                case "points":
+                  timeline.to(points, { autoAlpha: 0.82, scale: 1, duration: 0.34, stagger: { each: 0.003, from: "center" } }, at);
+                  break;
+                case "grid":
+                  timeline.to(gridLines, { strokeDashoffset: 0, duration: 0.36, stagger: 0.003 }, at);
+                  break;
+                case "layers":
+                  timeline
+                    .to(vectorPaths, { strokeDashoffset: 0, duration: 0.36, stagger: 0.018 }, at)
+                    .to(rasterCells, { autoAlpha: 0.68, scale: 1, duration: 0.3, stagger: 0.006 }, at + 0.08);
+                  break;
+                case "data":
+                  timeline.to(dataRows, { autoAlpha: 1, x: 0, duration: 0.32, stagger: 0.018 }, at);
+                  break;
+                case "model":
+                  timeline
+                    .to(modelNodes, { autoAlpha: 1, scale: 1, duration: 0.28, stagger: 0.012 }, at)
+                    .to(modelEdges, { strokeDashoffset: 0, duration: 0.34, stagger: 0.006 }, at + 0.08);
+                  break;
+                default:
+                  break;
+              }
+            };
 
-          const labelTimes = [0, 0.09, 0.22, 0.34, 0.46, 0.57, 0.69, isDesktop ? 0.9 : 0.74];
-          labelTimes.slice(1).forEach((time, index) => {
-            timeline.to(labels[index], { autoAlpha: 0, duration: 0.015 }, time - 0.01);
-            timeline.to(labels[index + 1], { autoAlpha: 1, duration: 0.015 }, time);
-          });
+            timeline.addLabel("state-01", 0).to({}, { duration: STATE_HOLD }, 0);
+            let cursor = STATE_HOLD;
 
-          triggerRef.current = ScrollTrigger.create({
-            trigger: section,
-            start: "top top",
-            end: () => `+=${Math.round(window.innerHeight * distanceFactor)}`,
-            animation: timeline,
-            pin: viewport,
-            pinSpacing: true,
-            scrub: isDesktop ? 0.65 : 0.4,
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
-          });
+            stateLayouts.slice(0, -1).forEach((outgoingState, index) => {
+              const incomingState = stateLayouts[index + 1];
+              const incomingX = incomingState.key === "system" ? systemActiveX : incomingState.activeX;
+              const incomingStart = cursor + 0.32;
 
-          return () => {
-            triggerRef.current = null;
-            timeline.kill();
-          };
-        },
-      );
+              timeline.addLabel(`handoff-${String(index + 1).padStart(2, "0")}-${String(index + 2).padStart(2, "0")}`, cursor);
+              timeline
+                .to(
+                  layers[outgoingState.key],
+                  {
+                    x: outgoingState.historyX,
+                    autoAlpha: outgoingState.historyOpacity,
+                    duration: 0.52,
+                  },
+                  cursor,
+                )
+                .to(
+                  artwork[outgoingState.key],
+                  { attr: { transform: scaleTransform(outgoingState.origin, outgoingState.historyScale) }, duration: 0.52 },
+                  cursor,
+                )
+                .to(labels[index], { autoAlpha: 0, scale: 0.7, duration: 0.28 }, cursor)
+                .to(
+                  layers[incomingState.key],
+                  {
+                    x: incomingX,
+                    autoAlpha: 1,
+                    duration: 0.46,
+                  },
+                  incomingStart,
+                )
+                .to(
+                  artwork[incomingState.key],
+                  { attr: { transform: scaleTransform(incomingState.origin, incomingState.activeScale) }, duration: 0.46 },
+                  incomingStart,
+                )
+                .to(labels[index + 1], { autoAlpha: 1, scale: 1, duration: 0.38 }, incomingStart + 0.04);
+
+              revealArtwork(incomingState.key, incomingStart + 0.02);
+
+              if (isMobile && index > 0) {
+                timeline.to(layers[stateLayouts[index - 1].key], { autoAlpha: 0.12, duration: 0.28 }, cursor);
+              }
+
+              timeline.addLabel(`state-${String(index + 2).padStart(2, "0")}`, cursor + HANDOFF_DURATION);
+              cursor += HANDOFF_DURATION + STATE_HOLD;
+            });
+
+            const overviewStart = cursor + 0.08;
+            timeline.addLabel("overview", overviewStart);
+            stateLayouts.forEach((state) => {
+              timeline.to(
+                layers[state.key],
+                {
+                  x: state.overviewX,
+                  y: 0,
+                  autoAlpha: state.overviewOpacity,
+                  duration: 0.72,
+                },
+                overviewStart,
+              );
+              timeline.to(
+                artwork[state.key],
+                { attr: { transform: scaleTransform(state.origin, state.overviewScale) }, duration: 0.72 },
+                overviewStart,
+              );
+            });
+            timeline
+              .to(labels[6], { autoAlpha: 0, scale: 0.7, duration: 0.28 }, overviewStart)
+              .to(labels[7], { autoAlpha: 1, scale: 1, duration: 0.4 }, overviewStart + 0.32)
+              .to(layers.arrows, { autoAlpha: 0.44, duration: 0.36 }, overviewStart + 0.34)
+              .to(stageShell, { scale: overviewStageScale, duration: 0.72 }, overviewStart)
+              .to({}, { duration: 0.14 }, overviewStart + 0.72);
+
+            triggerRef.current = ScrollTrigger.create({
+              trigger: section,
+              start: "top top",
+              end: () => `+=${Math.round(window.innerHeight * distanceFactor)}`,
+              animation: timeline,
+              pin: viewport,
+              pinSpacing: true,
+              scrub: isDesktop ? 0.65 : isCompactDesktop ? 0.5 : 0.4,
+              anticipatePin: 1,
+              invalidateOnRefresh: true,
+            });
+
+            return () => {
+              triggerRef.current = null;
+              timeline.kill();
+            };
+          },
+        );
       }, section);
 
       document.fonts.ready.then(() => {
@@ -198,7 +314,7 @@ export function useHeroTimeline({ sectionRef, viewportRef }: UseHeroTimelineOpti
     const staticExperienceRequested = window.matchMedia("(prefers-reduced-motion: reduce), (max-height: 559px)").matches || saveData;
 
     if (staticExperienceRequested) {
-      startMotion();
+      section.dataset.motionMode = "static";
     } else {
       delayedActivation = window.setTimeout(startMotion, 2200);
       interactionEvents.forEach((eventName) => {

@@ -222,11 +222,11 @@
 }
 
 .layerCoordinate {
-  opacity: 0.24;
+  opacity: 0.52;
 }
 
 .layerPoints {
-  opacity: 0.24;
+  opacity: 0.48;
 }
 
 .layerPoints circle {
@@ -235,7 +235,7 @@
 }
 
 .layerGrid {
-  opacity: 0.3;
+  opacity: 0.56;
 }
 
 .layerGrid path {
@@ -244,7 +244,7 @@
 }
 
 .layerSpatial {
-  opacity: 0.3;
+  opacity: 0.58;
 }
 
 .layerSpatial rect {
@@ -257,7 +257,7 @@
 }
 
 .layerData {
-  opacity: 0.2;
+  opacity: 0.6;
 }
 
 .layerData > rect {
@@ -265,7 +265,7 @@
 }
 
 .layerModel {
-  opacity: 0.28;
+  opacity: 0.65;
 }
 
 .layerModel circle {
@@ -273,7 +273,7 @@
 }
 
 .layerSystem {
-  opacity: 0.56;
+  opacity: 0.92;
 }
 
 .layerSystem path,
@@ -285,6 +285,34 @@
 .systemOuter {
   stroke: #b7bec2 !important;
   stroke-width: 1.2 !important;
+}
+
+.hero[data-motion-mode="static"] .layerCoordinate {
+  transform: translateX(-15px);
+}
+
+.hero[data-motion-mode="static"] .layerPoints {
+  transform: translateX(-30px);
+}
+
+.hero[data-motion-mode="static"] .layerGrid {
+  transform: translateX(-45px);
+}
+
+.hero[data-motion-mode="static"] .layerSpatial {
+  transform: translateX(55px);
+}
+
+.hero[data-motion-mode="static"] .layerData {
+  transform: translateX(90px);
+}
+
+.hero[data-motion-mode="static"] .layerModel {
+  transform: translateX(225px);
+}
+
+.hero[data-motion-mode="static"] .layerSystem {
+  transform: translateX(165px);
 }
 
 .identity {
@@ -358,13 +386,16 @@
 
 .primaryAction:hover,
 .primaryAction:focus-visible {
-  background: rgba(69, 191, 230, 0.08);
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--graphite);
 }
 
 .secondaryAction:hover,
 .secondaryAction:focus-visible {
-  border-color: #c3c9cc;
-  color: var(--paper);
+  border-color: var(--paper);
+  background: var(--paper);
+  color: var(--graphite);
 }
 
 :global(.icon) {
@@ -399,6 +430,7 @@
   gap: 0.8rem;
   margin: 0;
   opacity: 0;
+  transform-origin: right center;
   visibility: hidden;
 }
 
@@ -407,7 +439,7 @@
   font-weight: 500;
 }
 
-.metadataFinal {
+.metadata .metadataFinal {
   opacity: 1;
   visibility: visible;
 }
@@ -424,9 +456,34 @@
 
 .hero[data-motion-mode="pending"] .layerCoordinate {
   opacity: 1;
-  transform: translateX(590px) scale(1.18);
+  transform: translateX(672px);
+}
+
+.hero[data-motion-mode="pending"] [data-state-artwork="coordinate"] {
+  transform: scale(1.18);
   transform-box: fill-box;
   transform-origin: center;
+}
+
+.hero [data-coordinate-mark] {
+  opacity: 0;
+  transform: scale(0.36);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: coordinate-establish 560ms cubic-bezier(0.22, 1, 0.36, 1) 320ms both;
+}
+
+.hero[data-motion-mode="static"] [data-coordinate-mark] {
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
+
+@keyframes coordinate-establish {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .hero[data-motion-mode="pending"] .metadata p {
@@ -451,10 +508,6 @@
 }
 
 @media (max-width: 1199px) {
-  .hero[data-motion-mode="pending"] .layerCoordinate {
-    transform: translateX(470px) scale(1.18);
-  }
-
   .desktopLinks {
     gap: 1.6rem;
   }
@@ -546,6 +599,13 @@
   }
 }
 
+@media (max-width: 850px) {
+  .metadata {
+    top: 5.9rem;
+    bottom: auto;
+  }
+}
+
 @media (max-width: 767px) {
   .viewport {
     min-height: 600px;
@@ -579,6 +639,10 @@
     right: -18rem;
     left: -18rem;
     height: 53vh;
+  }
+
+  .hero[data-motion-mode="static"] .stageShell {
+    transform: scale(0.46);
   }
 
   .identity {
@@ -636,6 +700,12 @@
 }
 
 @media (max-height: 559px), (prefers-reduced-motion: reduce) {
+  .hero[data-motion-mode="pending"] [data-coordinate-mark] {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
   .hero[data-motion-mode="pending"] .identity,
   .hero[data-motion-mode="pending"] .actions,
   .hero[data-motion-mode="pending"] .layerPoints,
