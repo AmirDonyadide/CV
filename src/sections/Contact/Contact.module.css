@@ -30,6 +30,7 @@
 }
 
 .heading {
+  width: fit-content;
   margin: 0;
   color: var(--paper);
   font-family: "Geologica", sans-serif;
@@ -117,6 +118,10 @@
   color: var(--accent);
 }
 
+.downloadLink .linkLabel {
+  font-weight: 500;
+}
+
 @media (max-width: 720px) {
   .section {
     min-height: auto;
@@ -159,6 +164,33 @@
     flex-direction: column;
     gap: 0.55rem;
     margin-top: 3rem;
+  }
+}
+
+@media (max-width: 374px) {
+  .emailLink {
+    grid-template-areas:
+      "label arrow"
+      "detail detail";
+    grid-template-columns: minmax(0, 1fr) 1.5rem;
+    row-gap: 0.55rem;
+    padding-block: 1rem;
+  }
+
+  .emailLink .linkLabel {
+    grid-area: label;
+  }
+
+  .emailLink .linkDetail {
+    grid-area: detail;
+    overflow-wrap: normal;
+    white-space: nowrap;
+    word-break: normal;
+  }
+
+  .emailLink .arrow {
+    grid-area: arrow;
+    justify-self: end;
   }
 }
 

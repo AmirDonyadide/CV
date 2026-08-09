@@ -13,12 +13,26 @@ interface ContactLinkProps {
   external?: boolean;
   href: string;
   label: string;
+  variant?: "default" | "download" | "email";
 }
 
-function ContactLink({ detail, download, external, href, label }: ContactLinkProps) {
+function ContactLink({
+  detail,
+  download,
+  external,
+  href,
+  label,
+  variant = "default",
+}: ContactLinkProps) {
+  const className = [
+    styles.contactLink,
+    variant === "email" ? styles.emailLink : "",
+    variant === "download" ? styles.downloadLink : "",
+  ].filter(Boolean).join(" ");
+
   return (
     <a
-      className={styles.contactLink}
+      className={className}
       href={href}
       download={download || undefined}
       target={external ? "_blank" : undefined}
@@ -48,6 +62,7 @@ export function Contact({ locale }: ContactProps) {
           label={copy.email}
           detail={contactDetails.email.display}
           href={contactDetails.email.href}
+          variant="email"
         />
         <ContactLink
           label={copy.linkedIn}
@@ -66,6 +81,7 @@ export function Contact({ locale }: ContactProps) {
           detail={copy.downloadDetail}
           href={contactDetails.cv.href}
           download
+          variant="download"
         />
       </nav>
 
