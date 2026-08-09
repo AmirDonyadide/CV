@@ -72,8 +72,7 @@
 .routeProgress,
 .geographicArc,
 .originDrop,
-.exchangeTick,
-.routeContinuation path {
+.exchangeTick {
   fill: none;
   vector-effect: non-scaling-stroke;
 }
@@ -88,7 +87,7 @@
   stroke-width: 1.35;
 }
 
-.routeProgress[data-journey-segment="branch"] {
+.routeProgress[data-journey-segment="final"] {
   stroke: #8e999e;
 }
 
@@ -96,7 +95,7 @@
   stroke: #354047;
   stroke-width: 1;
   stroke-dasharray: 8 10;
-  opacity: 0.72;
+  opacity: 0.34;
 }
 
 .originDrop,
@@ -124,16 +123,20 @@
   fill: var(--accent);
 }
 
-.routeContinuation path {
-  stroke: #3f4a50;
+.terminalRing {
+  fill: none;
+  stroke: var(--accent);
   stroke-width: 1;
+  opacity: 0.42;
+  vector-effect: non-scaling-stroke;
 }
 
-.routeContinuation circle {
-  fill: var(--graphite);
-  stroke: #59646a;
-  stroke-width: 1;
-  vector-effect: non-scaling-stroke;
+.routeNode[data-terminal="true"] .nodeHalo {
+  stroke: var(--accent);
+}
+
+.routeNode[data-terminal="true"] .nodeCore {
+  fill: var(--accent);
 }
 
 .entry {
@@ -177,10 +180,16 @@
 }
 
 .entry time {
-  display: block;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem 0.4rem;
   margin: 0 0 1.2rem;
   color: #899297;
   font-size: clamp(0.67rem, 0.78vw, 0.8rem);
+}
+
+.datePart {
+  white-space: nowrap;
 }
 
 .degreeEntry h3,
@@ -277,28 +286,14 @@
   margin-top: 0.7rem;
 }
 
-@media (max-width: 1199px) {
-  .entry[data-location="tehran"] {
-    width: 33%;
-  }
-
-  .entry[data-location="milan"] {
-    left: 43%;
-    width: 34%;
-  }
-
-  .entry[data-location="karlsruhe"],
-  .entry[data-location="bonn"] {
-    left: 80%;
-    width: 19%;
-  }
-
-  .description {
-    font-size: 0.8rem;
+@media (min-width: 1120px) and (max-width: 1300px) {
+  .exchangeEntry time {
+    display: grid;
+    gap: 0.12rem;
   }
 }
 
-@media (max-width: 899px) {
+@media (max-width: 1119px) {
   .section {
     min-height: auto;
   }
@@ -320,13 +315,7 @@
   }
 
   .routeStage::before {
-    position: absolute;
-    top: 0.7rem;
-    bottom: 4rem;
-    left: 0.3rem;
-    width: 1px;
-    background: linear-gradient(var(--accent), #69747a 56%, #2f393f);
-    content: "";
+    content: none;
   }
 
   .routeGraphic {
@@ -355,12 +344,38 @@
     border-radius: 50%;
     background: var(--graphite);
     content: "";
+    z-index: 1;
+  }
+
+  .entry:not(:last-child)::after {
+    position: absolute;
+    top: 0.9rem;
+    bottom: 0;
+    left: -1.54rem;
+    width: 1px;
+    background: #536168;
+    content: "";
+    z-index: 0;
+  }
+
+  .entry[data-location="tehran"]::after {
+    background: linear-gradient(var(--accent), #6f7b81);
+  }
+
+  .entry[data-location="milan"]::after {
+    background: linear-gradient(#6f7b81, #536168);
   }
 
   .degreeEntry::before {
     border-color: var(--accent);
     background: var(--accent);
     box-shadow: 0 0 0 0.35rem rgba(69, 191, 230, 0.08);
+  }
+
+  .entry:last-child::before {
+    border-color: var(--accent);
+    background: var(--graphite);
+    box-shadow: 0 0 0 0.3rem rgba(69, 191, 230, 0.08);
   }
 
   .city {

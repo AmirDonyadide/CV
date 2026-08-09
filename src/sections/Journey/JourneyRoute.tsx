@@ -23,51 +23,46 @@ export function JourneyRoute({ label }: JourneyRouteProps) {
       </defs>
 
       <path className={styles.geographicArc} d="M106 62C305 -37 473 -33 635 57" />
-      <path className={styles.geographicArc} d="M70 475C178 545 326 575 522 562" />
 
       <path
         className={styles.routeGuide}
-        d="M70 80H635C780 80 836 80 903 160C945 210 968 240 1044 240H1150"
+        d="M70 80H635C780 80 836 80 903 160C945 210 968 240 1044 240H1125"
       />
       <path
         className={styles.routeProgress}
         data-journey-segment="main"
-        d="M70 80H635C780 80 836 80 903 160C945 210 968 240 1044 240H1150"
+        d="M70 80H635C780 80 836 80 903 160C945 210 968 240 1044 240H1125"
       />
-      <path className={styles.routeGuide} d="M1044 240C995 290 994 446 1044 486H1150" />
+      <path className={styles.routeGuide} d="M1125 240C1053 292 1053 434 1125 486" />
       <path
         className={styles.routeProgress}
-        data-journey-segment="branch"
-        d="M1044 240C995 290 994 446 1044 486H1150"
+        data-journey-segment="final"
+        d="M1125 240C1053 292 1053 434 1125 486"
       />
 
       <path className={styles.originDrop} d="M70 80v82" />
       <path className={styles.originDrop} d="M635 80v82" />
-      <path className={styles.exchangeTick} d="M1150 204v72M1150 450v72" />
+      <path className={styles.exchangeTick} d="M1125 204v72M1125 450v36" />
 
       {[
-        { id: "tehran", x: 70, y: 80, primary: true },
-        { id: "milan", x: 635, y: 80, primary: true },
-        { id: "karlsruhe", x: 1150, y: 240, primary: false },
-        { id: "bonn", x: 1150, y: 486, primary: false },
+        { id: "tehran", x: 70, y: 80, primary: true, terminal: false },
+        { id: "milan", x: 635, y: 80, primary: true, terminal: false },
+        { id: "karlsruhe", x: 1125, y: 240, primary: false, terminal: false },
+        { id: "bonn", x: 1125, y: 486, primary: false, terminal: true },
       ].map((node) => (
         <g
           key={node.id}
           className={styles.routeNode}
           data-journey-node={node.id}
           data-primary={node.primary ? "true" : undefined}
+          data-terminal={node.terminal ? "true" : undefined}
           transform={`translate(${node.x} ${node.y})`}
         >
+          {node.terminal && <circle className={styles.terminalRing} r={19} />}
           <circle className={styles.nodeHalo} r={node.primary ? 17 : 14} />
           <circle className={styles.nodeCore} r={node.primary ? 5 : 4} />
         </g>
       ))}
-
-      <g className={styles.routeContinuation}>
-        <path d="M70 520v70c0 25 17 37 42 37h490" />
-        <circle cx="168" cy="627" r="7" />
-        <path d="M602 627h40m-10-9 10 9-10 9" />
-      </g>
     </svg>
   );
 }

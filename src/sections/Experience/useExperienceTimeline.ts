@@ -33,8 +33,8 @@ export function useExperienceTimeline({ sectionRef }: UseExperienceTimelineOptio
       media.add(
         {
           reduced: "(prefers-reduced-motion: reduce)",
-          desktop: "(min-width: 900px) and (prefers-reduced-motion: no-preference)",
-          mobile: "(max-width: 899px) and (prefers-reduced-motion: no-preference)",
+          desktop: "(min-width: 1100px) and (prefers-reduced-motion: no-preference)",
+          mobile: "(max-width: 1099px) and (prefers-reduced-motion: no-preference)",
         },
         (mediaContext) => {
           const conditions = mediaContext.conditions;

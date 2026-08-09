@@ -129,9 +129,9 @@
 
 .group header h3 {
   margin: 0;
-  color: #d2d7d9;
-  font-size: 0.75rem;
-  font-weight: 500;
+  color: #d9dddf;
+  font-size: 0.84rem;
+  font-weight: 560;
   line-height: 1.35;
 }
 
@@ -165,16 +165,16 @@
 
 .evidence {
   display: grid;
-  gap: 0.55rem;
+  gap: 0.45rem;
   margin: auto 0 0;
-  padding-top: 0.9rem;
-  color: #788389;
-  font-size: 0.68rem;
-  line-height: 1.55;
+  padding-top: 1rem;
+  color: #8a959b;
+  font-size: 0.8rem;
+  line-height: 1.6;
 }
 
 .evidence span {
-  color: #a0aaaf;
+  color: #b0b8bc;
 }
 
 .sectionFooter {
@@ -182,9 +182,10 @@
   justify-content: space-between;
   gap: 2rem;
   align-items: center;
-  padding-top: 2rem;
-  color: #768188;
-  font-size: 0.62rem;
+  padding-top: 2.2rem;
+  color: #8a959b;
+  font-size: 0.8rem;
+  line-height: 1.55;
 }
 
 .sectionFooter p {
@@ -204,6 +205,12 @@
   margin-right: 0.75rem;
   color: var(--accent);
   content: "→";
+}
+
+@media (min-width: 900px) {
+  .sectionHeader {
+    padding-top: clamp(2.75rem, 5vh, 3.5rem);
+  }
 }
 
 @media (max-width: 1180px) {
@@ -227,6 +234,21 @@
 
   .skillList {
     margin-top: 2.2rem;
+  }
+}
+
+@media (min-width: 761px) and (max-width: 1180px) {
+  .stack {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .group {
+    grid-column: span 2;
+  }
+
+  .group[data-group="web"],
+  .group[data-group="engineering"] {
+    grid-column: span 3;
   }
 }
 
@@ -254,6 +276,19 @@
   .sectionFooter {
     align-items: flex-start;
     flex-direction: column;
+  }
+}
+
+@media (min-width: 521px) and (max-width: 760px) {
+  .group[data-group="engineering"] {
+    grid-column: 1 / -1;
+  }
+
+  .group[data-group="engineering"] > header,
+  .group[data-group="engineering"] .skillList,
+  .group[data-group="engineering"] .evidence {
+    width: min(100%, 30rem);
+    margin-inline: auto;
   }
 }
 
@@ -308,5 +343,11 @@
 
   .sectionFooter li + li::before {
     margin-right: 0.55rem;
+  }
+}
+
+@media (max-width: 340px) {
+  .skillList {
+    column-gap: 0.5rem;
   }
 }

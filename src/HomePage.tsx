@@ -1,4 +1,5 @@
 import type { Locale } from "./sections/Hero/hero.types";
+import { useInitialHashRestoration } from "./motion/useInitialHashRestoration";
 import { AdditionalWork } from "./sections/AdditionalWork/AdditionalWork";
 import { Contact } from "./sections/Contact/Contact";
 import { Experience } from "./sections/Experience/Experience";
@@ -12,6 +13,8 @@ interface HomePageProps {
 }
 
 export default function HomePage({ locale }: HomePageProps) {
+  useInitialHashRestoration();
+
   return (
     <>
       <WhatIBuild locale={locale} />

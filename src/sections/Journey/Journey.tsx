@@ -9,6 +9,25 @@ interface JourneyProps {
   locale: Locale;
 }
 
+interface JourneyDateProps {
+  value: string;
+}
+
+function JourneyDate({ value }: JourneyDateProps) {
+  const [start, end] = value.split(/\s+–\s+/, 2);
+
+  if (!end) return <time>{value}</time>;
+
+  return (
+    <time className={styles.dateRange} aria-label={value}>
+      <span className={styles.datePart}>
+        {start}<span aria-hidden="true"> –</span>
+      </span>
+      <span className={styles.datePart}>{end}</span>
+    </time>
+  );
+}
+
 export function Journey({ locale }: JourneyProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const copy = journeyCopy[locale];
@@ -36,7 +55,7 @@ export function Journey({ locale }: JourneyProps) {
             aria-labelledby={`${degree.id}-journey-title`}
           >
             <p className={styles.city}>{degree.city}</p>
-            <time>{degree.date}</time>
+            <JourneyDate value={degree.date} />
             <h3 id={`${degree.id}-journey-title`}>{degree.title}</h3>
             <p className={styles.institution}>{degree.institution}</p>
             <p className={styles.degreeFacts}>
@@ -59,7 +78,7 @@ export function Journey({ locale }: JourneyProps) {
             aria-labelledby={`${exchange.id}-journey-title`}
           >
             <p className={styles.city}>{exchange.city}</p>
-            <time>{exchange.date}</time>
+            <JourneyDate value={exchange.date} />
             <h3 id={`${exchange.id}-journey-title`}>{exchange.institution}</h3>
             <p className={styles.description}>{exchange.description}</p>
           </article>
