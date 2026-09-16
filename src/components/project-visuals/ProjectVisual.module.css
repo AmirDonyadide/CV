@@ -1,0 +1,210 @@
+.frame {
+  container: project-visual / inline-size;
+  min-width: 0;
+  color: var(--paper);
+  background: var(--graphite);
+  border: 1px solid var(--hairline);
+}
+
+.technicalLabel,
+.panelHeading,
+.mapFooter,
+.frameFooter,
+.selectionSummary dt,
+.indicators thead,
+.eventTable thead,
+.variableList li,
+.model small {
+  font-family: ui-monospace, "SFMono-Regular", "Cascadia Mono", monospace;
+  font-size: 0.65rem;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+}
+
+.frameHeader {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.3rem 1rem;
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid var(--hairline);
+}
+.frameHeader > :first-child { color: var(--accent); }
+.frameHeader > :last-child:not(:first-child) { color: var(--muted); }
+.frameFooter {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.3rem 1rem;
+  padding: 0.7rem 1rem;
+  color: var(--muted);
+  border-top: 1px solid var(--hairline);
+}
+
+.pipeline {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-bottom: 1px solid var(--hairline);
+}
+.workflowNode { display: grid; min-width: 0; flex: 1; gap: 0.3rem; }
+.workflowNode > .technicalLabel { color: var(--accent); }
+.workflowNode > span:not(.technicalLabel) { font-size: 0.78rem; }
+.workflowNode small { color: var(--muted); font-size: 0.7rem; }
+.arrow { flex: 0 0 1.4rem; width: 1.4rem; height: 1rem; color: var(--accent); }
+.arrow path { fill: none; stroke: currentColor; stroke-width: 1; vector-effect: non-scaling-stroke; }
+
+.mapPair {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 1.4rem minmax(0, 1fr);
+  align-items: center;
+  gap: 0.65rem;
+  padding: 1rem;
+}
+.mapPanel { min-width: 0; border: 1px solid var(--hairline); background: var(--graphite); }
+.panelHeading {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 0.5rem;
+  min-height: 2.65rem;
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px solid var(--hairline);
+  color: var(--paper);
+}
+.panelHeading > span:last-child:not(:first-child) { color: var(--muted); }
+.buildingCanvas {
+  background-image:
+    linear-gradient(rgba(122,139,149,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(122,139,149,0.035) 1px, transparent 1px);
+  background-size: 5rem 5rem;
+}
+.buildingCanvas svg { display: block; width: 100%; height: auto; }
+.buildings { fill: var(--muted); stroke: var(--graphite); stroke-width: 0.35; }
+.buildings[data-state="generalized"] { fill: var(--accent); }
+.mapFooter { position: relative; min-height: 3.2rem; padding: 0.65rem 0; color: var(--muted); }
+.mapFooter > .technicalLabel { position: absolute; right: 0.5rem; bottom: 0.6rem; font-size: 0.6rem; }
+.scale { margin-left: 1.4114%; white-space: nowrap; }
+.scale i { display: block; height: 0.35rem; border: solid var(--muted); border-width: 0 1px 1px; }
+.scale span { display: block; margin-top: 0.3rem; padding-left: 0.4rem; }
+
+.selectionSummary { display: flex; flex-wrap: wrap; gap: 1rem 2rem; margin: 0; padding: 0.75rem 1rem; border-bottom: 1px solid var(--hairline); }
+.selectionSummary > div { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.6rem; }
+.selectionSummary dt { color: var(--muted); }
+.selectionSummary dd { margin: 0; font-size: 0.85rem; }
+.dashboardBody { display: grid; grid-template-columns: minmax(0,1.3fr) minmax(0,1fr); }
+.satellitePanel { min-width: 0; border-right: 1px solid var(--hairline); }
+.satellitePanel img { display: block; width: 100%; height: auto; aspect-ratio: 804 / 340; object-fit: contain; }
+.attribution { padding: 0.35rem 0.75rem; color: var(--muted); font-size: 0.6rem; line-height: 1.5; }
+.chartPanel { min-width: 0; padding: 0.9rem 1rem; }
+.chartPanel > .technicalLabel { color: var(--muted); }
+.chartBody { display: flex; gap: 1rem; align-items: center; margin-top: 0.8rem; }
+.donut { position: relative; width: 7.5rem; flex: 0 0 7.5rem; }
+.donut svg { display: block; width: 100%; }
+.donut > div { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.2rem; }
+.donut strong { font-family: "Geologica", sans-serif; font-weight: 400; font-size: 1.35rem; }
+.donut span { color: var(--muted); font-size: 0.6rem; text-transform: uppercase; }
+.low { --risk-color: var(--accent); }
+.medium { --risk-color: var(--paper); }
+.high { --risk-color: var(--muted); }
+.donut circle { stroke: var(--risk-color); }
+.indicators { flex: 1; width: 100%; min-width: 0; border-collapse: collapse; font-size: 0.75rem; }
+.indicators th { text-align: left; font-weight: 400; }
+.indicators thead { color: var(--muted); font-size: 0.58rem; letter-spacing: 0; }
+.indicators th, .indicators td { padding: 0.55rem 0.2rem; border-bottom: 1px solid var(--hairline); }
+.indicators td { text-align: right; font-variant-numeric: tabular-nums; }
+.indicators th small { display: block; margin-top: 0.15rem; color: var(--muted); font-size: 0.6rem; }
+.indicators i { display: inline-block; width: 0.4rem; height: 0.4rem; margin-right: 0.35rem; background: var(--risk-color); }
+.eventTable { width: calc(100% - 2rem); margin: 0.5rem 1rem 1rem; border-collapse: collapse; font-size: 0.8rem; }
+.eventTable th, .eventTable td { padding: 0.65rem 0.5rem; text-align: left; border-bottom: 1px solid var(--hairline); }
+.eventTable th { color: var(--muted); }
+
+.rasterCanvas { background: #000; }
+.rasterCanvas img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: contain; }
+.legend { display: grid; gap: 0.65rem; padding: 0.75rem; border-top: 1px solid var(--hairline); color: var(--muted); font-family: ui-monospace, "SFMono-Regular", monospace; font-size: 0.65rem; line-height: 1.5; }
+.rangeLegend { min-width: 0; }
+.colorScale { width: 100%; height: 0.35rem; border: 1px solid var(--hairline); }
+.rangeLegend > div:last-child { display: flex; justify-content: space-between; gap: 0.3rem; margin-top: 0.3rem; }
+.classLegend { display: flex; flex-wrap: wrap; gap: 0.6rem 1rem; padding: 0; margin: 0; list-style: none; }
+.classLegend li { display: flex; align-items: center; gap: 0.4rem; }
+.classLegend i { width: 0.6rem; height: 0.6rem; background: var(--swatch); }
+.boundaryKey { display: flex; align-items: center; gap: 0.5rem; }
+.boundaryKey i { width: 1rem; height: 0.5rem; border: 1px solid #f00000; }
+
+.landslidePipeline { display: grid; grid-template-columns: minmax(0,1fr) minmax(7rem,0.58fr) minmax(0,1fr); align-items: center; gap: 0.75rem; padding: 1rem; }
+.modelStage { display: flex; flex-direction: column; align-items: center; gap: 1.2rem; }
+.variableList { width: 100%; }
+.variableList > .technicalLabel { color: var(--muted); }
+.variableList ul { display: grid; grid-template-columns: 1fr 1fr; gap: 0.35rem 0.5rem; padding: 0; margin: 0.6rem 0 0; list-style: none; }
+.variableList li { padding: 0.3rem 0; border-bottom: 1px solid var(--hairline); color: var(--paper); font-size: 0.6rem; letter-spacing: 0; }
+.model { width: 100%; text-align: center; }
+.model svg { display: block; width: 5rem; margin: 0 auto 0.6rem; fill: var(--graphite); stroke: var(--muted); stroke-width: 1; }
+.model circle:first-child { fill: var(--accent); stroke: var(--accent); }
+.model > span { display: block; color: var(--accent); font-size: 0.78rem; }
+.model small { display: block; margin-top: 0.3rem; color: var(--muted); font-size: 0.58rem; }
+.srOnly { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+
+@container project-visual (max-width: 850px) {
+  .dashboardBody { grid-template-columns: 1fr; }
+  .satellitePanel { border-right: 0; border-bottom: 1px solid var(--hairline); }
+  .chartBody { margin-top: 0.4rem; }
+  .donut { width: 6.5rem; flex-basis: 6.5rem; }
+}
+
+@container project-visual (max-width: 580px) {
+  .landslidePipeline { grid-template-columns: minmax(0,1fr) minmax(0,1fr); }
+  .landslidePipeline > .mapPanel:first-child { grid-column: 1; grid-row: 1; }
+  .landslidePipeline > .mapPanel:last-child { grid-column: 2; grid-row: 1; }
+  .modelStage { grid-column: 1 / -1; flex-direction: row; padding: 0.75rem 0 0; border-top: 1px solid var(--hairline); }
+  .modelStage > .arrow:first-child { transform: rotate(90deg); }
+  .modelStage > .arrow:last-child { transform: rotate(-90deg); }
+  .variableList { flex: 1; }
+  .model { flex: 1; }
+  .model svg { width: 4rem; }
+}
+
+@container project-visual (max-width: 420px) {
+  .frameHeader { padding: 0.75rem; }
+  .pipeline { display: grid; grid-template-columns: 1fr 1.4rem 1fr; gap: 0.75rem; padding: 0.75rem; }
+  .pipeline > .arrow:nth-child(4) { grid-column: 1 / -1; justify-self: center; transform: rotate(90deg); }
+  .pipeline:has(> :last-child:nth-child(5)) { grid-template-columns: 1fr; }
+  .pipeline:has(> :last-child:nth-child(5)) > .arrow { transform: rotate(90deg); justify-self: center; }
+  .mapPair { grid-template-columns: 1fr; gap: 0.85rem; padding: 0.75rem; }
+  .mapPair > .arrow { justify-self: center; transform: rotate(90deg); }
+  .landslidePipeline { grid-template-columns: 1fr; padding: 0.75rem; }
+  .landslidePipeline > .mapPanel:first-child,
+  .landslidePipeline > .mapPanel:last-child { grid-column: auto; grid-row: auto; }
+  .modelStage { grid-column: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding: 0; border: 0; }
+  .modelStage > .arrow { grid-column: 1 / -1; justify-self: center; transform: rotate(90deg) !important; }
+  .modelStage > .arrow:last-child { grid-row: 3; }
+  .variableList { grid-column: 1; }
+  .model { grid-column: 2; }
+  .selectionSummary { padding: 0.75rem; gap: 0.75rem; }
+  .chartPanel { padding: 0.75rem; }
+  .chartBody { gap: 0.65rem; }
+  .donut { flex-basis: 5.5rem; width: 5.5rem; }
+  .donut strong { font-size: 1.15rem; }
+  .indicators { font-size: 0.7rem; }
+  .indicators th small { font-size: 0.55rem; }
+  .eventTable { font-size: 0.72rem; }
+}
+
+/* In the sticky homepage stage, explain the dashboard in two compact columns.
+   Full case-study views retain the more spacious map/table arrangement. */
+@container project-visual (min-width: 550px) {
+  .dashboardBodyPreview { grid-template-columns: minmax(0,1.15fr) minmax(0,1fr); }
+  .dashboardBodyPreview .satellitePanel { border-right: 1px solid var(--hairline); border-bottom: 0; }
+  .dashboardBodyPreview .chartBody { flex-direction: column; gap: 0.4rem; }
+  .dashboardBodyPreview .donut { width: 5.5rem; flex-basis: auto; }
+  .dashboardBodyPreview .indicators th small { display: none; }
+  .dashboardBodyPreview .indicators { flex: auto; }
+}
+
+@container project-visual (max-width: 340px) {
+  .chartBody { flex-direction: column; gap: 0.5rem; }
+  .donut { width: 6rem; flex-basis: auto; }
+  .indicators { flex: auto; }
+}

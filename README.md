@@ -40,8 +40,10 @@ and flagship project case studies.
   hints for faster first rendering without third-party requests.
 - Deferred GSAP loading: the Hero starts after first-paint idle time or immediate
   user intent, while later timelines initialize only near their sections.
-- Responsive 640/800/full-size WebP project evidence with fixed dimensions and
-  intersection-based homepage loading; source PNG files remain available as fallbacks.
+- Native project visuals shared by the homepage and case studies: real NL2MAP
+  geometry in SVG, a reconstructed SE4G dashboard with a source satellite crop,
+  and Landslide raster layers with selectable legends. Responsive WebP layers
+  retain scientific content; original images remain available through source links.
 - Accessible mobile navigation, visible keyboard focus, semantic headings, and
   static reduced-motion alternatives for both implemented sections.
 
@@ -68,8 +70,14 @@ and flagship project case studies.
 - `src/i18n/routing.ts` owns locale-aware URLs and localized route parsing.
 - `src/seo/` contains shared localized metadata, language alternates, and runtime SEO updates.
 - `src/motion/` contains the shared deferred-activation and lazy GSAP runtime helpers.
+- `src/components/project-visuals/` contains the shared native frames, map panels,
+  dashboard, source-derived geometry, legends, workflows and localized visual copy.
 - `src/components/ResponsiveEvidenceImage.tsx` owns responsive project-image
   selection and optional near-viewport loading.
+- `docs/visual-assets-audit.md` records the complete asset inventory, classification,
+  implementation decisions, source integrity and browser verification.
+- `scripts/prepare-project-visuals.cjs` regenerates map presentation layers and SVG
+  geometry from the retained evidence; see `assets/projects/evidence/SOURCES.md`.
 - `src/styles/global.css` contains shared tokens, fonts, and accessibility rules.
 - `assets/` contains local webfonts, the downloadable CV, and repository-sourced
   project evidence. Evidence provenance is documented in

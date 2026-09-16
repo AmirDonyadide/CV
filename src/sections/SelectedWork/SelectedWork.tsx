@@ -56,9 +56,7 @@ export function SelectedWork({ locale }: SelectedWorkProps) {
                 <div key={project.slug} className={styles.visualScene} data-project-scene={project.slug}>
                   <ProjectVisual
                     slug={project.slug}
-                    labels={copy.visualLabels}
-                    illustrationLabel={copy.illustrationLabel}
-                    actualEvidenceLabel={copy.actualEvidenceLabel}
+                    locale={locale}
                   />
                 </div>
               ))}
@@ -77,9 +75,7 @@ export function SelectedWork({ locale }: SelectedWorkProps) {
               <div className={styles.mobileVisual} data-project-mobile-visual>
                 <ProjectVisual
                   slug={project.slug}
-                  labels={copy.visualLabels}
-                  illustrationLabel={copy.illustrationLabel}
-                  actualEvidenceLabel={copy.actualEvidenceLabel}
+                  locale={locale}
                   compact
                 />
               </div>

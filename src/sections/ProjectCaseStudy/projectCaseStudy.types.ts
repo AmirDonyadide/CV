@@ -1,3 +1,4 @@
+import type { EvidenceVisualId } from "../../components/project-visuals/projectVisual.types";
 import type { Locale } from "../Hero/hero.types";
 import type { ProjectSlug } from "../SelectedWork/selectedWork.types";
 
@@ -18,16 +19,12 @@ export interface CaseStudyMethodStep {
 }
 
 export interface CaseStudyEvidence {
+  visual: EvidenceVisualId;
   src: string;
-  webpSrcSet?: string;
-  sizes?: string;
-  width: number;
-  height: number;
   alt: string;
   title: string;
   caption: string;
   featured?: boolean;
-  contain?: boolean;
 }
 
 export interface ProjectCaseStudyCopy {

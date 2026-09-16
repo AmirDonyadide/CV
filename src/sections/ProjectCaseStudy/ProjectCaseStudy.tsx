@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { localizedHref } from "../../i18n/routing";
-import { ResponsiveEvidenceImage } from "../../components/ResponsiveEvidenceImage";
+import { ProjectEvidenceVisual } from "../../components/project-visuals/ProjectEvidenceVisual";
 import type { Locale } from "../Hero/hero.types";
 import type { ProjectSlug } from "../SelectedWork/selectedWork.types";
 import { CaseStudyHeroMedia } from "./CaseStudyHeroMedia";
@@ -115,8 +115,7 @@ export function ProjectCaseStudy({ locale, onLocaleChange, slug }: ProjectCaseSt
           <div className={styles.heroMediaWrap} data-case-reveal>
             <CaseStudyHeroMedia
               project={project}
-              evidenceLabel={ui.realEvidence}
-              documentedInterfaceLabel={ui.documentedInterface}
+              locale={locale}
             />
           </div>
         </header>
@@ -206,24 +205,14 @@ export function ProjectCaseStudy({ locale, onLocaleChange, slug }: ProjectCaseSt
               {project.evidence.map((item) => (
                 <figure
                   key={item.src}
-                  className={`${styles.evidenceItem} ${item.featured ? styles.evidenceFeatured : ""} ${item.contain ? styles.evidenceContain : ""}`}
+                  className={`${styles.evidenceItem} ${item.featured ? styles.evidenceFeatured : ""}`}
                 >
-                  <a href={item.src} target="_blank" rel="noreferrer" aria-label={`${ui.openImage}: ${item.title}`}>
-                    <ResponsiveEvidenceImage
-                      src={item.src}
-                      webpSrcSet={item.webpSrcSet}
-                      sizes={item.sizes}
-                      alt={item.alt}
-                      width={item.width}
-                      height={item.height}
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </a>
+                  <ProjectEvidenceVisual item={item} locale={locale} />
                   <figcaption>
                     <span>{ui.evidenceSource}</span>
                     <h3>{item.title}</h3>
                     <p>{item.caption}</p>
+                    <a className={styles.sourceImageLink} aria-label={`${ui.openImage}: ${item.title}`} href={item.src} target="_blank" rel="noreferrer">{ui.openImage}<ExternalArrow /></a>
                   </figcaption>
                 </figure>
               ))}
