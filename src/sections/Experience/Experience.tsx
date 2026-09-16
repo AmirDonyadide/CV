@@ -19,7 +19,6 @@ export function Experience({ locale }: ExperienceProps) {
     <section id="experience" ref={sectionRef} className={styles.section} aria-labelledby="experience-title">
       <header className={styles.sectionHeader} data-experience-header>
         <h2 id="experience-title" tabIndex={-1}>{copy.heading}</h2>
-        <p className={styles.supporting}>{copy.supporting}</p>
       </header>
 
       <div className={styles.timeline} data-experience-timeline>
@@ -55,17 +54,10 @@ export function Experience({ locale }: ExperienceProps) {
 
               <div className={styles.storyDetails}>
                 <div>
-                  <p className={styles.detailLabel}>{copy.responsibilitiesLabel}</p>
                   <ul className={styles.responsibilities}>
                     {role.responsibilities.map((responsibility) => (
                       <li key={responsibility}>{responsibility}</li>
                     ))}
-                  </ul>
-                </div>
-                <div>
-                  <p className={styles.detailLabel}>{copy.focusLabel}</p>
-                  <ul className={styles.focusList}>
-                    {role.focus.map((item) => <li key={item}>{item}</li>)}
                   </ul>
                 </div>
               </div>

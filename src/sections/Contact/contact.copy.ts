@@ -16,7 +16,7 @@ export interface ContactCopy {
 export const contactCopy: Record<Locale, ContactCopy> = {
   en: {
     eyebrow: "08 / Contact",
-    question: "Have a project, research problem, or opportunity?",
+    question: "Projects · Research · Opportunities",
     heading: "Let’s talk.",
     email: "Email",
     linkedIn: "LinkedIn",
@@ -28,8 +28,8 @@ export const contactCopy: Record<Locale, ContactCopy> = {
   },
   de: {
     eyebrow: "08 / Kontakt",
-    question: "Ein Projekt, eine Forschungsfrage oder eine Gelegenheit?",
-    heading: "Lassen Sie uns sprechen.",
+    question: "Projekte · Forschung · Zusammenarbeit",
+    heading: "Sprechen wir.",
     email: "E-Mail",
     linkedIn: "LinkedIn",
     github: "GitHub",
@@ -40,8 +40,8 @@ export const contactCopy: Record<Locale, ContactCopy> = {
   },
   it: {
     eyebrow: "08 / Contatti",
-    question: "Un progetto, un problema di ricerca o un’opportunità?",
-    heading: "Parliamone.",
+    question: "Progetti · Ricerca · Opportunità",
+    heading: "Parliamo.",
     email: "Email",
     linkedIn: "LinkedIn",
     github: "GitHub",

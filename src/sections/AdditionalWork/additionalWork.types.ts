@@ -14,7 +14,6 @@ export interface AdditionalProject {
 export interface AdditionalWorkCopy {
   eyebrow: string;
   heading: string;
-  supporting: string;
   workflowLabel: string;
   openProject: string;
   privateProject: string;

@@ -26,15 +26,15 @@ export const seoContent: Record<Locale, LocaleSeoContent> = {
     downloadCv: "Download CV",
     quickCvLabel: "Quick CV",
     role: "Geospatial Data & Software Engineer",
-    tagline: "From coordinates to decisions.",
+    tagline: "I build spatial data pipelines, models, and WebGIS applications.",
     home: {
       title: "Amirhossein Donyadidegan | Geospatial Data & Software Engineer",
-      description: "Portfolio of Amirhossein Donyadidegan, a Geospatial Data & Software Engineer building spatial-data workflows, analysis, models, maps, dashboards, and software.",
+      description: "Amirhossein Donyadidegan — geospatial data pipelines, machine learning, and WebGIS. Explore projects, research, and experience.",
       entityName: "Amirhossein Donyadidegan",
     },
     quickCv: {
       title: "Quick CV | Amirhossein Donyadidegan",
-      description: "Recruiter-focused CV for Amirhossein Donyadidegan: current experience, career history, education, core technologies, selected geospatial projects, and contact details.",
+      description: "Amirhossein Donyadidegan: experience, education, stack, and geospatial projects. Download the full CV.",
       entityName: "Amirhossein Donyadidegan — Quick CV",
     },
     notFound: {
@@ -45,17 +45,17 @@ export const seoContent: Record<Locale, LocaleSeoContent> = {
     projects: {
       nl2map: {
         title: "NL2MAP Case Study | Amirhossein Donyadidegan",
-        description: "A research workflow connecting the language people use to describe visible map changes with structured cartographic generalization operations.",
+        description: "Infer cartographic operations from descriptions of building-map changes, using a public comparison study, text features, and classification.",
         entityName: "Inferring Map Generalization Operations from User Prompts",
       },
       se4g: {
         title: "SE4G Case Study | Amirhossein Donyadidegan",
-        description: "A geospatial application that links prepared spatial data, API endpoints, interactive maps, tables, and plots in one dashboard.",
+        description: "Explore hydrogeological indicators and Olympic venues by municipality in a Dash application backed by PostGIS and Flask.",
         entityName: "Geoinformatics Data Visualization Dashboard",
       },
       landslide: {
         title: "Landslide Mapping Case Study | Amirhossein Donyadidegan",
-        description: "A GIS and machine-learning workflow that combines terrain, land-cover, proximity, and inventory layers into a susceptibility surface and exposure analysis.",
+        description: "Random Forest landslide-susceptibility mapping for Bergamo, combining terrain, vegetation, land use, proximity, and inventory data. Outputs include susceptibility maps, population exposure, and WebGIS.",
         entityName: "AI-Based Landslide Susceptibility Mapping",
       },
     },
@@ -64,15 +64,15 @@ export const seoContent: Record<Locale, LocaleSeoContent> = {
     downloadCv: "Lebenslauf herunterladen",
     quickCvLabel: "Kurzprofil",
     role: "Ingenieur für Geodaten und Software",
-    tagline: "Von Koordinaten zu Entscheidungen.",
+    tagline: "Ich entwickle Geodaten-Pipelines, Modelle und WebGIS-Anwendungen.",
     home: {
       title: "Amirhossein Donyadidegan | Ingenieur für Geodaten und Software",
-      description: "Portfolio von Amirhossein Donyadidegan: Geodaten-Engineering, räumliche Analysen, Modelle, Karten, Dashboards und nutzbare Software.",
+      description: "Amirhossein Donyadidegan — Geodaten-Pipelines, Machine Learning und WebGIS. Projekte, Forschung und Erfahrung.",
       entityName: "Amirhossein Donyadidegan",
     },
     quickCv: {
       title: "Kurzprofil | Amirhossein Donyadidegan",
-      description: "Recruiter-orientiertes Kurzprofil mit aktueller Position, Berufserfahrung, Ausbildung, Kerntechnologien, ausgewählten Geodatenprojekten und Kontaktdaten.",
+      description: "Amirhossein Donyadidegan: Erfahrung, Ausbildung, Stack und Geodatenprojekte. Vollständigen Lebenslauf herunterladen.",
       entityName: "Amirhossein Donyadidegan — Kurzprofil",
     },
     notFound: {
@@ -83,17 +83,17 @@ export const seoContent: Record<Locale, LocaleSeoContent> = {
     projects: {
       nl2map: {
         title: "NL2MAP Fallstudie | Amirhossein Donyadidegan",
-        description: "Ein Forschungsworkflow, der sprachliche Beschreibungen sichtbarer Kartenänderungen mit strukturierten kartografischen Generalisierungsoperationen verbindet.",
+        description: "Generalisierungsoperationen aus Beschreibungen von Kartenänderungen ableiten: öffentliche Vergleichsstudie, Textmerkmale und Klassifikation.",
         entityName: "Inferring Map Generalization Operations from User Prompts",
       },
       se4g: {
         title: "SE4G Fallstudie | Amirhossein Donyadidegan",
-        description: "Eine Geodatenanwendung, die aufbereitete räumliche Daten, API-Endpunkte, interaktive Karten, Tabellen und Diagramme in einem Dashboard verbindet.",
+        description: "Hydrogeologische Indikatoren und Olympia-Standorte je Gemeinde erkunden: Dash-Anwendung mit PostGIS und Flask.",
         entityName: "Geoinformatics Data Visualization Dashboard",
       },
       landslide: {
         title: "Hangrutschungskartierung Fallstudie | Amirhossein Donyadidegan",
-        description: "Ein GIS- und Machine-Learning-Workflow, der Gelände-, Landbedeckungs-, Distanz- und Inventardaten zu einer Suszeptibilitätsfläche und Expositionsanalyse verbindet.",
+        description: "Hangrutschungssuszeptibilität in Bergamo mit Random Forest kartieren: Gelände, Vegetation, Landnutzung, Distanzen und Inventardaten. Ergebnisse: Suszeptibilitätskarten, Bevölkerungsexposition und WebGIS.",
         entityName: "AI-Based Landslide Susceptibility Mapping",
       },
     },
@@ -102,15 +102,15 @@ export const seoContent: Record<Locale, LocaleSeoContent> = {
     downloadCv: "Scarica il CV",
     quickCvLabel: "CV rapido",
     role: "Ingegnere di dati geospaziali e software",
-    tagline: "Dalle coordinate alle decisioni.",
+    tagline: "Sviluppo pipeline geospaziali, modelli e applicazioni WebGIS.",
     home: {
       title: "Amirhossein Donyadidegan | Ingegnere geospaziale e software",
-      description: "Portfolio di Amirhossein Donyadidegan: data engineering geospaziale, analisi, modelli, mappe, dashboard e software utilizzabile.",
+      description: "Amirhossein Donyadidegan — pipeline geospaziali, machine learning e WebGIS. Progetti, ricerca ed esperienza.",
       entityName: "Amirhossein Donyadidegan",
     },
     quickCv: {
       title: "CV rapido | Amirhossein Donyadidegan",
-      description: "CV rapido per recruiter con posizione attuale, esperienze, formazione, tecnologie principali, progetti geospaziali selezionati e contatti.",
+      description: "Amirhossein Donyadidegan: esperienza, formazione, stack e progetti geospaziali. Scarica il CV completo.",
       entityName: "Amirhossein Donyadidegan — CV rapido",
     },
     notFound: {
@@ -121,17 +121,17 @@ export const seoContent: Record<Locale, LocaleSeoContent> = {
     projects: {
       nl2map: {
         title: "Caso studio NL2MAP | Amirhossein Donyadidegan",
-        description: "Un workflow di ricerca che collega il linguaggio usato per descrivere i cambiamenti visibili tra mappe a operazioni strutturate di generalizzazione cartografica.",
+        description: "Inferire operazioni cartografiche dalle descrizioni di variazioni nelle mappe di edifici: studio comparativo pubblico, feature testuali e classificazione.",
         entityName: "Inferring Map Generalization Operations from User Prompts",
       },
       se4g: {
         title: "Caso studio SE4G | Amirhossein Donyadidegan",
-        description: "Un'applicazione geospaziale che collega dati preparati, endpoint API, mappe interattive, tabelle e grafici in una sola dashboard.",
+        description: "Esplorare indicatori idrogeologici e sedi olimpiche per comune in un’applicazione Dash con PostGIS e Flask.",
         entityName: "Geoinformatics Data Visualization Dashboard",
       },
       landslide: {
         title: "Caso studio sulla suscettibilità alle frane | Amirhossein Donyadidegan",
-        description: "Un workflow GIS e machine learning che combina terreno, copertura del suolo, prossimità e inventario in una superficie di suscettibilità e un'analisi dell'esposizione.",
+        description: "Suscettibilità alle frane a Bergamo con Random Forest: terreno, vegetazione, uso del suolo, prossimità e inventario. Output: mappe di suscettibilità, esposizione della popolazione e WebGIS.",
         entityName: "AI-Based Landslide Susceptibility Mapping",
       },
     },

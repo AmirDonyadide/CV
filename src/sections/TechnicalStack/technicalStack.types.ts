@@ -7,12 +7,8 @@ export interface TechnicalGroup {
 }
 
 export interface TechnicalStackCopy {
-  eyebrow: string;
   heading: string;
-  supporting: string;
   groupLabel: string;
   evidenceLabel: string;
-  footer: string;
-  flow: string[];
   groups: TechnicalGroup[];
 }

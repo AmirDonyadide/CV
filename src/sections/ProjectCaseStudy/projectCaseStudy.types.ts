@@ -34,13 +34,10 @@ export interface ProjectCaseStudyCopy {
   title: string;
   context: string;
   summary: string;
-  overview: string[];
   problem: string[];
   contribution: string[];
   data: CaseStudyDataItem[];
-  methodIntro: string;
   method: CaseStudyMethodStep[];
-  workflow: CaseStudyDataItem[];
   outputs: string[];
   technologies: string[];
   evidenceIntro: string;
@@ -56,23 +53,17 @@ export interface CaseStudyUiCopy {
   allWork: string;
   quickCv: string;
   languageLabel: string;
-  realEvidence: string;
-  documentedInterface: string;
-  overview: string;
   problem: string;
   contribution: string;
   data: string;
   method: string;
-  workflow: string;
   results: string;
   technology: string;
   visualEvidence: string;
-  evidenceSource: string;
   openImage: string;
   projectLinks: string;
   nextProject: string;
   backToWork: string;
-  caseStudyLabel: string;
 }
 
 export type CaseStudiesByLocale = Record<Locale, Record<ProjectSlug, ProjectCaseStudyCopy>>;

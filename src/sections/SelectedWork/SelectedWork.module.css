@@ -36,6 +36,8 @@
 }
 
 .sectionHeader h2 {
+  overflow-wrap: anywhere;
+  hyphens: auto;
   max-width: none;
   margin: 0;
   font-family: "Geologica", "Helvetica Neue", sans-serif;
@@ -44,15 +46,6 @@
   line-height: 0.95;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-}
-
-.supporting {
-  max-width: 60rem;
-  margin: 0.85rem 0 0;
-  color: #a7aeb2;
-  font-size: clamp(1.1rem, 1.45vw, 1.5rem);
-  line-height: 1.5;
-  letter-spacing: -0.02em;
 }
 
 .projectSequence {
@@ -121,7 +114,7 @@
 
 .projectStory {
   display: flex;
-  min-height: 105svh;
+  min-height: 80svh;
   flex-direction: column;
   justify-content: flex-start;
   padding: 0 0 8svh;
@@ -133,7 +126,7 @@
 
 .storyHeading {
   display: grid;
-  grid-template-columns: 3rem 1fr;
+  grid-template-columns: 3rem minmax(0, 1fr);
   gap: 1.25rem;
   padding-bottom: 2rem;
   border-bottom: 1px solid var(--hairline);
@@ -151,12 +144,17 @@
 }
 
 .storyHeading h3 {
+  overflow-wrap: anywhere;
   margin: 0;
   font-family: "Geologica", "Helvetica Neue", sans-serif;
   font-size: clamp(2rem, 3.15vw, 3.65rem);
   font-weight: 420;
   line-height: 1.03;
   letter-spacing: -0.035em;
+}
+
+.storyHeading h3:lang(de) {
+  hyphens: auto;
 }
 
 .projectContext {
@@ -169,6 +167,14 @@
 
 .projectFacts {
   margin: 0;
+}
+
+.summary {
+  max-width: 54ch;
+  margin: 1.4rem 0;
+  color: #bcc3c6;
+  font-size: clamp(0.95rem, 1.1vw, 1.08rem);
+  line-height: 1.6;
 }
 
 .projectFacts > div {
@@ -190,10 +196,6 @@
   color: #bcc3c6;
   font-size: clamp(0.82rem, 0.92vw, 0.95rem);
   line-height: 1.58;
-}
-
-.evidenceFact dd {
-  color: #d6dbdd;
 }
 
 .technologyList {
@@ -308,7 +310,7 @@
   }
 
   .storyHeading {
-    grid-template-columns: 2rem 1fr;
+    grid-template-columns: 2rem minmax(0, 1fr);
     gap: 0.7rem;
   }
 

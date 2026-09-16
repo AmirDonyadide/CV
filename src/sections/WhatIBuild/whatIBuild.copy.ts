@@ -12,28 +12,28 @@ export interface WhatIBuildCopy {
 export const whatIBuildCopy: Record<Locale, WhatIBuildCopy> = {
   en: {
     heading: "What I Build",
-    supporting: "Spatial data, analysis and software belong in one workflow.",
+    supporting: "Remote sensing · GIS · Machine learning",
     stages: [
       { name: "Spatial", detail: "Coordinates · raster · vector" },
-      { name: "Data / Intelligence", detail: "Python · pipelines · models" },
+      { name: "Analysis", detail: "Python · pipelines · models" },
       { name: "Systems", detail: "APIs · dashboards · WebGIS" },
     ],
   },
   de: {
     heading: "Was ich entwickle",
-    supporting: "Geodaten, Analyse und Software gehören in einen gemeinsamen Workflow.",
+    supporting: "Fernerkundung · GIS · Machine Learning",
     stages: [
       { name: "Raum", detail: "Koordinaten · Raster · Vektor" },
-      { name: "Daten / Intelligenz", detail: "Python · Pipelines · Modelle" },
+      { name: "Analyse", detail: "Python · Pipelines · Modelle" },
       { name: "Systeme", detail: "APIs · Dashboards · WebGIS" },
     ],
   },
   it: {
     heading: "Cosa realizzo",
-    supporting: "Dati spaziali, analisi e software appartengono a un unico flusso di lavoro.",
+    supporting: "Telerilevamento · GIS · Machine learning",
     stages: [
       { name: "Spazio", detail: "Coordinate · raster · vettori" },
-      { name: "Dati / Intelligenza", detail: "Python · pipeline · modelli" },
+      { name: "Analisi", detail: "Python · pipeline · modelli" },
       { name: "Sistemi", detail: "API · dashboard · WebGIS" },
     ],
   },

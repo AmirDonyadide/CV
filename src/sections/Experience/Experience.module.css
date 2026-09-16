@@ -52,15 +52,6 @@
   text-transform: uppercase;
 }
 
-.supporting {
-  max-width: 40rem;
-  margin: 0.85rem 0 0;
-  color: #a7aeb2;
-  font-size: clamp(1.1rem, 1.45vw, 1.5rem);
-  line-height: 1.5;
-  letter-spacing: -0.02em;
-}
-
 .timeline {
   position: relative;
   z-index: 1;
@@ -203,6 +194,7 @@
 }
 
 .story h3 {
+  overflow-wrap: anywhere;
   max-width: 19ch;
   margin: 0.75rem 0 0;
   font-family: "Geologica", "Helvetica Neue", sans-serif;
@@ -210,6 +202,10 @@
   font-weight: 410;
   line-height: 0.98;
   letter-spacing: -0.045em;
+}
+
+.story h3:lang(de) {
+  hyphens: auto;
 }
 
 .organization {
@@ -231,30 +227,18 @@
 }
 
 .storyDetails {
-  display: grid;
-  grid-template-columns: minmax(0, 1.65fr) minmax(9rem, 0.75fr);
-  gap: clamp(2rem, 4vw, 4rem);
-  margin-top: clamp(2.2rem, 5vh, 3.8rem);
+  max-width: 56ch;
+  margin-top: 1.8rem;
   padding-top: 1.4rem;
   border-top: 1px solid var(--hairline);
-}
-
-.detailLabel {
-  margin: 0 0 1rem;
-  color: #788289;
-  font-size: 0.66rem;
-}
-
-.responsibilities,
-.focusList {
-  margin: 0;
-  padding: 0;
-  list-style: none;
 }
 
 .responsibilities {
   display: grid;
   gap: 0.8rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
   color: #aeb5b9;
   line-height: 1.55;
 }
@@ -274,48 +258,17 @@
   content: "";
 }
 
-.focusList {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.55rem 0.8rem;
-  color: #b9c0c3;
-  font-size: 0.8rem;
-}
-
-.focusList li {
-  display: flex;
-  align-items: center;
-  gap: 0.45rem;
-}
-
-.focusList li::before {
-  width: 0.27rem;
-  height: 0.27rem;
-  border-radius: 50%;
-  background: #59656b;
-  content: "";
-}
-
-.story[data-current="true"] .focusList li::before {
-  background: var(--accent);
-}
-
 @media (min-width: 1100px) {
   .story {
-    min-height: clamp(36rem, 74svh, 42rem);
+    min-height: clamp(27rem, 56svh, 34rem);
   }
 
   .story:last-child {
-    min-height: clamp(30rem, 56svh, 36rem);
+    min-height: auto;
   }
 }
 
 @media (max-width: 1099px) {
-  .storyDetails {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-
   .sectionHeader {
     min-height: auto;
     padding: 5.5rem 1rem 4.5rem;

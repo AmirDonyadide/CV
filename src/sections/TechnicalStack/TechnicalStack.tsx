@@ -13,7 +13,6 @@ export function TechnicalStack({ locale }: TechnicalStackProps) {
     <section id="technical-stack" className={styles.section} aria-labelledby="technical-stack-title">
       <header className={styles.sectionHeader}>
         <h2 id="technical-stack-title" tabIndex={-1}>{copy.heading}</h2>
-        <p className={styles.supporting}>{copy.supporting}</p>
       </header>
 
       <div className={styles.stack} role="group" aria-label={copy.groupLabel}>
@@ -47,12 +46,6 @@ export function TechnicalStack({ locale }: TechnicalStackProps) {
         ))}
       </div>
 
-      <footer className={styles.sectionFooter}>
-        <p>{copy.footer}</p>
-        <ol aria-label={copy.flow.join(" to ")}>
-          {copy.flow.map((item) => <li key={item}>{item}</li>)}
-        </ol>
-      </footer>
     </section>
   );
 }

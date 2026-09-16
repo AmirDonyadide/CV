@@ -2,462 +2,432 @@ import type { Locale } from "../Hero/hero.types";
 import type { ProjectSlug } from "../SelectedWork/selectedWork.types";
 import type { CaseStudiesByLocale, CaseStudyUiCopy, ProjectCaseStudyCopy } from "./projectCaseStudy.types";
 
-const links = {
-  nl2map: [
-    { label: "Open public study", href: "https://amirdonyadide.github.io/Thesis_UserStudy/", kind: "study" as const },
-    { label: "View source repository", href: "https://github.com/AmirDonyadide/Thesis_UserStudy", kind: "repository" as const },
-  ],
-  se4g: [
-    { label: "View source repository", href: "https://github.com/AmirDonyadide/SE4G", kind: "repository" as const },
-  ],
-  landslide: [
-    { label: "Open project WebGIS", href: "https://amirdonyadide.github.io/GIS-Course-Polimi-2024/", kind: "demo" as const },
-    { label: "View source repository", href: "https://github.com/AmirDonyadide/GIS-Course-Polimi-2024", kind: "repository" as const },
-  ],
-};
-
-const sharedEvidence = {
-  nl2map: [
-    {
-      visual: "nl2map-input" as const,
-      src: "/assets/projects/evidence/nl2map-input-1069.png",
-      alt: "Original building map from NL2MAP study pair 1069",
-      title: "Original map",
-      caption: "Public thesis study pair 1069 - input building geometry.",
-      featured: true,
-    },
-    {
-      visual: "nl2map-generalized" as const,
-      src: "/assets/projects/evidence/nl2map-generalized-1069.png",
-      alt: "Generalized building map from NL2MAP study pair 1069",
-      title: "Generalized map",
-      caption: "The corresponding generalized state shown to study participants.",
-      featured: true,
-    },
-  ],
-  se4g: [
-    {
-      visual: "se4g" as const,
-      src: "/assets/projects/evidence/se4g-dashboard.webp",
-      alt: "Implemented SE4G dashboard state with city controls, map, table, and pie chart",
-      title: "Documented dashboard reconstruction",
-      caption: "Portfolio reconstruction of the documented Bormio state. Counts: 778 low, 36 medium and 36 high flood-risk buildings; source satellite content retained.",
-      featured: true,
-    },
-  ],
-  landslide: [
-    {
-      visual: "dtm" as const,
-      src: "/assets/projects/evidence/landslide-dtm.png",
-      alt: "Digital terrain model used by the landslide project",
-      title: "Terrain input",
-      caption: "Digital Terrain Model used as an input and for derived terrain variables.",
-    },
-    {
-      visual: "ndvi" as const,
-      src: "/assets/projects/evidence/landslide-ndvi.webp",
-      alt: "NDVI input map from the landslide project",
-      title: "Vegetation input",
-      caption: "NDVI layer documenting vegetation cover within the wider source area and study boundary.",
-    },
-    {
-      visual: "slope" as const,
-      src: "/assets/projects/evidence/landslide-slope.webp",
-      alt: "Slope raster derived for the landslide study area",
-      title: "Derived slope",
-      caption: "Slope classes derived from terrain data and used as an environmental factor.",
-    },
-    {
-      visual: "confidence" as const,
-      src: "/assets/projects/evidence/landslide-confidence.webp",
-      alt: "Random Forest classification confidence map from the landslide project",
-      title: "Classification confidence",
-      caption: "Confidence surface produced by the QGIS classification workflow.",
-    },
-    {
-      visual: "reclassified" as const,
-      src: "/assets/projects/evidence/landslide-reclassified.webp",
-      alt: "Reclassified landslide susceptibility raster",
-      title: "Reclassified susceptibility",
-      caption: "Susceptibility values grouped into four classes for exposure assessment.",
-    },
-    {
-      visual: "susceptibility" as const,
-      src: "/assets/projects/evidence/landslide-susceptibility.png",
-      alt: "Final landslide susceptibility map produced by the project",
-      title: "Final susceptibility surface",
-      caption: "Repository-native final map showing the produced susceptibility surface.",
-      featured: true,
-    },
-  ],
-};
-
 const english: Record<ProjectSlug, ProjectCaseStudyCopy> = {
   nl2map: {
     slug: "nl2map",
     number: "01",
     shortTitle: "NL2MAP",
-    title: "Inferring Map Generalization Operations from User Prompts",
-    context: "MSc thesis research · University of Bonn + Politecnico di Milano",
-    summary: "A research workflow connecting the language people use to describe visible map changes with structured cartographic generalization operations.",
-    overview: [
-      "This MSc thesis investigates how a system can infer cartographic generalization operations from the language people use to describe visible changes between two maps.",
-      "A public comparison study presents original and generalized building maps side by side and collects short participant-written prompts about how the second state could be produced from the first.",
-    ],
+    title: "Map operations from language",
+    context: "MSc thesis · University of Bonn + Politecnico di Milano",
+    summary: "Infer cartographic operations from descriptions of building-map changes, using a public comparison study, text features, and classification.",
     problem: [
-      "Map generalization changes geometry so maps remain legible at different scales. A person can describe those changes in ordinary language, while a software system needs a structured operation it can interpret.",
-      "The research problem is to bridge that language-to-operation gap while retaining the visual relationship between the original and generalized map states.",
+      "People describe map changes in everyday language; cartographic software needs explicit operations such as removal, merging, or simplification."
     ],
-    contribution: [
-      "Amirhossein conducted the MSc thesis research and built the public study interface used to present paired maps and collect written descriptions.",
-      "The case study reports only the workflow and artifacts that can be verified publicly. It makes no claim about unpublished accuracy, model performance, or participant outcomes.",
-    ],
+    contribution: ["Conducted the thesis research and built the public interface for collecting descriptions of paired maps."],
     data: [
-      { label: "Paired maps", detail: "Original and generalized building maps representing the same areas." },
-      { label: "Participant language", detail: "Short prompts describing how the generalized map could be derived from the input." },
-      { label: "Spatial geometry", detail: "Paired building geometries stored with the public study assets." },
+      { label: "Maps", detail: "Paired original and generalized building geometries." },
+      { label: "Language", detail: "Participant prompts describing each transformation." }
     ],
-    methodIntro: "The thesis workflow turns a visual comparison task into records that can support operation inference.",
     method: [
-      { title: "Present paired states", detail: "Show the original and generalized maps together so the change remains visually inspectable." },
-      { title: "Collect descriptions", detail: "Ask participants for a concise natural-language prompt describing the visible transformation." },
-      { title: "Prepare model inputs", detail: "Structure the prompt language and its paired map context for analysis." },
-      { title: "Classify the operation", detail: "Use the prepared representation to infer a cartographic operation category." },
-      { title: "Relate back to the map", detail: "Connect the inferred operation with the corresponding generalized map state." },
-    ],
-    workflow: [
-      { label: "Natural-language request", detail: "Participant description" },
-      { label: "Text representation", detail: "Model-ready features" },
-      { label: "Classifier", detail: "Operation inference" },
-      { label: "Cartographic operation", detail: "Remove, merge, simplify, or another class" },
-      { label: "Resulting map state", detail: "Paired generalized geometry" },
+      { title: "Collect", detail: "Present paired maps and collect written descriptions." },
+      { title: "Represent", detail: "Structure prompts and map context as model inputs." },
+      { title: "Classify", detail: "Infer an operation category from text features." },
+      { title: "Link", detail: "Associate the operation with the generalized geometry." }
     ],
     outputs: [
-      "A public map-comparison user-study interface.",
-      "Paired original and generalized building-map artifacts.",
-      "A model-oriented research pipeline for connecting descriptions to generalization operations.",
+      "Public map-comparison study and paired building maps.",
+      "Research pipeline connecting descriptions to generalization operations."
     ],
     technologies: ["Python", "Scikit-learn", "GeoPandas", "Shapely", "JavaScript", "GeoJSON"],
-    evidenceIntro: "Building geometry from public study pair 1069, rendered in the portfolio’s visual language. Both maps use the same extent and scale. The original published images remain available below.",
-    evidence: sharedEvidence.nl2map,
-    links: links.nl2map,
+    evidenceIntro: "Study pair 1069 · Source geometry redrawn at equal extent and scale.",
+    evidence: [
+      { visual: "nl2map-input", src: "/assets/projects/evidence/nl2map-input-1069.png", alt: "Original building map from NL2MAP study pair 1069", title: "Original map", caption: "Input building geometry.", featured: true },
+      {
+        visual: "nl2map-generalized",
+        src: "/assets/projects/evidence/nl2map-generalized-1069.png",
+        alt: "Generalized building map from NL2MAP study pair 1069",
+        title: "Generalized map",
+        caption: "Corresponding study geometry.",
+        featured: true
+      }
+    ],
+    links: [
+      { label: "Open study", href: "https://amirdonyadide.github.io/Thesis_UserStudy/", kind: "study" },
+      { label: "Source code", href: "https://github.com/AmirDonyadide/Thesis_UserStudy", kind: "repository" }
+    ],
     nextSlug: "se4g",
-    nextTitle: "SE4G Geoinformatics Dashboard",
+    nextTitle: "SE4G"
   },
   se4g: {
     slug: "se4g",
     number: "02",
     shortTitle: "SE4G",
-    title: "Geoinformatics Data Visualization Dashboard",
-    context: "Software Engineering for Geoinformatics · Four-person team project",
-    summary: "A geospatial application that links prepared spatial data, API endpoints, interactive maps, tables, and plots in one dashboard.",
-    overview: [
-      "SE4G is a team-built Dash application for exploring geographic information through interactive maps and charts.",
-      "Its public repository and design document show a system that combines city selection, hydrogeological indicators, Olympic-event locations, user reports, downloadable tables, and plot selection.",
-    ],
+    title: "Olympic venue hazard dashboard",
+    context: "Geoinformatics course project",
+    summary: "Explore hydrogeological indicators and Olympic venues by municipality in a Dash application backed by PostGIS and Flask.",
     problem: [
-      "Hazard indicators, municipality geometry, event locations, and reports are useful only when they can be queried and inspected together.",
-      "The project addresses that integration problem with a database-backed application rather than a collection of disconnected files and static outputs.",
+      "Inspect hazard indicators, venue locations, and user reports together, with city-level queries and downloadable data."
     ],
-    contribution: [
-      "Amirhossein contributed as one member of the four-person project team named in the public design document.",
-      "The repository does not document a reliable individual task split, so this page does not assign exclusive ownership of specific modules or interface features.",
-    ],
+    contribution: ["Contributor · Four-person team"],
     data: [
-      { label: "Municipal geometry", detail: "Spatial city records prepared for map display and queries." },
-      { label: "Hazard indicators", detail: "Selected hydrogeological indicators associated with target cities." },
-      { label: "Event locations", detail: "Olympic-event records linked to cities and venues." },
-      { label: "User records", detail: "Application users and submitted reports represented in the project schema." },
+      { label: "Municipalities", detail: "Italian city geometries and hydrogeological indicators." },
+      { label: "Events", detail: "Olympic venues and event records." },
+      { label: "Reports", detail: "Application users and submitted reports." }
     ],
-    methodIntro: "The implementation separates persistence, API access, and interactive presentation into connected application layers.",
     method: [
-      { title: "Prepare and persist", detail: "Load tabular and geographic records into PostgreSQL/PostGIS." },
-      { title: "Expose endpoints", detail: "Serve cities, indicators, events, users, and reports through Flask routes." },
-      { title: "Retrieve by selection", detail: "Request the relevant records when a visitor chooses a city and parameter." },
-      { title: "Compose the view", detail: "Connect Folium maps, Dash controls, tables, and Plotly charts." },
-      { title: "Support inspection", detail: "Allow selected data to be compared visually and downloaded as tables." },
+      { title: "Store", detail: "Load spatial and tabular records into PostgreSQL/PostGIS." },
+      { title: "Serve", detail: "Expose cities, indicators, events, users, and reports through Flask." },
+      { title: "Connect", detail: "Use Dash callbacks to update Folium maps and Plotly charts by city and parameter." },
+      { title: "Export", detail: "Download selected indicator and event tables as CSV." }
     ],
-    workflow: [
-      { label: "Source records", detail: "Cities, indicators, events, reports" },
-      { label: "Spatial database", detail: "PostgreSQL + PostGIS" },
-      { label: "API layer", detail: "Flask endpoints" },
-      { label: "Application logic", detail: "Dash callbacks" },
-      { label: "Interactive output", detail: "Folium maps + Plotly charts" },
-    ],
-    outputs: [
-      "An interactive city and parameter selection workflow.",
-      "Map views with event locations and geographic context.",
-      "Indicator and event tables with downloadable CSV output.",
-      "Pie and bar-chart views generated from selected indicator records.",
-    ],
+    outputs: ["Linked maps, tables, and pie/bar charts with city and parameter selection.", "CSV downloads of selected records."],
     technologies: ["Python", "Dash", "Flask", "Plotly", "Folium", "GeoPandas", "PostgreSQL", "PostGIS"],
-    evidenceIntro: "A native reconstruction of the Bormio dashboard state documented on page 14. The satellite content is retained from the original; tables and the chart use its published values. This is a static project explanation, not a live dashboard.",
-    evidence: sharedEvidence.se4g,
-    links: links.se4g,
+    evidenceIntro: "Static reconstruction using published Bormio values and original satellite imagery.",
+    evidence: [
+      {
+        visual: "se4g",
+        src: "/assets/projects/evidence/se4g-dashboard.webp",
+        alt: "Implemented SE4G dashboard state with city controls, map, table, and pie chart",
+        title: "Bormio dashboard",
+        caption: "City indicators and Olympic venues · Design document, p. 14.",
+        featured: true
+      }
+    ],
+    links: [
+      { label: "Source code", href: "https://github.com/AmirDonyadide/SE4G", kind: "repository" }
+    ],
     nextSlug: "landslide",
-    nextTitle: "Landslide Susceptibility Mapping",
+    nextTitle: "Landslide mapping"
   },
   landslide: {
     slug: "landslide",
     number: "03",
     shortTitle: "Landslide",
-    title: "AI-Based Landslide Susceptibility Mapping",
-    context: "MSc GIS course project · Three-person team · Bergamo, Italy",
-    summary: "A GIS and machine-learning workflow that combines terrain, land-cover, proximity, and inventory layers into a susceptibility surface and exposure analysis.",
-    overview: [
-      "This MSc course project assesses landslide susceptibility in a study area in the province of Bergamo, Italy.",
-      "The public project site documents the complete path from input collection and raster preprocessing through Random Forest classification, susceptibility mapping, population exposure analysis, validation, and WebGIS presentation.",
-    ],
-    problem: [
-      "Landslide susceptibility depends on several spatially varying conditions. Evaluating them requires consistent raster preparation, a reproducible modelling workflow, and outputs that can still be inspected geographically.",
-      "The project brings those inputs into one analysis and then translates the model output into mapped susceptibility classes and an interactive presentation.",
-    ],
-    contribution: [
-      "Amirhossein is one of the three contributors named on the public project site, alongside Firoozeh Rahimian and Hadi Kheiri.",
-      "Because the repository does not document an individual task split, this case study describes the verified team workflow without assigning exclusive ownership of a particular analysis step.",
-    ],
+    title: "Landslide susceptibility mapping",
+    context: "MSc GIS project · Bergamo, Italy",
+    summary: "Random Forest landslide-susceptibility mapping for Bergamo, combining terrain, vegetation, land use, proximity, and inventory data. Outputs include susceptibility maps, population exposure, and WebGIS.",
+    problem: ["Identify susceptible terrain from heterogeneous spatial layers, then assess population exposure."],
+    contribution: ["Team contributor · With Firoozeh Rahimian and Hadi Kheiri"],
     data: [
-      { label: "Terrain", detail: "Digital Terrain Model plus slope, aspect, plan curvature, and profile curvature derivatives." },
-      { label: "Environment", detail: "DUSAF land use, NDVI, river and road buffers, and geological-fault buffers." },
-      { label: "Reference labels", detail: "Landslide inventory and generated no-landslide zones used to prepare training and testing points." },
-      { label: "Exposure", detail: "Population raster aligned with reclassified susceptibility data." },
+      { label: "Terrain", detail: "DTM · Slope · Aspect · Plan and profile curvature" },
+      { label: "Environment", detail: "DUSAF land use · NDVI · River, road, and fault buffers" },
+      { label: "Labels", detail: "Landslide inventory and no-landslide zones for training/testing." },
+      { label: "Exposure", detail: "Population raster aligned to susceptibility classes." }
     ],
-    methodIntro: "The repository documents six connected stages; the central analytical sequence is summarized here.",
     method: [
-      { title: "Standardize layers", detail: "Reproject, clip, rasterize, and align the source datasets to the study area." },
-      { title: "Derive terrain variables", detail: "Generate slope, aspect, and curvature layers from the terrain model." },
-      { title: "Build model inputs", detail: "Combine the environmental variables into a virtual raster and prepare training and testing points." },
-      { title: "Classify", detail: "Run a Random Forest classifier through the Dzetsaka QGIS plugin and produce classification and confidence surfaces." },
-      { title: "Derive susceptibility", detail: "Use raster calculation to express landslide-class probability on a 0-100 surface and reclassify the result." },
-      { title: "Assess and publish", detail: "Overlay population data, validate with an error matrix, and expose the results through WebGIS." },
-    ],
-    workflow: [
-      { label: "Terrain + environment", detail: "Aligned raster variables" },
-      { label: "Training samples", detail: "Inventory + no-landslide points" },
-      { label: "Random Forest", detail: "QGIS Dzetsaka classification" },
-      { label: "Susceptibility surface", detail: "Probability and four reclassified bands" },
-      { label: "Exposure + WebGIS", detail: "Population analysis and interactive output" },
+      { title: "Align", detail: "Reproject, clip, and rasterize sources; derive terrain variables and build a virtual raster." },
+      { title: "Train", detail: "Prepare training/test points; classify with Random Forest in QGIS/Dzetsaka." },
+      { title: "Map", detail: "Convert landslide-class probability to a 0–100 surface and four susceptibility classes." },
+      { title: "Validate", detail: "Evaluate with an error matrix; calculate population exposure with zonal statistics." },
+      { title: "Publish", detail: "Present results in an OpenLayers WebGIS." }
     ],
     outputs: [
-      "Classification and confidence rasters.",
-      "A continuous landslide susceptibility surface and four-class reclassified map.",
-      "Population exposure calculations using zonal statistics.",
-      "A validation workflow and interactive WebGIS presentation.",
+      "Classification, confidence, and susceptibility rasters, including a four-class map.",
+      "Population exposure analysis and interactive WebGIS."
     ],
     technologies: ["QGIS", "Dzetsaka", "Random Forest", "Python", "Remote sensing", "OpenLayers", "WebGIS"],
-    evidenceIntro: "Original project raster content with native titles and legends. Source colors, values and study boundaries are preserved. The gallery follows the analysis from input layers to confidence and susceptibility; original images remain available.",
-    evidence: sharedEvidence.landslide,
-    links: links.landslide,
+    evidenceIntro: "Original raster content · Source colors, values, and study boundaries preserved.",
+    evidence: [
+      { visual: "dtm", src: "/assets/projects/evidence/landslide-dtm.png", alt: "Digital terrain model used by the landslide project", title: "Terrain", caption: "DTM · Basis for terrain derivatives." },
+      { visual: "ndvi", src: "/assets/projects/evidence/landslide-ndvi.webp", alt: "NDVI input map from the landslide project", title: "Vegetation", caption: "NDVI · Source area and study boundary." },
+      { visual: "slope", src: "/assets/projects/evidence/landslide-slope.webp", alt: "Slope raster derived for the landslide study area", title: "Slope", caption: "Terrain-derived slope classes." },
+      {
+        visual: "confidence",
+        src: "/assets/projects/evidence/landslide-confidence.webp",
+        alt: "Random Forest classification confidence map from the landslide project",
+        title: "Confidence",
+        caption: "QGIS/Dzetsaka classification confidence."
+      },
+      {
+        visual: "reclassified",
+        src: "/assets/projects/evidence/landslide-reclassified.webp",
+        alt: "Reclassified landslide susceptibility raster",
+        title: "Susceptibility classes",
+        caption: "Four classes for exposure analysis."
+      },
+      {
+        visual: "susceptibility",
+        src: "/assets/projects/evidence/landslide-susceptibility.png",
+        alt: "Final landslide susceptibility map produced by the project",
+        title: "Susceptibility surface",
+        caption: "Continuous 0–100 output.",
+        featured: true
+      }
+    ],
+    links: [
+      { label: "Open WebGIS", href: "https://amirdonyadide.github.io/GIS-Course-Polimi-2024/", kind: "demo" },
+      { label: "Source code", href: "https://github.com/AmirDonyadide/GIS-Course-Polimi-2024", kind: "repository" }
+    ],
     nextSlug: "nl2map",
-    nextTitle: "NL2MAP Thesis Research",
-  },
+    nextTitle: "NL2MAP"
+  }
 };
-
-function translatedEvidence(
-  slug: ProjectSlug,
-  locale: Exclude<Locale, "en">,
-): ProjectCaseStudyCopy["evidence"] {
-  const translations = {
-    de: {
-      nl2map: [
-        ["Originalkarte", "Öffentliches Thesis-Studienpaar 1069 - ursprüngliche Gebäudegeometrie."],
-        ["Generalisierte Karte", "Der zugehörige generalisierte Zustand, der den Teilnehmenden gezeigt wurde."],
-      ],
-      se4g: [["Rekonstruktion des Dashboards", "Rekonstruktion des dokumentierten Bormio-Zustands: 778 Gebäude mit niedrigem, 36 mit mittlerem und 36 mit hohem Hochwasserrisiko. Satelliteninhalt aus dem Original."]],
-      landslide: [
-        ["Geländeeingabe", "Digitales Geländemodell als Eingabe und Grundlage abgeleiteter Geländevariablen."],
-        ["Vegetationseingabe", "NDVI-Layer zur Vegetationsbedeckung im Quellgebiet und innerhalb der Untersuchungsgrenze."],
-        ["Abgeleitete Hangneigung", "Aus Geländedaten abgeleitete Neigungsklassen als Umweltfaktor."],
-        ["Klassifikationskonfidenz", "Konfidenzfläche aus dem QGIS-Klassifikationsworkflow."],
-        ["Reklassifizierte Suszeptibilität", "Vier Klassen der Suszeptibilitätswerte für die Expositionsanalyse."],
-        ["Finale Suszeptibilitätsfläche", "Repository-native Ergebniskarte der erzeugten Suszeptibilitätsfläche."],
-      ],
-    },
-    it: {
-      nl2map: [
-        ["Mappa originale", "Coppia pubblica 1069 dello studio di tesi - geometria iniziale degli edifici."],
-        ["Mappa generalizzata", "Lo stato generalizzato corrispondente mostrato ai partecipanti."],
-      ],
-      se4g: [["Ricostruzione della dashboard", "Ricostruzione dello stato documentato di Bormio: 778 edifici a basso rischio alluvione, 36 a rischio medio e 36 alto. Contenuto satellitare originale."]],
-      landslide: [
-        ["Input del terreno", "Modello digitale del terreno usato come input e per derivare le variabili topografiche."],
-        ["Input di vegetazione", "Layer NDVI che documenta la copertura vegetale nell'area sorgente e nel perimetro di studio."],
-        ["Pendenza derivata", "Classi di pendenza derivate dai dati del terreno e usate come fattore ambientale."],
-        ["Confidenza della classificazione", "Superficie di confidenza prodotta dal workflow di classificazione QGIS."],
-        ["Suscettibilità riclassificata", "Valori di suscettibilità raggruppati in quattro classi per l'analisi dell'esposizione."],
-        ["Superficie finale di suscettibilità", "Mappa finale nativa del repository con la superficie prodotta."],
-      ],
-    },
-  } as const;
-
-  return sharedEvidence[slug].map((item, index) => ({
-    ...item,
-    title: translations[locale][slug][index][0],
-    caption: translations[locale][slug][index][1],
-  }));
-}
-
-function translatedLinks(
-  slug: ProjectSlug,
-  locale: Exclude<Locale, "en">,
-): ProjectCaseStudyCopy["links"] {
-  const labels = {
-    de: {
-      nl2map: ["Öffentliche Studie öffnen", "Quellcode ansehen"],
-      se4g: ["Quellcode ansehen"],
-      landslide: ["Projekt-WebGIS öffnen", "Quellcode ansehen"],
-    },
-    it: {
-      nl2map: ["Apri lo studio pubblico", "Vedi repository sorgente"],
-      se4g: ["Vedi repository sorgente"],
-      landslide: ["Apri il WebGIS del progetto", "Vedi repository sorgente"],
-    },
-  } as const;
-
-  return links[slug].map((link, index) => ({ ...link, label: labels[locale][slug][index] }));
-}
 
 const german: Record<ProjectSlug, ProjectCaseStudyCopy> = {
   nl2map: {
     ...english.nl2map,
+    title: "Kartenoperationen aus Sprache",
     context: "Masterarbeit · Universität Bonn + Politecnico di Milano",
-    summary: "Ein Forschungsworkflow, der sprachliche Beschreibungen sichtbarer Kartenänderungen mit strukturierten kartografischen Generalisierungsoperationen verbindet.",
-    overview: [
-      "Diese Masterarbeit untersucht, wie ein System aus der Sprache, mit der Menschen sichtbare Unterschiede zwischen zwei Karten beschreiben, kartografische Generalisierungsoperationen ableiten kann.",
-      "Eine öffentliche Vergleichsstudie zeigt originale und generalisierte Gebäudekarten nebeneinander und erfasst kurze Prompts dazu, wie der zweite Zustand aus dem ersten entstehen könnte.",
-    ],
+    summary: "Generalisierungsoperationen aus Beschreibungen von Kartenänderungen ableiten: öffentliche Vergleichsstudie, Textmerkmale und Klassifikation.",
     problem: [
-      "Kartengeneralisierung verändert Geometrien, damit Karten in unterschiedlichen Maßstäben lesbar bleiben. Menschen beschreiben solche Änderungen frei, ein Softwaresystem benötigt dagegen eine strukturierte Operation.",
-      "Die Forschungsfrage ist, diese Lücke zwischen Sprache und Operation zu schließen und zugleich den visuellen Bezug zwischen Ausgangs- und Zielkarte zu erhalten.",
+      "Menschen beschreiben Kartenänderungen in Alltagssprache; Kartografiesoftware benötigt eindeutige Operationen wie Entfernen, Zusammenführen oder Vereinfachen."
     ],
     contribution: [
-      "Amirhossein führte die Masterarbeitsforschung durch und entwickelte die öffentliche Studienoberfläche zur Darstellung der Kartenpaare und Erfassung schriftlicher Beschreibungen.",
-      "Die Fallstudie nennt nur öffentlich überprüfbare Workflows und Artefakte. Sie macht keine Aussagen zu unveröffentlichten Genauigkeiten, Modellleistungen oder Studienergebnissen.",
+      "Thesisforschung durchgeführt und die öffentliche Oberfläche zur Erfassung von Beschreibungen gepaarter Karten entwickelt."
     ],
     data: [
-      { label: "Kartenpaare", detail: "Originale und generalisierte Gebäudekarten derselben Gebiete." },
-      { label: "Teilnehmendensprache", detail: "Kurze Prompts, die die Ableitung der generalisierten Karte beschreiben." },
-      { label: "Räumliche Geometrie", detail: "Gepaarte Gebäudegeometrien in den öffentlichen Studienartefakten." },
+      { label: "Karten", detail: "Gepaarte originale und generalisierte Gebäudegeometrien." },
+      { label: "Sprache", detail: "Prompts der Teilnehmenden zu jeder Transformation." }
     ],
-    methodIntro: "Der Thesis-Workflow überführt eine visuelle Vergleichsaufgabe in Datensätze zur Ableitung von Operationen.",
     method: [
-      { title: "Kartenstände zeigen", detail: "Original und Generalisierung gemeinsam darstellen, damit die Veränderung prüfbar bleibt." },
-      { title: "Beschreibungen erfassen", detail: "Kurze natürlichsprachige Prompts zur sichtbaren Transformation sammeln." },
-      { title: "Modelleingaben vorbereiten", detail: "Prompt-Sprache und Kartenkontext strukturiert für die Analyse aufbereiten." },
-      { title: "Operation klassifizieren", detail: "Aus der vorbereiteten Repräsentation eine kartografische Operationsklasse ableiten." },
-      { title: "Mit der Karte verknüpfen", detail: "Die abgeleitete Operation dem zugehörigen generalisierten Kartenstand zuordnen." },
+      { title: "Erfassen", detail: "Kartenpaare zeigen und Beschreibungen sammeln." },
+      { title: "Aufbereiten", detail: "Prompts und Kartenkontext als Modelleingaben strukturieren." },
+      { title: "Klassifizieren", detail: "Operationskategorie aus Textmerkmalen ableiten." },
+      { title: "Verknüpfen", detail: "Operation der generalisierten Geometrie zuordnen." }
     ],
-    workflow: [
-      { label: "Natürlichsprachiger Prompt", detail: "Beschreibung der Teilnehmenden" },
-      { label: "Textrepräsentation", detail: "Modellierbare Merkmale" },
-      { label: "Klassifikator", detail: "Ableitung der Operation" },
-      { label: "Kartografische Operation", detail: "Entfernen, Zusammenführen, Vereinfachen oder andere Klasse" },
-      { label: "Resultierender Kartenstand", detail: "Gepaarte generalisierte Geometrie" },
+    outputs: [
+      "Öffentliche Kartenvergleichsstudie und gepaarte Gebäudekarten.",
+      "Forschungspipeline zwischen Beschreibungen und Generalisierungsoperationen."
     ],
-    outputs: ["Öffentliche Oberfläche für die Kartenvergleichsstudie.", "Gepaarte originale und generalisierte Gebäudekarten.", "Modellorientierter Forschungsworkflow zur Verbindung von Beschreibungen und Generalisierungsoperationen."],
-    evidenceIntro: "Gebäudegeometrie des öffentlichen Studienpaars 1069, im Stil dieses Portfolios dargestellt. Beide Karten verwenden denselben Ausschnitt und Maßstab. Die veröffentlichten Originalbilder bleiben unten zugänglich.",
-    evidence: translatedEvidence("nl2map", "de"),
-    links: translatedLinks("nl2map", "de"),
-    nextTitle: "SE4G Geoinformatik-Dashboard",
+    evidenceIntro: "Studienpaar 1069 · Quellgeometrie mit gleichem Ausschnitt und Maßstab neu dargestellt.",
+    evidence: english.nl2map.evidence.map((item, index) => ({
+      ...item,
+      ...[
+        { title: "Originalkarte", caption: "Ursprüngliche Gebäudegeometrie.", alt: "Originalkarte · Studienpaar 1069" },
+        { title: "Generalisierte Karte", caption: "Zugehörige Studiengeometrie.", alt: "Generalisierte Karte · Studienpaar 1069" }
+      ][index],
+    })),
+    links: english.nl2map.links.map((link, index) => ({ ...link, label: ["Studie öffnen", "Quellcode"][index] })),
   },
   se4g: {
     ...english.se4g,
-    context: "Software Engineering for Geoinformatics · Vierköpfiges Teamprojekt",
-    summary: "Eine Geodatenanwendung, die aufbereitete räumliche Daten, API-Endpunkte, interaktive Karten, Tabellen und Diagramme in einem Dashboard verbindet.",
-    overview: ["SE4G ist eine im Team entwickelte Dash-Anwendung zur Untersuchung geografischer Informationen mit interaktiven Karten und Diagrammen.", "Repository und Designdokument zeigen Stadtauswahl, hydrogeologische Indikatoren, olympische Veranstaltungsorte, Nutzerberichte, herunterladbare Tabellen und auswählbare Diagramme."],
-    problem: ["Gefahrenindikatoren, Gemeindegeometrien, Veranstaltungsorte und Berichte sind erst dann gemeinsam nutzbar, wenn sie zusammen abgefragt und untersucht werden können.", "Das Projekt löst diese Integrationsaufgabe mit einer datenbankgestützten Anwendung statt mit getrennten Dateien und statischen Ergebnissen."],
-    contribution: ["Amirhossein arbeitete als eines der vier im öffentlichen Designdokument genannten Teammitglieder am Projekt mit.", "Das Repository dokumentiert keine belastbare individuelle Aufgabenverteilung; daher weist diese Seite keine Module oder Funktionen exklusiv einer Person zu."],
-    data: [{ label: "Gemeindegeometrien", detail: "Räumliche Stadtobjekte für Kartendarstellung und Abfragen." }, { label: "Gefahrenindikatoren", detail: "Ausgewählte hydrogeologische Indikatoren für Zielstädte." }, { label: "Veranstaltungsorte", detail: "Olympische Veranstaltungen mit Städten und Austragungsorten." }, { label: "Nutzerdaten", detail: "Anwendungsnutzende und eingereichte Berichte im Projektschema." }],
-    methodIntro: "Die Implementierung trennt Persistenz, API-Zugriff und interaktive Darstellung in verbundene Anwendungsschichten.",
-    method: [{ title: "Aufbereiten und speichern", detail: "Tabellarische und geografische Datensätze in PostgreSQL/PostGIS laden." }, { title: "Endpunkte bereitstellen", detail: "Städte, Indikatoren, Events, Nutzende und Berichte über Flask-Routen ausgeben." }, { title: "Nach Auswahl abrufen", detail: "Bei Stadt- und Parameterauswahl die relevanten Datensätze anfragen." }, { title: "Ansicht zusammensetzen", detail: "Folium-Karten, Dash-Steuerung, Tabellen und Plotly-Diagramme verbinden." }, { title: "Untersuchung ermöglichen", detail: "Ausgewählte Daten visuell vergleichen und als Tabelle herunterladen." }],
-    workflow: [{ label: "Quelldatensätze", detail: "Städte, Indikatoren, Events, Berichte" }, { label: "Geodatenbank", detail: "PostgreSQL + PostGIS" }, { label: "API-Schicht", detail: "Flask-Endpunkte" }, { label: "Anwendungslogik", detail: "Dash-Callbacks" }, { label: "Interaktive Ausgabe", detail: "Folium-Karten + Plotly-Diagramme" }],
-    outputs: ["Interaktive Auswahl von Stadt und Parameter.", "Kartenansichten mit Veranstaltungsorten und geografischem Kontext.", "Indikator- und Veranstaltungstabellen mit CSV-Download.", "Kreis- und Balkendiagramme aus den ausgewählten Indikatordatensätzen."],
-    evidenceIntro: "Rekonstruktion des auf Seite 14 dokumentierten Bormio-Dashboards. Der Satellitenausschnitt stammt aus dem Original, Tabelle und Diagramm verwenden die veröffentlichten Werte. Eine statische Projektdarstellung, kein Live-Dashboard.",
-    evidence: translatedEvidence("se4g", "de"),
-    links: translatedLinks("se4g", "de"),
-    nextTitle: "Kartierung der Hangrutschungssuszeptibilität",
+    title: "Gefahren an Olympia-Standorten",
+    context: "Geoinformatik-Kursprojekt",
+    summary: "Hydrogeologische Indikatoren und Olympia-Standorte je Gemeinde erkunden: Dash-Anwendung mit PostGIS und Flask.",
+    problem: [
+      "Gefahrenindikatoren, Veranstaltungsorte und Nutzermeldungen gemeinsam abfragen, je Stadt untersuchen und herunterladen."
+    ],
+    contribution: ["Mitwirkender · Vierköpfiges Team"],
+    data: [
+      { label: "Gemeinden", detail: "Italienische Stadtgeometrien und hydrogeologische Indikatoren." },
+      { label: "Events", detail: "Olympische Veranstaltungsorte und Ereignisdaten." },
+      { label: "Meldungen", detail: "Anwendungsnutzende und eingereichte Berichte." }
+    ],
+    method: [
+      { title: "Speichern", detail: "Räumliche und tabellarische Datensätze in PostgreSQL/PostGIS laden." },
+      { title: "Bereitstellen", detail: "Städte, Indikatoren, Events, Nutzende und Meldungen über Flask ausgeben." },
+      { title: "Verbinden", detail: "Folium-Karten und Plotly-Diagramme per Dash-Callback nach Stadt und Parameter aktualisieren." },
+      { title: "Exportieren", detail: "Ausgewählte Indikator- und Veranstaltungstabellen als CSV herunterladen." }
+    ],
+    outputs: [
+      "Verknüpfte Karten, Tabellen, Kreis- und Balkendiagramme mit Stadt- und Parameterauswahl.",
+      "CSV-Downloads ausgewählter Datensätze."
+    ],
+    evidenceIntro: "Statische Rekonstruktion mit veröffentlichten Bormio-Werten und originalem Satellitenbild.",
+    nextTitle: "Hangrutschungskartierung",
+    evidence: english.se4g.evidence.map((item, index) => ({
+      ...item,
+      ...[
+        { title: "Bormio-Dashboard", caption: "Stadtindikatoren und Olympia-Standorte · Designdokument, S. 14.", alt: "Bormio-Dashboard · Bormio · SE4G" }
+      ][index],
+    })),
+    links: english.se4g.links.map((link, index) => ({ ...link, label: ["Quellcode"][index] })),
   },
   landslide: {
     ...english.landslide,
-    context: "MSc-GIS-Kursprojekt · Dreiköpfiges Team · Bergamo, Italien",
-    summary: "Ein GIS- und Machine-Learning-Workflow, der Gelände-, Landbedeckungs-, Distanz- und Inventardaten zu einer Suszeptibilitätsfläche und Expositionsanalyse verbindet.",
-    overview: ["Dieses MSc-Kursprojekt untersucht die Hangrutschungssuszeptibilität in einem Gebiet der Provinz Bergamo in Italien.", "Die öffentliche Projektseite dokumentiert den Weg von Datenerfassung und Rastervorverarbeitung über Random-Forest-Klassifikation, Suszeptibilitätskartierung, Bevölkerungsexposition und Validierung bis zur WebGIS-Darstellung."],
-    problem: ["Hangrutschungssuszeptibilität hängt von mehreren räumlich variierenden Bedingungen ab. Ihre Auswertung erfordert konsistente Raster, einen reproduzierbaren Modellworkflow und geografisch prüfbare Ergebnisse.", "Das Projekt führt diese Eingaben in einer Analyse zusammen und übersetzt das Modellergebnis in Suszeptibilitätsklassen und eine interaktive Darstellung."],
-    contribution: ["Amirhossein ist neben Firoozeh Rahimian und Hadi Kheiri einer der drei auf der öffentlichen Projektseite genannten Mitwirkenden.", "Da das Repository keine individuelle Aufgabenverteilung dokumentiert, beschreibt die Fallstudie den verifizierten Teamworkflow ohne einzelne Analyseschritte exklusiv zuzuordnen."],
-    data: [{ label: "Gelände", detail: "Digitales Geländemodell sowie Neigung, Exposition, Plan- und Profilkrümmung." }, { label: "Umwelt", detail: "DUSAF-Landnutzung, NDVI sowie Fluss-, Straßen- und Störungspuffer." }, { label: "Referenzlabels", detail: "Hangrutschungsinventar und erzeugte Nicht-Rutschungszonen für Trainings- und Testpunkte." }, { label: "Exposition", detail: "Bevölkerungsraster, ausgerichtet mit reklassifizierten Suszeptibilitätsdaten." }],
-    methodIntro: "Das Repository dokumentiert sechs verbundene Phasen; hier ist die zentrale analytische Folge zusammengefasst.",
-    method: [{ title: "Layer vereinheitlichen", detail: "Quellen reprojizieren, zuschneiden, rasterisieren und auf das Untersuchungsgebiet ausrichten." }, { title: "Geländevariablen ableiten", detail: "Neigung, Exposition und Krümmungen aus dem Geländemodell erzeugen." }, { title: "Modelleingaben erstellen", detail: "Umweltvariablen in einem virtuellen Raster kombinieren und Trainings- sowie Testpunkte vorbereiten." }, { title: "Klassifizieren", detail: "Random Forest über das QGIS-Plugin Dzetsaka ausführen und Klassifikations- sowie Konfidenzflächen erzeugen." }, { title: "Suszeptibilität ableiten", detail: "Die Hangrutschungswahrscheinlichkeit per Rasterberechnung auf einer 0-100-Fläche ausdrücken und reklassifizieren." }, { title: "Auswerten und publizieren", detail: "Bevölkerungsdaten überlagern, mit einer Fehlermatrix validieren und im WebGIS bereitstellen." }],
-    workflow: [{ label: "Gelände + Umwelt", detail: "Ausgerichtete Rastervariablen" }, { label: "Trainingsstichprobe", detail: "Inventar + Nicht-Rutschungspunkte" }, { label: "Random Forest", detail: "QGIS-Dzetsaka-Klassifikation" }, { label: "Suszeptibilitätsfläche", detail: "Wahrscheinlichkeit und vier Klassen" }, { label: "Exposition + WebGIS", detail: "Bevölkerungsanalyse und interaktive Ausgabe" }],
-    outputs: ["Klassifikations- und Konfidenzraster.", "Kontinuierliche Suszeptibilitätsfläche und reklassifizierte Karte mit vier Klassen.", "Berechnung der Bevölkerungsexposition mit zonaler Statistik.", "Validierungsworkflow und interaktive WebGIS-Darstellung."],
-    evidenceIntro: "Originale Rasterinhalte mit neu gesetzten Titeln und Legenden. Farben, Werte und Untersuchungsgrenzen bleiben erhalten. Die Galerie führt von Eingabelayern zu Konfidenz und Suszeptibilität; Originalbilder bleiben zugänglich.",
-    evidence: translatedEvidence("landslide", "de"),
-    links: translatedLinks("landslide", "de"),
-    nextTitle: "NL2MAP-Thesisforschung",
+    title: "Anfälligkeit für Hangrutschungen",
+    context: "MSc-GIS-Projekt · Bergamo, Italien",
+    summary: "Hangrutschungssuszeptibilität in Bergamo mit Random Forest kartieren: Gelände, Vegetation, Landnutzung, Distanzen und Inventardaten. Ergebnisse: Suszeptibilitätskarten, Bevölkerungsexposition und WebGIS.",
+    problem: ["Anfälliges Gelände aus heterogenen Geodaten identifizieren und die Bevölkerungsexposition bewerten."],
+    contribution: ["Teambeitrag · Mit Firoozeh Rahimian und Hadi Kheiri"],
+    data: [
+      { label: "Gelände", detail: "DGM · Neigung · Exposition · Plan- und Profilkrümmung" },
+      { label: "Umwelt", detail: "DUSAF-Landnutzung · NDVI · Fluss-, Straßen- und Störungspuffer" },
+      { label: "Labels", detail: "Hangrutschungsinventar und Nicht-Rutschungszonen für Training und Test." },
+      { label: "Exposition", detail: "Bevölkerungsraster, an Suszeptibilitätsklassen ausgerichtet." }
+    ],
+    method: [
+      { title: "Ausrichten", detail: "Quellen reprojizieren, zuschneiden und rasterisieren; Geländevariablen ableiten und virtuelles Raster erstellen." },
+      { title: "Trainieren", detail: "Trainings-/Testpunkte vorbereiten; Random Forest in QGIS/Dzetsaka ausführen." },
+      { title: "Kartieren", detail: "Rutschungswahrscheinlichkeit in eine 0–100-Fläche und vier Suszeptibilitätsklassen überführen." },
+      { title: "Validieren", detail: "Mit Fehlermatrix prüfen; Bevölkerungsexposition per zonaler Statistik berechnen." },
+      { title: "Publizieren", detail: "Ergebnisse in einem OpenLayers-WebGIS darstellen." }
+    ],
+    outputs: [
+      "Klassifikations-, Konfidenz- und Suszeptibilitätsraster mit Vierklassenkarte.",
+      "Bevölkerungsexpositionsanalyse und interaktives WebGIS."
+    ],
+    evidenceIntro: "Originale Rasterinhalte · Quellfarben, Werte und Untersuchungsgrenzen erhalten.",
+    evidence: english.landslide.evidence.map((item, index) => ({
+      ...item,
+      ...[
+        { title: "Gelände", caption: "DGM · Grundlage der Geländevariablen.", alt: "Gelände · Bergamo · QGIS" },
+        { title: "Vegetation", caption: "NDVI · Quellgebiet und Untersuchungsgrenze.", alt: "Vegetation · Bergamo · QGIS" },
+        { title: "Hangneigung", caption: "Aus Geländedaten abgeleitete Neigungsklassen.", alt: "Hangneigung · Bergamo · QGIS" },
+        { title: "Konfidenz", caption: "QGIS/Dzetsaka-Klassifikationskonfidenz.", alt: "Konfidenz · Bergamo · QGIS" },
+        { title: "Suszeptibilitätsklassen", caption: "Vier Klassen für die Expositionsanalyse.", alt: "Suszeptibilitätsklassen · Bergamo · QGIS" },
+        { title: "Suszeptibilitätsfläche", caption: "Kontinuierliches 0–100-Ergebnis.", alt: "Suszeptibilitätsfläche · Bergamo · QGIS" }
+      ][index],
+    })),
+    links: english.landslide.links.map((link, index) => ({ ...link, label: ["WebGIS öffnen", "Quellcode"][index] })),
   },
 };
 
 const italian: Record<ProjectSlug, ProjectCaseStudyCopy> = {
   nl2map: {
     ...english.nl2map,
+    title: "Operazioni cartografiche dal linguaggio",
     context: "Tesi magistrale · Università di Bonn + Politecnico di Milano",
-    summary: "Un workflow di ricerca che collega il linguaggio usato per descrivere i cambiamenti visibili tra mappe a operazioni strutturate di generalizzazione cartografica.",
-    overview: ["Questa tesi magistrale studia come un sistema possa inferire operazioni di generalizzazione cartografica dal linguaggio usato per descrivere le differenze visibili tra due mappe.", "Uno studio pubblico mostra affiancate mappe di edifici originali e generalizzate e raccoglie brevi prompt su come il secondo stato potrebbe derivare dal primo."],
-    problem: ["La generalizzazione modifica le geometrie affinché le mappe restino leggibili a scale diverse. Le persone descrivono liberamente questi cambiamenti, mentre un sistema software necessita di un'operazione strutturata.", "Il problema di ricerca è collegare linguaggio e operazione mantenendo il rapporto visivo tra lo stato iniziale e quello generalizzato."],
-    contribution: ["Amirhossein ha condotto la ricerca di tesi e sviluppato l'interfaccia pubblica usata per mostrare le coppie di mappe e raccogliere le descrizioni scritte.", "Il caso studio riporta solo workflow e artefatti verificabili pubblicamente, senza affermare accuratezze, prestazioni del modello o risultati dei partecipanti non pubblicati."],
-    data: [{ label: "Coppie di mappe", detail: "Mappe di edifici originali e generalizzate delle stesse aree." }, { label: "Linguaggio dei partecipanti", detail: "Brevi prompt che descrivono come ottenere la mappa generalizzata." }, { label: "Geometrie spaziali", detail: "Geometrie di edifici abbinate negli artefatti pubblici dello studio." }],
-    methodIntro: "Il workflow di tesi trasforma un confronto visivo in record utili all'inferenza delle operazioni.",
-    method: [{ title: "Mostrare gli stati", detail: "Presentare insieme mappa originale e generalizzata per rendere il cambiamento verificabile." }, { title: "Raccogliere descrizioni", detail: "Chiedere un breve prompt in linguaggio naturale sulla trasformazione visibile." }, { title: "Preparare gli input", detail: "Strutturare il linguaggio del prompt e il contesto cartografico per l'analisi." }, { title: "Classificare l'operazione", detail: "Inferire una categoria di operazione cartografica dalla rappresentazione preparata." }, { title: "Ricollegare alla mappa", detail: "Associare l'operazione inferita allo stato generalizzato corrispondente." }],
-    workflow: [{ label: "Richiesta in linguaggio naturale", detail: "Descrizione del partecipante" }, { label: "Rappresentazione testuale", detail: "Feature utilizzabili dal modello" }, { label: "Classificatore", detail: "Inferenza dell'operazione" }, { label: "Operazione cartografica", detail: "Rimuovi, unisci, semplifica o altra classe" }, { label: "Stato risultante", detail: "Geometria generalizzata abbinata" }],
-    outputs: ["Interfaccia pubblica per lo studio di confronto cartografico.", "Artefatti abbinati di mappe di edifici originali e generalizzate.", "Pipeline di ricerca orientata al modello per collegare descrizioni e operazioni."],
-    evidenceIntro: "Geometria degli edifici della coppia pubblica 1069, resa nel linguaggio visivo del portfolio. Le due mappe condividono estensione e scala. Le immagini originali restano disponibili qui sotto.",
-    evidence: translatedEvidence("nl2map", "it"),
-    links: translatedLinks("nl2map", "it"),
-    nextTitle: "Dashboard geoinformatica SE4G",
+    summary: "Inferire operazioni cartografiche dalle descrizioni di variazioni nelle mappe di edifici: studio comparativo pubblico, feature testuali e classificazione.",
+    problem: [
+      "Le persone descrivono le variazioni con parole comuni; il software cartografico richiede operazioni esplicite come rimozione, fusione o semplificazione."
+    ],
+    contribution: ["Ho condotto la ricerca di tesi e sviluppato l’interfaccia pubblica per raccogliere descrizioni di coppie di mappe."],
+    data: [
+      { label: "Mappe", detail: "Geometrie di edifici originali e generalizzate abbinate." },
+      { label: "Linguaggio", detail: "Prompt dei partecipanti sulle trasformazioni." }
+    ],
+    method: [
+      { title: "Raccogliere", detail: "Mostrare coppie di mappe e raccogliere descrizioni." },
+      { title: "Rappresentare", detail: "Strutturare prompt e contesto cartografico come input del modello." },
+      { title: "Classificare", detail: "Inferire la categoria di operazione dalle feature testuali." },
+      { title: "Collegare", detail: "Associare l’operazione alla geometria generalizzata." }
+    ],
+    outputs: [
+      "Studio pubblico di confronto cartografico e coppie di mappe di edifici.",
+      "Pipeline di ricerca tra descrizioni e operazioni di generalizzazione."
+    ],
+    evidenceIntro: "Coppia 1069 · Geometria sorgente ridisegnata con estensione e scala comuni.",
+    evidence: english.nl2map.evidence.map((item, index) => ({
+      ...item,
+      ...[
+        { title: "Mappa originale", caption: "Geometria iniziale degli edifici.", alt: "Mappa originale · Coppia di studio 1069" },
+        { title: "Mappa generalizzata", caption: "Geometria corrispondente nello studio.", alt: "Mappa generalizzata · Coppia di studio 1069" }
+      ][index],
+    })),
+    links: english.nl2map.links.map((link, index) => ({ ...link, label: ["Apri studio", "Codice"][index] })),
   },
   se4g: {
     ...english.se4g,
-    context: "Software Engineering for Geoinformatics · Progetto in team di quattro persone",
-    summary: "Un'applicazione geospaziale che collega dati preparati, endpoint API, mappe interattive, tabelle e grafici in una sola dashboard.",
-    overview: ["SE4G è un'applicazione Dash sviluppata in team per esplorare informazioni geografiche attraverso mappe e grafici interattivi.", "Il repository e il design document pubblici mostrano selezione della città, indicatori idrogeologici, sedi olimpiche, segnalazioni, tabelle scaricabili e selezione dei grafici."],
-    problem: ["Indicatori di pericolosità, geometrie comunali, luoghi degli eventi e segnalazioni diventano utili insieme solo quando possono essere interrogati e ispezionati nello stesso contesto.", "Il progetto affronta l'integrazione con un'applicazione basata su database invece di file separati e output statici."],
-    contribution: ["Amirhossein ha contribuito come uno dei quattro membri indicati nel design document pubblico.", "Il repository non documenta una divisione individuale affidabile dei compiti; la pagina quindi non attribuisce in esclusiva moduli o funzioni specifiche."],
-    data: [{ label: "Geometrie comunali", detail: "Record spaziali delle città per visualizzazione e query." }, { label: "Indicatori di pericolosità", detail: "Indicatori idrogeologici selezionati e associati alle città target." }, { label: "Sedi degli eventi", detail: "Record degli eventi olimpici collegati a città e sedi." }, { label: "Record utente", detail: "Utenti e segnalazioni rappresentati nello schema del progetto." }],
-    methodIntro: "L'implementazione separa persistenza, accesso API e presentazione interattiva in livelli collegati.",
-    method: [{ title: "Preparare e memorizzare", detail: "Caricare record tabellari e geografici in PostgreSQL/PostGIS." }, { title: "Esporre gli endpoint", detail: "Servire città, indicatori, eventi, utenti e segnalazioni tramite route Flask." }, { title: "Recuperare per selezione", detail: "Richiedere i record pertinenti quando si scelgono città e parametro." }, { title: "Comporre la vista", detail: "Collegare mappe Folium, controlli Dash, tabelle e grafici Plotly." }, { title: "Supportare l'ispezione", detail: "Confrontare visivamente i dati selezionati e scaricarli in tabella." }],
-    workflow: [{ label: "Record sorgente", detail: "Città, indicatori, eventi, segnalazioni" }, { label: "Database spaziale", detail: "PostgreSQL + PostGIS" }, { label: "Livello API", detail: "Endpoint Flask" }, { label: "Logica applicativa", detail: "Callback Dash" }, { label: "Output interattivo", detail: "Mappe Folium + grafici Plotly" }],
-    outputs: ["Workflow interattivo per città e parametro.", "Mappe con luoghi degli eventi e contesto geografico.", "Tabelle di indicatori ed eventi scaricabili in CSV.", "Grafici a torta e a barre derivati dagli indicatori selezionati."],
-    evidenceIntro: "Ricostruzione dello stato della dashboard di Bormio documentato a pagina 14. Il contenuto satellitare è conservato dall’originale; tabelle e grafico usano i valori pubblicati. È una spiegazione statica del progetto, non una dashboard live.",
-    evidence: translatedEvidence("se4g", "it"),
-    links: translatedLinks("se4g", "it"),
-    nextTitle: "Mappatura della suscettibilità alle frane",
+    title: "Dashboard dei rischi nelle sedi olimpiche",
+    context: "Progetto di geoinformatica",
+    summary: "Esplorare indicatori idrogeologici e sedi olimpiche per comune in un’applicazione Dash con PostGIS e Flask.",
+    problem: [
+      "Esaminare insieme indicatori di pericolosità, sedi degli eventi e segnalazioni, con query per città e dati scaricabili."
+    ],
+    contribution: ["Contributore · Team di quattro persone"],
+    data: [
+      { label: "Comuni", detail: "Geometrie delle città italiane e indicatori idrogeologici." },
+      { label: "Eventi", detail: "Sedi olimpiche e dati degli eventi." },
+      { label: "Segnalazioni", detail: "Utenti dell’applicazione e segnalazioni inviate." }
+    ],
+    method: [
+      { title: "Memorizzare", detail: "Caricare dati spaziali e tabellari in PostgreSQL/PostGIS." },
+      { title: "Esporre", detail: "Servire città, indicatori, eventi, utenti e segnalazioni tramite Flask." },
+      { title: "Collegare", detail: "Aggiornare mappe Folium e grafici Plotly per città e parametro con callback Dash." },
+      { title: "Esportare", detail: "Scaricare tabelle di indicatori ed eventi selezionati in CSV." }
+    ],
+    outputs: [
+      "Mappe, tabelle, grafici a torta e a barre con selezione di città e parametro.",
+      "Download CSV dei record selezionati."
+    ],
+    evidenceIntro: "Ricostruzione statica con valori pubblicati di Bormio e immagini satellitari originali.",
+    nextTitle: "Suscettibilità alle frane",
+    evidence: english.se4g.evidence.map((item, index) => ({
+      ...item,
+      ...[
+        { title: "Dashboard di Bormio", caption: "Indicatori comunali e sedi olimpiche · Design document, p. 14.", alt: "Dashboard di Bormio · Bormio · SE4G" }
+      ][index],
+    })),
+    links: english.se4g.links.map((link, index) => ({ ...link, label: ["Codice"][index] })),
   },
   landslide: {
     ...english.landslide,
-    context: "Progetto GIS magistrale · Team di tre persone · Bergamo, Italia",
-    summary: "Un workflow GIS e machine learning che combina terreno, copertura del suolo, prossimità e inventario in una superficie di suscettibilità e un'analisi dell'esposizione.",
-    overview: ["Questo progetto di corso magistrale valuta la suscettibilità alle frane in un'area della provincia di Bergamo.", "Il sito pubblico documenta il percorso da raccolta e preprocessing dei raster a classificazione Random Forest, mappatura della suscettibilità, analisi dell'esposizione, validazione e presentazione WebGIS."],
-    problem: ["La suscettibilità alle frane dipende da più condizioni variabili nello spazio. Valutarle richiede raster coerenti, un workflow di modellazione riproducibile e output ancora ispezionabili geograficamente.", "Il progetto riunisce questi input in un'analisi e traduce il modello in classi di suscettibilità e una presentazione interattiva."],
-    contribution: ["Amirhossein è uno dei tre contributori indicati sul sito pubblico, insieme a Firoozeh Rahimian e Hadi Kheiri.", "Poiché il repository non documenta la divisione individuale dei compiti, il caso studio descrive il workflow verificato del team senza attribuzioni esclusive."],
-    data: [{ label: "Terreno", detail: "Modello digitale del terreno, pendenza, esposizione e curvature planimetrica e di profilo." }, { label: "Ambiente", detail: "Uso del suolo DUSAF, NDVI e buffer di fiumi, strade e faglie." }, { label: "Etichette di riferimento", detail: "Inventario frane e zone senza frane per preparare punti di training e test." }, { label: "Esposizione", detail: "Raster di popolazione allineato con i dati di suscettibilità riclassificati." }],
-    methodIntro: "Il repository documenta sei fasi collegate; qui è sintetizzata la sequenza analitica centrale.",
-    method: [{ title: "Uniformare i layer", detail: "Riproiettare, ritagliare, rasterizzare e allineare i dati sorgente all'area di studio." }, { title: "Derivare variabili del terreno", detail: "Generare pendenza, esposizione e curvature dal modello del terreno." }, { title: "Costruire gli input", detail: "Combinare le variabili ambientali in un raster virtuale e preparare punti di training e test." }, { title: "Classificare", detail: "Eseguire Random Forest con il plugin QGIS Dzetsaka e produrre superfici di classificazione e confidenza." }, { title: "Derivare la suscettibilità", detail: "Esprimere la probabilità della classe frana su una superficie 0-100 e riclassificare il risultato." }, { title: "Valutare e pubblicare", detail: "Sovrapporre la popolazione, validare con una matrice degli errori e pubblicare tramite WebGIS." }],
-    workflow: [{ label: "Terreno + ambiente", detail: "Variabili raster allineate" }, { label: "Campioni di training", detail: "Inventario + punti senza frana" }, { label: "Random Forest", detail: "Classificazione QGIS Dzetsaka" }, { label: "Superficie di suscettibilità", detail: "Probabilità e quattro classi" }, { label: "Esposizione + WebGIS", detail: "Analisi della popolazione e output interattivo" }],
-    outputs: ["Raster di classificazione e confidenza.", "Superficie continua di suscettibilità e mappa riclassificata in quattro classi.", "Calcolo dell'esposizione della popolazione con statistiche zonali.", "Workflow di validazione e presentazione WebGIS interattiva."],
-    evidenceIntro: "Contenuti raster originali con titoli e legende ricostruiti. Colori, valori e confini dell’area di studio sono conservati. La galleria segue input, confidenza e suscettibilità; le immagini originali restano disponibili.",
-    evidence: translatedEvidence("landslide", "it"),
-    links: translatedLinks("landslide", "it"),
-    nextTitle: "Ricerca di tesi NL2MAP",
+    title: "Suscettibilità alle frane",
+    context: "Progetto GIS magistrale · Bergamo, Italia",
+    summary: "Suscettibilità alle frane a Bergamo con Random Forest: terreno, vegetazione, uso del suolo, prossimità e inventario. Output: mappe di suscettibilità, esposizione della popolazione e WebGIS.",
+    problem: ["Individuare terreni suscettibili da layer eterogenei e valutare l’esposizione della popolazione."],
+    contribution: [
+      "Contributo in team · Con Firoozeh Rahimian e Hadi Kheiri"
+    ],
+    data: [
+      { label: "Terreno", detail: "DTM · Pendenza · Esposizione · Curvature planimetrica e di profilo" },
+      { label: "Ambiente", detail: "Uso del suolo DUSAF · NDVI · Buffer di fiumi, strade e faglie" },
+      { label: "Etichette", detail: "Inventario frane e zone senza frane per training e test." },
+      { label: "Esposizione", detail: "Raster di popolazione allineato alle classi di suscettibilità." }
+    ],
+    method: [
+      { title: "Allineare", detail: "Riproiettare, ritagliare e rasterizzare; derivare variabili del terreno e creare un raster virtuale." },
+      { title: "Addestrare", detail: "Preparare punti di training/test; classificare con Random Forest in QGIS/Dzetsaka." },
+      { title: "Mappare", detail: "Convertire la probabilità di frana in una superficie 0–100 e quattro classi." },
+      { title: "Validare", detail: "Valutare con matrice degli errori; calcolare l’esposizione tramite statistiche zonali." },
+      { title: "Pubblicare", detail: "Presentare i risultati in un WebGIS OpenLayers." }
+    ],
+    outputs: [
+      "Raster di classificazione, confidenza e suscettibilità, con mappa a quattro classi.",
+      "Analisi dell’esposizione della popolazione e WebGIS interattivo."
+    ],
+    evidenceIntro: "Raster originali · Colori, valori e confini dell’area di studio conservati.",
+    evidence: english.landslide.evidence.map((item, index) => ({
+      ...item,
+      ...[
+        { title: "Terreno", caption: "DTM · Base delle variabili topografiche.", alt: "Terreno · Bergamo · QGIS" },
+        { title: "Vegetazione", caption: "NDVI · Area sorgente e perimetro di studio.", alt: "Vegetazione · Bergamo · QGIS" },
+        { title: "Pendenza", caption: "Classi derivate dal terreno.", alt: "Pendenza · Bergamo · QGIS" },
+        { title: "Confidenza", caption: "Confidenza della classificazione QGIS/Dzetsaka.", alt: "Confidenza · Bergamo · QGIS" },
+        { title: "Classi di suscettibilità", caption: "Quattro classi per l’analisi dell’esposizione.", alt: "Classi di suscettibilità · Bergamo · QGIS" },
+        { title: "Superficie di suscettibilità", caption: "Output continuo 0–100.", alt: "Superficie di suscettibilità · Bergamo · QGIS" }
+      ][index],
+    })),
+    links: english.landslide.links.map((link, index) => ({ ...link, label: ["Apri WebGIS", "Codice"][index] })),
   },
 };
 
 export const caseStudyUiCopy: Record<Locale, CaseStudyUiCopy> = {
-  en: { navigationLabel: "Case study navigation", homeLabel: "Amirhossein Donyadidegan - home", allWork: "All work", quickCv: "Quick CV", languageLabel: "Language", realEvidence: "Real project evidence", documentedInterface: "Documented interface state", overview: "Overview", problem: "Problem", contribution: "My Contribution", data: "Data", method: "Method", workflow: "Architecture / Workflow", results: "Results / Output", technology: "Technology", visualEvidence: "Visual Evidence", evidenceSource: "Evidence source", openImage: "Open original image", projectLinks: "Project links", nextProject: "Next case study", backToWork: "Back to selected work", caseStudyLabel: "Project case study" },
-  de: { navigationLabel: "Navigation der Fallstudie", homeLabel: "Amirhossein Donyadidegan - Startseite", allWork: "Alle Projekte", quickCv: "Kurzprofil", languageLabel: "Sprache", realEvidence: "Realer Projektnachweis", documentedInterface: "Dokumentierter Oberflächenzustand", overview: "Überblick", problem: "Problem", contribution: "Mein Beitrag", data: "Daten", method: "Methode", workflow: "Architektur / Workflow", results: "Ergebnisse / Output", technology: "Technologien", visualEvidence: "Visuelle Nachweise", evidenceSource: "Nachweisquelle", openImage: "Originalbild öffnen", projectLinks: "Projektlinks", nextProject: "Nächste Fallstudie", backToWork: "Zurück zu den Projekten", caseStudyLabel: "Projektfallstudie" },
-  it: { navigationLabel: "Navigazione del caso studio", homeLabel: "Amirhossein Donyadidegan - home", allWork: "Tutti i progetti", quickCv: "CV rapido", languageLabel: "Lingua", realEvidence: "Evidenza reale del progetto", documentedInterface: "Stato documentato dell'interfaccia", overview: "Panoramica", problem: "Problema", contribution: "Il mio contributo", data: "Dati", method: "Metodo", workflow: "Architettura / Workflow", results: "Risultati / Output", technology: "Tecnologie", visualEvidence: "Evidenza visiva", evidenceSource: "Fonte dell'evidenza", openImage: "Apri immagine originale", projectLinks: "Link del progetto", nextProject: "Prossimo caso studio", backToWork: "Torna ai progetti", caseStudyLabel: "Caso studio del progetto" },
+  en: {
+    navigationLabel: "Case study navigation",
+    homeLabel: "Amirhossein Donyadidegan - home",
+    allWork: "All work",
+    quickCv: "Quick CV",
+    languageLabel: "Language",
+    problem: "Challenge",
+    contribution: "My role",
+    data: "Inputs",
+    method: "Approach",
+    results: "Output",
+    technology: "Stack",
+    visualEvidence: "Maps & interface",
+    openImage: "Original image",
+    projectLinks: "Sources",
+    nextProject: "Next project",
+    backToWork: "All work"
+  },
+  de: {
+    navigationLabel: "Navigation der Fallstudie",
+    homeLabel: "Amirhossein Donyadidegan - Startseite",
+    allWork: "Alle Projekte",
+    quickCv: "Kurzprofil",
+    languageLabel: "Sprache",
+    problem: "Aufgabe",
+    contribution: "Meine Rolle",
+    data: "Daten",
+    method: "Ansatz",
+    results: "Ergebnis",
+    technology: "Stack",
+    visualEvidence: "Karten & Oberfläche",
+    openImage: "Originalbild",
+    projectLinks: "Quellen",
+    nextProject: "Nächstes Projekt",
+    backToWork: "Alle Projekte"
+  },
+  it: {
+    navigationLabel: "Navigazione del caso studio",
+    homeLabel: "Amirhossein Donyadidegan - home",
+    allWork: "Tutti i progetti",
+    quickCv: "CV rapido",
+    languageLabel: "Lingua",
+    problem: "Problema",
+    contribution: "Il mio ruolo",
+    data: "Input",
+    method: "Metodo",
+    results: "Output",
+    technology: "Stack",
+    visualEvidence: "Mappe e interfaccia",
+    openImage: "Immagine originale",
+    projectLinks: "Fonti",
+    nextProject: "Prossimo progetto",
+    backToWork: "Tutti i progetti"
+  }
 };
 
-export const projectCaseStudies: CaseStudiesByLocale = {
-  en: english,
-  de: german,
-  it: italian,
-};
+export const projectCaseStudies: CaseStudiesByLocale = { en: english, de: german, it: italian };

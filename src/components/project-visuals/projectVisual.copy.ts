@@ -5,7 +5,7 @@ const en = {
   geometry: "Source geometry", features: "buildings", extent: "Shared extent", scale: "100 m",
   prompt: "Language", representation: "Features", classifier: "Classifier", operation: "Operation",
   mapPair: "Original and generalized building geometry from study pair 1069",
-  dashboard: "Geoinformatics dashboard", reconstruction: "Documented state · reconstructed",
+  dashboard: "Geoinformatics dashboard", reconstruction: "Static reconstruction",
   city: "City", parameter: "Parameter", building: "Buildings", satellite: "Satellite context",
   floodRisk: "Buildings by flood risk", risk: "Flood risk", count: "Buildings", total: "Total",
   low: "Low", medium: "Medium", high: "High", source: "Source: SE4G design document · p. 14",
@@ -15,7 +15,7 @@ const en = {
   studyArea: "Study area", originalPalette: "Source color scale", input: "Input", result: "Output",
   dtm: "Digital terrain model", ndvi: "Vegetation · NDVI", slope: "Derived slope", confidence: "Classification confidence",
   reclassified: "Reclassified susceptibility", susceptibility: "Susceptibility surface", legend: "Legend",
-  pipeline: "Terrain and environmental variables feed a Random Forest model to produce a landslide susceptibility surface. The terrain covers the wider source area; the output covers the outlined study area.",
+  pipeline: "Terrain and environmental inputs → Random Forest → susceptibility. Terrain: source area; output: outlined study area.",
   units: "Values as published", sourceMap: "Source map content", qgis: "QGIS · Dzetsaka",
 };
 
@@ -26,7 +26,7 @@ export const projectVisualCopy: Record<Locale, typeof en> = {
     geometry: "Quellgeometrie", features: "Gebäude", extent: "Gleicher Ausschnitt",
     prompt: "Sprache", representation: "Merkmale", classifier: "Klassifikator", operation: "Operation",
     mapPair: "Ursprüngliche und generalisierte Gebäudegeometrie des Studienpaars 1069",
-    dashboard: "Geoinformatik-Dashboard", reconstruction: "Dokumentierter Zustand · rekonstruiert",
+    dashboard: "Geoinformatik-Dashboard", reconstruction: "Statische Rekonstruktion",
     city: "Stadt", parameter: "Parameter", building: "Gebäude", satellite: "Satellitenkontext",
     floodRisk: "Gebäude nach Hochwasserrisiko", risk: "Hochwasserrisiko", count: "Gebäude", total: "Gesamt",
     low: "Niedrig", medium: "Mittel", high: "Hoch", source: "Quelle: SE4G-Designdokument · S. 14",
@@ -35,7 +35,7 @@ export const projectVisualCopy: Record<Locale, typeof en> = {
     studyArea: "Untersuchungsgebiet", originalPalette: "Originale Farbskala", input: "Eingabe", result: "Ergebnis",
     dtm: "Digitales Geländemodell", ndvi: "Vegetation · NDVI", slope: "Hangneigung", confidence: "Klassifikationskonfidenz",
     reclassified: "Reklassifizierte Suszeptibilität", susceptibility: "Suszeptibilitätsfläche", legend: "Legende",
-    pipeline: "Gelände- und Umweltvariablen fließen in ein Random-Forest-Modell ein. Die Geländekarte zeigt das größere Quellgebiet, das Ergebnis das umrandete Untersuchungsgebiet.",
+    pipeline: "Gelände und Umwelt → Random Forest → Suszeptibilität. Gelände: Quellgebiet; Ergebnis: umrandetes Untersuchungsgebiet.",
     units: "Veröffentlichte Werte", sourceMap: "Originaler Karteninhalt",
   },
   it: {
@@ -43,7 +43,7 @@ export const projectVisualCopy: Record<Locale, typeof en> = {
     geometry: "Geometria sorgente", features: "edifici", extent: "Estensione condivisa",
     prompt: "Linguaggio", representation: "Caratteristiche", classifier: "Classificatore", operation: "Operazione",
     mapPair: "Geometria originale e generalizzata degli edifici della coppia di studio 1069",
-    dashboard: "Dashboard geoinformatica", reconstruction: "Stato documentato · ricostruito",
+    dashboard: "Dashboard geoinformatica", reconstruction: "Ricostruzione statica",
     city: "Città", parameter: "Parametro", building: "Edifici", satellite: "Contesto satellitare",
     floodRisk: "Edifici per rischio alluvione", risk: "Rischio alluvione", count: "Edifici", total: "Totale",
     low: "Basso", medium: "Medio", high: "Alto", source: "Fonte: design document SE4G · p. 14",
@@ -52,7 +52,7 @@ export const projectVisualCopy: Record<Locale, typeof en> = {
     studyArea: "Area di studio", originalPalette: "Scala cromatica originale", input: "Input", result: "Risultato",
     dtm: "Modello digitale del terreno", ndvi: "Vegetazione · NDVI", slope: "Pendenza derivata", confidence: "Confidenza della classificazione",
     reclassified: "Suscettibilità riclassificata", susceptibility: "Superficie di suscettibilità", legend: "Legenda",
-    pipeline: "Terreno e variabili ambientali alimentano un modello Random Forest che produce una superficie di suscettibilità. Il terreno copre l’area sorgente più ampia; il risultato copre l’area di studio delimitata.",
+    pipeline: "Terreno e ambiente → Random Forest → suscettibilità. Terreno: area sorgente; output: area di studio delimitata.",
     units: "Valori pubblicati", sourceMap: "Contenuto cartografico originale",
   },
 };

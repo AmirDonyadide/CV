@@ -36,7 +36,6 @@ export function SelectedWork({ locale }: SelectedWorkProps) {
     <section id="projects" ref={sectionRef} className={styles.section} aria-labelledby="selected-work-title">
       <header className={styles.sectionHeader}>
         <h2 id="selected-work-title" tabIndex={-1}>{copy.heading}</h2>
-        <p className={styles.supporting}>{copy.supporting}</p>
       </header>
 
       <div className={styles.projectSequence} data-project-sequence>
@@ -89,22 +88,12 @@ export function SelectedWork({ locale }: SelectedWorkProps) {
                 </div>
               </div>
 
+              <p className={styles.summary}>{project.summary}</p>
+
               <dl className={styles.projectFacts}>
-                <div>
-                  <dt>{copy.fields.problem}</dt>
-                  <dd>{project.problem}</dd>
-                </div>
                 <div>
                   <dt>{copy.fields.role}</dt>
                   <dd>{project.role}</dd>
-                </div>
-                <div>
-                  <dt>{copy.fields.input}</dt>
-                  <dd>{project.input}</dd>
-                </div>
-                <div>
-                  <dt>{copy.fields.approach}</dt>
-                  <dd>{project.approach}</dd>
                 </div>
                 <div>
                   <dt>{copy.fields.technologies}</dt>
@@ -117,10 +106,6 @@ export function SelectedWork({ locale }: SelectedWorkProps) {
                 <div>
                   <dt>{copy.fields.output}</dt>
                   <dd>{project.output}</dd>
-                </div>
-                <div className={styles.evidenceFact}>
-                  <dt>{copy.fields.evidence}</dt>
-                  <dd>{project.evidence}</dd>
                 </div>
               </dl>
 

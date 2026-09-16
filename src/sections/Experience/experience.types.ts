@@ -13,15 +13,11 @@ export interface ExperienceRole {
 }
 
 export interface ExperienceCopy {
-  eyebrow: string;
   heading: string;
-  supporting: string;
   timelineLabel: string;
   pathCurrentLabel: string;
   pathOriginLabel: string;
   currentRole: string;
-  responsibilitiesLabel: string;
-  focusLabel: string;
   roles: ExperienceRole[];
 }
 

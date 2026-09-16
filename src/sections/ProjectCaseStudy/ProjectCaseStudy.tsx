@@ -6,7 +6,6 @@ import type { ProjectSlug } from "../SelectedWork/selectedWork.types";
 import { CaseStudyHeroMedia } from "./CaseStudyHeroMedia";
 import { CaseStudyNavigation } from "./CaseStudyNavigation";
 import { caseStudyUiCopy, projectCaseStudies } from "./projectCaseStudy.copy";
-import type { ProjectCaseStudyCopy } from "./projectCaseStudy.types";
 import { useCaseStudyMotion } from "./useCaseStudyMotion";
 import styles from "./ProjectCaseStudy.module.css";
 
@@ -56,23 +55,6 @@ function TextSection({
   );
 }
 
-function Workflow({ project }: { project: ProjectCaseStudyCopy }) {
-  return (
-    <ol className={styles.workflowList}>
-      {project.workflow.map((stage, index) => (
-        <li key={stage.label}>
-          <span>{String(index + 1).padStart(2, "0")}</span>
-          <strong>{stage.label}</strong>
-          <small>{stage.detail}</small>
-          {index < project.workflow.length - 1 && (
-            <svg viewBox="0 0 36 12" aria-hidden="true"><path d="M1 6h31M27 2l5 4-5 4" /></svg>
-          )}
-        </li>
-      ))}
-    </ol>
-  );
-}
-
 export function ProjectCaseStudy({ locale, onLocaleChange, slug }: ProjectCaseStudyProps) {
   const articleRef = useRef<HTMLElement>(null);
   const project = projectCaseStudies[locale][slug];
@@ -91,7 +73,7 @@ export function ProjectCaseStudy({ locale, onLocaleChange, slug }: ProjectCaseSt
           <div className={styles.heroCopy} data-case-reveal>
             <p className={styles.caseMeta}>
               <span>{project.number}</span>
-              <span>{ui.caseStudyLabel}</span>
+              <span>{project.shortTitle}</span>
             </p>
             <h1 itemProp="name">{project.title}</h1>
             <p className={styles.context}>{project.context}</p>
@@ -122,15 +104,14 @@ export function ProjectCaseStudy({ locale, onLocaleChange, slug }: ProjectCaseSt
 
         <div className={styles.caseBody}>
           <div className={styles.overviewGrid}>
-            <TextSection id="overview" number="01" title={ui.overview} paragraphs={project.overview} />
-            <TextSection id="problem" number="02" title={ui.problem} paragraphs={project.problem} />
-            <TextSection id="contribution" number="03" title={ui.contribution} paragraphs={project.contribution} />
+            <TextSection id="problem" number="01" title={ui.problem} paragraphs={project.problem} />
+            <TextSection id="contribution" number="02" title={ui.contribution} paragraphs={project.contribution} />
           </div>
 
           <section className={styles.dataMethodSection} data-case-reveal aria-labelledby="data-title">
             <div className={styles.dataColumn}>
               <div className={styles.sectionHeading}>
-                <span>04</span>
+                <span>03</span>
                 <h2 id="data-title">{ui.data}</h2>
               </div>
               <dl className={styles.dataList}>
@@ -145,10 +126,9 @@ export function ProjectCaseStudy({ locale, onLocaleChange, slug }: ProjectCaseSt
 
             <div className={styles.methodColumn} aria-labelledby="method-title">
               <div className={styles.sectionHeading}>
-                <span>05</span>
+                <span>04</span>
                 <h2 id="method-title">{ui.method}</h2>
               </div>
-              <p className={styles.methodIntro}>{project.methodIntro}</p>
               <ol className={styles.methodList}>
                 {project.method.map((step, index) => (
                   <li key={step.title}>
@@ -163,18 +143,10 @@ export function ProjectCaseStudy({ locale, onLocaleChange, slug }: ProjectCaseSt
             </div>
           </section>
 
-          <section className={styles.workflowSection} data-case-reveal aria-labelledby="workflow-title">
-            <div className={styles.sectionHeading}>
-              <span>06</span>
-              <h2 id="workflow-title">{ui.workflow}</h2>
-            </div>
-            <Workflow project={project} />
-          </section>
-
           <section className={styles.outputSection} data-case-reveal>
             <div className={styles.outputColumn} aria-labelledby="output-title">
               <div className={styles.sectionHeading}>
-                <span>07</span>
+                <span>05</span>
                 <h2 id="output-title">{ui.results}</h2>
               </div>
               <ul className={styles.outputList}>
@@ -183,7 +155,7 @@ export function ProjectCaseStudy({ locale, onLocaleChange, slug }: ProjectCaseSt
             </div>
             <div className={styles.techColumn} aria-labelledby="technology-title">
               <div className={styles.sectionHeading}>
-                <span>08</span>
+                <span>06</span>
                 <h2 id="technology-title">{ui.technology}</h2>
               </div>
               <ul className={styles.technologyList}>
@@ -195,7 +167,7 @@ export function ProjectCaseStudy({ locale, onLocaleChange, slug }: ProjectCaseSt
           <section className={styles.evidenceSection} data-case-reveal aria-labelledby="evidence-title">
             <div className={styles.evidenceHeading}>
               <div className={styles.sectionHeading}>
-                <span>09</span>
+                <span>07</span>
                 <h2 id="evidence-title">{ui.visualEvidence}</h2>
               </div>
               <p>{project.evidenceIntro}</p>
@@ -209,7 +181,6 @@ export function ProjectCaseStudy({ locale, onLocaleChange, slug }: ProjectCaseSt
                 >
                   <ProjectEvidenceVisual item={item} locale={locale} />
                   <figcaption>
-                    <span>{ui.evidenceSource}</span>
                     <h3>{item.title}</h3>
                     <p>{item.caption}</p>
                     <a className={styles.sourceImageLink} aria-label={`${ui.openImage}: ${item.title}`} href={item.src} target="_blank" rel="noreferrer">{ui.openImage}<ExternalArrow /></a>

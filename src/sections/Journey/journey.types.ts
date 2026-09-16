@@ -7,7 +7,6 @@ export interface JourneyDegree {
   title: string;
   institution: string;
   grade: string;
-  status?: string;
   thesis: string;
 }
 
@@ -21,7 +20,6 @@ export interface JourneyExchange {
 
 export interface JourneyCopy {
   heading: string;
-  supporting: string;
   routeLabel: string;
   thesisLabel: string;
   degrees: JourneyDegree[];

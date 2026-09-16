@@ -2,15 +2,11 @@ import type { ExperienceCopyByLocale } from "./experience.types";
 
 export const experienceCopy: ExperienceCopyByLocale = {
   en: {
-    eyebrow: "05 / Experience",
     heading: "Experience",
-    supporting: "Research, data, and software in practice.",
     timelineLabel: "Career trajectory from 2021 to the current role",
     pathCurrentLabel: "CURRENT",
     pathOriginLabel: "ORIGIN · 2021",
     currentRole: "Current role",
-    responsibilitiesLabel: "Responsibilities",
-    focusLabel: "Focus",
     roles: [
       {
         id: "safe",
@@ -19,10 +15,9 @@ export const experienceCopy: ExperienceCopyByLocale = {
         organization: "Leibniz Institute for Financial Research SAFE",
         location: "Frankfurt am Main, Germany",
         responsibilities: [
-          "Prepare and process geospatial and environmental datasets through reproducible Python workflows.",
-          "Support large-scale address, geocoding, and location-linkage workflows for research.",
-          "Link corporate and location information with environmental or remote-sensing data.",
-          "Support research-computing workflows for larger spatial datasets.",
+          "Process geospatial and environmental data in reproducible Python workflows.",
+          "Support large-scale address geocoding, location linkage, and spatial research computing.",
+          "Link company locations to environmental and remote-sensing data."
         ],
         focus: ["Python", "Geospatial data engineering", "Environmental data", "Research computing"],
         current: true,
@@ -35,9 +30,9 @@ export const experienceCopy: ExperienceCopyByLocale = {
         organization: "IIP, Karlsruhe Institute of Technology (KIT)",
         location: "Karlsruhe, Germany",
         responsibilities: [
-          "Developed Python-based data pipelines for energy and mobility data processing.",
-          "Performed spatial analyses supporting energy-demand and decarbonization models.",
-          "Built interactive dashboards with map integration for applied research workflows.",
+          "Built Python pipelines for energy and mobility data.",
+          "Analyzed spatial data for energy-demand and decarbonization models.",
+          "Built research dashboards with integrated maps."
         ],
         focus: ["Python", "Spatial analysis", "Energy and mobility data", "Dashboards"],
         pathLabel: "IIP · KIT",
@@ -48,11 +43,7 @@ export const experienceCopy: ExperienceCopyByLocale = {
         role: "Web Developer, Research Assistant",
         organization: "KIT nova",
         location: "Karlsruhe, Germany",
-        responsibilities: [
-          "Contributed to web applications with a focus on functionality and usability.",
-          "Supported VR/AR projects for digital and interactive applications.",
-          "Contributed to geospatial visualizations and digital map solutions.",
-        ],
+        responsibilities: ["Contributed to web applications, usability, and geospatial visualizations.", "Supported VR/AR projects."],
         focus: ["Web applications", "VR/AR", "Geovisualization", "Digital maps"],
         pathLabel: "KIT nova",
       },
@@ -62,9 +53,8 @@ export const experienceCopy: ExperienceCopyByLocale = {
         role: "Intern",
         organization: "Naghsheh Gostaran Fartak Co.",
         responsibilities: [
-          "Supported surveying, photogrammetry, and GIS projects in a practical work environment.",
-          "Assisted with data collection, spatial analysis, and technical implementation.",
-          "Applied AutoCAD and GIS tools for creating and processing geospatial data.",
+          "Supported surveying, photogrammetry, data collection, and spatial analysis.",
+          "Created and processed geodata with AutoCAD and GIS tools."
         ],
         focus: ["Surveying", "Photogrammetry", "AutoCAD", "GIS"],
         pathLabel: "Fartak Co.",
@@ -72,15 +62,11 @@ export const experienceCopy: ExperienceCopyByLocale = {
     ],
   },
   de: {
-    eyebrow: "05 / Erfahrung",
     heading: "Erfahrung",
-    supporting: "Forschung, Daten und Software in der Praxis.",
     timelineLabel: "Beruflicher Weg von 2021 bis zur aktuellen Position",
     pathCurrentLabel: "AKTUELL",
     pathOriginLabel: "ANFANG · 2021",
     currentRole: "Aktuelle Position",
-    responsibilitiesLabel: "Aufgaben",
-    focusLabel: "Schwerpunkte",
     roles: [
       {
         id: "safe",
@@ -89,10 +75,9 @@ export const experienceCopy: ExperienceCopyByLocale = {
         organization: "Leibniz Institute for Financial Research SAFE",
         location: "Frankfurt am Main, Deutschland",
         responsibilities: [
-          "Geospatiale und umweltbezogene Datensätze in reproduzierbaren Python-Workflows aufbereiten und verarbeiten.",
-          "Großskalige Adress-, Geocoding- und Standortverknüpfungs-Workflows für die Forschung unterstützen.",
-          "Unternehmens- und Standortinformationen mit Umwelt- oder Fernerkundungsdaten verknüpfen.",
-          "Research-Computing-Workflows für größere räumliche Datensätze unterstützen.",
+          "Geo- und Umweltdaten in reproduzierbaren Python-Workflows verarbeiten.",
+          "Großskaliges Adress-Geocoding, Standortverknüpfung und räumliches Research Computing unterstützen.",
+          "Unternehmensstandorte mit Umwelt- und Fernerkundungsdaten verknüpfen."
         ],
         focus: ["Python", "Geodaten-Engineering", "Umweltdaten", "Research Computing"],
         current: true,
@@ -105,9 +90,9 @@ export const experienceCopy: ExperienceCopyByLocale = {
         organization: "IIP, Karlsruher Institut für Technologie (KIT)",
         location: "Karlsruhe, Deutschland",
         responsibilities: [
-          "Python-basierte Datenpipelines für die Verarbeitung von Energie- und Mobilitätsdaten entwickelt.",
-          "Räumliche Analysen zur Unterstützung von Energiebedarfs- und Dekarbonisierungsmodellen durchgeführt.",
-          "Interaktive Dashboards mit Kartenintegration für angewandte Forschungsabläufe entwickelt.",
+          "Python-Pipelines für Energie- und Mobilitätsdaten entwickelt.",
+          "Räumliche Daten für Energiebedarfs- und Dekarbonisierungsmodelle analysiert.",
+          "Forschungsdashboards mit integrierten Karten entwickelt."
         ],
         focus: ["Python", "Räumliche Analyse", "Energie- und Mobilitätsdaten", "Dashboards"],
         pathLabel: "IIP · KIT",
@@ -118,11 +103,7 @@ export const experienceCopy: ExperienceCopyByLocale = {
         role: "Webentwickler, Hilfswissenschaftler",
         organization: "KIT nova",
         location: "Karlsruhe, Deutschland",
-        responsibilities: [
-          "Webanwendungen mit Fokus auf Funktionalität und Benutzerfreundlichkeit mitentwickelt.",
-          "VR/AR-Projekte für digitale und interaktive Anwendungen unterstützt.",
-          "Zu Geovisualisierungen und digitalen Kartenlösungen beigetragen.",
-        ],
+        responsibilities: ["Webanwendungen, Benutzerfreundlichkeit und Geovisualisierungen mitentwickelt.", "VR/AR-Projekte unterstützt."],
         focus: ["Webanwendungen", "VR/AR", "Geovisualisierung", "Digitale Karten"],
         pathLabel: "KIT nova",
       },
@@ -132,9 +113,8 @@ export const experienceCopy: ExperienceCopyByLocale = {
         role: "Praktikant",
         organization: "Naghsheh Gostaran Fartak Co.",
         responsibilities: [
-          "Vermessungs-, Photogrammetrie- und GIS-Projekte in einem praktischen Arbeitsumfeld unterstützt.",
-          "Bei Datenerhebung, räumlicher Analyse und technischer Umsetzung mitgewirkt.",
-          "AutoCAD und GIS-Werkzeuge zur Erstellung und Verarbeitung von Geodaten eingesetzt.",
+          "Vermessung, Photogrammetrie, Datenerhebung und räumliche Analyse unterstützt.",
+          "Geodaten mit AutoCAD und GIS-Werkzeugen erstellt und verarbeitet."
         ],
         focus: ["Vermessung", "Photogrammetrie", "AutoCAD", "GIS"],
         pathLabel: "Fartak Co.",
@@ -142,15 +122,11 @@ export const experienceCopy: ExperienceCopyByLocale = {
     ],
   },
   it: {
-    eyebrow: "05 / Esperienza",
     heading: "Esperienza",
-    supporting: "Ricerca, dati e software nella pratica.",
     timelineLabel: "Percorso professionale dal 2021 alla posizione attuale",
     pathCurrentLabel: "ATTUALE",
     pathOriginLabel: "INIZIO · 2021",
     currentRole: "Posizione attuale",
-    responsibilitiesLabel: "Responsabilità",
-    focusLabel: "Ambiti",
     roles: [
       {
         id: "safe",
@@ -159,10 +135,9 @@ export const experienceCopy: ExperienceCopyByLocale = {
         organization: "Leibniz Institute for Financial Research SAFE",
         location: "Francoforte sul Meno, Germania",
         responsibilities: [
-          "Preparazione ed elaborazione di dati geospaziali e ambientali tramite workflow Python riproducibili.",
-          "Supporto a workflow su larga scala per indirizzi, geocoding e collegamento di località a fini di ricerca.",
-          "Collegamento di informazioni aziendali e territoriali con dati ambientali o di telerilevamento.",
-          "Supporto a workflow di research computing per dataset spaziali più estesi.",
+          "Elaboro dati geospaziali e ambientali con workflow Python riproducibili.",
+          "Supporto geocoding di indirizzi, collegamento di località e calcolo spaziale su larga scala.",
+          "Collego sedi aziendali a dati ambientali e di telerilevamento."
         ],
         focus: ["Python", "Data engineering geospaziale", "Dati ambientali", "Research computing"],
         current: true,
@@ -175,9 +150,9 @@ export const experienceCopy: ExperienceCopyByLocale = {
         organization: "IIP, Karlsruhe Institute of Technology (KIT)",
         location: "Karlsruhe, Germania",
         responsibilities: [
-          "Sviluppo di pipeline Python per l'elaborazione di dati energetici e di mobilità.",
-          "Analisi spaziali a supporto di modelli di domanda energetica e decarbonizzazione.",
-          "Sviluppo di dashboard interattive con mappe integrate per flussi di ricerca applicata.",
+          "Sviluppate pipeline Python per dati energetici e di mobilità.",
+          "Analizzati dati spaziali per modelli di domanda energetica e decarbonizzazione.",
+          "Sviluppate dashboard di ricerca con mappe integrate."
         ],
         focus: ["Python", "Analisi spaziale", "Dati energia e mobilità", "Dashboard"],
         pathLabel: "IIP · KIT",
@@ -188,11 +163,7 @@ export const experienceCopy: ExperienceCopyByLocale = {
         role: "Sviluppatore web, assistente di ricerca",
         organization: "KIT nova",
         location: "Karlsruhe, Germania",
-        responsibilities: [
-          "Contributo ad applicazioni web con attenzione a funzionalità e usabilità.",
-          "Supporto a progetti VR/AR per applicazioni digitali e interattive.",
-          "Contributo a visualizzazioni geospaziali e soluzioni cartografiche digitali.",
-        ],
+        responsibilities: ["Contributo ad applicazioni web, usabilità e visualizzazioni geospaziali.", "Supporto a progetti VR/AR."],
         focus: ["Applicazioni web", "VR/AR", "Geovisualizzazione", "Mappe digitali"],
         pathLabel: "KIT nova",
       },
@@ -202,9 +173,8 @@ export const experienceCopy: ExperienceCopyByLocale = {
         role: "Tirocinante",
         organization: "Naghsheh Gostaran Fartak Co.",
         responsibilities: [
-          "Supporto a progetti di rilievo, fotogrammetria e GIS in un contesto operativo.",
-          "Assistenza nella raccolta dati, nell'analisi spaziale e nell'implementazione tecnica.",
-          "Uso di AutoCAD e strumenti GIS per creare ed elaborare dati geospaziali.",
+          "Supporto a rilievo, fotogrammetria, raccolta dati e analisi spaziale.",
+          "Creazione ed elaborazione di geodati con AutoCAD e strumenti GIS."
         ],
         focus: ["Rilievo", "Fotogrammetria", "AutoCAD", "GIS"],
         pathLabel: "Fartak Co.",

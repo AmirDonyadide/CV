@@ -143,7 +143,6 @@
 .sectionHeading,
 .dataList dt,
 .methodList > li > span,
-.workflowList,
 .evidenceItem figcaption > span,
 .linksSection > div > h2,
 .nextProject > span,
@@ -173,6 +172,7 @@
 }
 
 .caseHero h1 {
+  overflow-wrap: anywhere;
   max-width: 14ch;
   margin: 0;
   font-family: "Geologica", "Helvetica Neue", sans-serif;
@@ -181,6 +181,10 @@
   line-height: 0.92;
   letter-spacing: -0.048em;
   text-wrap: balance;
+}
+
+.caseHero h1:lang(de) {
+  hyphens: auto;
 }
 
 .context {
@@ -257,13 +261,13 @@
 
 .overviewGrid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   padding: 0 clamp(2rem, 4.7vw, 4.75rem);
 }
 
 .textSection {
   min-width: 0;
-  padding: clamp(5.5rem, 9vw, 9rem) clamp(1.5rem, 3vw, 3.75rem) clamp(5rem, 8vw, 8rem) 0;
+  padding: clamp(3rem, 5vw, 5rem) clamp(1.5rem, 3vw, 3.75rem) clamp(3rem, 5vw, 5rem) 0;
 }
 
 .textSection + .textSection {
@@ -291,11 +295,11 @@
 }
 
 .prose {
-  margin-top: clamp(2.2rem, 3.6vw, 3.8rem);
+  max-width: 55ch;
+  margin-top: 1.5rem;
 }
 
 .prose p,
-.methodIntro,
 .evidenceHeading > p {
   color: #aeb6ba;
   font-size: clamp(0.92rem, 1.08vw, 1.08rem);
@@ -322,8 +326,8 @@
 .methodColumn,
 .outputColumn,
 .techColumn {
-  padding-top: clamp(5.5rem, 9vw, 9rem);
-  padding-bottom: clamp(5.5rem, 9vw, 9rem);
+  padding-top: clamp(3rem, 5vw, 5rem);
+  padding-bottom: clamp(3rem, 5vw, 5rem);
 }
 
 .dataColumn,
@@ -356,11 +360,6 @@
   color: #c1c7ca;
   font-size: 0.88rem;
   line-height: 1.65;
-}
-
-.methodIntro {
-  max-width: 43rem;
-  margin: 2.8rem 0 0;
 }
 
 .methodList {
@@ -397,73 +396,6 @@
   color: #949da2;
   font-size: 0.84rem;
   line-height: 1.65;
-}
-
-.workflowSection {
-  border-top: 1px solid var(--hairline);
-  padding: clamp(5.5rem, 9vw, 9rem) clamp(2rem, 4.7vw, 4.75rem);
-}
-
-.workflowList {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  margin: clamp(3.5rem, 6vw, 6.5rem) 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.workflowList li {
-  position: relative;
-  min-height: 13rem;
-  padding: 1.3rem 1.5rem 1.3rem 0;
-  border-top: 1px solid #3b464c;
-  border-bottom: 1px solid #3b464c;
-}
-
-.workflowList li + li {
-  padding-left: 1.5rem;
-  border-left: 1px solid #3b464c;
-}
-
-.workflowList li > span {
-  display: block;
-  color: var(--accent);
-  font-size: 0.68rem;
-}
-
-.workflowList strong {
-  display: block;
-  max-width: 14rem;
-  margin-top: 3.2rem;
-  color: #e2e6e7;
-  font-size: 0.72rem;
-  font-weight: 510;
-  line-height: 1.45;
-}
-
-.workflowList small {
-  display: block;
-  max-width: 14rem;
-  margin-top: 0.75rem;
-  color: #748087;
-  font-family: "Manrope", "Helvetica Neue", sans-serif;
-  font-size: 0.74rem;
-  letter-spacing: 0;
-  line-height: 1.55;
-  text-transform: none;
-}
-
-.workflowList svg {
-  position: absolute;
-  z-index: 1;
-  top: -0.42rem;
-  right: -1.12rem;
-  width: 2.25rem;
-  padding: 0 0.25rem;
-  background: var(--graphite);
-  fill: none;
-  stroke: var(--accent);
-  stroke-width: 1;
 }
 
 .outputList {
@@ -669,10 +601,6 @@
     gap: 3rem;
   }
 
-  .workflowList strong {
-    font-size: 0.64rem;
-  }
-
   .evidenceGrid_landslide {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -752,7 +680,7 @@
   .methodColumn,
   .outputColumn,
   .techColumn {
-    padding: 4.5rem 0;
+    padding: 2.5rem 0;
     border-left: 0;
   }
 
@@ -764,57 +692,12 @@
 
   .prose,
   .dataList,
-  .methodIntro,
   .technologyList {
     margin-top: 2.2rem;
   }
 
-  .workflowSection,
   .evidenceSection {
     padding: 4.5rem 1rem;
-  }
-
-  .workflowList {
-    display: block;
-    margin-top: 2.75rem;
-  }
-
-  .workflowList li,
-  .workflowList li + li {
-    min-height: auto;
-    padding: 1.25rem 0 1.5rem 2.8rem;
-    border-right: 0;
-    border-bottom: 0;
-    border-left: 1px solid #3b464c;
-  }
-
-  .workflowList li:last-child {
-    border-bottom: 1px solid #3b464c;
-  }
-
-  .workflowList li > span {
-    position: absolute;
-    top: 1.35rem;
-    left: 0.8rem;
-  }
-
-  .workflowList strong {
-    max-width: none;
-    margin-top: 0;
-    font-size: 0.7rem;
-  }
-
-  .workflowList small {
-    max-width: none;
-  }
-
-  .workflowList svg {
-    top: auto;
-    right: auto;
-    bottom: -0.4rem;
-    left: -1.15rem;
-    background: var(--graphite);
-    transform: rotate(90deg);
   }
 
   .evidenceHeading > p {

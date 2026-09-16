@@ -16,7 +16,7 @@ export const heroCopy: Record<Locale, HeroCopy> = {
     menu: "Open navigation",
     closeMenu: "Close navigation",
     role: "Geospatial Data & Software Engineer",
-    tagline: "From coordinates to decisions.",
+    tagline: "I build spatial data pipelines, models, and WebGIS applications.",
     exploreWork: "Explore work",
     downloadCv: "Download CV",
     metadataStates: [
@@ -45,7 +45,7 @@ export const heroCopy: Record<Locale, HeroCopy> = {
     menu: "Navigation öffnen",
     closeMenu: "Navigation schließen",
     role: "Ingenieur für Geodaten und Software",
-    tagline: "Von Koordinaten zu Entscheidungen.",
+    tagline: "Ich entwickle Geodaten-Pipelines, Modelle und WebGIS-Anwendungen.",
     exploreWork: "Projekte ansehen",
     downloadCv: "Lebenslauf herunterladen",
     metadataStates: [
@@ -74,7 +74,7 @@ export const heroCopy: Record<Locale, HeroCopy> = {
     menu: "Apri navigazione",
     closeMenu: "Chiudi navigazione",
     role: "Ingegnere di dati geospaziali e software",
-    tagline: "Dalle coordinate alle decisioni.",
+    tagline: "Sviluppo pipeline geospaziali, modelli e applicazioni WebGIS.",
     exploreWork: "Vedi i progetti",
     downloadCv: "Scarica il CV",
     metadataStates: [

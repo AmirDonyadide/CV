@@ -138,7 +138,6 @@ export function AdditionalWork({ locale }: AdditionalWorkProps) {
       <header className={styles.sectionHeader}>
         <p className={styles.eyebrow}>{copy.eyebrow}</p>
         <h2 id="additional-work-title" tabIndex={-1}>{copy.heading}</h2>
-        <p className={styles.supporting}>{copy.supporting}</p>
       </header>
 
       <div className={styles.content}>
