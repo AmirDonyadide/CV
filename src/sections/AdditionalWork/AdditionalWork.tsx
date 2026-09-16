@@ -12,7 +12,7 @@ interface AdditionalWorkProps {
 function Arrow() {
   return (
     <svg viewBox="0 0 22 18" aria-hidden="true">
-      <path d="M1 9h17M13 3l6 6-6 6" />
+      <path d="M1 9h18M13 3l6 6-6 6" />
     </svg>
   );
 }

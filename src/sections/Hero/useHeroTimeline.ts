@@ -1,3 +1,4 @@
+import { stateLayouts, mobileOverviewLayouts, type VisualStateKey } from "./hero.geometry";
 import { useCallback, useEffect, useLayoutEffect, useRef } from "react";
 import type { ScrollTrigger as ScrollTriggerInstance } from "gsap/ScrollTrigger";
 import { gsap, loadScrollGsap, ScrollTrigger } from "../../motion/loadGsap";
@@ -30,50 +31,10 @@ const layerSelectors = {
   mobileArrows: "[data-layer='mobile-arrows']",
 } as const;
 
-type VisualStateKey = Exclude<keyof typeof layerSelectors, "arrows" | "mobileArrows">;
-
-interface StateLayout {
-  key: VisualStateKey;
-  origin: readonly [number, number];
-  activeX: number;
-  activeScale: number;
-  historyX: number;
-  historyScale: number;
-  historyOpacity: number;
-  overviewX: number;
-  overviewScale: number;
-  overviewOpacity: number;
-}
-
-const stateLayouts: readonly StateLayout[] = [
-  { key: "coordinate", origin: [128, 372], activeX: 672, activeScale: 1.18, historyX: 12, historyScale: 0.72, historyOpacity: 0.38, overviewX: -10, overviewScale: 0.72, overviewOpacity: 0.52 },
-  { key: "points", origin: [391, 372], activeX: 409, activeScale: 1, historyX: -116, historyScale: 0.58, historyOpacity: 0.4, overviewX: -10, overviewScale: 0.58, overviewOpacity: 0.48 },
-  { key: "grid", origin: [632, 372], activeX: 168, activeScale: 1, historyX: -227, historyScale: 0.66, historyOpacity: 0.42, overviewX: -15, overviewScale: 0.66, overviewOpacity: 0.56 },
-  { key: "layers", origin: [766, 381], activeX: 34, activeScale: 1, historyX: -246, historyScale: 0.62, historyOpacity: 0.44, overviewX: 25, overviewScale: 0.62, overviewOpacity: 0.58 },
-  { key: "data", origin: [955, 375], activeX: -155, activeScale: 1, historyX: -335, historyScale: 0.66, historyOpacity: 0.48, overviewX: 75, overviewScale: 0.66, overviewOpacity: 0.6 },
-  { key: "model", origin: [1023, 363], activeX: -223, activeScale: 1, historyX: -293, historyScale: 0.64, historyOpacity: 0.52, overviewX: 205, overviewScale: 0.64, overviewOpacity: 0.65 },
-  { key: "system", origin: [1356, 381], activeX: -376, activeScale: 1.03, historyX: -376, historyScale: 1.03, historyOpacity: 1, overviewX: 180, overviewScale: 0.82, overviewOpacity: 0.92 },
-];
-
-interface OverviewLayout {
-  x: number;
-  y: number;
-  scale: number;
-  opacity: number;
-}
-
-const mobileOverviewLayouts: Record<VisualStateKey, OverviewLayout> = {
-  coordinate: { x: 402, y: -112, scale: 0.62, opacity: 0.58 },
-  points: { x: 309, y: -112, scale: 0.52, opacity: 0.56 },
-  grid: { x: 238, y: -112, scale: 0.55, opacity: 0.62 },
-  layers: { x: 274, y: -121, scale: 0.5, opacity: 0.66 },
-  data: { x: -335, y: 65, scale: 0.62, opacity: 0.68 },
-  model: { x: -203, y: 77, scale: 0.6, opacity: 0.74 },
-  system: { x: -360, y: 59, scale: 0.58, opacity: 0.96 },
-};
-
 const STATE_HOLD = 0.26;
 const HANDOFF_DURATION = 0.78;
+const OVERVIEW_MOVE_DURATION = 0.72;
+const OVERVIEW_ARROW_DURATION = 0.14;
 const INCOMING_OFFSET = 64;
 const MOBILE_HISTORY_CENTER = 620;
 const MOBILE_EXIT_CENTER = 260;
@@ -172,7 +133,7 @@ export function useHeroTimeline({ sectionRef, viewportRef }: UseHeroTimelineOpti
               ? mobileOverviewLayouts[state.key]
               : {
                   x: state.overviewX,
-                  y: 0,
+                  y: stateLayouts[0].origin[1] - state.origin[1],
                   scale: state.overviewScale,
                   opacity: state.overviewOpacity,
                 };
@@ -238,7 +199,7 @@ export function useHeroTimeline({ sectionRef, viewportRef }: UseHeroTimelineOpti
             gsap.set(rasterCells, { autoAlpha: 0, scale: 0.35, transformOrigin: "center center" });
             gsap.set(dataRows, { autoAlpha: 0, x: -16 });
             gsap.set(modelEdges, { strokeDasharray: 160, strokeDashoffset: 160 });
-            gsap.set(modelNodes, { autoAlpha: 0, scale: 0.2, transformOrigin: "center center" });
+            gsap.set(modelNodes, { autoAlpha: 0 });
             gsap.set(labels, { autoAlpha: 0, scale: 0.8, transformOrigin: "right center" });
             gsap.set(labels[0], { autoAlpha: 1, scale: 1 });
 
@@ -262,7 +223,7 @@ export function useHeroTimeline({ sectionRef, viewportRef }: UseHeroTimelineOpti
                   break;
                 case "model":
                   timeline
-                    .to(modelNodes, { autoAlpha: 1, scale: 1, duration: 0.28, stagger: 0.012 }, at)
+                    .to(modelNodes, { autoAlpha: 1, duration: 0.28, stagger: 0.012 }, at)
                     .to(modelEdges, { strokeDashoffset: 0, duration: 0.34, stagger: 0.006 }, at + 0.08);
                   break;
                 default:
@@ -344,7 +305,7 @@ export function useHeroTimeline({ sectionRef, viewportRef }: UseHeroTimelineOpti
                 ? mobileOverviewLayouts[state.key]
                 : {
                     x: state.overviewX,
-                    y: 0,
+                    y: stateLayouts[0].origin[1] - state.origin[1],
                     scale: state.overviewScale,
                     opacity: state.overviewOpacity,
                   };
@@ -354,23 +315,24 @@ export function useHeroTimeline({ sectionRef, viewportRef }: UseHeroTimelineOpti
                   x: overview.x,
                   y: overview.y,
                   autoAlpha: overview.opacity,
-                  duration: 0.72,
+                  duration: OVERVIEW_MOVE_DURATION,
                 },
                 overviewStart,
               );
               timeline.to(
                 artwork[state.key],
-                { attr: { transform: scaleTransform(state.origin, overview.scale) }, duration: 0.72 },
+                { attr: { transform: scaleTransform(state.origin, overview.scale) }, duration: OVERVIEW_MOVE_DURATION },
                 overviewStart,
               );
             });
             timeline
               .to(labels[6], { autoAlpha: 0, scale: 0.7, duration: 0.28 }, overviewStart)
               .to(labels[7], { autoAlpha: 1, scale: 1, duration: 0.4 }, overviewStart + 0.32)
-              .to(layers.arrows, { autoAlpha: isMobile ? 0 : 0.44, duration: 0.36 }, overviewStart + 0.34)
-              .to(layers.mobileArrows, { autoAlpha: isMobile ? 0.5 : 0, duration: 0.36 }, overviewStart + 0.34)
-              .to(stageShell, { scale: overviewStageScale, duration: 0.72 }, overviewStart)
-              .to({}, { duration: 0.14 }, overviewStart + 0.72);
+              // Connectors use the final overview anchors: reveal only once the
+              // artwork has reached those anchors, including when scrubbing back.
+              .to(layers.arrows, { autoAlpha: isMobile ? 0 : 0.44, duration: OVERVIEW_ARROW_DURATION }, overviewStart + OVERVIEW_MOVE_DURATION)
+              .to(layers.mobileArrows, { autoAlpha: isMobile ? 0.5 : 0, duration: OVERVIEW_ARROW_DURATION }, overviewStart + OVERVIEW_MOVE_DURATION)
+              .to(stageShell, { scale: overviewStageScale, duration: OVERVIEW_MOVE_DURATION }, overviewStart);
 
             const trigger = ScrollTrigger.create({
               trigger: section,

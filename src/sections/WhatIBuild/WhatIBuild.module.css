@@ -138,14 +138,16 @@
 .capabilityRail {
   position: relative;
   display: grid;
-  grid-template-columns: 30% 40% 30%;
+  --rail-padding: 2rem;
+  grid-template-columns: 3fr 4fr 3fr;
   gap: 1rem;
   margin: 0.65rem 0 0;
-  padding: 2rem 0 0;
+  padding: var(--rail-padding) 0 0;
   list-style: none;
 }
 
 .capabilityRail::before {
+  transform: translateY(-50%);
   position: absolute;
   top: 0;
   right: 0;
@@ -162,14 +164,14 @@
 
 .railDot {
   position: absolute;
-  top: -2.35rem;
+  top: calc(-1 * var(--rail-padding));
   left: 50%;
   width: 0.62rem;
   height: 0.62rem;
   border-radius: 50%;
   background: var(--accent);
   box-shadow: 0 0 0 4px var(--graphite);
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
 }
 
 .capabilityRail h3,
@@ -389,3 +391,8 @@
     position: relative;
   }
 }
+
+.desktopVisual .routePoint,
+.responsiveArtwork .routePoint { fill: var(--graphite); }
+
+.desktopVisual marker path { fill: var(--accent); stroke: none; }

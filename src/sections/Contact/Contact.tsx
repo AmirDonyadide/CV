@@ -41,7 +41,7 @@ function ContactLink({
       <span className={styles.linkLabel}>{label}</span>
       <span className={styles.linkDetail}>{detail}</span>
       <svg className={styles.arrow} aria-hidden="true" viewBox="0 0 24 24" focusable="false">
-        <path d="M5 12h13M13 6l6 6-6 6" />
+        <path d="M5 12h14M13 6l6 6-6 6" />
       </svg>
     </a>
   );

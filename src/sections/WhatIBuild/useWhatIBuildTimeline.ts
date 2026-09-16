@@ -125,14 +125,14 @@ export function useWhatIBuildTimeline({ sectionRef }: UseWhatIBuildTimelineOptio
           gsap.set(spatialLayers[0], { y: -34 });
           gsap.set(spatialLayers[2], { y: 34 });
           gsap.set(connector, { opacity: 0.15 });
-          gsap.set(data, { opacity: 0.14, x: -28 });
+          gsap.set(data, { opacity: 0.14 });
           gsap.set(dataRows, { opacity: 0.15, x: -12 });
           gsap.set(streams, { strokeDasharray: 260, strokeDashoffset: 260 });
           gsap.set(model, { opacity: 0.12 });
           gsap.set(modelEdges, { opacity: 0 });
-          gsap.set(modelNodes, { scale: 0.45, transformOrigin: "center center" });
+          gsap.set(modelNodes, { opacity: 0 });
           gsap.set(systemArrow, { opacity: 0.12 });
-          gsap.set(system, { opacity: 0.12, x: 34 });
+          gsap.set(system, { opacity: 0.12 });
           gsap.set(systemControls, { opacity: 0.15 });
           gsap.set(desktopRailItems, { opacity: 0.52 });
           gsap.set(desktopRailDots, { scale: 0.68, transformOrigin: "center center" });
@@ -144,16 +144,16 @@ export function useWhatIBuildTimeline({ sectionRef }: UseWhatIBuildTimelineOptio
             .to(desktopRailItems[0], { opacity: 1, duration: 0.12 }, 0.06)
             .to(desktopRailDots[0], { scale: 1, duration: 0.12 }, 0.08)
             .to(connector, { opacity: 1, duration: 0.12 }, 0.22)
-            .to(data, { opacity: 1, x: 0, duration: 0.2 }, 0.25)
+            .to(data, { opacity: 1, duration: 0.2 }, 0.25)
             .to(desktopRailItems[1], { opacity: 1, duration: 0.14 }, 0.27)
             .to(desktopRailDots[1], { scale: 1, duration: 0.14 }, 0.29)
             .to(dataRows, { opacity: 1, x: 0, duration: 0.16, stagger: 0.018 }, 0.3)
             .to(streams, { strokeDashoffset: 0, duration: 0.22, stagger: 0.012 }, 0.38)
             .to(model, { opacity: 1, duration: 0.2 }, 0.44)
-            .to(modelNodes, { scale: 1, duration: 0.17, stagger: 0.016 }, 0.46)
+            .to(modelNodes, { opacity: 1, duration: 0.17, stagger: 0.016 }, 0.46)
             .to(modelEdges, { opacity: 1, duration: 0.18, stagger: 0.012 }, 0.48)
             .to(systemArrow, { opacity: 1, duration: 0.12 }, 0.67)
-            .to(system, { opacity: 1, x: 0, duration: 0.21 }, 0.7)
+            .to(system, { opacity: 1, duration: 0.21 }, 0.7)
             .to(systemControls, { opacity: 1, duration: 0.13, stagger: 0.01 }, 0.73)
             .to(desktopRailItems[2], { opacity: 1, duration: 0.12 }, 0.75)
             .to(desktopRailDots[2], { scale: 1, duration: 0.12 }, 0.77);

@@ -821,3 +821,8 @@
     margin-inline: 1rem;
   }
 }
+
+.layerCoordinate circle:not(.accentFill) { fill: var(--graphite); }
+
+.stage path { fill: none; }
+.stage marker path { fill: var(--muted); stroke: none; }

@@ -347,12 +347,14 @@
   stroke: var(--accent);
 }
 
-.modelNodes circle:nth-of-type(8) {
+.modelNodes .accentNode {
   fill: var(--accent);
   stroke: var(--accent);
 }
 
 .previewSteps {
+  --rail-stroke: 1px;
+  border-top: var(--rail-stroke) solid #323c42;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 0;
@@ -365,7 +367,6 @@
   position: relative;
   display: grid;
   gap: 0.45rem;
-  border-top: 1px solid #323c42;
   padding: 1rem 0.65rem 0 0;
   color: #969fa4;
   font-size: 0.7rem;
@@ -374,7 +375,8 @@
 
 .previewSteps li::before {
   position: absolute;
-  top: -0.2rem;
+  top: calc(var(--rail-stroke) / -2);
+  transform: translateY(-50%);
   left: 0;
   width: 0.38rem;
   height: 0.38rem;
@@ -556,6 +558,8 @@
   }
 
   .inlineWorkflow .previewSteps {
+  --rail-stroke: 1px;
+  border-top: var(--rail-stroke) solid #323c42;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1rem 0;
   }

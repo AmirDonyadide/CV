@@ -134,7 +134,7 @@
 .boundaryKey { display: flex; align-items: center; gap: 0.5rem; }
 .boundaryKey i { width: 1rem; height: 0.5rem; border: 1px solid #f00000; }
 
-.landslidePipeline { display: grid; grid-template-columns: minmax(0,1fr) minmax(7rem,0.58fr) minmax(0,1fr); align-items: center; gap: 0.75rem; padding: 1rem; }
+.landslidePipeline { display: grid; grid-template-columns: minmax(0,1fr) 1.4rem minmax(7rem,0.58fr) 1.4rem minmax(0,1fr); align-items: center; gap: 0.75rem; padding: 1rem; }
 .modelStage { display: flex; flex-direction: column; align-items: center; gap: 1.2rem; }
 .variableList { width: 100%; }
 .variableList > .technicalLabel { color: var(--muted); }
@@ -142,7 +142,7 @@
 .variableList li { padding: 0.3rem 0; border-bottom: 1px solid var(--hairline); color: var(--paper); font-size: 0.6rem; letter-spacing: 0; }
 .model { width: 100%; text-align: center; }
 .model svg { display: block; width: 5rem; margin: 0 auto 0.6rem; fill: var(--graphite); stroke: var(--muted); stroke-width: 1; }
-.model circle:first-child { fill: var(--accent); stroke: var(--accent); }
+.model circle:first-of-type { fill: var(--accent); stroke: var(--accent); }
 .model > span { display: block; color: var(--accent); font-size: 0.78rem; }
 .model small { display: block; margin-top: 0.3rem; color: var(--muted); font-size: 0.58rem; }
 .srOnly { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
@@ -158,9 +158,9 @@
   .landslidePipeline { grid-template-columns: minmax(0,1fr) minmax(0,1fr); }
   .landslidePipeline > .mapPanel:first-child { grid-column: 1; grid-row: 1; }
   .landslidePipeline > .mapPanel:last-child { grid-column: 2; grid-row: 1; }
-  .modelStage { grid-column: 1 / -1; flex-direction: row; padding: 0.75rem 0 0; border-top: 1px solid var(--hairline); }
-  .modelStage > .arrow:first-child { transform: rotate(90deg); }
-  .modelStage > .arrow:last-child { transform: rotate(-90deg); }
+  .modelStage { grid-column: 1 / -1; grid-row: 3; flex-direction: row; padding: 0.75rem 0 0; border-top: 1px solid var(--hairline); }
+  .landslidePipeline > .arrow:nth-child(2) { grid-column: 1; grid-row: 2; justify-self: center; transform: rotate(90deg); }
+  .landslidePipeline > .arrow:nth-child(4) { grid-column: 2; grid-row: 2; justify-self: center; transform: rotate(-90deg); }
   .variableList { flex: 1; }
   .model { flex: 1; }
   .model svg { width: 4rem; }
@@ -169,17 +169,21 @@
 @container project-visual (max-width: 420px) {
   .frameHeader { padding: 0.75rem; }
   .pipeline { display: grid; grid-template-columns: 1fr 1.4rem 1fr; gap: 0.75rem; padding: 0.75rem; }
-  .pipeline > .arrow:nth-child(4) { grid-column: 1 / -1; justify-self: center; transform: rotate(90deg); }
+  .pipeline > .arrow:nth-child(4) { grid-column: 3; grid-row: 2; justify-self: center; transform: rotate(90deg); }
+  .pipeline:has(> :last-child:nth-child(7)) > :nth-child(5) { grid-column: 3; grid-row: 3; }
+  .pipeline:has(> :last-child:nth-child(7)) > :nth-child(6) { grid-column: 2; grid-row: 3; transform: rotate(180deg); }
+  .pipeline:has(> :last-child:nth-child(7)) > :nth-child(7) { grid-column: 1; grid-row: 3; }
   .pipeline:has(> :last-child:nth-child(5)) { grid-template-columns: 1fr; }
-  .pipeline:has(> :last-child:nth-child(5)) > .arrow { transform: rotate(90deg); justify-self: center; }
+  .pipeline:has(> :last-child:nth-child(5)) > .arrow { grid-column: auto; grid-row: auto; transform: rotate(90deg); justify-self: center; }
   .mapPair { grid-template-columns: 1fr; gap: 0.85rem; padding: 0.75rem; }
   .mapPair > .arrow { justify-self: center; transform: rotate(90deg); }
   .landslidePipeline { grid-template-columns: 1fr; padding: 0.75rem; }
   .landslidePipeline > .mapPanel:first-child,
   .landslidePipeline > .mapPanel:last-child { grid-column: auto; grid-row: auto; }
-  .modelStage { grid-column: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding: 0; border: 0; }
-  .modelStage > .arrow { grid-column: 1 / -1; justify-self: center; transform: rotate(90deg) !important; }
-  .modelStage > .arrow:last-child { grid-row: 3; }
+  .modelStage { grid-column: auto; grid-row: 3; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding: 0; border: 0; }
+  .landslidePipeline > .arrow:nth-child(2) { grid-column: 1; grid-row: 2; transform: rotate(90deg); }
+  .landslidePipeline > .arrow:nth-child(4) { grid-column: 1; grid-row: 4; transform: rotate(90deg); }
+  .landslidePipeline > .mapPanel:last-child { grid-row: 5; }
   .variableList { grid-column: 1; }
   .model { grid-column: 2; }
   .selectionSummary { padding: 0.75rem; gap: 0.75rem; }

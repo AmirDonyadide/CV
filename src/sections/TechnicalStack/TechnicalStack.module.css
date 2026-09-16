@@ -66,6 +66,7 @@
 }
 
 .stack {
+  --divider-stroke: 1px;
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   border-top: 1px solid var(--hairline);
@@ -91,7 +92,7 @@
 .throughline span::before {
   position: absolute;
   top: 50%;
-  left: 0;
+  left: calc(var(--divider-stroke) / 2);
   width: 0.58rem;
   height: 0.58rem;
   border: 1px solid var(--accent);
@@ -106,7 +107,7 @@
   min-width: 0;
   min-height: clamp(31rem, 37vw, 37.5rem);
   flex-direction: column;
-  border-left: 1px solid var(--hairline);
+  border-left: var(--divider-stroke) solid var(--hairline);
   padding: 2.05rem clamp(1.3rem, 2vw, 2.25rem) 2rem;
 }
 

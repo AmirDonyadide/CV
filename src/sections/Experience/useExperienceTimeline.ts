@@ -66,8 +66,8 @@ export function useExperienceTimeline({ sectionRef }: UseExperienceTimelineOptio
 
             gsap.set(stories, { opacity: 0.58 });
             gsap.set(stories[0], { opacity: 1 });
-            gsap.set(nodes, { opacity: 0.5, scale: 0.88, transformOrigin: "center center" });
-            gsap.set(nodes[0], { opacity: 1, scale: 1 });
+            gsap.set(nodes, { opacity: 0.5 });
+            gsap.set(nodes[0], { opacity: 1 });
 
             const activateStory = (activeIndex: number) => {
               gsap.to(stories, {
@@ -77,7 +77,6 @@ export function useExperienceTimeline({ sectionRef }: UseExperienceTimelineOptio
               });
               gsap.to(nodes, {
                 opacity: (index) => (index <= activeIndex ? 1 : 0.5),
-                scale: (index) => (index === activeIndex ? 1 : 0.88),
                 duration: 0.28,
                 overwrite: "auto",
               });
@@ -100,10 +99,9 @@ export function useExperienceTimeline({ sectionRef }: UseExperienceTimelineOptio
           stories.forEach((story) => {
             gsap.fromTo(
               story,
-              { opacity: 0.45, y: 18 },
+              { opacity: 0.45 },
               {
                 opacity: 1,
-                y: 0,
                 ease: "none",
                 scrollTrigger: {
                   trigger: story,

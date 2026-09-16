@@ -98,7 +98,8 @@ Quality checks:
 npm run check
 ```
 
-`npm run check` runs the TypeScript-aware lint gate, type-check, and production build.
+`npm run check` runs the TypeScript-aware lint gate, geometry tests, type-check, and production build.
+Run the mathematical geometry tests separately with `npm test` (Node.js 24+, matching CI).
 
 ## Deploy With GitHub Pages
 

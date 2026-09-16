@@ -8,8 +8,9 @@
     "build": "tsc --noEmit && vite build",
     "lint": "oxlint src vite.config.ts --deny-warnings",
     "typecheck": "tsc --noEmit",
+    "test": "node --test src/geometry/*.test.ts",
     "preview": "vite preview",
-    "check": "npm run lint && npm run build"
+    "check": "npm run lint && npm test && npm run build"
   },
   "dependencies": {
     "gsap": "3.15.0",

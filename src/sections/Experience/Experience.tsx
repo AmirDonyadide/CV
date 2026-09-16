@@ -1,3 +1,4 @@
+import { TimelineRail } from "../../geometry/TimelineRail";
 import { useRef } from "react";
 import type { Locale } from "../Hero/hero.types";
 import { ExperiencePath } from "./ExperiencePath";
@@ -34,6 +35,7 @@ export function Experience({ locale }: ExperienceProps) {
         </div>
 
         <div className={styles.stories}>
+          <TimelineRail selector="[data-experience-story]" accentSelector="[data-current=true]" className={styles.mobileRail} />
           {copy.roles.map((role) => (
             <article
               key={role.id}

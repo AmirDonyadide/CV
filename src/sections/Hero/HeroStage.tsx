@@ -1,3 +1,5 @@
+import { resolveEdges, segmentPath } from "../../geometry/geometry";
+import { overviewArrows, coordinateCenter, gridCenter, heroDataFrame, heroSystemFrame } from "./hero.geometry";
 import styles from "./Hero.module.css";
 
 const points = [
@@ -12,7 +14,7 @@ const rasterCells = [
   [716, 408], [742, 434], [768, 434], [794, 460], [820, 460], [690, 382], [820, 356], [846, 408],
 ];
 
-const modelNodes = [
+const modelPoints = [
   [968, 292], [1026, 270], [1086, 308], [948, 370], [1020, 360], [1098, 390], [980, 448], [1055, 455],
 ];
 
@@ -21,12 +23,17 @@ const modelEdges = [
   [4, 6], [4, 7], [5, 7], [6, 7],
 ];
 
+const modelNodes = Object.fromEntries(modelPoints.map(([x,y], index) => [String(index), {point:{x,y},radius:index===4?8:6}]));
+const modelConnections = resolveEdges(modelNodes, modelEdges.map(([from,to]) => ({from:String(from),to:String(to)})));
+const desktopArrows = overviewArrows(false);
+const mobileArrows = overviewArrows(true);
+
 export function HeroStage() {
   return (
     <div className={styles.stageShell} data-stage-shell aria-hidden="true">
       <svg className={styles.stage} viewBox="0 0 1600 620" role="presentation" focusable="false">
         <defs>
-          <marker id="sequence-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+          <marker id="sequence-arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
             <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor" />
           </marker>
           <clipPath id="system-viewport-clip">
@@ -35,29 +42,21 @@ export function HeroStage() {
         </defs>
 
         <g className={styles.sequenceArrows} data-layer="arrows">
-          <path d="M190 372h95" />
-          <path d="M470 372h75" />
-          <path d="M680 372h40" />
-          <path d="M865 372h85" />
-          <path d="M1100 372h50" />
-          <path d="M1300 372h60" />
+          {desktopArrows.map(d => <path key={d} d={d} />)}
         </g>
 
         <g className={`${styles.sequenceArrows} ${styles.mobileSequenceArrows}`} data-layer="mobile-arrows">
-          <path d="M575 260h70" />
-          <path d="M755 260h60" />
-          <path d="M915 260h70" />
-          <path d="M1090 260h30v90H620v35" />
-          <path d="M690 440h65" />
-          <path d="M870 440h30" />
+          {mobileArrows.map(d => <path key={d} d={d} />)}
         </g>
 
         <g className={styles.layerCoordinate} data-layer="coordinate">
           <g data-state-artwork="coordinate">
             <g data-coordinate-mark>
-              <path d="M128 310v124M66 372h124" />
-              <circle cx="128" cy="372" r="9" />
-              <circle className={styles.accentFill} cx="128" cy="372" r="4.5" />
+              <g transform={`translate(${coordinateCenter.x} ${coordinateCenter.y})`}>
+              <path d="M0 -62v124M-62 0h124" />
+              <circle r="9" fill="var(--graphite)" />
+              <circle className={styles.accentFill} r="4.5" />
+              </g>
             </g>
           </g>
         </g>
@@ -85,8 +84,8 @@ export function HeroStage() {
             {Array.from({ length: 11 }, (_, index) => (
               <path data-grid-line key={`h-${index}`} d={`M560 ${282 + index * 18}h144`} />
             ))}
-            <path className={styles.accentStroke} d="M632 280v184M560 372h144" />
-            <circle className={styles.accentFill} cx="632" cy="372" r="3.5" />
+            <path className={styles.accentStroke} d={`M${gridCenter.x} 280v184M560 ${gridCenter.y}h144`} />
+            <circle className={styles.accentFill} cx={gridCenter.x} cy={gridCenter.y} r="3.5" />
           </g>
         </g>
 
@@ -111,7 +110,7 @@ export function HeroStage() {
 
         <g className={styles.layerData} data-layer="data">
           <g data-state-artwork="data">
-            <rect x="884" y="280" width="142" height="190" />
+            <rect {...heroDataFrame} />
             {Array.from({ length: 5 }, (_, index) => (
               <g data-data-row key={`data-row-${298 + index * 32}`}>
                 <rect x="898" y={298 + index * 32} width="18" height="18" />
@@ -124,28 +123,18 @@ export function HeroStage() {
 
         <g className={styles.layerModel} data-layer="model">
           <g data-state-artwork="model">
-            {modelEdges.map(([from, to]) => {
-              const [x1, y1] = modelNodes[from];
-              const [x2, y2] = modelNodes[to];
-              return <path data-model-edge key={`${from}-${to}`} d={`M${x1} ${y1}L${x2} ${y2}`} />;
-            })}
-            {modelNodes.map(([cx, cy], index) => (
-              <circle
-                data-model-node
-                className={index === 4 ? styles.accentNode : undefined}
-                key={`${cx}-${cy}`}
-                cx={cx}
-                cy={cy}
-                r={index === 4 ? 8 : 6}
-              />
+            {modelConnections.map(({segment}) => segment && <path data-model-edge key={segmentPath(segment)} d={segmentPath(segment)} />)}
+            {Object.entries(modelNodes).map(([id, node]) => (
+              <circle data-model-node className={id === '4' ? styles.accentNode : undefined} key={id}
+                cx={node.point.x} cy={node.point.y} r={node.radius} />
             ))}
           </g>
         </g>
 
         <g className={styles.layerSystem} data-layer="system">
           <g data-state-artwork="system">
-            <rect className={styles.systemOuter} x="1178" y="238" width="356" height="286" rx="8" />
-            <path d="M1178 270h356M1218 270v254M1470 270v254" />
+            <rect className={styles.systemOuter} {...heroSystemFrame} rx="8" />
+            <path d={`M${heroSystemFrame.x} ${heroSystemFrame.y+32}h${heroSystemFrame.width}M${heroSystemFrame.x+40} ${heroSystemFrame.y+32}v${heroSystemFrame.height-32}M${heroSystemFrame.x+292} ${heroSystemFrame.y+32}v${heroSystemFrame.height-32}`} />
             <circle cx="1195" cy="254" r="3" />
             <circle cx="1207" cy="254" r="3" />
             <circle cx="1219" cy="254" r="3" />

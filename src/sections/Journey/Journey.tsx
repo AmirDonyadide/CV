@@ -1,4 +1,6 @@
-import { useRef } from "react";
+import { journeyNodes, journeySize } from "./journey.geometry";
+import { TimelineRail } from "../../geometry/TimelineRail";
+import { useRef, type CSSProperties } from "react";
 import type { Locale } from "../Hero/hero.types";
 import { JourneyRoute } from "./JourneyRoute";
 import { journeyCopy } from "./journey.copy";
@@ -28,6 +30,14 @@ function JourneyDate({ value }: JourneyDateProps) {
   );
 }
 
+function locationStyle(id: keyof typeof journeyNodes): CSSProperties {
+  const node = journeyNodes[id];
+  return {
+    '--location-x': `${(node.point.x + (node.primary ? 0 : 40)) / journeySize.width * 100}%`,
+    '--location-y': `${(node.point.y + (node.primary ? 82 : node.terminal ? 5 : -12)) / journeySize.height * 100}%`,
+  } as CSSProperties;
+}
+
 export function Journey({ locale }: JourneyProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const copy = journeyCopy[locale];
@@ -43,11 +53,13 @@ export function Journey({ locale }: JourneyProps) {
       </header>
 
       <div className={styles.routeStage} data-journey-stage>
+        <TimelineRail selector="[data-journey-entry]" accentSelector="[data-location=tehran], [data-location=milan]" terminalSelector="[data-location=bonn]" className={styles.mobileRail} />
         <JourneyRoute label={copy.routeLabel} />
 
         {[tehran, milan].map((degree) => (
           <article
             key={degree.id}
+            style={locationStyle(degree.id)}
             className={`${styles.entry} ${styles.degreeEntry}`}
             data-journey-entry={degree.id}
             data-location={degree.id}
@@ -70,6 +82,7 @@ export function Journey({ locale }: JourneyProps) {
         {[karlsruhe, bonn].map((exchange) => (
           <article
             key={exchange.id}
+            style={locationStyle(exchange.id)}
             className={`${styles.entry} ${styles.exchangeEntry}`}
             data-journey-entry={exchange.id}
             data-location={exchange.id}

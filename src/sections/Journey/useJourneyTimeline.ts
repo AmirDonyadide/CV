@@ -47,10 +47,9 @@ export function useJourneyTimeline({ sectionRef }: UseJourneyTimelineOptions) {
             entries.forEach((entry) => {
               gsap.fromTo(
                 entry,
-                { opacity: 0.5, y: 16 },
+                { opacity: 0.5 },
                 {
                   opacity: 1,
-                  y: 0,
                   ease: "none",
                   scrollTrigger: {
                     trigger: entry,
@@ -72,7 +71,7 @@ export function useJourneyTimeline({ sectionRef }: UseJourneyTimelineOptions) {
               strokeDashoffset: lengths[index],
             });
           });
-          gsap.set(nodes, { opacity: 0.48, scale: 0.82, transformOrigin: "center center" });
+          gsap.set(nodes, { opacity: 0.48 });
           gsap.set(entries, { opacity: 0.56, y: 12 });
 
           const timeline = gsap.timeline({
@@ -87,15 +86,15 @@ export function useJourneyTimeline({ sectionRef }: UseJourneyTimelineOptions) {
           });
 
           timeline
-            .to(nodes[0], { opacity: 1, scale: 1, duration: 0.08 }, 0)
+            .to(nodes[0], { opacity: 1, duration: 0.08 }, 0)
             .to(entries[0], { opacity: 1, y: 0, duration: 0.12 }, 0)
             .to(segments[0], { strokeDashoffset: 0, duration: 0.62 }, 0.02)
-            .to(nodes[1], { opacity: 1, scale: 1, duration: 0.08 }, 0.32)
+            .to(nodes[1], { opacity: 1, duration: 0.08 }, 0.32)
             .to(entries[1], { opacity: 1, y: 0, duration: 0.12 }, 0.32)
-            .to(nodes[2], { opacity: 1, scale: 1, duration: 0.08 }, 0.61)
+            .to(nodes[2], { opacity: 1, duration: 0.08 }, 0.61)
             .to(entries[2], { opacity: 1, y: 0, duration: 0.12 }, 0.61)
             .to(segments[1], { strokeDashoffset: 0, duration: 0.28 }, 0.65)
-            .to(nodes[3], { opacity: 1, scale: 1, duration: 0.08 }, 0.86)
+            .to(nodes[3], { opacity: 1, duration: 0.08 }, 0.86)
             .to(entries[3], { opacity: 1, y: 0, duration: 0.12 }, 0.86);
         },
       );

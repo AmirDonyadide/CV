@@ -71,9 +71,11 @@ export function NotFound({ locale, onLocaleChange }: NotFoundProps) {
       </header>
 
       <main className={styles.main}>
-        <div className={styles.coordinate} aria-hidden="true">
-          <span />
-        </div>
+        <svg className={styles.coordinate} viewBox="-36 -36 72 72" aria-hidden="true" focusable="false">
+          <path d="M-36 0H36M0 -36V36" stroke="var(--hairline)" />
+          <circle r="10" fill="var(--accent)" opacity="0.08" />
+          <circle r="4" fill="var(--accent)" />
+        </svg>
         <p className={styles.eyebrow}>{content.code}</p>
         <h1>{content.heading}</h1>
         <p className={styles.message}>{content.message}</p>
